@@ -1,0 +1,14 @@
+.DS_Store
+*.orig
+*.log
+*.sqlite3
+.tmproj
+*.pid
+*.ppid
+*.log
+*.diff
+*.orig
+*.rej
+*.log
+*.pid
+*.patch
