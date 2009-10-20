@@ -6,13 +6,13 @@
 
 <div class="container_16 clearfix">
   <div class="grid_16">
-    <div id="releases">
+    <div id="<%= dom_id(@artist) %>_releases">
       Please wait...
     </div>
   </div>
 </div>
 <script type="text/javascript">
 $(function(){
-  $('#releases').load('<%= url_for([@artist, :releases]) %>');
+  $('#<%= dom_id(@artist) %>_releases').load('<%= url_for([@artist, :releases]) %>');
 });
 </script>

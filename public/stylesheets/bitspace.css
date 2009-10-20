@@ -1,7 +1,9 @@
 #root { margin: 0; padding: 0; position: relative; text-align: left; }
 
-#nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 18px 20px 10px 20px; font-size: 12px; }
-#nav-playback {  }
+#nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 18px 20px 10px 20px; font-size: 12px; height: 18px; }
+#nav-playback { position: absolute; left: 0; top: 18px; width: 200px; text-align: center; }
+#nav-progress { position: absolute; left: 200px; top: 22px; width: 500px; border: 1px solid #222; -webkit-border-radius: 5px; }
+#nav-progress .gauge { height: 10px; width: 0px; }
 #nav-upload { position: absolute; right: 0; top: 18px; width: 100px; }
 
 .release { background: #eee; width: 800px; margin: 0; }
@@ -25,6 +27,8 @@ body.white .release ol.tracks li.even { background: #fff; }
 
 body.black { background: #151515; color: #fff; }
 body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
+body.black #nav-progress { background: #2a2a2a; }
+body.black #nav-progress .gauge { background: #151515; }
 body.black .container_16, body.black .container_12 { background: #2a2a2a; }
 body.black a { color: #ccc; text-decoration: none; text-shadow: #000 1px 1px 0px; }
 body.black a:hover { color: #fff; }

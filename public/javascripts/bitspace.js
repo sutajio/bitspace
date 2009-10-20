@@ -10,4 +10,15 @@ $(function(){
     e.preventDefault();
     $('#player').each(function(){ if(this.paused) { this.play(); } else { this.pause(); } });
   });
+  
+  $('#nav-progress').each(function(){
+    var progress = $(this);
+    var gauge = progress.find('.gauge');
+    var player = $('#player');
+    setInterval(function(){
+      var percent = ((player.get(0).currentTime / player.get(0).duration) * 100);
+      gauge.width(percent+'%');
+    }, 300);
+  });
+
 });
