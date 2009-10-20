@@ -1,0 +1,60 @@
+<div id="upload">
+  <% form_tag(s3_upload_url, :method => :post, :multipart => true) do %>
+    <%= s3_upload_form_fields(
+      :bucket => ENV['S3_BUCKET'],
+      :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
+      :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
+      :key_prefix => upload_key_prefix,
+      :success_action_redirect => import_url,
+      :meta_fields => %w(x-amz-meta-user_id authenticity_token)) %>
+    <%= hidden_field_tag :'x-amz-meta-user_id', 0 %>
+    <div id="upload-button">
+      <%= file_field_tag 'file' %>
+      <%= submit_tag 'Upload' %>
+    </div>
+    <div id="progress"></div>
+  <% end %>
+</div>
+<script type="text/javascript">
+$(function(){
+  $('#upload form').each(function(){
+    $(this).swfupload({
+      upload_url: this.action,
+      file_size_limit: 0,
+      file_types: "*.mp3",
+      file_types_description: "MP3 Audio files",
+      file_post_name: "file",
+      button_image_url : "../../images/upload.png",
+      button_placeholder_id : "upload-button",
+      button_width: 180,
+      button_height: 32,
+      button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+      button_cursor: SWFUpload.CURSOR.HAND,
+      flash_url: "/vendor/swfupload/swfupload.swf",
+      post_params: <%= s3_swfupload_form_fields(
+                        :bucket => ENV['S3_BUCKET'],
+                        :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
+                        :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
+                        :key_prefix => upload_key_prefix,
+                        :meta_fields => %w()) %>
+    })
+    .bind('fileQueued', function(e, file){
+      $(this).swfupload('startUpload');
+    })
+    .bind('uploadComplete', function(e, file){
+        var self = this;
+        $.post("<%= import_url %>",
+          { bucket: "<%= ENV['S3_BUCKET'] %>",
+            key: "<%= upload_key_prefix %>"+file.name },
+          function(){
+            $(self).swfupload('startUpload');
+          });
+    })
+    .bind('uploadProgress', function(e, file, bytesLoaded){
+      var percent = Math.ceil((bytesLoaded / file.size) * 100);
+      window.status = percent + "%";
+      $('#progress').width(percent + '%');
+    });
+  });
+});
+</script>
