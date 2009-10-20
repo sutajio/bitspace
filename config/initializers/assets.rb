@@ -4,6 +4,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/swfobject/swfobject.js',
     '/vendor/swfupload/swfupload.js',
     '/vendor/plugins/jquery.swfupload.js',
+    '/vendor/plugins/jquery.livequery.js',
     'bitspace'
   ])
 ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(

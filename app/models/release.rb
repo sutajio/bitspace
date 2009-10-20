@@ -12,4 +12,6 @@ class Release < ActiveRecord::Base
   
   default_scope :order => 'year DESC'
   
+  searchable_on :title, :year
+  
 end

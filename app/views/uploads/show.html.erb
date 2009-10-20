@@ -12,7 +12,8 @@
       <%= file_field_tag 'file' %>
       <%= submit_tag 'Upload' %>
     </div>
-    <div id="progress"></div>
+    <div id="upload-progress"></div>
+    <div id="upload-status"></div>
   <% end %>
 </div>
 <script type="text/javascript">
@@ -43,17 +44,19 @@ $(function(){
     })
     .bind('uploadComplete', function(e, file){
         var self = this;
+        $('#upload-status').text('Queueing file for processing...');
         $.post("<%= import_url %>",
           { bucket: "<%= ENV['S3_BUCKET'] %>",
             key: "<%= upload_key_prefix %>"+file.name },
           function(){
+            $('#upload-status').text('Upload finished.');
             $(self).swfupload('startUpload');
           });
     })
     .bind('uploadProgress', function(e, file, bytesLoaded){
       var percent = Math.ceil((bytesLoaded / file.size) * 100);
-      window.status = percent + "%";
-      $('#progress').width(percent + '%');
+      $('#upload-progress').width(percent + '%');
+      $('#upload-status').text(file.name + ' – ' + percent + '%');
     });
   });
 });

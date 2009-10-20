@@ -1,1 +1,36 @@
-#progress { background: #f00; height: 20px; width: 10px; }
+#root { margin: 0; padding: 0; position: relative; text-align: left; }
+
+#nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 18px 20px 10px 20px; font-size: 12px; }
+#nav-playback {  }
+#nav-upload { position: absolute; right: 0; top: 18px; width: 100px; }
+
+.release { background: #eee; width: 800px; margin: 0; }
+.release .info { padding: 10px; width: 150px; text-align: center; float: left; }
+.release img { margin: 10px 0; }
+.release h2 { margin: 0; font-size: 12px; }
+.release h3 { font-size: 10px; font-weight: normal; }
+
+.release ol.tracks { width: 630px; float: left; }
+.release ol.tracks li { padding: 2px; }
+.release ol.tracks li a.playing { font-weight: bold; }
+
+.track-title { width: 500px; overflow: hidden; display: block; float: left; padding-left: 15px; }
+.track-length { width: 50px; display: block; float: left; text-align: right; }
+
+body.white { background: #fff; color: #000; }
+body.white .release { background: #eee; }
+body.white .release ol.tracks { background: #fff; }
+body.white .release ol.tracks li.odd { background: #f0f5fa; }
+body.white .release ol.tracks li.even { background: #fff; }
+
+body.black { background: #151515; color: #fff; }
+body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
+body.black .container_16, body.black .container_12 { background: #2a2a2a; }
+body.black a { color: #ccc; text-decoration: none; text-shadow: #000 1px 1px 0px; }
+body.black a:hover { color: #fff; }
+body.black h1, body.black h2, body.black h3 { text-shadow: #000 1px 1px 1px; }
+body.black .release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
+body.black .release ol.tracks { background: #2f2f2f; color: #777; }
+body.black .release ol.tracks li.odd { background: #252525; }
+body.black .release ol.tracks li.even { background: #2f2f2f; }
+body.black #upload-progress { background: #313131; height: 10px; width: 0px; }

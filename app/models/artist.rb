@@ -9,4 +9,6 @@ class Artist < ActiveRecord::Base
   
   default_scope :order => 'name'
   
+  searchable_on :name
+  
 end
