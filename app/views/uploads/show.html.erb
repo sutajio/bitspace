@@ -22,13 +22,17 @@
           :meta_fields => %w(x-amz-meta-user_id authenticity_token)) %>
         <%= hidden_field_tag :'x-amz-meta-user_id', 0 %>
         <div id="upload-button">
-          <%= file_field_tag 'file' %>
-          <%= submit_tag 'Upload' %>
+          <div id="upload-button-swf">
+            <%= file_field_tag 'file' %>
+            <%= submit_tag 'Upload' %>
+          </div>
         </div>
-        <div id="upload-progress" class="progress">
-          <div class="gauge"></div>
+        <div id="upload-info">
+          <div id="upload-progress" class="progress">
+            <div class="gauge"></div>
+          </div>
+          <div id="upload-status" class="progress-status">Please select files to upload.</div>
         </div>
-        <div id="upload-status" class="progress-status"></div>
       <% end %>
     </div>
     <script type="text/javascript">
@@ -40,12 +44,9 @@
           file_types: "*.mp3",
           file_types_description: "MP3 Audio files",
           file_post_name: "file",
-          button_text: "Select files...",
-          button_text_top_padding: 7,
-          button_text_left_padding: 25,
           button_image_url : "../../images/upload.png",
-          button_placeholder_id : "upload-button",
-          button_width: 180,
+          button_placeholder_id : "upload-button-swf",
+          button_width: 100,
           button_height: 32,
           button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
           button_cursor: SWFUpload.CURSOR.HAND,
