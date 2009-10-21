@@ -13,13 +13,13 @@ class Artist < ActiveRecord::Base
   searchable_on :name
   
   def to_param
-    name.tr(' ','+')
+    name.tr(' ','+').sub('/','%2F')
   end
   
   class <<self
     def find(*args)
       if args.size == 1 && args.first.respond_to?(:to_str)
-        by_name(args.first.tr('+',' ')).first or raise RecordNotFound
+        by_name(args.first.tr('+',' ').sub('%2F','/')).first or raise ActiveRecord::RecordNotFound
       else
         super
       end
