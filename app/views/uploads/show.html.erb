@@ -1,63 +1,83 @@
-<div id="upload">
-  <% form_tag(s3_upload_url, :method => :post, :multipart => true) do %>
-    <%= s3_upload_form_fields(
-      :bucket => ENV['S3_BUCKET'],
-      :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
-      :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
-      :key_prefix => upload_key_prefix,
-      :success_action_redirect => import_url,
-      :meta_fields => %w(x-amz-meta-user_id authenticity_token)) %>
-    <%= hidden_field_tag :'x-amz-meta-user_id', 0 %>
-    <div id="upload-button">
-      <%= file_field_tag 'file' %>
-      <%= submit_tag 'Upload' %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="chrome=1" />
+    <title>Bitspace</title>
+    <%= stylesheet_link_tag :defaults %>
+    <%= stylesheet_link_tag :application %>
+    <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag :upload %>
+  </head>
+  <body class="black">
+    <div id="upload">
+      <% form_tag(s3_upload_url, :method => :post, :multipart => true) do %>
+        <%= s3_upload_form_fields(
+          :bucket => ENV['S3_BUCKET'],
+          :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
+          :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
+          :key_prefix => upload_key_prefix,
+          :success_action_redirect => import_url,
+          :meta_fields => %w(x-amz-meta-user_id authenticity_token)) %>
+        <%= hidden_field_tag :'x-amz-meta-user_id', 0 %>
+        <div id="upload-button">
+          <%= file_field_tag 'file' %>
+          <%= submit_tag 'Upload' %>
+        </div>
+        <div id="upload-progress" class="progress">
+          <div class="gauge"></div>
+        </div>
+        <div id="upload-status" class="progress-status"></div>
+      <% end %>
     </div>
-    <div id="upload-progress"></div>
-    <div id="upload-status"></div>
-  <% end %>
-</div>
-<script type="text/javascript">
-$(function(){
-  $('#upload form').each(function(){
-    $(this).swfupload({
-      upload_url: this.action,
-      file_size_limit: 0,
-      file_types: "*.mp3",
-      file_types_description: "MP3 Audio files",
-      file_post_name: "file",
-      button_image_url : "../../images/upload.png",
-      button_placeholder_id : "upload-button",
-      button_width: 180,
-      button_height: 32,
-      button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
-      button_cursor: SWFUpload.CURSOR.HAND,
-      flash_url: "/vendor/swfupload/swfupload.swf",
-      post_params: <%= s3_swfupload_form_fields(
-                        :bucket => ENV['S3_BUCKET'],
-                        :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
-                        :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
-                        :key_prefix => upload_key_prefix,
-                        :meta_fields => %w()) %>
-    })
-    .bind('fileQueued', function(e, file){
-      $(this).swfupload('startUpload');
-    })
-    .bind('uploadComplete', function(e, file){
-        var self = this;
-        $('#upload-status').text('Queueing file for processing...');
-        $.post("<%= import_url %>",
-          { bucket: "<%= ENV['S3_BUCKET'] %>",
-            key: "<%= upload_key_prefix %>"+file.name },
-          function(){
-            $('#upload-status').text('Upload finished.');
-            $(self).swfupload('startUpload');
-          });
-    })
-    .bind('uploadProgress', function(e, file, bytesLoaded){
-      var percent = Math.ceil((bytesLoaded / file.size) * 100);
-      $('#upload-progress').width(percent + '%');
-      $('#upload-status').text(file.name + ' – ' + percent + '%');
+    <script type="text/javascript">
+    $(function(){
+      $('#upload form').each(function(){
+        $(this).swfupload({
+          upload_url: this.action,
+          file_size_limit: 0,
+          file_types: "*.mp3",
+          file_types_description: "MP3 Audio files",
+          file_post_name: "file",
+          button_text: "Select files...",
+          button_text_top_padding: 7,
+          button_text_left_padding: 25,
+          button_image_url : "../../images/upload.png",
+          button_placeholder_id : "upload-button",
+          button_width: 180,
+          button_height: 32,
+          button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+          button_cursor: SWFUpload.CURSOR.HAND,
+          flash_url: "/vendor/swfupload/swfupload.swf",
+          post_params: <%= s3_swfupload_form_fields(
+                            :bucket => ENV['S3_BUCKET'],
+                            :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
+                            :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
+                            :key_prefix => upload_key_prefix,
+                            :meta_fields => %w()) %>
+        })
+        .bind('fileQueued', function(e, file){
+          $(this).swfupload('startUpload');
+        })
+        .bind('uploadComplete', function(e, file){
+            var self = this;
+            $('#upload-status').text('Queueing file for processing...');
+            $.post("<%= import_url %>",
+              { bucket: "<%= ENV['S3_BUCKET'] %>",
+                key: "<%= upload_key_prefix %>"+file.name },
+              function(){
+                $('#upload-status').text('Upload finished.');
+                $(self).swfupload('startUpload');
+              });
+        })
+        .bind('uploadProgress', function(e, file, bytesLoaded){
+          var percent = Math.ceil((bytesLoaded / file.size) * 100);
+          $('#upload-progress .gauge').width(percent + '%');
+          $('#upload-status').text(file.name + ' – ' + percent + '%');
+        });
+      });
     });
-  });
-});
-</script>
+    </script>
+  </body>
+</html>

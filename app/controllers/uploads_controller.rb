@@ -1,5 +1,7 @@
 class UploadsController < ApplicationController
   
+  layout nil
+  
   def show
   end
   

@@ -20,5 +20,9 @@ $(function(){
       gauge.width(percent+'%');
     }, 300);
   });
-
+  
+  $('a.cover-art[rel=shadowbox]').livequery('click', function(e){
+    e.preventDefault();
+    Shadowbox.open({ content: this.href, player: 'img' });
+  });
 });

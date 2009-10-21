@@ -6,7 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <title>Bitspace</title>
     <%= stylesheet_link_tag :defaults %>
+    <%= stylesheet_link_tag :shadowbox %>
+    <%= stylesheet_link_tag :application %>
     <%= javascript_include_tag :defaults %>
+    <%= javascript_include_tag :shadowbox %>
+    <%= javascript_include_tag :application %>
+    <script type="text/javascript">
+    Shadowbox.init();
+    </script>
   </head>
   <body class="black">
     <div id="root">
@@ -18,11 +25,11 @@
         <a href="#" rel="pause">Pause</a>
         <a href="#" rel="next">Next →</a>
       </div>
-      <div id="nav-progress">
+      <div id="nav-progress" class="progress">
         <div class="gauge"></div>
       </div>
       <div id="nav-upload">
-        <%= link_to('Upload', upload_path, :rel => 'remote-popup') %>
+        <%= link_to('Upload', upload_path, :rel => 'shadowbox;width=500;height=120') %>
       </div>
     </div>
     <audio id="player">
