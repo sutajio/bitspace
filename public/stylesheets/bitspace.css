@@ -10,7 +10,7 @@
 #upload-info { margin-left: 120px; }
 #upload-progress { margin: 0 0 5px 0; }
 
-.progress { -webkit-border-radius: 5px; }
+.progress { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; }
 .progress .gauge { height: 10px; width: 0px; }
 .progress-status { font-size: 10px; text-align: center; }
 
@@ -35,7 +35,7 @@ body.white .release ol.tracks li.even { background: #fff; }
 
 body.black { background: #151515; color: #fff; }
 body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
-body.black .progress { background: #2a2a2a; border: 1px solid #222; }
+body.black .progress { background-color: #2a2a2a; border: 1px solid #222; }
 body.black .progress .gauge { background: #151515; }
 body.black .progress-status { color: #555; }
 body.black .container_16, body.black .container_12 { background: #2a2a2a; }
