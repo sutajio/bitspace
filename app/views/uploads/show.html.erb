@@ -12,34 +12,21 @@
   </head>
   <body class="black">
     <div id="upload">
-      <% form_tag(s3_upload_url, :method => :post, :multipart => true) do %>
-        <%= s3_upload_form_fields(
-          :bucket => ENV['S3_BUCKET'],
-          :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
-          :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
-          :key_prefix => upload_key_prefix,
-          :success_action_redirect => import_url,
-          :meta_fields => %w(x-amz-meta-user_id authenticity_token)) %>
-        <%= hidden_field_tag :'x-amz-meta-user_id', 0 %>
-        <div id="upload-button">
-          <div id="upload-button-swf">
-            <%= file_field_tag 'file' %>
-            <%= submit_tag 'Upload' %>
-          </div>
+      <div id="upload-button">
+        <div id="upload-button-swf"></div>
+      </div>
+      <div id="upload-info">
+        <div id="upload-progress" class="progress">
+          <div class="gauge"></div>
         </div>
-        <div id="upload-info">
-          <div id="upload-progress" class="progress">
-            <div class="gauge"></div>
-          </div>
-          <div id="upload-status" class="progress-status">Please select files to upload.</div>
-        </div>
-      <% end %>
+        <div id="upload-status" class="progress-status">Please select files to upload.</div>
+      </div>
     </div>
     <script type="text/javascript">
     $(function(){
-      $('#upload form').each(function(){
+      $('#upload-button').each(function(){
         $(this).swfupload({
-          upload_url: this.action,
+          upload_url: "<%= s3_upload_url %>",
           file_size_limit: 0,
           file_types: "*.mp3",
           file_types_description: "MP3 Audio files",
@@ -51,12 +38,11 @@
           button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
           button_cursor: SWFUpload.CURSOR.HAND,
           flash_url: "/vendor/swfupload/swfupload.swf",
-          post_params: <%= s3_swfupload_form_fields(
-                            :bucket => ENV['S3_BUCKET'],
+          post_params: <%= s3_upload_params(
                             :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
                             :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
-                            :key_prefix => upload_key_prefix,
-                            :meta_fields => %w()) %>
+                            :meta_fields => %w(),
+                            :flash => true) %>
         })
         .bind('fileQueued', function(e, file){
           $(this).swfupload('startUpload');
@@ -64,9 +50,8 @@
         .bind('uploadComplete', function(e, file){
             var self = this;
             $('#upload-status').text('Queueing file for processing...');
-            $.post("<%= import_url %>",
-              { bucket: "<%= ENV['S3_BUCKET'] %>",
-                key: "<%= upload_key_prefix %>"+file.name },
+            $.post("<%= upload_url %>",
+              { key: "<%= s3_upload_key_prefix %>"+file.name },
               function(){
                 $('#upload-status').text('Upload finished.');
                 $(self).swfupload('startUpload');

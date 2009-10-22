@@ -2,27 +2,26 @@ require 'hmac/sha1'
 
 module UploadsHelper
   
-  def upload_key_prefix
+  def s3_upload_key_prefix
     "uploads/#{request.remote_ip}/"
   end
   
+  def s3_upload_bucket
+    ENV['S3_UPLOAD_BUCKET'] || ENV['S3_BUCKET']
+  end
+  
   def s3_upload_url
-    "http://#{ENV['S3_BUCKET']}.#{AWS::S3::DEFAULT_HOST}/"
+    "http://#{s3_upload_bucket}.#{AWS::S3::DEFAULT_HOST}/"
   end
   
-  def s3_upload_form_fields(options = {})
-    options[:expiration_date] ||= 1.year.from_now.utc.strftime('%Y-%m-%dT%H:%M:%S.000Z')
-    res = hidden_field_tag(:success_action_redirect, options[:success_action_redirect]) +
-          hidden_field_tag(:AWSAccessKeyId, options[:AWSAccessKeyId]) +
-          hidden_field_tag(:key, "#{options[:key_prefix]}${filename}") +
-          hidden_field_tag(:policy, s3_upload_policy(options)) +
-          hidden_field_tag(:signature, s3_upload_signature(options))
-    res
+  def s3_upload_file_param
+    'file'
   end
   
-  def s3_swfupload_form_fields(options = {})
-    options[:expiration_date] ||= 1.year.from_now.utc.strftime('%Y-%m-%dT%H:%M:%S.000Z')
-    options[:flash] = true
+  def s3_upload_params(options = {})
+    options[:expiration_date] ||= s3_upload_expiration_date(1.year.from_now)
+    options[:bucket] ||= s3_upload_bucket
+    options[:key_prefix] ||= s3_upload_key_prefix
     options[:success_action_status] = '201'
     { :success_action_status => options[:success_action_status],
       :AWSAccessKeyId => options[:AWSAccessKeyId],
@@ -52,6 +51,10 @@ module UploadsHelper
   
   def s3_upload_signature(options = {})
     Base64.encode64(HMAC::SHA1.digest(options[:AWSSecretAccessKey],s3_upload_policy(options))).strip
+  end
+  
+  def s3_upload_expiration_date(seconds_from_now)
+    seconds_from_now.utc.strftime('%Y-%m-%dT%H:%M:%S.000Z')
   end
   
 end
