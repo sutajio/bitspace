@@ -1,0 +1,13 @@
+#root { margin: 0; padding: 0; position: relative; text-align: left; }
+
+#nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 18px 20px 10px 20px; font-size: 12px; height: 18px; }
+#nav-playback { position: absolute; left: 0; top: 18px; width: 200px; text-align: center; }
+#nav-progress { position: absolute; left: 200px; top: 22px; width: 500px; }
+#nav-upload { position: absolute; right: 0; top: 18px; width: 100px; }
+
+#menu { margin-bottom: 20px; }
+
+#upload { padding: 20px; }
+#upload-button { float: left; width: 100px; height: 32px; }
+#upload-info { margin-left: 120px; }
+#upload-progress { margin: 0 0 5px 0; }

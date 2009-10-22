@@ -22,5 +22,7 @@ ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(
     '/vendor/shadowbox/shadowbox.css'
   ],
   :application => [
+    'widgets',
+    'layout',
     'bitspace'
   ])

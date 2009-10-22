@@ -1,0 +1,21 @@
+.pane { padding: 10px 0; }
+
+.progress { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; }
+.progress .gauge { height: 10px; width: 0px; }
+.progress-status { font-size: 10px; text-align: center; }
+
+.horizontal-tabs { list-style: none; margin: 0; }
+.horizontal-tabs li { margin: 0; float: left; padding: 12px 24px; }
+
+.release { background: #eee; width: 800px; margin: 0; }
+.release .info { padding: 10px; width: 150px; text-align: center; float: left; }
+.release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
+.release h2 { margin: 0; font-size: 12px; }
+.release h3 { font-size: 10px; font-weight: normal; }
+
+.release ol.tracks { width: 630px; float: left; }
+.release ol.tracks li { padding: 2px; }
+.release ol.tracks li a.playing { font-weight: bold; }
+
+.track-title { width: 500px; overflow: hidden; display: block; float: left; padding-left: 15px; }
+.track-length { width: 50px; display: block; float: left; text-align: right; }
