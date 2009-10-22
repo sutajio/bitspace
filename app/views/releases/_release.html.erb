@@ -1,6 +1,6 @@
 <% content_tag_for(:li, release, :class => 'clearfix') do %>
   <div class="info">
-    <%= link_to(image_tag('cover-art.png', :size => '125x125'), '/images/cover-art.png', :rel => 'shadowbox', :class => 'cover-art') %>
+    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125'), edit_artist_release_path(@artist, release), :class => 'cover-art') %>
     <h2><%=h release.title %> (<%= release.year %>)</h2>
     <h3><%=h release.artist.name %></h3>
   </div>

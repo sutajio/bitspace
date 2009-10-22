@@ -14,4 +14,19 @@ class Release < ActiveRecord::Base
   
   searchable_on :title, :year
   
+  has_attached_file :artwork,
+    :path => ":class/:attachment/:style/:id_partition.png",
+    :styles => { :medium => ["500x500>", :png], :small => ["125x125#", :png] },
+    :whiny => false,
+    :storage => :s3,
+    :s3_credentials => {
+      :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY']
+    },
+    :default_url => '/images/cover-art.png',
+    :url => "http://#{ENV['CDN_HOST']}/:class/:attachment/:style/:id_partition.png",
+    :s3_host_alias => :s3_alias_url,
+    :s3_alias_url => ENV['CDN_HOST'],
+    :bucket => ENV['S3_BUCKET']
+  
 end
