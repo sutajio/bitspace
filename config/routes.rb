@@ -4,6 +4,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :artists do |artists|
     artists.resources :releases
   end
-  map.root :controller => 'spaces'
+  map.root :controller => 'artists'
 
 end

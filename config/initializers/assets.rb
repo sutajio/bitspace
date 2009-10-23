@@ -2,7 +2,8 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
   :defaults => [
     '/vendor/jquery/jquery.js',
     '/vendor/swfobject/swfobject.js',
-    '/vendor/plugins/jquery.livequery.js'
+    '/vendor/plugins/jquery.livequery.js',
+    '/vendor/plugins/jquery.address.js'
   ],
   :upload => [
     '/vendor/swfupload/swfupload.js',
