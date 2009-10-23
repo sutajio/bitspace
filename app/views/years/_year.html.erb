@@ -1,0 +1,19 @@
+<% content_tag(:li, :id => "year_#{year.first}", :class => 'year clearfix') do %>
+  <div class="grid_3">
+    <h1>
+      <%= link_to(format_year(year.first), year_path(year.first), :target => '_self') %><br />
+      <span class="meta"><%= pluralize(year.last.size, 'release') %></span>
+    </h1>
+  </div>
+  <div class="grid_12">
+    <ul class="releases clearfix">
+      <% year.last.each do |release| %>
+      <li>
+        <% link_to([release.artist, release], :target => '_self') do %>
+          <%= image_tag(release.artwork.url(:small), :size => '125x125') %>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>

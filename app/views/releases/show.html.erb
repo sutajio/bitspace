@@ -1,0 +1,17 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <h1>
+      <%=h @artist.name%> &ndash; <%=h @release.title %>
+      <% if @release.year.present? %>
+      <span class="year">(<%= @release.year %>)</span>
+      <% end %>
+    </h1>
+  </div>
+</div>
+<div class="container_16 clearfix pane">
+  <div class="grid_16">
+    <ul class="releases">
+      <%= render :partial => 'release', :object => @release %>
+    </ul>
+  </div>
+</div>

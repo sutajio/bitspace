@@ -10,6 +10,7 @@ class Release < ActiveRecord::Base
   validates_uniqueness_of :mbid, :allow_nil => true
   
   default_scope :order => 'year DESC'
+  named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
   
   searchable_on :title, :year
   

@@ -18,7 +18,9 @@ body.black .dialog { background: #151515; }
 body.black a { color: #ccc; text-decoration: none; text-shadow: #000 1px 1px 0px; }
 body.black a:hover { color: #fff; }
 body.black h1, body.black h2, body.black h3 { text-shadow: #000 1px 1px 1px; }
+body.black h1 a, body.black h2 a, body.black h3 a { text-shadow: #000 1px 1px 1px; }
 body.black .release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
 body.black .release ol.tracks { background: #2f2f2f; color: #777; }
 body.black .release ol.tracks li.odd { background: #252525; }
 body.black .release ol.tracks li.even { background: #2f2f2f; }
+body.black .years .year { border-top: 1px solid #1d1d1d; }

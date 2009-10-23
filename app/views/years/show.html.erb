@@ -1,0 +1,14 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <h1>
+      <%= format_year(@year) %>
+    </h1>
+  </div>
+</div>
+<div class="container_16 clearfix pane">
+  <div class="grid_16">
+    <ul class="releases">
+      <%= render :partial => 'release', :collection => @releases %>
+    </ul>
+  </div>
+</div>
