@@ -101,6 +101,8 @@ class Track < ActiveRecord::Base
       end
     end
     
+    handle_asynchronously :import if Rails.env.production?
+    
     def generate_fingerprint(file)
       Digest::SHA1.hexdigest(file.open.read)
     end
