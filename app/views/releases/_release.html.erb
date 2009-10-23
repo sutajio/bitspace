@@ -1,6 +1,6 @@
 <% content_tag_for(:li, release, :class => 'clearfix') do %>
   <div class="info">
-    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125'), release.artwork.file? ? release.artwork.url(:medium) : "##{dom_id(release)}_edit", :class => 'cover-art', :rel => 'shadowbox') %>
+    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125'), release.artwork.file? ? release.artwork.url(:medium) : "##{dom_id(release)}_edit", :alt => 'Cover art', :class => 'cover-art', :rel => 'shadowbox') %>
     <div id="<%= dom_id(release) %>_edit" style="display:none">
       <%= render :partial => 'upload_artwork', :locals => { :release => release } %>
     </div>
