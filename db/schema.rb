@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091022143043) do
+ActiveRecord::Schema.define(:version => 20091023150205) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -64,6 +64,10 @@ ActiveRecord::Schema.define(:version => 20091022143043) do
     t.integer  "size"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "bitrate"
+    t.integer  "samplerate"
+    t.boolean  "vbr"
+    t.string   "content_type"
   end
 
 end
