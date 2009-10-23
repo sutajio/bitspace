@@ -5,7 +5,9 @@
 #nav-progress { position: absolute; left: 200px; top: 22px; width: 500px; }
 #nav-upload { position: absolute; right: 0; top: 18px; width: 100px; }
 
-#menu { margin-bottom: 20px; }
+#menu { margin: 20px 0; }
+#menu .first { padding-left: 10px; }
+#menu .grid_1 a { display: block; margin: 6px 0; font-weight: bold; }
 
 #upload-button { text-align: center; height: 32px; }
 #upload-progress { margin: 10px 0 5px 0; }
