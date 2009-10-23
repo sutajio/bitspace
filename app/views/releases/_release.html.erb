@@ -4,7 +4,12 @@
     <div id="<%= dom_id(release) %>_edit" style="display:none">
       <%= render :partial => 'upload_artwork', :locals => { :release => release } %>
     </div>
-    <h2><%=h release.title %> (<%= release.year %>)</h2>
+    <h2>
+      <%=h release.title %>
+      <% if release.year.present? %>
+      <span class="year">(<%= release.year %>)</span>
+      <% end %>
+    </h2>
     <h3><%=h release.artist.name %></h3>
   </div>
   <ol class="tracks">

@@ -6,7 +6,6 @@ class Release < ActiveRecord::Base
   
   validates_presence_of :artist_id
   validates_presence_of :title
-  validates_presence_of :year
   
   validates_uniqueness_of :mbid, :allow_nil => true
   

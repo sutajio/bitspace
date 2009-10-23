@@ -16,6 +16,15 @@ class Track < ActiveRecord::Base
   
   default_scope :order => 'track_nr'
   
+  cattr_accessor :unknown_artist
+  self.unknown_artist = '[Unknown Artist]'
+  
+  cattr_accessor :unknown_release
+  self.unknown_release = '[Unknown Release]'
+  
+  cattr_accessor :unknown_title
+  self.unknown_title = '[Unknown Title]'
+  
   class <<self
     def import(options)
       require 'tempfile'
@@ -28,35 +37,62 @@ class Track < ActiveRecord::Base
           file.write(chunk)
         end
         
+        logger.info("Importing #{options[:key]}")
+        
         Mp3Info.open(file.path) do |mp3info|
-          logger.info("Title: #{mp3info.tag.title}")
-          logger.info("Artist: #{mp3info.tag.artist}")
-          logger.info("Release: #{mp3info.tag.album}")
-          logger.info("Year: #{mp3info.tag.year}")
-          logger.info("Track No.: #{mp3info.tag.tracknum}")
+          
+          artist_name = 
+            mp3info.tag.artist.blank? ? 
+              parse_filename(options[:key])[:artist] : mp3info.tag.artist
+          release_title = 
+            mp3info.tag.album.blank? ? 
+              parse_filename(options[:key])[:release] : mp3info.tag.album
+          release_year = 
+            mp3info.tag.year.blank? ? 
+              parse_filename(options[:key])[:year] : mp3info.tag.year
+          track_title = 
+            mp3info.tag.title.blank? ? 
+              parse_filename(options[:key])[:title] : mp3info.tag.title
+          track_nr =
+            mp3info.tag.tracknum.blank? ?
+              parse_filename(options[:key])[:track_nr] : mp3info.tag.tracknum
+          
+          logger.info("Title: #{track_title}")
+          logger.info("Artist: #{artist_name}")
+          logger.info("Release: #{release_title}")
+          logger.info("Year: #{release_year}")
+          logger.info("Track No.: #{track_nr}")
           logger.info("Length: #{mp3info.length}")
+          logger.info("Bitrate: #{mp3info.bitrate}")
+          logger.info("Sample rate: #{mp3info.samplerate}")
+          logger.info("VBR: #{mp3info.vbr}")
+          
           transaction do
-            artist = Artist.find_or_create_by_name(mp3info.tag.artist)
+            artist = Artist.find_or_create_by_name(artist_name)
             unless artist.valid?
-              logger.debug(artist.errors.full_messages.to_sentence)
+              logger.error(artist.errors.full_messages.to_sentence)
             end
             release = Release.find_or_create_by_title(
               :artist => artist,
-              :title => mp3info.tag.album,
-              :year => mp3info.tag.year)
+              :title => release_title,
+              :year => release_year)
             unless release.valid?
-              logger.debug(release.errors.full_messages.to_sentence)
+              logger.error(release.errors.full_messages.to_sentence)
             end
             track = Track.find_or_create_by_title(
               :release => release,
               :fingerprint => generate_fingerprint(file),
-              :title => mp3info.tag.title,
-              :track_nr => mp3info.tag.tracknum,
+              :title => track_title,
+              :track_nr => track_nr,
               :length => mp3info.length,
+              :bitrate => mp3info.bitrate,
+              :samplerate => mp3info.samplerate,
+              :vbr => mp3info.vbr,
+              :content_type => 'audio/mpeg',
               :size => file.size,
               :file => file)
             unless track.valid?
-              logger.debug(track.errors.full_messages.to_sentence)
+              logger.error(track.errors.full_messages.to_sentence)
             end
           end
         end
@@ -65,10 +101,25 @@ class Track < ActiveRecord::Base
       end
     end
     
-    handle_asynchronously :import
-    
     def generate_fingerprint(file)
       Digest::SHA1.hexdigest(file.open.read)
+    end
+    
+    def parse_filename(original_filename)
+      filename = File.basename(original_filename,
+                               File.extname(original_filename))
+      track_nr = filename.match(/([0-9]+)[ -_]/).to_a.last
+      parts = filename.split('-')
+      parts = parts.size > 3 ? [parts[0],parts[1],parts[2..-1].join('-')] : parts
+      parts = parts.map(&:humanize).map(&:strip).map(&:titleize)
+      {
+        :track_nr => track_nr,
+        :title => parts.last.present? ? parts.last : unknown_title,
+        :artist => parts.size > 1 && parts[0] != track_nr ? parts[0] :
+                                                            unknown_artist,
+        :release => parts.size > 2 &&  parts[1] != track_nr ? parts[1] :
+                                                              unknown_release
+      }
     end
   end
   
