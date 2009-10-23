@@ -1,4 +1,5 @@
 .pane { padding: 10px 0; -webkit-border-radius: 5px; }
+.dialog { padding: 20px; }
 
 .progress { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; }
 .progress .gauge { height: 10px; width: 0px; }

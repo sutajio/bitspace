@@ -11,9 +11,6 @@
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag :shadowbox %>
     <%= javascript_include_tag :application %>
-    <script type="text/javascript">
-    Shadowbox.init();
-    </script>
   </head>
   <body class="black">
     <div id="root">
@@ -35,7 +32,7 @@
         <div class="gauge"></div>
       </div>
       <div id="nav-upload">
-        <%= link_to('Upload', upload_path, :rel => 'shadowbox;width=500;height=72') %>
+        <%= link_to('Upload', upload_path, :rel => 'shadowbox;width=325;height=114') %>
       </div>
     </div>
     <audio id="player">

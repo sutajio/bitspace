@@ -24,9 +24,8 @@ class Release < ActiveRecord::Base
       :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY']
     },
     :default_url => '/images/cover-art.png',
-    :url => "http://#{ENV['CDN_HOST']}/:class/:attachment/:style/:id_partition.png",
-    :s3_host_alias => :s3_alias_url,
-    :s3_alias_url => ENV['CDN_HOST'],
+    :url => ":s3_alias_url",
+    :s3_host_alias => ENV['CDN_HOST'],
     :bucket => ENV['S3_BUCKET']
   
 end

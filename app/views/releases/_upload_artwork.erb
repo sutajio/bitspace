@@ -1,0 +1,6 @@
+<div class="dialog">
+  <% form_for([@artist, release], :html => { :multipart => true }) do |f| %>
+    <%= f.file_field :artwork %>
+    <%= submit_tag 'Upload' %>
+  <% end %>
+</div>

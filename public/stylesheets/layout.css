@@ -7,7 +7,5 @@
 
 #menu { margin-bottom: 20px; }
 
-#upload { padding: 20px; }
-#upload-button { float: left; width: 100px; height: 32px; }
-#upload-info { margin-left: 120px; }
-#upload-progress { margin: 0 0 5px 0; }
+#upload-button { text-align: center; height: 32px; }
+#upload-progress { margin: 10px 0 5px 0; }

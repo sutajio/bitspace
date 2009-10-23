@@ -1,4 +1,9 @@
 $(function(){
+  if(Shadowbox) {
+    Shadowbox.init({ skipSetup: true });
+    Shadowbox.setup();
+  }
+  
   $('a[rel=play]').livequery('click', function(e){
     e.preventDefault();
     $('#player').attr('src', this.href).each(function(){ this.load(); this.play(); });
@@ -21,8 +26,5 @@ $(function(){
     }, 300);
   });
   
-  $('a.cover-art[rel=shadowbox]').livequery('click', function(e){
-    e.preventDefault();
-    Shadowbox.open({ content: this.href, player: 'img' });
-  });
+
 });
