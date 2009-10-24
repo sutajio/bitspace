@@ -23,10 +23,10 @@
     <div id="root">
       <div class="container_16 clearfix">
         <ul id="menu" class="horizontal-tabs clearfix">
-          <li class="grid_2 first"><%= link_to(image_tag('/images/logos/logo.png'), root_path, :target => '_self') %></li>
-          <li class="grid_1"><%= link_to('Artists', artists_path, :target => '_self') %></li>
-          <li class="grid_1"><%= link_to('Labels', '#', :target => '_self') %></li>
-          <li class="grid_1"><%= link_to('Years', years_path, :target => '_self') %></li>
+          <li class="grid_2 first"><%= link_to(image_tag('/images/logos/logo.png'), root_path, :target => '_self', :rel => 'start') %></li>
+          <li class="grid_1"><%= link_to('Artists', artists_path, :target => '_self', :rel => 'contents') %></li>
+          <li class="grid_1"><%= link_to('Labels', '#', :target => '_self', :rel => 'contents') %></li>
+          <li class="grid_1"><%= link_to('Years', years_path, :target => '_self', :rel => 'contents') %></li>
         </ul>
       </div>
       <div id="page">
@@ -35,9 +35,9 @@
     </div>
     <div id="nav">
       <div id="nav-playback">
-        <a href="#" rel="prev">← Prev</a>
-        <a href="#" rel="pause">Pause</a>
-        <a href="#" rel="next">Next →</a>
+        <a href="#" rel="prev" id="nav-prev">← Prev</a>
+        <a href="#" rel="pause" id="nav-play-pause" class="pause">Pause</a>
+        <a href="#" rel="next" id="nav-next">Next →</a>
       </div>
       <div id="nav-progress" class="progress">
         <div class="gauge"></div>

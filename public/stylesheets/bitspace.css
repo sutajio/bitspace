@@ -23,4 +23,7 @@ body.black .release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
 body.black .release ol.tracks { background: #2f2f2f; color: #777; }
 body.black .release ol.tracks li.odd { background: #252525; }
 body.black .release ol.tracks li.even { background: #2f2f2f; }
+body.black .release ol.tracks li a.playing { background: url(/images/black/playing.png) no-repeat; }
+body.black .release ol.tracks li a.loading { background: url(/images/black/loading.gif) no-repeat; }
 body.black .years .year { border-top: 1px solid #1d1d1d; }
+body.black .years .releases { background: -webkit-gradient(linear, left top, left bottom, from(rgba(34,34,34, .5)), color-stop(0.55, rgba(34,34,34, .01)), to(transparent)); }
