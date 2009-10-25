@@ -1,9 +1,10 @@
 <% content_tag_for(:li, release, :class => 'clearfix') do %>
   <div class="info">
-    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125'), release.artwork.file? ? release.artwork.url(:medium) : "##{dom_id(release)}_edit", :alt => 'Cover art', :class => 'cover-art', :rel => 'shadowbox') %>
-    <div id="<%= dom_id(release) %>_edit" style="display:none">
-      <%= render :partial => 'upload_artwork', :locals => { :release => release } %>
-    </div>
+    <% if release.artwork.file? %>
+    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125', :alt => 'Cover art'), release.artwork.url(:medium), :class => 'cover-art', :rel => 'shadowbox') %>
+    <% else %>
+    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125', :alt => 'Cover art'), edit_artist_release_path(@artist, release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
+    <% end %>
     <h2>
       <%=h release.title %>
       <% if release.year.present? %>

@@ -1,6 +1,7 @@
 class ReleasesController < ApplicationController
   
   before_filter :find_artist
+  skip_before_filter :verify_authenticity_token, :only => [:update]
   
   def index
     @releases = @artist.releases.search_for(params[:q]).paginate(:page => params[:page])
@@ -10,10 +11,14 @@ class ReleasesController < ApplicationController
     @release = @artist.releases.find(params[:id])
   end
   
+  def edit
+    @release = @artist.releases.find(params[:id])
+  end
+  
   def update
     @release = @artist.releases.find(params[:id])
     @release.update_attributes!(:artwork => params[:release][:artwork])
-    redirect_to @artist
+    head :ok
   rescue ActiveRecord::RecordInvalid => e
     raise e
   end

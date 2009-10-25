@@ -1,6 +1,66 @@
-<div class="dialog">
-  <% form_for([@artist, release], :html => { :multipart => true }) do |f| %>
-    <%= f.file_field :artwork %>
-    <%= submit_tag 'Upload' %>
-  <% end %>
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <div><%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %> &ndash; <%= link_to(h(@release.title), [@release.artist, @release], :target => '_self') %></div>
+    <h1>Upload artwork for this release...</h1>
+  </div>
+</div>
+<div class="container_16 clearfix">
+    <div class="pane clearfix">
+      <div class="grid_3">
+        <%= image_tag(@release.artwork.url(:small), :size => '125x125', :alt => 'Current cover art') %>
+      </div>
+      <div class="grid_7 suffix_6">
+        <div class="dialog" style="background:none">
+          <div id="upload-button">
+            <div id="upload-button-swf"></div>
+          </div>
+          <div id="upload-info">
+            <div id="upload-progress" class="progress">
+              <div class="gauge"></div>
+            </div>
+            <div id="upload-status" class="progress-status">Please select an image to upload.</div>
+          </div>
+        </div>
+        <%= javascript_include_tag :upload %>
+        <script type="text/javascript">
+        $(function(){
+          $('#upload-button').each(function(){
+            $(this).swfupload({
+              upload_url: "<%= artist_release_path(@artist, @release) %>",
+              post_params: { '_method': 'put', <%= request_forgery_protection_token.to_s %>: '<%= form_authenticity_token %>' },
+              file_size_limit: 0,
+              file_types: "*.jpg;*.png;*.gif",
+              file_types_description: "Image files",
+              file_post_name: "release[artwork]",
+              file_upload_limit: 1,
+              file_queue_limit: 1,
+              button_image_url : "../../images/button-select-files.png",
+              button_placeholder_id : "upload-button-swf",
+              button_width: 100,
+              button_height: 32,
+              button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+              button_cursor: SWFUpload.CURSOR.HAND,
+              flash_url: "/vendor/swfupload/swfupload.swf"
+            })
+            .bind('fileQueued', function(e, file){
+              $(this).swfupload('startUpload');
+            })
+            .bind('uploadComplete', function(e, file){
+                $('#upload-status').text('Upload finished.');
+                setTimeout(function(){ $.address.value("<%= artist_release_path(@artist, @release) %>"); }, 2000);
+            })
+            .bind('uploadProgress', function(e, file, bytesLoaded){
+              var percent = Math.ceil((bytesLoaded / file.size) * 100);
+              $('#upload-progress .gauge').width(percent + '%');
+              $('#upload-status').text(file.name + ' – ' + percent + '%');
+            })
+            .bind('uploadError', function(e, file, code, message){
+              $('#upload-status').text('Error: ' + message);
+            });
+          });
+        });
+        </script>
+      </div>
+    </div>
+  </div>
 </div>
