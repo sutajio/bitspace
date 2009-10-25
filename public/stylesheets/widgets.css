@@ -25,8 +25,6 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 .release ol.tracks { width: 630px; float: left; }
 .release ol.tracks li { padding: 2px; }
 .release ol.tracks li a { padding-left: 19px; }
-.release ol.tracks li a.playing { background: url(/images/playing.png) no-repeat; }
-.release ol.tracks li a.loading { background: url(/images/loading.png) no-repeat; }
 
 .track-title { width: 500px; overflow: hidden; display: block; float: left; }
 .track-length { width: 50px; display: block; float: left; text-align: right; }

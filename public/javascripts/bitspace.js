@@ -25,11 +25,21 @@ $(function(){
     $('#player').attr('src', this.href).each(function(){ this.load(); this.play(); });
     $('.playing').removeClass('playing');
     $(this).addClass('playing');
+    $('a[rel=play-pause]').addClass('pause');
   });
   
-  $('a[rel=pause]').livequery('click', function(e){
+  $('a[rel=play-pause]').livequery('click', function(e){
     e.preventDefault();
-    $('#player').each(function(){ if(this.paused) { this.play(); } else { this.pause(); } });
+    var self = $(this);
+    $('#player').each(function(){
+      if(this.paused) {
+        self.addClass('pause');
+        this.play();
+      } else {
+        self.removeClass('pause');
+        this.pause();
+      }
+    });
   });
   
   $('#nav-progress').each(function(){
