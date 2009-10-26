@@ -12,6 +12,10 @@ class Release < ActiveRecord::Base
   default_scope :order => 'year DESC'
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
   
+  def self.first_with_artwork
+    first(:order => 'artwork_updated_at DESC')
+  end
+  
   searchable_on :title, :year
   
   has_attached_file :artwork,
