@@ -8,7 +8,7 @@ $(function(){
     $('#page').load(e.value, null, function(){
       var links = $('#page a[rel*=shadowbox]');
       if(links.length) {
-        Shadowbox.setup(link);
+        Shadowbox.setup(links);
       }
     });
   });
