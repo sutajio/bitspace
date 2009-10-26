@@ -13,7 +13,7 @@ class Release < ActiveRecord::Base
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
   
   def self.first_with_artwork
-    first(:order => 'artwork_updated_at DESC')
+    first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
   end
   
   searchable_on :title, :year
