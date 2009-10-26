@@ -3,7 +3,7 @@
     <% if release.artwork.file? %>
     <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125', :alt => 'Cover art'), release.artwork.url(:medium), :class => 'cover-art', :rel => 'shadowbox') %>
     <% else %>
-    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125', :alt => 'Cover art'), edit_artist_release_path(@artist, release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
+    <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125', :alt => 'Cover art'), edit_artist_release_path(release.artist, release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
     <% end %>
     <h2>
       <%=h release.title %>

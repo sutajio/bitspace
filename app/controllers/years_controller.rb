@@ -12,6 +12,10 @@ class YearsController < ApplicationController
   
   def show
     @year = params[:id]
+    if @year.split('-').size == 2
+      years = @year.split('-').sort.map(&:to_i)
+      @year = years.first..years.last
+    end
     @releases = Release.by_year(@year)
   end
   
