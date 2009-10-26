@@ -5,7 +5,12 @@ $(function(){
   }
   
   $.address.change(function(e){
-    $('#page').load(e.value);
+    $('#page').load(e.value, null, function(){
+      var links = $('#page a[rel*=shadowbox]');
+      if(links.length) {
+        Shadowbox.setup(link);
+      }
+    });
   });
   
   $('a[target=_self]').livequery('click', function(e){
