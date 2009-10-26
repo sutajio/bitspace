@@ -33,17 +33,32 @@
         <%= yield %>
       </div>
     </div>
+    <div id="status">
+      <div class="container_16 clearfix">
+        <div class="grid_16">
+          <div>
+            <span id="status-artist"></span> &ndash;
+            <span id="status-track"></span>
+          </div>
+          <div id="status-release"></div>
+        </div>
+      </div>
+    </div>
     <div id="nav">
-      <div id="nav-playback">
-        <a href="#" rel="prev" id="nav-prev">← Prev</a>
-        <a href="#" rel="play-pause" id="nav-play-pause">Play/Pause</a>
-        <a href="#" rel="next" id="nav-next">Next →</a>
-      </div>
-      <div id="nav-progress" class="progress">
-        <div class="gauge"></div>
-      </div>
-      <div id="nav-upload">
-        <%= link_to('Upload', upload_path, :rel => 'shadowbox;width=325;height=114') %>
+      <div class="container_16 clearfix">
+        <div class="grid_16">
+          <div id="nav-playback">
+            <button rel="prev" id="nav-prev" disabled="disabled">← Prev</button>
+            <button rel="play-pause" id="nav-play-pause" disabled="disabled">Play/Pause</button>
+            <button rel="next" id="nav-next" disabled="disabled">Next →</button>
+          </div>
+          <div id="nav-progress" class="progress">
+            <div class="gauge"></div>
+          </div>
+          <div id="nav-upload">
+            <%= link_to('Upload', upload_path, :rel => 'shadowbox;width=325;height=114') %>
+          </div>
+        </div>
       </div>
     </div>
     <audio id="player">

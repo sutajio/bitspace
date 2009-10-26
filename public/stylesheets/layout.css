@@ -1,8 +1,10 @@
 #root { margin: 0; padding: 0 0 60px 0; position: relative; text-align: left; }
 
-#nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 18px 20px 10px 20px; font-size: 12px; height: 18px; }
-#nav-playback { position: absolute; left: 0; top: 12px; width: 96px; text-align: center; padding: 0 32px; }
-#nav-playback a { float: left; display: block; text-indent: -9999px; width: 32px; height: 32px; }
+#nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 8px 0 0 0; font-size: 12px; height: 38px; }
+#nav .container_16 { position: relative; }
+#nav-playback { position: absolute; left: 0; top: 0; width: 96px; text-align: center; padding: 3px 10px; }
+#nav-playback button { float: left; display: block; text-indent: -9999px; width: 32px; height: 32px; border: none; }
+#nav-playback button:disabled { opacity: 0.6; background-position-y: 0 !important; }
 #nav-play-pause { background: url(/images/button-play-pause.png) no-repeat;  }
 #nav-play-pause:hover { background-position: 0 -32px; }
 #nav-play-pause:active { background-position: 0 -64px; }
@@ -15,11 +17,15 @@
 #nav-next { background: url(/images/button-next-prev.png) no-repeat -32px 0; }
 #nav-next:hover { background-position: -32px -32px; }
 #nav-next:active { background-position: -32px -64px; }
-#nav-progress { position: absolute; left: 200px; top: 22px; width: 500px; }
-#nav-upload { position: absolute; right: 10px; top: 12px; width: 100px; }
+#nav-progress { position: absolute; left: 200px; top: 0; width: 540px; margin: 13px 0; }
+#nav-upload { position: absolute; right: 0; top: 0; width: 60px; margin: 3px 0; }
 #nav-upload a { display: block; text-indent: -9999px; background: url(/images/button-upload.png) no-repeat; width: 60px; height: 32px; }
 #nav-upload a:hover { background-position: 0 -32px; }
 #nav-upload a:active { background-position: 0 -64px; }
+
+#status { width: 100%; position: fixed; bottom: 38px; z-index: 79; padding: 10px 0; font-size: 12px; background: #000; opacity: 0.4; display: none; text-shadow: #000 1px 1px 1px; }
+#status-artist { font-weight: bold; }
+#status-track { font-weight: bold; }
 
 #menu { margin: 20px 0; }
 #menu .first { padding-left: 10px; }

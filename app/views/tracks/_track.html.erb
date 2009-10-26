@@ -1,4 +1,4 @@
 <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
-  <span class="track-title"><%= link_to(h(track.title), track.url, :rel => 'play') %></span>
+  <span class="track-title"><%= link_to(h(track.title), track.url, :rel => 'play', 'data-track' => h(track.title), 'data-release' => h(track.release.title), 'data-artist' => h(@artist.name)) %></span>
   <span class="track-length"><%= seconds_to_time(track.length) %></span>
 <% end %>
