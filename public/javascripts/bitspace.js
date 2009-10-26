@@ -11,6 +11,7 @@ $(function(){
         Shadowbox.setup(links);
       }
     });
+    $('a[href='+e.value+']').addClass('current');
   });
   
   $('a[target=_self]').livequery('click', function(e){
