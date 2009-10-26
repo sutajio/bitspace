@@ -80,6 +80,7 @@ $(function(){
   .bind('ended', function(e){
     if($(this).queue('playlist').length == 0) {
       $('button[rel=play-pause]').attr('disabled','disabled');
+      $('button[rel=next]').attr('disabled', 'disabled');
       $('#status').fadeOut('slow');
     } else {
       $(this).dequeue('playlist');
