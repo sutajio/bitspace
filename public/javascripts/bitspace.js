@@ -45,9 +45,7 @@ $(function(){
   
   $('button[rel=play-pause]').livequery('click', function(e){
     e.preventDefault();
-    $('audio#player').each(function(){
-      if(this.paused) { this.play(); } else { this.pause(); }
-    });
+    $('audio#player').trigger('toggle');
   });
   
   $('button[rel=next]').livequery('click', function(e){
@@ -76,6 +74,9 @@ $(function(){
   })
   .bind('pause', function(e){
     $('button[rel=play-pause]').removeClass('pause');
+  })
+  .bind('toggle', function(e){
+    if(this.paused) { this.play(); } else { this.pause(); }
   })
   .bind('ended', function(e){
     if($(this).queue('playlist').length == 0) {
