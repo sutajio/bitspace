@@ -104,5 +104,9 @@ $(function(){
   .bind('canplaythrough', function(e){
     $('a.loading').removeClass('loading');
   });
+  
+  $(document).shortkeys({
+    'Space':   function () { $('audio#player').trigger('toggle'); }
+  });
 
 });
