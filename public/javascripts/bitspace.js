@@ -11,6 +11,7 @@ $(function(){
         Shadowbox.setup(links);
       }
     });
+    $('a.current').removeClass('current');
     $('a[href='+e.value+']').addClass('current');
   });
   
@@ -21,8 +22,6 @@ $(function(){
   
   $('#menu a').livequery('click', function(e){
     e.preventDefault();
-    $('#menu a').removeClass('current');
-    $(this).addClass('current');
     $.address.value($(this).attr('href'));
   });
   
