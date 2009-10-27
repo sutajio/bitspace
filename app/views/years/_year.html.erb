@@ -9,7 +9,7 @@
     <ul class="releases clearfix">
       <% year.last.each do |release| %>
       <li>
-        <% link_to([release.artist, release], :target => '_self') do %>
+        <% link_to([release.artist, release], :target => '_self', :title => release_title(release)) do %>
           <%= image_tag(release.artwork.url(:small), :size => '125x125') %>
         <% end %>
       </li>
