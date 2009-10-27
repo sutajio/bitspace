@@ -6,12 +6,12 @@
     <%= link_to(image_tag(release.artwork.url(:small), :size => '125x125', :alt => 'Cover art'), edit_artist_release_path(release.artist, release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
     <% end %>
     <h2>
-      <%=h release.title %>
+      <%= link_to(h(release.title), [release.artist, release], :target => '_self') %>
       <% if release.year.present? %>
-      <span class="year">(<%= release.year %>)</span>
+      <span class="year">(<%= link_to(release.year, year_path(release.year), :target => '_self') %>)</span>
       <% end %>
     </h2>
-    <h3><%=h release.artist.name %></h3>
+    <h3><%= link_to(h(release.artist.name), release.artist, :target => '_self') %></h3>
   </div>
   <ol class="tracks">
     <%= render :partial => 'tracks/track', :collection => release.tracks %>

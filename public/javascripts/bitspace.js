@@ -32,9 +32,9 @@ $(function(){
       var self = $(this);
       playlist.push(function(){
         $('audio#player').trigger('start', self.attr('href'));
-        $('#status-artist').text(self.attr('data-artist'));
-        $('#status-track').text(self.attr('data-track'));
-        $('#status-release').text(self.attr('data-release'));
+        $('#status-artist').text(self.attr('data-artist')).attr('href',self.attr('data-artist-url'));
+        $('#status-track').text(self.attr('data-track')).attr('href',self.attr('data-track-url'));
+        $('#status-release').text(self.attr('data-release')).attr('href',self.attr('data-release-url'));
         $('#status').fadeIn('slow');
         $('.playing').removeClass('playing').removeClass('loading');
         self.addClass('playing');

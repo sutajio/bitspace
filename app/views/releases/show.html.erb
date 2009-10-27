@@ -1,7 +1,8 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
     <h1>
-      <%=h @artist.name%> &ndash; <%=h @release.title %>
+      <%= link_to(h(@artist.name), @artist, :target => '_self') %> &ndash;
+      <%= link_to(h(@release.title), [@artist, @release], :target => '_self') %>
       <% if @release.year.present? %>
       <span class="year">(<%= @release.year %>)</span>
       <% end %>

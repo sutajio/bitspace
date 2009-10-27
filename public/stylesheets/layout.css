@@ -23,7 +23,7 @@
 #nav-upload a:hover { background-position: 0 -32px; }
 #nav-upload a:active { background-position: 0 -64px; }
 
-#status { width: 100%; position: fixed; bottom: 38px; z-index: 79; padding: 10px 0; font-size: 12px; background: #000; opacity: 0.4; display: none; text-shadow: #000 1px 1px 1px; }
+#status { width: 100%; position: fixed; bottom: 38px; z-index: 79; padding: 10px 0; font-size: 12px; background: #000; opacity: 0.4; display: none; }
 #status-artist { font-weight: bold; }
 #status-track { font-weight: bold; }
 
