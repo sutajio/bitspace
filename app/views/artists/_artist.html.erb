@@ -1,12 +1,10 @@
-<% if artist.releases.present? %>
 <% content_tag_for(:li, artist, :class => 'grid_3') do %>
   <% link_to(artist, :target => '_self') do %>
-    <%= image_tag(artist.releases.first_with_artwork.artwork.url(:small), :size => '125x125', :alt => 'Cover art') %>
+    <%= image_tag((artist.releases.first_with_artwork || Release.new).artwork.url(:small), :size => '125x125', :alt => 'Cover art') %>
   <% end %>
   <%= link_to(h(artist.name), artist, :class => 'name', :target => '_self') %>
   <span class="meta">
     <%= pluralize(artist.releases.size, 'release') %>,
     <%= pluralize(artist.tracks.size, 'track')%>
   </span>
-<% end %>
 <% end %>
