@@ -1,0 +1,19 @@
+<div class="container_16 clearfix pane">
+  <div class="grid_16">
+    <h1>Login</h1>
+    <% form_for @user_session do |f| %>
+      <%= f.error_messages %>
+      <div class="field">
+        <%= f.label :login, "Username" %><br />
+        <%= f.text_field :login %>
+      </div>
+      <div class="field">
+        <%= f.label :password %><br />
+        <%= f.password_field :password %>
+      </div>
+      <div class="submit-row">
+        <%= f.submit "Login" %>
+      </div>
+     <% end %>
+   </div>
+</div>

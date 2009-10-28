@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem 'scoped_search', :source => 'http://gemcutter.org'
   config.gem 'paperclip', :source => 'http://gemcutter.org'
   config.gem 'right_aws', :source => 'http://gemcutter.org'
+  config.gem 'authlogic', :source => 'http://gemcutter.org'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

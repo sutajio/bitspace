@@ -21,6 +21,13 @@
   </head>
   <body class="black">
     <div id="root">
+	    <div class="container_16 clearfix">
+	      <div class="grid_3 prefix_13">
+	        <ul id="site-menu" class="clearfix">
+	          <% if current_user %><li><%= link_to("Logout", current_user_session, :method => :delete) %></li><% end %>
+	        </ul>
+	      </div>
+	    </div>
       <div class="container_16 clearfix">
         <ul id="menu" class="horizontal-tabs clearfix">
           <li class="grid_2 first"><%= link_to(image_tag('/images/logos/logo.png'), root_path, :target => '_self', :rel => 'start') %></li>
