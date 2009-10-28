@@ -7,6 +7,7 @@ class Release < ActiveRecord::Base
   validates_presence_of :artist_id
   validates_presence_of :title
   
+  validates_uniqueness_of :title, :scope => [:artist_id]
   validates_uniqueness_of :mbid, :allow_nil => true
   
   default_scope :order => 'year DESC'
