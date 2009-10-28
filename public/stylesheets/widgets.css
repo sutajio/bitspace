@@ -10,6 +10,8 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 .horizontal-tabs { list-style: none; margin: 0; }
 .horizontal-tabs li { margin: 0; float: left; padding: 12px 24px; }
 
+.more { display: block; text-align: center; padding: 10px; margin: 0 10px; text-transform: lowercase; -webkit-border-radius: 5px; }
+
 .artists { padding: 20px 30px; }
 .artist { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
 .artist img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; }

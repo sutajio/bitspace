@@ -1,5 +1,8 @@
 <div class="container_16 clearfix pane">
-  <ul class="artists clearfix">
-    <%= render :partial => 'artist', :collection => @artists %>
-  </ul>
+  <div class="artists clearfix infinite-scroll">
+    <div id="infscr-page-1" class="infscr-pages">
+      <%= render :partial => 'artist', :collection => @artists %>
+    </div>
+  </div>
+  <%= more(@artists) %>
 </div>
