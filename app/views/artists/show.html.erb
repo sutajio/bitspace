@@ -13,6 +13,6 @@
 </div>
 <script type="text/javascript">
 $(function(){
-  $('#<%= dom_id(@artist) %>_releases').load('<%= url_for([@artist, :releases]) %>', null, function(){ Shadowbox.setup($('#<%= dom_id(@artist) %>_releases a[rel*=shadowbox]')); });
+  $('#<%= dom_id(@artist) %>_releases').load("<%= url_for([@artist, :releases]).sub('"','\"') %>", null, function(){ Shadowbox.setup($('#<%= dom_id(@artist) %>_releases a[rel*=shadowbox]')); });
 });
 </script>

@@ -12,7 +12,7 @@ $(function(){
       }
     });
     $('a.current').removeClass('current');
-    $('a[href='+e.value+']').addClass('current');
+    $('a[href="'+e.value.replace(/["]/g, '\\"')+'"]').addClass('current');
   });
   
   $('a[target=_self]').livequery('click', function(e){
