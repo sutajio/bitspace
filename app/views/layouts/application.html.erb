@@ -27,6 +27,11 @@
           <li class="grid_1"><%= link_to('Artists', artists_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Labels', '#', :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Years', years_path, :target => '_self', :rel => 'contents') %></li>
+          <li class="grid_3 prefix_6 last">
+            <% form_tag(search_path, :method => 'get') do %>
+              <input type="search" results="5" name="q" id="search-q" />
+            <% end %>
+          </li>
         </ul>
       </div>
       <div id="page">

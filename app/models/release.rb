@@ -17,7 +17,9 @@ class Release < ActiveRecord::Base
     first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
   end
   
-  searchable_on :title, :year
+  scoped_search :on => [:title]
+  scoped_search :in => :artist, :on => [:name]
+  scoped_search :in => :tracks, :on => [:title]
   
   has_attached_file :artwork,
     :path => ":class/:attachment/:style/:id_partition.png",

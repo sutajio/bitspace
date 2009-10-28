@@ -1,0 +1,13 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <h1>Search results for <em><%=h params[:q] %></em></h1>
+  </div>
+</div>
+
+<div class="container_16 clearfix pane">
+  <div class="grid_16">
+    <ul class="releases">
+      <%= render :partial => 'releases/release', :collection => @releases %>
+    </ul>
+  </div>
+</div>

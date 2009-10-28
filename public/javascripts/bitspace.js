@@ -133,5 +133,22 @@ $(function(){
   $(document).shortkeys({
     'Space':   function () { $('audio#player').trigger('toggle'); }
   });
+  
+  $('#search-q')
+  .keyup(function(){
+    var q = $(this).val();
+    if(q != "") {
+      $.address.value('/search?q='+q.replace(/ /g,'+'));
+    } else {
+      $.address.value('/artists');
+    }
+  })
+  .closest('form').submit(function(e){
+    e.preventDefault();
+    var q = $(this).val();
+    if(q != "") {
+      $.address.value('/search?q='+q.replace(/ /g,'+'));
+    }
+  });
 
 });
