@@ -3,10 +3,6 @@ class ReleasesController < ApplicationController
   before_filter :find_artist
   skip_before_filter :verify_authenticity_token, :only => [:update]
   
-  def index
-    @releases = @artist.releases.search_for(params[:q]).paginate(:page => params[:page])
-  end
-  
   def show
     @release = @artist.releases.find(params[:id])
   end

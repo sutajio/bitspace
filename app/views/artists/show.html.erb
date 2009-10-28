@@ -6,13 +6,8 @@
 
 <div class="container_16 clearfix pane">
   <div class="grid_16">
-    <div id="<%= dom_id(@artist) %>_releases">
-      Please wait...
-    </div>
+    <ul class="releases">
+      <%= render :partial => 'releases/release', :collection => @artist.releases %>
+    </ul>
   </div>
 </div>
-<script type="text/javascript">
-$(function(){
-  $('#<%= dom_id(@artist) %>_releases').load("<%= url_for([@artist, :releases]).sub('"','\"') %>", null, function(){ Shadowbox.setup($('#<%= dom_id(@artist) %>_releases a[rel*=shadowbox]')); });
-});
-</script>

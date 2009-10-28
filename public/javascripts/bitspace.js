@@ -10,6 +10,9 @@ $(function(){
       if(links.length) {
         Shadowbox.setup(links);
       }
+      if($('audio#player').attr('paused') == false) {
+        $('a[href="'+$('audio#player').attr('src')+'"]').addClass('playing');
+      }
     });
     $('a.current').removeClass('current');
     $('a[href="'+e.value.replace(/["]/g, '\\"')+'"]').addClass('current');
@@ -103,6 +106,7 @@ $(function(){
     if($(this).queue('playlist').length == 0) {
       $('button[rel=play-pause]').attr('disabled','disabled');
       $('button[rel=next]').attr('disabled', 'disabled');
+      $('.playing').removeClass('playing');
       $('#status').fadeOut('slow');
     } else {
       $(this).dequeue('playlist');
