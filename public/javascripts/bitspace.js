@@ -4,6 +4,10 @@ $(function(){
     Shadowbox.setup();
   }
   
+  if(window.location.pathname != '/') {
+    window.location.href = '/#' + window.location.pathname;
+  }
+  
   $.address.change(function(e){
     $('#page').load(e.value, null, function(){
       var links = $('#page a[rel*=shadowbox]');
