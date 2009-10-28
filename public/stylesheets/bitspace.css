@@ -8,6 +8,7 @@ body.black { background: #151515; color: #fff; }
 body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
 body.black #menu { border-bottom: 1px solid #222; }
 body.black #menu a { color: #666; }
+body.black #menu a:hover { color: #999; }
 body.black #menu .first a.current { background: none; }
 body.black #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
 body.black .progress { background-color: #2a2a2a; border: 1px solid #191919; }
