@@ -12,7 +12,7 @@ class Track < ActiveRecord::Base
   
   validates_uniqueness_of :mbid, :allow_nil => true
   validates_uniqueness_of :fingerprint
-  validates_uniqueness_of :track_nr, :scope => [:release_id]
+  validates_uniqueness_of :track_nr, :scope => [:release_id], :allow_nil => true
   
   default_scope :order => 'track_nr'
   
@@ -39,7 +39,7 @@ class Track < ActiveRecord::Base
         
         logger.info("Importing #{options[:key]}")
         
-        Mp3Info.open(file.path) do |mp3info|
+        Mp3Info.open(file.path, :encoding => 'utf-8') do |mp3info|
           
           artist_name = 
             mp3info.tag.artist.blank? ? 
@@ -71,15 +71,18 @@ class Track < ActiveRecord::Base
             artist = Artist.find_or_create_by_name(artist_name)
             unless artist.valid?
               logger.error(artist.errors.full_messages.to_sentence)
+              raise
             end
-            release = Release.find_or_create_by_title(
+            release = artist.releases.find_or_create_by_title(
               :artist => artist,
               :title => release_title,
-              :year => release_year)
+              :year => release_year,
+              :artwork => mp3info.tag2['APIC'] ? StringIO.new(mp3info.tag2['APIC']) : nil)
             unless release.valid?
               logger.error(release.errors.full_messages.to_sentence)
+              raise
             end
-            track = Track.find_or_create_by_title(
+            track = release.tracks.find_or_create_by_title(
               :release => release,
               :fingerprint => generate_fingerprint(file),
               :title => track_title,
@@ -93,6 +96,7 @@ class Track < ActiveRecord::Base
               :file => file)
             unless track.valid?
               logger.error(track.errors.full_messages.to_sentence)
+              raise
             end
           end
         end
