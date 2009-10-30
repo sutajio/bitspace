@@ -1,0 +1,10 @@
+<% content_tag_for(:div, label, :class => 'grid_3') do %>
+  <% link_to(label, :target => '_self') do %>
+    <%= image_tag((label.releases.first_with_artwork || Release.new).artwork.url(:small), :size => '125x125', :alt => 'Cover art') %>
+  <% end %>
+  <%= link_to(h(label.name), label, :class => 'name', :target => '_self') %>
+  <span class="meta">
+    <%= pluralize(label.artists.size, 'artist')%>,
+    <%= pluralize(label.releases.size, 'release') %>
+  </span>
+<% end %>

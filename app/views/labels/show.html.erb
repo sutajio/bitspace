@@ -1,0 +1,13 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <h1><%=h @label.name %></h1>
+  </div>
+</div>
+
+<div class="container_16 clearfix pane">
+  <div class="grid_16">
+    <ul class="releases">
+      <%= render :partial => 'releases/release', :collection => @label.releases %>
+    </ul>
+  </div>
+</div>
