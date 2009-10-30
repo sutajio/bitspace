@@ -77,7 +77,7 @@ class Track < ActiveRecord::Base
               :artist => artist,
               :title => release_title,
               :year => release_year,
-              :artwork => mp3info.tag2['APIC'] ? StringIO.new(mp3info.tag2['APIC']) : nil)
+              :artwork => image_from_id3(mp3info))
             unless release.valid?
               logger.error(release.errors.full_messages.to_sentence)
               raise
@@ -127,6 +127,12 @@ class Track < ActiveRecord::Base
                                                               unknown_release
       }
     end
+    
+    def image_from_id3(mp3info)
+      if mp3info.tag2['APIC']
+        StringIO.new(mp3info.tag2['APIC'])
+      end
+    end
   end
   
   def url(use_cdn = true)
@@ -160,5 +166,11 @@ class Track < ActiveRecord::Base
   end
   
   before_save :upload_track
+  
+  def update_meta_data
+    track = Scrobbler::Track.new(artist ? artist.name : release.artist.name, title)
+    self.mbid = album.mbid if track.mbid.present?
+    self.save
+  end
   
 end

@@ -35,4 +35,12 @@ class Release < ActiveRecord::Base
     :s3_host_alias => ENV['CDN_HOST'],
     :bucket => ENV['S3_BUCKET']
   
+  def update_meta_data
+    require 'open-uri'
+    album = Scrobbler::Album.new(artist.name, title, :include_info => true)
+    self.artwork = open(album.image_large) if album.image_large.present?
+    self.mbid = album.mbid if album.mbid.present?
+    self.year = album.release_date.year if album.release_date.present?
+    self.save
+  end
 end
