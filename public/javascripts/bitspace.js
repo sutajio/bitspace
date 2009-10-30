@@ -96,6 +96,7 @@ $(function(){
     this.src = data;
     this.load();
     this.play();
+    $('a[href="'+data+'"]').addClass('playing');
   })
   .bind('play', function(e){
     $('button[rel=play-pause]').addClass('pause').attr('disabled','');
