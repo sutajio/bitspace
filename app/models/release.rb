@@ -39,10 +39,14 @@ class Release < ActiveRecord::Base
     require 'open-uri'
     album = Scrobbler::Album.new(artist.name, title, :include_info => true)
     unless self.artwork.file?
-      self.artwork = open(album.image_large) if album.image_large.present?
+      if album.image_large.present? && !album.image_large.include?('default')
+        self.artwork = open(album.image_large)
+      end
     end
     self.mbid = album.mbid if album.mbid.present?
-    self.year = album.release_date.year if album.release_date.present?
+    if album.release_date.present? && !album.release_date.today?
+      self.year = album.release_date.year
+    end
     self.save!
   end
   
