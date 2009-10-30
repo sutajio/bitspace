@@ -81,15 +81,15 @@ $(function(){
     $('audio#player').trigger('next');
   });
   
-  $('#nav-progress').each(function(){
-    var progress = $(this);
-    var gauge = progress.find('.gauge');
-    var player = $('#player');
-    setInterval(function(){
-      var percent = ((player.get(0).currentTime / player.get(0).duration) * 100);
-      gauge.width(percent+'%');
-    }, 300);
-  });
+  $('#nav-progress').slider({
+    range: 'min',
+    value: 0,
+    min: 0,
+    max: 100,
+    slide: function(e, ui){
+      $('audio#player').attr('currentTime', ui.value);
+    }
+  }).slider('disable');
   
   $('audio#player')
   .bind('start', function(e,data){
@@ -99,6 +99,7 @@ $(function(){
   })
   .bind('play', function(e){
     $('button[rel=play-pause]').addClass('pause').attr('disabled','');
+    $('#nav-progress').slider('enable');
   })
   .bind('pause', function(e){
     $('button[rel=play-pause]').removeClass('pause');
@@ -108,6 +109,7 @@ $(function(){
   })
   .bind('ended', function(e){
     if($(this).queue('playlist').length == 0) {
+      $('#nav-progress').slider('disable').slider('value', 0);
       $('button[rel=play-pause]').attr('disabled','disabled');
       $('button[rel=next]').attr('disabled', 'disabled');
       $('.playing').removeClass('playing');
@@ -132,6 +134,27 @@ $(function(){
   })
   .bind('canplaythrough', function(e){
     $('a.loading').removeClass('loading');
+  })
+  .bind('durationchange', function(e){
+    $('#nav-progress').slider('option', 'max', this.duration);
+  })
+  .bind('timeupdate', function(e){
+    $('#nav-progress').slider('value', this.currentTime);
+  })
+  .bind('abort', function(e){
+    window.status = "Abort";
+  })
+  .bind('dataunavailable', function(e){
+    window.status = 'Data unavailable';
+  })
+  .bind('emptied', function(e){
+    window.status = 'Emptied';
+  })
+  .bind('empty', function(e){
+    window.status = 'Empty';
+  })
+  .bind('error', function(e){
+    window.status = 'Error';
   });
   
   $(document).shortkeys({

@@ -3,8 +3,10 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 .pane { padding: 10px 0; -webkit-border-radius: 5px; }
 .dialog { padding: 20px; }
 
-.progress { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; }
-.progress .gauge { height: 10px; width: 0px; }
+.progress, .ui-slider { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; position: relative; overflow: hidden; }
+.progress .gauge, .ui-slider .ui-slider-range { height: 10px; width: 0px; }
+.ui-slider .ui-slider-handle { background: #fff; height: 10px; width: 10px; position: absolute; top: 0; left: 0; }
+.ui-slider-disabled .ui-slider-handle { opacity: 0.5; cursor: default; }
 .progress-status { font-size: 10px; text-align: center; }
 
 .horizontal-tabs { list-style: none; margin: 0; }

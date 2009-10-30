@@ -11,8 +11,11 @@ body.black #menu a { color: #666; }
 body.black #menu a:hover { color: #999; }
 body.black #menu .first a.current { background: none; }
 body.black #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
-body.black .progress { background-color: #2a2a2a; border: 1px solid #191919; }
-body.black .progress .gauge { background: #151515; }
+body.black .progress,
+body.black .ui-slider { background-color: #2a2a2a; border: 1px solid #191919; }
+body.black .progress .gauge,
+body.black .ui-slider .ui-slider-range { background: #151515; }
+body.black .ui-slider .ui-slider-handle { background: url(/images/black/progress-handle.png) no-repeat; }
 body.black .progress-status { color: #555; }
 body.black .pane { background: #2a2a2a; }
 body.black .dialog { background: #151515; }
