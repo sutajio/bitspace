@@ -38,9 +38,14 @@ class Release < ActiveRecord::Base
   def update_meta_data
     require 'open-uri'
     album = Scrobbler::Album.new(artist.name, title, :include_info => true)
-    self.artwork = open(album.image_large) if album.image_large.present?
+    unless self.artwork.file?
+      self.artwork = open(album.image_large) if album.image_large.present?
+    end
     self.mbid = album.mbid if album.mbid.present?
     self.year = album.release_date.year if album.release_date.present?
-    self.save
+    self.save!
   end
+  
+  after_create :update_meta_data
+  handle_asynchronously :update_meta_data if Rails.env.production?
 end

@@ -130,7 +130,7 @@ class Track < ActiveRecord::Base
     
     def image_from_id3(mp3info)
       if mp3info.tag2['APIC']
-        StringIO.new(mp3info.tag2['APIC'])
+        nil # StringIO.new(mp3info.tag2['APIC'])
       end
     end
   end
@@ -170,7 +170,10 @@ class Track < ActiveRecord::Base
   def update_meta_data
     track = Scrobbler::Track.new(artist ? artist.name : release.artist.name, title)
     self.mbid = album.mbid if track.mbid.present?
-    self.save
+    self.save!
   end
+  
+  after_create :update_meta_data
+  handle_asynchronously :update_meta_data if Rails.env.production?
   
 end

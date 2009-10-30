@@ -31,15 +31,13 @@ class Artist < ActiveRecord::Base
     lastfm_artist = Scrobbler::Artist.new(name)
     self.mbid = lastfm_artist.mbid if lastfm_artist.mbid.present?
     discogs_artist = Discogs::Artist.new(name)
-    discogs_artist.releases.each do |discogs_release|
-      release = self.releases.find_by_title(discogs_release.title)
-      if release
-        release.label = Label.find_or_create_by_name(discogs_release.labels.first) if discogs_release.labels.present?
-        release.artwork = open(discogs_release.images.first.uri) if discogs_release.images.first.try(:uri)
-        release.save
-      end
+    self.releases.find(:all, :conditions => { :title => discogs_artist.releases.map(&:title) }).each do |release|
+      discogs_release = discogs_artist.releases.find {|r| r.title == release.title }
+      release.label = Label.find_or_create_by_name(discogs_release.labels.first) if discogs_release.labels.present?
+      release.artwork = open(discogs_release.images.first.uri) if discogs_release.images.first.try(:uri)
+      release.save!
     end
-    self.save
+    self.save!
   end
   
   after_create :update_meta_data
