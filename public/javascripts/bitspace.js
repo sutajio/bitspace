@@ -1,13 +1,18 @@
 $(function(){
+  // Initialize Shadowbox.
   if(Shadowbox) {
     Shadowbox.init({ skipSetup: true });
     Shadowbox.setup();
   }
   
+  // If user enters Bitspace with an absolut URL, redirect her to the
+  // corresponding hashtag URL.
   if(window.location.pathname != '/') {
     window.location.href = '/#' + window.location.pathname;
   }
   
+  // Handle change in hashtag URL. Loads the new page and does setup of
+  // Shadowbox and current playing track, etc...
   $.address.change(function(e){
     $('#page').load(e.value, null, function(){
       var links = $('#page a[rel*=shadowbox]');
@@ -22,16 +27,19 @@ $(function(){
     $('a[href="'+e.value.replace(/["]/g, '\\"')+'"]').addClass('current');
   });
   
+  // Load all links that has target="_self" with Ajax.
   $('a[target=_self]').livequery('click', function(e){
     e.preventDefault();
     $.address.value($(this).attr('href'));
   });
   
+  // Load all links in the main menu with Ajax.
   $('#menu a').livequery('click', function(e){
     e.preventDefault();
     $.address.value($(this).attr('href'));
   });
   
+  // Intinite scroll
   $('.infinite-scroll').livequery(function(){
     $.infinitescroll.currPage = 1;
     $.infinitescroll.loadingImg = undefined;
@@ -53,10 +61,12 @@ $(function(){
     });
   });
   
+  // Links with rel="play" acts as play buttons. Plays the file specified in
+  // the links href=".." attribute.
   $('a[rel=play]').livequery('click', function(e){
     e.preventDefault();
     var playlist = [];
-    $(this).add($(this).closest('li').nextAll().find('a[rel=play]')).each(function(){
+    $(this).closest('ul').find('a[rel=play]').each(function(){
       var self = $(this);
       playlist.push(function(){
         $('audio#player').trigger('start', self.attr('href'));
@@ -68,19 +78,33 @@ $(function(){
         self.addClass('playing');
       });
     });
-    $('audio#player').queue('playlist', playlist).trigger('next');
+    var playlist_position = $(this).closest('ul').find('li a[rel=play]').index(this);
+    $('audio#player').data('playlist', playlist).data('playlist_position', playlist_position).trigger('playcurrent');
   });
   
+  // Buttons with rel="play-pause" acts as play/pause buttons. Triggers the
+  // "toggle" event on the audio player.
   $('button[rel=play-pause]').livequery('click', function(e){
     e.preventDefault();
     $('audio#player').trigger('toggle');
   });
   
+  // Buttons with rel="next" acts as next buttons. Triggers the
+  // "next" event on the audio player.
   $('button[rel=next]').livequery('click', function(e){
     e.preventDefault();
     $('audio#player').trigger('next');
   });
   
+  // Buttons with rel="prev" acts as prev buttons. Triggers the
+  // "prev" event on the audio player.
+  $('button[rel=prev]').livequery('click', function(e){
+    e.preventDefault();
+    $('audio#player').trigger('prev');
+  });
+  
+  // Apply slider functionality to the playback progress bar. Will seek the
+  // audio playback on slide. Disabled by default (when no song is playing).
   $('#nav-progress').slider({
     range: 'min',
     value: 0,
@@ -91,6 +115,7 @@ $(function(){
     }
   }).slider('disable');
   
+  // The audio player object.
   $('audio#player')
   .bind('start', function(e,data){
     this.src = data;
@@ -111,24 +136,33 @@ $(function(){
   .bind('ended', function(e){
     if($(this).queue('playlist').length == 0) {
       $('#nav-progress').slider('disable').slider('value', 0);
-      $('button[rel=play-pause]').attr('disabled','disabled');
+      $('button[rel=play-pause]').attr('disabled','disabled').removeClass('pause');
       $('button[rel=next]').attr('disabled', 'disabled');
+      $('button[rel=prev]').attr('disabled', 'disabled');
       $('.playing').removeClass('playing');
       $('#status').fadeOut('slow');
     } else {
       $(this).dequeue('playlist');
     }
   })
-  .bind('next', function(e){
-    $(this).dequeue('playlist');
-    if($(this).queue('playlist').length > 0) {
-      $('button[rel=next]').attr('disabled', '');
+  .bind('playcurrent', function(e){
+    $(this).data('playlist')[$(this).data('playlist_position')]();
+    if($(this).data('playlist_position') == 0) {
+      $('button[rel=prev]').attr('disabled', 'disabled');
     } else {
+      $('button[rel=prev]').attr('disabled', '');
+    }
+    if($(this).data('playlist_position') == ($(this).data('playlist').length - 1)) {
       $('button[rel=next]').attr('disabled', 'disabled');
+    } else {
+      $('button[rel=next]').attr('disabled', '');
     }
   })
+  .bind('next', function(e){
+    $(this).data('playlist_position', $(this).data('playlist_position') + 1).trigger('playcurrent');
+  })
   .bind('prev', function(e){
-    alert('prev');
+    $(this).data('playlist_position', $(this).data('playlist_position') - 1).trigger('playcurrent');
   })
   .bind('loadstart', function(e){
     $('a.playing').addClass('loading');
