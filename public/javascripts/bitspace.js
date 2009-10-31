@@ -153,15 +153,15 @@ $(function(){
     if(this.paused) { this.play(); } else { this.pause(); }
   })
   .bind('ended', function(e){
-    if($(this).queue('playlist').length == 0) {
+	  if($(this).data('playlist_position') == $(this).data('playlist').length) {
       $('#nav-progress').slider('disable').slider('value', 0);
       $('button[rel=play-pause]').attr('disabled','disabled').removeClass('pause');
       $('button[rel=next]').attr('disabled', 'disabled');
       $('button[rel=prev]').attr('disabled', 'disabled');
       $('.playing').removeClass('playing');
       $('#status').fadeOut('slow');
-    } else {
-      $(this).dequeue('playlist');
+    } else {	
+	    $(this).trigger('next');
     }
   })
   .bind('playcurrent', function(e){
