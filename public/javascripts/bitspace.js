@@ -222,5 +222,14 @@ $(function(){
       $.address.value('/search?q='+q.replace(/ /g,'+'));
     }
   });
+  
+  $('form#new_user_session').livequery('submit', function(e){
+    e.preventDefault();
+    $(this).ajaxSubmit({
+      success: function(){
+        $.address.value('/');
+      }
+    });
+  });
 
 });

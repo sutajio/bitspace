@@ -10,12 +10,12 @@ class UserSessionsController < ApplicationController
     if @user_session.save
       redirect_to root_path
     else
-      render :action => :new
+      render :text => 'Login failed, invalid username or password.', :status => :forbidden
     end
   end
 
   def destroy
-    current_user_session.destroy
+    current_user_session.destroy if current_user_session
     redirect_to root_path
   end
   
