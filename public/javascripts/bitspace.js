@@ -15,6 +15,7 @@ $(function(){
   // Shadowbox and current playing track, etc...
   $.address.change(function(e){
     $('#page').load(e.value, null, function(){
+      $(window).scrollTop(0);
       var links = $('#page a[rel*=shadowbox]');
       if(links.length) {
         Shadowbox.setup(links);
