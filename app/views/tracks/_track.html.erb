@@ -1,4 +1,9 @@
 <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
-  <span class="track-title"><%= link_to(h(truncate(track.title, :length => 70)), track.url, :rel => 'play', 'data-track' => h(track.title), 'data-release' => h(track.release.title), 'data-artist' => h(track.artist.try(:name) || track.release.artist.name), 'data-artist-url' => url_for(track.release.artist), 'data-release-url' => url_for([track.release.artist, track.release]), 'data-track-url' => artist_release_path(track.release.artist, track.release, :anchor => dom_id(track))) %></span>
+  <span class="track-title">
+  <%= link_to(h(truncate(track.title, :length => 70)), track.url, :rel => 'play', 'data-track' => h(track.title), 'data-release' => h(track.release.title), 'data-artist' => h(track.artist.try(:name) || track.release.artist.name), 'data-artist-url' => url_for(track.release.artist), 'data-release-url' => url_for([track.release.artist, track.release]), 'data-track-url' => artist_release_path(track.release.artist, track.release, :anchor => dom_id(track))) %>
+  <% if track.artist %>
+  &ndash; <span class="track-artist"><%=h track.artist.name %></span>
+  <% end %>
+  </span>
   <span class="track-length"><%= seconds_to_time(track.length) %></span>
 <% end %>

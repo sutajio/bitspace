@@ -9,13 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091023150205) do
+ActiveRecord::Schema.define(:version => 20091031162331) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "releases_count"
   end
 
   create_table "delayed_jobs", :force => true do |t|

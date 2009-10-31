@@ -1,6 +1,6 @@
 class Release < ActiveRecord::Base
   
-  belongs_to :artist
+  belongs_to :artist, :counter_cache => true
   belongs_to :label
   has_many :tracks
   

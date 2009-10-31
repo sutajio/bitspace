@@ -25,6 +25,9 @@ class Track < ActiveRecord::Base
   cattr_accessor :unknown_title
   self.unknown_title = '[Unknown Title]'
   
+  cattr_accessor :various_artists
+  self.various_artists = 'Various Artists'
+  
   class <<self
     def import(options)
       require 'tempfile'
@@ -41,9 +44,15 @@ class Track < ActiveRecord::Base
         
         Mp3Info.open(file.path, :encoding => 'utf-8') do |mp3info|
           
-          artist_name = 
+          track_artist_name = 
             mp3info.tag.artist.blank? ? 
               parse_filename(options[:key])[:artist] : mp3info.tag.artist
+          if mp3info.tag2['TCMP'] == '1'
+            album_artist_name = mp3info.tag2['TPE2'].present? ? 
+              mp3info.tag2['TPE2'] : various_artists
+          else
+            album_artist_name = track_artist_name
+          end
           release_title = 
             mp3info.tag.album.blank? ? 
               parse_filename(options[:key])[:release] : mp3info.tag.album
@@ -58,7 +67,8 @@ class Track < ActiveRecord::Base
               parse_filename(options[:key])[:track_nr] : mp3info.tag.tracknum
           
           logger.info("Title: #{track_title}")
-          logger.info("Artist: #{artist_name}")
+          logger.info("Artist: #{track_artist_name}")
+          logger.info("Album artist: #{album_artist_name}")
           logger.info("Release: #{release_title}")
           logger.info("Year: #{release_year}")
           logger.info("Track No.: #{track_nr}")
@@ -68,13 +78,20 @@ class Track < ActiveRecord::Base
           logger.info("VBR: #{mp3info.vbr}")
           
           transaction do
-            artist = Artist.find_or_create_by_name(artist_name)
-            unless artist.valid?
-              logger.error(artist.errors.full_messages.to_sentence)
+            if track_artist_name != album_artist_name
+              track_artist = Artist.find_or_create_by_name(track_artist_name)
+              unless track_artist.valid?
+                logger.error(track_artist.errors.full_messages.to_sentence)
+                raise
+              end
+            end
+            album_artist = Artist.find_or_create_by_name(album_artist_name)
+            unless album_artist.valid?
+              logger.error(album_artist.errors.full_messages.to_sentence)
               raise
             end
-            release = artist.releases.find_or_create_by_title(
-              :artist => artist,
+            release = album_artist.releases.find_or_create_by_title(
+              :artist => album_artist,
               :title => release_title,
               :year => release_year,
               :artwork => image_from_id3(mp3info))
@@ -83,6 +100,7 @@ class Track < ActiveRecord::Base
               raise
             end
             track = release.tracks.find_or_create_by_title(
+              :artist => track_artist,
               :release => release,
               :fingerprint => generate_fingerprint(file),
               :title => track_title,
