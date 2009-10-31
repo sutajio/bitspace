@@ -1,10 +1,8 @@
 class SpacesController < ApplicationController
   
-  def index
-  end
+  skip_before_filter :require_user
   
-  def show
-    @space = Space.find(params[:id])
+  def index
   end
   
 end

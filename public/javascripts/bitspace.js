@@ -5,15 +5,33 @@ $(function(){
     Shadowbox.setup();
   }
   
-  // If user enters Bitspace with an absolut URL, redirect her to the
-  // corresponding hashtag URL.
-  if(window.location.pathname != '/') {
-    window.location.href = '/#' + window.location.pathname;
-  }
+  // Handle Ajax error in a nice way.
+  $.ajaxSetup({
+    error: function(xhr, status, error){
+      switch(status) {
+        case 'error':
+          switch(xhr.status) {
+            case 403:
+              $.address.value('/login');
+              $('#error').text(xhr.responseText).fadeIn('slow');
+            break
+          }
+        break;
+        case 'timeout':
+          alert("Connection lost");
+        break;
+      }
+    }
+  });
+  
+  $('#error').click(function(e){
+    $(this).fadeOut('slow');
+  });
   
   // Handle change in hashtag URL. Loads the new page and does setup of
   // Shadowbox and current playing track, etc...
   $.address.change(function(e){
+    $('#error').fadeOut();
     $('#page').load(e.value, null, function(){
       $(window).scrollTop(0);
       var links = $('#page a[rel*=shadowbox]');

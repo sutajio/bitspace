@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem 'scoped_search', :source => 'http://gemcutter.org'
   config.gem 'paperclip', :source => 'http://gemcutter.org'
   config.gem 'right_aws', :source => 'http://gemcutter.org'
+  config.gem 'authlogic', :source => 'http://gemcutter.org'
   config.gem 'discogs', :source => 'http://gemcutter.org'
   config.gem 'scrobbler', :source => 'http://gemcutter.org'
 

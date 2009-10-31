@@ -9,6 +9,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :years do |years|
     years.resources :releases
   end
-  map.root :controller => 'spaces'
+  
+  map.resources :user_sessions
+  map.resources :users
+  map.login 'login', :controller => 'user_sessions', :action => 'new'
+  map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :method => 'delete'
+  
+  map.root :controller => 'spaces', :action => 'index'
 
 end

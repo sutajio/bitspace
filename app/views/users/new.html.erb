@@ -1,0 +1,12 @@
+<div class="container_16 clearfix pane">
+  <div class="grid_16">
+    <h1>Sign up</h1>
+    <% form_for @user do |f| %>
+      <%= f.error_messages %>
+      <%= render :partial => "form", :object => f %>
+      <div class="submit-row">
+        <%= f.submit "Register" %>
+      </div>
+    <% end %>
+  </div>
+</div>
