@@ -14,7 +14,7 @@ class Artist < ActiveRecord::Base
   searchable_on :name
   
   def to_param
-    name.tr(' ','+').sub('/','%2F')
+    name.tr(' ','+').sub('/','%2F').sub('?','%3F')
   end
   
   class <<self
