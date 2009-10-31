@@ -8,6 +8,7 @@ class YearsController < ApplicationController
     @years << ['1970-1960', Release.by_year(1960..1970).all(:limit => 10)]
     @years << ['1960-1950', Release.by_year(1950..1960).all(:limit => 10)]
     @years << ['1950-1940', Release.by_year(1940..1950).all(:limit => 10)]
+    expires_in(5.minutes, :public => true)
   end
   
   def show
@@ -17,6 +18,7 @@ class YearsController < ApplicationController
       @year = years.first..years.last
     end
     @releases = Release.by_year(@year)
+    expires_in(5.minutes, :public => true)
   end
   
 end

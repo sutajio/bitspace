@@ -5,6 +5,7 @@ class ReleasesController < ApplicationController
   
   def show
     @release = @artist.releases.find(params[:id])
+    expires_in(5.minutes, :public => true)
     fresh_when(:last_modified => @release.updated_at.utc, :public => true)
   end
   
