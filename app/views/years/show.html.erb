@@ -1,7 +1,7 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
     <h1>
-      <%= format_year(@year) %>
+      <%= link_to(format_year(@year), year_path(@year), :target => '_self') %>
     </h1>
   </div>
 </div>
