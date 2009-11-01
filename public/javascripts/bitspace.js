@@ -241,8 +241,23 @@ $(function(){
     window.status = 'Error';
   });
   
-  $(document).shortkeys({
-    'Space':   function () { $('audio#player').trigger('toggle'); }
+  $(window).shortkeys({
+    'Space': function () { $('audio#player').trigger('toggle'); },
+    'm': function() {
+      if($('audio#player').attr('muted')) {
+        $('audio#player').attr('muted', false);
+        $('#mute').attr('checked', '').next('label').removeClass('checked');;
+      } else {
+        $('audio#player').attr('muted', true);
+        $('#mute').attr('checked', 'checked').next('label').addClass('checked');
+      }
+    },
+    'k': function() {
+      $('audio#player').trigger('next');
+    },
+    'j': function() {
+      $('audio#player').trigger('prev');
+    }
   });
   
   $('#search-q').closest('form').submit(function(e){
