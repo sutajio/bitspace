@@ -18,6 +18,21 @@
 #nav-next:hover { background-position: -32px -32px; }
 #nav-next:active { background-position: -32px -64px; }
 #nav-progress { position: absolute; left: 200px; top: 0; width: 540px; margin: 13px 0; }
+#nav-mute { position: absolute; left: 118px; }
+#nav-mute input[type=checkbox] { display: none; }
+#nav-mute label { background: url(/images/button-mute.png) no-repeat; width: 20px; height: 38px; display: block; text-indent: -9999px; cursor: pointer; }
+#nav-mute label:hover { background-position: 0 -38px; }
+#nav-mute label.checked { background-position: 0 -76px; }
+#nav-repeat { position: absolute; left: 140px; }
+#nav-repeat input[type=checkbox] { display: none; }
+#nav-repeat label { background: url(/images/button-repeat.png) no-repeat; width: 20px; height: 38px; display: block; text-indent: -9999px; cursor: pointer; }
+#nav-repeat label:hover { background-position: 0 -38px; }
+#nav-repeat label.checked { background-position: 0 -76px; }
+#nav-shuffle { position: absolute; left: 162px; }
+#nav-shuffle input[type=checkbox] { display: none; }
+#nav-shuffle label { background: url(/images/button-shuffle.png) no-repeat; width: 20px; height: 38px; display: block; text-indent: -9999px; cursor: pointer; }
+#nav-shuffle label:hover { background-position: 0 -38px; }
+#nav-shuffle label.checked { background-position: 0 -76px; }
 #nav-upload { position: absolute; right: 0; top: 0; width: 60px; margin: 3px 0; }
 #nav-upload a { display: block; text-indent: -9999px; background: url(/images/button-upload.png) no-repeat; width: 60px; height: 32px; }
 #nav-upload a:hover { background-position: 0 -32px; }
