@@ -33,21 +33,21 @@ class ApplicationController < ActionController::Base
     
     def require_user
       unless current_user
-        render :text => "You must be logged in to access this page", :status => :forbidden
+        render :text => "You must be logged in to access that page.", :status => :forbidden
         return false
       end
     end
     
     def require_no_user
       if current_user
-        render :text => "You must be logged out to access this page", :status => :forbidden
+        render :text => "You must be logged out to access that page.", :status => :forbidden
         return false
       end
     end
     
     def require_admin_user
       unless current_user.is_admin?
-        render :text => "You must be admin to access this page", :status => :forbidden
+        render :text => "You must be admin to access that page.", :status => :forbidden
         return false
       end
     end

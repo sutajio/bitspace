@@ -153,35 +153,65 @@ $(function(){
     if(this.paused) { this.play(); } else { this.pause(); }
   })
   .bind('ended', function(e){
-	  if($(this).data('playlist_position') == $(this).data('playlist').length) {
-      $('#nav-progress').slider('disable').slider('value', 0);
-      $('button[rel=play-pause]').attr('disabled','disabled').removeClass('pause');
-      $('button[rel=next]').attr('disabled', 'disabled');
-      $('button[rel=prev]').attr('disabled', 'disabled');
-      $('.playing').removeClass('playing');
-      $('#status').fadeOut('slow');
-    } else {	
-	    $(this).trigger('next');
+    if($(this).data('playlist_position') == $(this).data('playlist').length) {
+      if(($('#repeat').attr('checked') == true) || ($('#shuffle').attr('checked') == true)) {
+        $(this).trigger('next');
+      } else {
+        $(this).data('playlist', null);
+        $(this).data('playlist_position', null);
+        $('#nav-progress').slider('disable').slider('value', 0);
+        $('button[rel=play-pause]').attr('disabled','disabled').removeClass('pause');
+        $('button[rel=next]').attr('disabled', 'disabled');
+        $('button[rel=prev]').attr('disabled', 'disabled');
+        $('.playing').removeClass('playing');
+        $('#status').fadeOut('slow');
+      }
+    } else {
+      $(this).trigger('next');
     }
   })
   .bind('playcurrent', function(e){
     $(this).data('playlist')[$(this).data('playlist_position')]();
     if($(this).data('playlist_position') == 0) {
-      $('button[rel=prev]').attr('disabled', 'disabled');
+      if(($('#repeat').attr('checked') == false) && ($('#shuffle').attr('checked') == false)) {
+        $('button[rel=prev]').attr('disabled', 'disabled');
+      } else {
+        $('button[rel=prev]').attr('disabled', '');
+      }
     } else {
       $('button[rel=prev]').attr('disabled', '');
     }
     if($(this).data('playlist_position') == ($(this).data('playlist').length - 1)) {
-      $('button[rel=next]').attr('disabled', 'disabled');
+      if(($('#repeat').attr('checked') == false) && ($('#shuffle').attr('checked') == false)) {
+        $('button[rel=next]').attr('disabled', 'disabled');
+      } else {
+        $('button[rel=next]').attr('disabled', '');
+      }
     } else {
       $('button[rel=next]').attr('disabled', '');
     }
   })
   .bind('next', function(e){
-    $(this).data('playlist_position', $(this).data('playlist_position') + 1).trigger('playcurrent');
+    if($('#shuffle').attr('checked')) {
+      $(this).data('playlist_position', Math.floor(Math.random()*$(this).data('playlist').length)).trigger('playcurrent');
+    } else {
+      if($('#repeat').attr('checked') && ($(this).data('playlist_position') == ($(this).data('playlist').length - 1))) {
+        $(this).data('playlist_position', 0).trigger('playcurrent');
+      } else {
+        $(this).data('playlist_position', $(this).data('playlist_position') + 1).trigger('playcurrent');
+      }
+    }
   })
   .bind('prev', function(e){
-    $(this).data('playlist_position', $(this).data('playlist_position') - 1).trigger('playcurrent');
+    if($('#shuffle').attr('checked')) {
+      $(this).data('playlist_position', Math.floor(Math.random()*$(this).data('playlist').length)).trigger('playcurrent');
+    } else {
+      if($('#repeat').attr('checked') && ($(this).data('playlist_position') == 0)) {
+        $(this).data('playlist_position', $(this).data('playlist').length - 1).trigger('playcurrent');
+      } else {
+        $(this).data('playlist_position', $(this).data('playlist_position') - 1).trigger('playcurrent');
+      }
+    }
   })
   .bind('loadstart', function(e){
     $('a.playing').addClass('loading');
@@ -211,8 +241,23 @@ $(function(){
     window.status = 'Error';
   });
   
-  $(document).shortkeys({
-    'Space':   function () { $('audio#player').trigger('toggle'); }
+  $(window).shortkeys({
+    'Space': function () { $('audio#player').trigger('toggle'); },
+    'm': function() {
+      if($('audio#player').attr('muted')) {
+        $('audio#player').attr('muted', false);
+        $('#mute').attr('checked', '').next('label').removeClass('checked');;
+      } else {
+        $('audio#player').attr('muted', true);
+        $('#mute').attr('checked', 'checked').next('label').addClass('checked');
+      }
+    },
+    'k': function() {
+      $('audio#player').trigger('next');
+    },
+    'j': function() {
+      $('audio#player').trigger('prev');
+    }
   });
   
   $('#search-q').closest('form').submit(function(e){
@@ -229,6 +274,51 @@ $(function(){
     $.post(this.href, { '_method': 'put' }, function(){
       self.toggleClass('loved');
     });
+  });
+
+  $('form#new_user_session').livequery('submit', function(e){
+    e.preventDefault();
+    $(this).ajaxSubmit({
+      success: function(){
+        $.address.value('/');
+      }
+    });
+  });
+  
+  $('#mute').change(function(e){
+    if($(this).attr('checked')) {
+      $('audio#player').attr('muted', true);
+      $(this).next('label').addClass('checked');
+    } else {
+      $('audio#player').attr('muted', false);
+      $(this).next('label').removeClass('checked');
+    }
+  });
+  
+  $('#repeat').change(function(e){
+    if($(this).attr('checked')) {
+      $(this).next('label').addClass('checked');
+      if($('audio#player').data('playlist')) {
+        $('button[rel=prev]').attr('disabled', '');
+        $('button[rel=next]').attr('disabled', '');
+      }
+    } else {
+      $(this).next('label').removeClass('checked');
+      if($('audio#player').data('playlist_position') == 0) {
+        $('button[rel=prev]').attr('disabled', 'disabled');
+      }
+      if($('audio#player').data('playlist_position') == ($('audio#player').data('playlist').length - 1)) {
+        $('button[rel=next]').attr('disabled', 'disabled');
+      }
+    }
+  });
+  
+  $('#shuffle').change(function(e){
+    if($(this).attr('checked')) {
+      $(this).next('label').addClass('checked');
+    } else {
+      $(this).next('label').removeClass('checked');
+    }
   });
 
 });

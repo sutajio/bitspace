@@ -2,7 +2,7 @@
   <div class="grid_3">
     <h1>
       <%= link_to(format_year(year.first), year_path(year.first), :target => '_self') %><br />
-      <span class="meta"><%= pluralize(year.last.size, 'release') %></span>
+      <span class="meta"><%= pluralize(year.last.total_entries, 'release') %></span>
     </h1>
   </div>
   <div class="grid_12">
