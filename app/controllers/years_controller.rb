@@ -15,9 +15,11 @@ class YearsController < ApplicationController
     @year = params[:id]
     if @year.split('-').size == 2
       years = @year.split('-').sort.map(&:to_i)
-      @year = years.first..years.last
+      years = years.first..years.last
+    else
+      years = @year
     end
-    @releases = Release.by_year(@year)
+    @releases = Release.by_year(years)
     expires_in(5.minutes, :public => true)
   end
   
