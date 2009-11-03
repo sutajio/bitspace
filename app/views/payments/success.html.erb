@@ -1,0 +1,18 @@
+<div class="container_16 clearfix">
+  <div class="grid_18 prefix_4 suffix_4 aligncenter">
+    <h1>Thank you for signing up!</h1>
+    <p>
+      Your payment succeeded and a receipt has been sent to your email
+      address.
+    </p>
+    <p>
+      <%= facebook_login_button %>
+    </p>
+    <p class="small grey">
+      Your subscription is linked to the email address you entered on the
+      PayPal payment page. If you use a different email address for your
+      Facebook account, please contact us at
+      <%= mail_to('support@bitspace.se', nil, :encode => 'javascript') %>.
+    </p>
+  </div>
+</div>

@@ -5,4 +5,16 @@ class SpacesController < ApplicationController
   def index
   end
   
+  def price
+  end
+  
+  def tour
+  end
+  
+  def help
+  end
+  
+  def blog
+  end
+  
 end

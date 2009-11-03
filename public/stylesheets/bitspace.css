@@ -4,13 +4,17 @@ body.white .release ol.tracks { background: #fff; }
 body.white .release ol.tracks li.odd { background: #f0f5fa; }
 body.white .release ol.tracks li.even { background: #fff; }
 
-body.black { background: #151515; color: #fff; }
+body.black { background: #060606; color: #fff; font: 13px Helvetica, Arial, sans-serif; line-height: normal; }
+body.black #root { background: #151515; }
 body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
 body.black #menu { border-bottom: 1px solid #222; }
 body.black #menu a { color: #666; }
 body.black #menu a:hover { color: #999; }
 body.black #menu .first a.current { background: none; }
 body.black #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
+body.black #footer { color: #666; }
+body.black .grey { color: #555; }
+body.black .small { font-size: 11px; }
 body.black .progress,
 body.black .ui-slider { background-color: #2a2a2a; border: 1px solid #191919; }
 body.black .progress .gauge,

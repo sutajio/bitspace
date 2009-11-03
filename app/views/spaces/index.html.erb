@@ -1,0 +1,21 @@
+<% if current_user.nil? %>
+<div class="container_16 clearfix">
+  <div class="grid_11">
+    <% link_to(price_path) do %>
+    <img src="/images/splash.png" width="640" height="440" alt="1 GB free!" />
+    <% end %>
+  </div>
+  <div class="grid_5" style="padding-top: 100px;">
+    <h1 style="font-family: Georgia, Times, serif; font-size: 30px; font-weight: normal;">No One Puts Music In A Corner.</h1>
+    <h2 style="font-family: Georgia, Times, serif; font-size: 14px; font-weight: normal;">Bitspace is a better way to store and listen to music.
+    We believe that music should be easy, beautiful and 
+    available. Simply upload your collection and enjoy 
+    it everyday, anywhere.</h2>
+    
+    <div class="aligncenter">
+      <p><%= facebook_login_button %></p>
+      <p class="small grey">Bitspace is currently invitation only.</p>
+    </div>
+  </div>
+</div>
+<% end %>

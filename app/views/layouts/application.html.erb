@@ -24,6 +24,7 @@
       <div class="container_16 clearfix">
         <div class="grid_3 prefix_13">
           <ul id="site-menu" class="clearfix">
+            <li><%=h current_user.login %></li>
             <li><%= link_to("Logout", logout_path, :method => :delete) %></li>
           </ul>
         </div>
@@ -89,16 +90,6 @@
     <audio id="player">
       Your browser does not support the <code>audio</code> element.
     </audio>
-    <% if Rails.env.production? %>
-    <script type="text/javascript">
-    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <script type="text/javascript">
-    try {
-    var pageTracker = _gat._getTracker("UA-11300936-1");
-    pageTracker._trackPageview();
-    } catch(err) {}</script>
-    <% end %>
+    <%= render :partial => 'layouts/google_analytics' %>
   </body>
 </html>

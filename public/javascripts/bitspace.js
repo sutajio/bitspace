@@ -12,7 +12,6 @@ $(function(){
         case 'error':
           switch(xhr.status) {
             case 403:
-              $.address.value('/login');
               $('#error').text(xhr.responseText).fadeIn('slow');
             break
           }
@@ -48,12 +47,6 @@ $(function(){
   
   // Load all links that has target="_self" with Ajax.
   $('a[target=_self]').livequery('click', function(e){
-    e.preventDefault();
-    $.address.value($(this).attr('href'));
-  });
-  
-  // Load all links in the main menu with Ajax.
-  $('#menu a').livequery('click', function(e){
     e.preventDefault();
     $.address.value($(this).attr('href'));
   });

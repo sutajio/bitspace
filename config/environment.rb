@@ -28,6 +28,8 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic', :source => 'http://gemcutter.org'
   config.gem 'discogs', :source => 'http://gemcutter.org'
   config.gem 'scrobbler', :source => 'http://gemcutter.org'
+  config.gem 'facebooker', :source => 'http://gemcutter.org'
+  config.gem 'activemerchant', :lib => 'active_merchant', :source => 'http://gemcutter.org'
 
   # Only load the plugins named here, in the order given (default is alphabetical).
   # :all can be used as a placeholder for all plugins not explicitly named

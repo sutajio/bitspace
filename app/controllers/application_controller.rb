@@ -13,12 +13,19 @@ class ApplicationController < ActionController::Base
   filter_parameter_logging :password, :password_confirmation
   helper_method :current_user_session, :current_user
   
+  include Facebooker::Rails::Controller
+  
   before_filter :require_user
+  before_filter :ensure_authenticated_to_facebook
   
   protected
     
     def current_layout
-      request.xhr? ? nil : 'application'
+      if request.xhr?
+        nil
+      else
+        current_user ? 'application' : 'site'
+      end
     end
     
     def current_user_session
@@ -33,22 +40,54 @@ class ApplicationController < ActionController::Base
     
     def require_user
       unless current_user
-        render :text => "You must be logged in to access that page.", :status => :forbidden
+        if request.xhr?
+          render :text => "You must be logged in to access that page.", :status => :forbidden
+        else
+          redirect_to root_path
+        end
         return false
       end
     end
     
     def require_no_user
       if current_user
-        render :text => "You must be logged out to access that page.", :status => :forbidden
+        if request.xhr?
+          render :text => "You must be logged out to access that page.", :status => :forbidden
+        else
+          redirect_to root_path
+        end
         return false
       end
     end
     
     def require_admin_user
       unless current_user.is_admin?
-        render :text => "You must be admin to access that page.", :status => :forbidden
+        if request.xhr?
+          render :text => "You must be admin access that page.", :status => :forbidden
+        else
+          redirect_to root_path
+        end
         return false
+      end
+    end
+    
+    def require_connected_user
+      unless facebook_session
+        if request.xhr?
+          render :text => "You must connect to Facebook to access that page.", :status => :forbidden
+        else
+          redirect_to root_path
+        end
+      end
+    end
+    
+    def require_invited_user
+      unless current_user.invited?
+        if request.xhr?
+          render :text => "Sorry, Bitspace is currently invitation only.", :status => :forbidden
+        else
+          redirect_to root_path
+        end
       end
     end
 

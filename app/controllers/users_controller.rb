@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
-  before_filter :require_admin_user
+  skip_before_filter :require_user
+  before_filter :require_connected_user
+  #before_filter :require_invited_user, :only => [:create]
   
   def new
     @user = User.new

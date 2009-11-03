@@ -1,5 +1,7 @@
 h1 span, h2 span { font-weight: normal; font-size: 12px; }
 
+sup { font-size: smaller; vertical-align: super; }
+
 .pane { padding: 10px 0; -webkit-border-radius: 5px; }
 .dialog { padding: 20px; }
 
@@ -16,6 +18,10 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 
 .field { margin: 10px 0; }
 .submit-row { margin: 20px 0; }
+
+.aligncenter { text-align: center; }
+.alignright { text-align: right; }
+.alignleft { text-align: left; }
 
 .artists { padding: 20px 30px; }
 .artist { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
