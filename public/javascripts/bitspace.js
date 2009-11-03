@@ -261,6 +261,14 @@ $(function(){
     }
   });
   
+  $('a[rel=love]').livequery('click', function(e){
+    e.preventDefault();
+    var self = $(this);
+    $.post(this.href, { '_method': 'put' }, function(){
+      self.toggleClass('loved');
+    });
+  });
+
   $('form#new_user_session').livequery('submit', function(e){
     e.preventDefault();
     $(this).ajaxSubmit({

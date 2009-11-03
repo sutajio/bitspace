@@ -16,7 +16,7 @@ class ApplicationController < ActionController::Base
   include Facebooker::Rails::Controller
   
   before_filter :require_user
-  before_filter :ensure_authenticated_to_facebook
+  before_filter :set_facebook_session
   
   protected
     

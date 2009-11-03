@@ -13,7 +13,7 @@ class Invitation < ActiveRecord::Base
   end
   
   after_create :send_invitation!
-  handle_asynchronously :send_invitation! if Rails.env.production?
+  #handle_asynchronously :send_invitation! if Rails.env.production?
   
   def generate_token
     unless self.token.present?

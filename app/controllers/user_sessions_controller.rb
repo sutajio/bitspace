@@ -5,13 +5,12 @@ class UserSessionsController < ApplicationController
   
   def new
   end
-
+  
   def create
-    debugger
     user = User.find_or_create_by_facebook_uid(
       :facebook_uid => facebook_session.user.uid,
       :email => "#{facebook_session.user.id}@facebook.com",
-      :login => facebook_session.user.name,
+      :login => Rails.env.production? ? facebook_session.user.name : facebook_session.user.id,
       :password => '123456')
     @user_session = UserSession.create(user)
     if @user_session.save
