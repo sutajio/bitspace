@@ -41,6 +41,7 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 
 .track-title { width: 500px; overflow: hidden; display: block; float: left; }
 .track-length { width: 50px; display: block; float: left; text-align: right; }
+.track-love {  width:46px; display: block; float:left; padding-left: 0 !important; text-align: center; }
 
 .years .releases li { list-style: none; margin: 0; float: left; line-height: 0; }
 .years h1 span { font-size: 10px; }

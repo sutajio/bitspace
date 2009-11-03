@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091031162331) do
+ActiveRecord::Schema.define(:version => 20091031202557) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -34,6 +34,20 @@ ActiveRecord::Schema.define(:version => 20091031162331) do
 
   create_table "labels", :force => true do |t|
     t.string   "mbid"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "playlist_items", :force => true do |t|
+    t.integer  "playlist_id"
+    t.integer  "user_id"
+    t.integer  "track_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "playlists", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"

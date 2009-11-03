@@ -15,6 +15,9 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :method => 'delete'
   
+  map.resources :tracks, :member => { :love => :put, :unlove => :put }
+  map.resources :playlists
+  
   map.root :controller => 'spaces', :action => 'index'
 
 end

@@ -6,4 +6,5 @@
   <% end %>
   </span>
   <span class="track-length"><%= seconds_to_time(track.length) %></span>
+  <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love') %>
 <% end %>

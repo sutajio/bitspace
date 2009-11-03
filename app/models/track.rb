@@ -3,6 +3,8 @@ class Track < ActiveRecord::Base
   belongs_to :release
   belongs_to :artist
   
+  has_many :playlist_items
+  
   validates_presence_of :release_id
   validates_presence_of :fingerprint
   validates_presence_of :title
@@ -193,5 +195,21 @@ class Track < ActiveRecord::Base
   
   after_create :update_meta_data
   handle_asynchronously :update_meta_data if Rails.env.production?
+  
+  def toggle_love!
+    loved? ? unlove! : love!
+  end
+  
+  def love!
+    playlist_items.create
+  end
+  
+  def unlove!
+    playlist_items.all.each(&:destroy)
+  end
+  
+  def loved?
+    playlist_items.present?
+  end
   
 end

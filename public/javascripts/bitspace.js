@@ -222,5 +222,13 @@ $(function(){
       $.address.value('/search?q='+q.replace(/ /g,'+'));
     }
   });
+  
+  $('a[rel=love]').livequery('click', function(e){
+    e.preventDefault();
+    var self = $(this);
+    $.post(this.href, { '_method': 'put' }, function(){
+      self.toggleClass('loved');
+    });
+  });
 
 });
