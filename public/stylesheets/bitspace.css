@@ -4,7 +4,7 @@ body.white .release ol.tracks { background: #fff; }
 body.white .release ol.tracks li.odd { background: #f0f5fa; }
 body.white .release ol.tracks li.even { background: #fff; }
 
-body.black { background: #060606; color: #fff; font: 13px Helvetica, Arial, sans-serif; line-height: normal; }
+body.black { background: #060606; color: #fff; }
 body.black #root { background: #151515; }
 body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
 body.black #menu { border-bottom: 1px solid #222; }
@@ -37,6 +37,6 @@ body.black .release ol.tracks li a.playing { background: url(/images/black/playi
 body.black .release ol.tracks li a.loading { background: url(/images/black/loading.gif) no-repeat; }
 body.black .years .year { border-top: 1px solid #1d1d1d; }
 body.black .years .releases { background: -webkit-gradient(linear, left top, left bottom, from(rgba(34,34,34, .5)), color-stop(0.55, rgba(34,34,34, .01)), to(transparent)); }
-body.black .track-love { opacity: 0.5; background: url(/images/black/love.png) no-repeat 50% 0; text-indent: -9999px; }
+body.black .track-love { opacity: 0.5; background: url(/images/love.png) no-repeat 50% 0; text-indent: -9999px; }
 body.black .track-love:hover { opacity: 0.5; background-position: 50% -19px; }
 body.black .track-love.loved { opacity: 1; background-position: 50% -38px; }

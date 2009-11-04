@@ -24,14 +24,14 @@
     FB.init("229bc1a35d28a91f61819151c35ed5a5","/xd_receiver.htm");
     </script>
     <div id="root">
-      <div class="container_16 clearfix">
-        <ul id="menu" class="horizontal-tabs clearfix">
+      <div class="container_12 clearfix">
+        <ul id="menu" class="clearfix">
           <li class="grid_2 first"><%= link_to(image_tag('/images/logos/logo.png'), root_path, :rel => 'start') %></li>
           <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Tour', tour_path, :class => params[:action] == 'tour' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Help', help_path, :class => params[:action] == 'help' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:action] == 'blog' ? 'current' : nil) %></li>
-          <li class="grid_3 prefix_5 last">
+          <li class="grid_3 prefix_3 last">
             <% form_tag(search_path, :method => 'get') do %>
               <input type="search" results="5" name="q" id="search-q" />
             <% end %>

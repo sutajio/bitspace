@@ -11,9 +11,6 @@ sup { font-size: smaller; vertical-align: super; }
 .ui-slider-disabled .ui-slider-handle { opacity: 0.5; cursor: default; }
 .progress-status { font-size: 10px; text-align: center; }
 
-.horizontal-tabs { list-style: none; margin: 0; }
-.horizontal-tabs li { margin: 0; float: left; padding: 12px 24px; }
-
 .more { display: block; text-align: center; padding: 10px; margin: 0 10px; text-transform: lowercase; -webkit-border-radius: 5px; }
 
 .field { margin: 10px 0; }
