@@ -9,7 +9,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :years do |years|
     years.resources :releases
   end
-  map.resources :tracks, :member => { :love => :put, :unlove => :put }
+  map.resources :tracks, :member => { :love => :put }
   map.resources :playlists
   
   map.resources :invitations
