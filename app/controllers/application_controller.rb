@@ -18,6 +18,13 @@ class ApplicationController < ActionController::Base
   before_filter :require_user
   before_filter :set_facebook_session
   
+  rescue_from Facebooker::Session::SessionExpired do |exception|
+    clear_facebook_session_information
+    clear_fb_cookies!
+    current_user_session.destroy if current_user_session
+    redirect_to root_path
+  end
+  
   protected
     
     def current_layout
@@ -72,21 +79,13 @@ class ApplicationController < ActionController::Base
     end
     
     def require_connected_user
-      unless facebook_session
-        if request.xhr?
-          render :text => "You must connect to Facebook to access that page.", :status => :forbidden
-        else
-          redirect_to root_path
-        end
-      end
-    end
-    
-    def require_invited_user
-      unless current_user.invited?
-        if request.xhr?
-          render :text => "Sorry, Bitspace is currently invitation only.", :status => :forbidden
-        else
-          redirect_to root_path
+      if Rails.env.production?
+        unless facebook_session
+          if request.xhr?
+            render :text => "You must connect to Facebook to access that page.", :status => :forbidden
+          else
+            redirect_to root_path
+          end
         end
       end
     end

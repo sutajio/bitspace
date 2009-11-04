@@ -20,11 +20,19 @@
     <%= javascript_include_tag :application %>
   </head>
   <body class="black">
+    <%= fb_connect_javascript_tag %>
+    <script type="text/javascript">
+    FB.init("229bc1a35d28a91f61819151c35ed5a5","/xd_receiver.htm");
+    </script>
     <div id="root">
       <div class="container_16 clearfix">
         <div class="grid_3 prefix_13">
           <ul id="user-menu" class="clearfix">
-            <li><%=h current_user.login %></li>
+            <% if current_user.name.present? %>
+            <li><%=h current_user.name %></li>
+            <% else %>
+            <li><fb:name uid="loggedinuser" useyou="false" linked="false"></fb:name></li>
+            <% end %>
             <li><%= link_to("Logout", logout_path, :method => :delete) %></li>
           </ul>
         </div>

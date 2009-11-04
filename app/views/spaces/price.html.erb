@@ -6,26 +6,26 @@
   
   <div class="grid_4 prefix_2 aligncenter">
     <div class="pane" style="height: 236px; overflow: hidden; line-height: normal;">
-      <h2>Bitspace Free</h2>
-      <h3>€0/month</h3>
+      <h2><%= User::SUBSCRIPTION_PLANS[:free][:name] %></h2>
+      <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:free][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
-        <li style="margin: 0;"><strong>1 GB</strong> storage</li>
-        <li style="margin: 0;"><strong>20</strong> albums*</li>
-        <li style="margin: 0;"><strong>200</strong> tracks*</li>
+        <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:free][:storage]) %></strong> storage</li>
+        <li style="margin: 0;"><strong><%= bytes_to_albums(User::SUBSCRIPTION_PLANS[:free][:storage]) %></strong> albums*</li>
+        <li style="margin: 0;"><strong><%= bytes_to_tracks(User::SUBSCRIPTION_PLANS[:free][:storage]) %></strong> tracks*</li>
       </ul>
-      <p><%= facebook_login_button %></p>
-      <p class="small grey">Bitspace Free is currently invitation only.</p>
+      <p class="small grey">Bitspace Free is currently<br />
+        invitation only. </p>
     </div>
   </div>
     
   <div class="grid_4 aligncenter">
     <div class="pane" style="height: 236px; overflow: hidden; border: 2px solid #555; position: relative; top: -2px; line-height: normal;">
-      <h2>Bitspace Premium</h2>
-      <h3>€7,99/month</h3>
+      <h2><%= User::SUBSCRIPTION_PLANS[:premium][:name] %></h2>
+      <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:premium][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
-        <li style="margin: 0;"><strong>50 GB</strong> storage</li>
-        <li style="margin: 0;"><strong>1000</strong> albums*</li>
-        <li style="margin: 0;"><strong>10,000</strong> tracks*</li>
+        <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> storage</li>
+        <li style="margin: 0;"><strong><%= bytes_to_albums(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> albums*</li>
+        <li style="margin: 0;"><strong><%= bytes_to_tracks(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> tracks*</li>
       </ul>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
@@ -38,12 +38,12 @@
   
   <div class="grid_4 suffix_2 aligncenter">
     <div class="pane" style="height: 236px; overflow: hidden; line-height: normal;">
-      <h2>Bitspace Unlimited</h2>
-      <h3>€79,99/month</h3>
+      <h2><%= User::SUBSCRIPTION_PLANS[:unlimited][:name] %></h2>
+      <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:unlimited][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
-        <li style="margin: 0;"><strong>Unlimited</strong> storage</li>
-        <li style="margin: 0;"><strong>Unlimited</strong> albums</li>
-        <li style="margin: 0;"><strong>Unlimited</strong> tracks</li>
+        <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:unlimited][:storage]) || 'Unlimited' %></strong> storage</li>
+        <li style="margin: 0;"><strong><%= bytes_to_albums(User::SUBSCRIPTION_PLANS[:unlimited][:storage]) %></strong> albums</li>
+        <li style="margin: 0;"><strong><%= bytes_to_tracks(User::SUBSCRIPTION_PLANS[:unlimited][:storage]) %></strong> tracks</li>
       </ul>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
@@ -58,15 +58,5 @@
     <small class="small grey">
       * Actual capacity varies by content.
     </small>
-  </div>
-    
-    <!-- KE4nY91DBJRs9eGYLZcHsveVT9SYZYgoJ3hqmZ17NhsR41etIaybrJN8pla -->
-    
-    <!--
-    <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=5VXN9TP3QC5RG">
-    <img src="https://www.paypal.com/en_US/i/btn/btn_unsubscribe_SM.gif" border="0">
-    </a>
-    -->
-    
   </div>
 </div>

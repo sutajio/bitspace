@@ -1,12 +1,36 @@
-<div class="container_16 clearfix pane">
-  <div class="grid_16">
-    <h1>Sign up</h1>
-    <% form_for @user do |f| %>
-      <%= f.error_messages %>
-      <%= render :partial => "users/form", :object => f %>
-      <div class="submit-row">
-        <%= f.submit "Register" %>
-      </div>
+<div class="container_16 clearfix">
+  <div class="grid_8 prefix_4 suffix_4 aligncenter">
+    <% if flash[:error] %>
+    <div class="error">
+      <%=h flash[:error] %>
+    </div>
     <% end %>
+    <h1 style="margin: 0;">Welcome to <%=h @user.subscription_plan %></h1>
+    <h3 class="grey">
+      You will get <%= number_to_human_size(@user.max_storage) %> of storage,
+      wow!
+    </h3>
+    <div class="pane">
+      <% form_for @invitation, :html => { :id => 'invitation-form' } do |f| %>
+        <%= f.error_messages %>
+        <div class="field">
+          <%= f.text_field :email, :class => 'aligncenter', :style => 'font-size: 18px; padding: 5px; width: 65%;' %>
+        </div>
+        <div class="submit-row">
+          <p>
+            <fb:login-button v="2" size="medium" onlogin="$('#invitation-form').submit()">Connect with Facebook</fb:login-button>
+          </p>
+          <p class="small grey" style="margin: 0 40px;">
+            You will be using your Facebook account for logging in to 
+            Bitspace. It's sweet because then you don't have to worry about
+            remembering yet another set of username and password for yet
+            another random site (that would be us). ;)<br />
+            That's why we only need to ask you for your email address (it
+            should already be filled in, but you can change it if you want).
+            Go ahead and click on the "Connect with Facebook" button now.
+          </p>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
