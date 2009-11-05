@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091104092923) do
+ActiveRecord::Schema.define(:version => 20091105164139) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(:version => 20091104092923) do
     t.datetime "updated_at"
     t.integer  "releases_count"
   end
+
+  add_index "artists", ["mbid"], :name => "index_artists_on_mbid"
+  add_index "artists", ["name"], :name => "index_artists_on_name"
+  add_index "artists", ["releases_count"], :name => "index_artists_on_releases_count"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -41,12 +45,17 @@ ActiveRecord::Schema.define(:version => 20091104092923) do
     t.datetime "updated_at"
   end
 
+  add_index "invitations", ["token"], :name => "index_invitations_on_token"
+
   create_table "labels", :force => true do |t|
     t.string   "mbid"
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "labels", ["mbid"], :name => "index_labels_on_mbid"
+  add_index "labels", ["name"], :name => "index_labels_on_name"
 
   create_table "playlist_items", :force => true do |t|
     t.integer  "playlist_id"
@@ -56,11 +65,17 @@ ActiveRecord::Schema.define(:version => 20091104092923) do
     t.datetime "updated_at"
   end
 
+  add_index "playlist_items", ["playlist_id"], :name => "index_playlist_items_on_playlist_id"
+  add_index "playlist_items", ["track_id"], :name => "index_playlist_items_on_track_id"
+  add_index "playlist_items", ["user_id"], :name => "index_playlist_items_on_user_id"
+
   create_table "playlists", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "playlists", ["name"], :name => "index_playlists_on_name"
 
   create_table "releases", :force => true do |t|
     t.integer  "artist_id"
@@ -76,6 +91,12 @@ ActiveRecord::Schema.define(:version => 20091104092923) do
     t.integer  "artwork_file_size"
     t.datetime "artwork_updated_at"
   end
+
+  add_index "releases", ["artist_id"], :name => "index_releases_on_artist_id"
+  add_index "releases", ["label_id"], :name => "index_releases_on_label_id"
+  add_index "releases", ["mbid"], :name => "index_releases_on_mbid"
+  add_index "releases", ["title"], :name => "index_releases_on_title"
+  add_index "releases", ["year"], :name => "index_releases_on_year"
 
   create_table "tracks", :force => true do |t|
     t.integer  "release_id"
@@ -94,26 +115,35 @@ ActiveRecord::Schema.define(:version => 20091104092923) do
     t.string   "content_type"
   end
 
+  add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
+  add_index "tracks", ["fingerprint"], :name => "index_tracks_on_fingerprint"
+  add_index "tracks", ["mbid"], :name => "index_tracks_on_mbid"
+  add_index "tracks", ["release_id"], :name => "index_tracks_on_release_id"
+  add_index "tracks", ["title"], :name => "index_tracks_on_title"
+  add_index "tracks", ["track_nr"], :name => "index_tracks_on_track_nr"
+
   create_table "users", :force => true do |t|
-    t.string   "facebook_uid"
+    t.integer  "facebook_uid"
     t.string   "name"
-    t.string   "email_hash"
     t.string   "email"
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "perishable_token"
-    t.integer  "login_count",         :default => 0
-    t.integer  "failed_login_count",  :default => 0
+    t.integer  "login_count",                                                      :default => 0
+    t.integer  "failed_login_count",                                               :default => 0
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
     t.boolean  "is_admin"
-    t.string   "subscription_plan",   :default => "Bitspace Free"
-    t.string   "max_storage",         :default => "524288000"
+    t.string   "subscription_id"
+    t.string   "subscription_plan",                                                :default => "Bitspace Free"
+    t.integer  "max_storage",         :limit => 20, :precision => 20, :scale => 0, :default => 524288000
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
 
 end
