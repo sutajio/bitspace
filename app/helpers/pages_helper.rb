@@ -1,4 +1,4 @@
-module SpacesHelper
+module PagesHelper
   
   def bytes_per_album
     50.megabytes

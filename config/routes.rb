@@ -18,13 +18,13 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :requirements => { :method => 'delete' }
   
-  map.price 'price', :controller => 'spaces', :action => 'price'
-  map.tour 'tour', :controller => 'spaces', :action => 'tour'
-  map.help 'help', :controller => 'spaces', :action => 'help'
-  map.blog 'blog', :controller => 'spaces', :action => 'blog'
+  map.price 'price', :controller => 'pages', :action => 'price'
+  map.tour 'tour', :controller => 'pages', :action => 'tour'
+  map.help 'help', :controller => 'pages', :action => 'help'
+  map.blog 'blog', :controller => 'pages', :action => 'blog'
   
   map.resources :payments, :collection => { :paypal_ipn => :post, :success => :get, :cancel => :get }
   
-  map.root :controller => 'spaces', :action => 'index'
+  map.root :controller => 'pages', :action => 'index'
 
 end
