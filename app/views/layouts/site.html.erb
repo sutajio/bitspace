@@ -21,7 +21,7 @@
   <body class="black">
     <%= fb_connect_javascript_tag %>
     <script type="text/javascript">
-    FB.init("229bc1a35d28a91f61819151c35ed5a5","/xd_receiver.htm");
+    FB.init("<%= ENV['FACEBOOK_API_KEY'] %>","/xd_receiver.htm");
     </script>
     <div id="root">
       <div class="container_12 clearfix">
