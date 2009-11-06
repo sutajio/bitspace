@@ -78,7 +78,7 @@ class Upload < ActiveRecord::Base
             :artist => album_artist,
             :title => release_title,
             :year => release_year,
-            :artwork => self.class.image_from_id3(mp3info))
+            :artwork => self.class.image_from_id3_apic_tag(mp3info.tag2['APIC']))
           unless release.valid?
             logger.error(release.errors.full_messages.to_sentence)
             raise
@@ -150,9 +150,10 @@ class Upload < ActiveRecord::Base
       }
     end
 
-    def image_from_id3(mp3info)
-      if mp3info.tag2['APIC']
-        nil # StringIO.new(mp3info.tag2['APIC'])
+    def image_from_id3_apic_tag(apic_tag)
+      if apic_tag
+        encoding, mime_type, type, desc, data = apic_tag.unpack('BZ*BZ*M*')
+        StringIO.new(data)
       end
     end
   end
