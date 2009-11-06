@@ -7,7 +7,7 @@ class ArtistsController < ApplicationController
         :conditions => ['releases_count > 0'])
     expires_in(5.minutes, :public => true)
     if request.xhr? && @artists.empty?
-      head :not_found
+      render :nothing => true
     end
   end
   

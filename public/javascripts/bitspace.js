@@ -14,6 +14,8 @@ $(function(){
             case 403:
               $('#error').text(xhr.responseText).fadeIn('slow');
             break
+            default:
+              $('#error').text('Error ' + xhr.status + ' ' + xhr.responseText).fadeIn('slow');
           }
         break;
         case 'timeout':
