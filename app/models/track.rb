@@ -10,12 +10,8 @@ class Track < ActiveRecord::Base
   validates_presence_of :release_id
   validates_presence_of :fingerprint
   validates_presence_of :title
-  validates_presence_of :track_nr
   validates_presence_of :length
   validates_presence_of :size
-  
-  validates_uniqueness_of :mbid, :allow_nil => true
-  validates_uniqueness_of :fingerprint
   validates_uniqueness_of :track_nr, :scope => [:release_id], :allow_nil => true
   
   default_scope :order => 'track_nr'
