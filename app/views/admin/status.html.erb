@@ -1,0 +1,50 @@
+<div class="container_12 clearfix aligncenter">
+  <div class="grid_2">
+    <dl class="status">
+      <dt>Jobs in the queue</dt>
+      <dd><%= Delayed::Job.count %></dd>
+      <dt>Failed jobs</dt>
+      <dd><%= Delayed::Job.count(:conditions => ['last_error IS NOT NULL']) %></dd>
+    </dl>
+  </div>
+  <div class="grid_2">
+    <dl class="status">
+      <dt>No. users</dt>
+      <dd><%= User.count %></dd>
+      <dt>Paying users</dt>
+      <dd><%= User.count(:conditions => { :subscription_plan => ['Bitspace Premium', 'Bitspace Unlimited'] }) %></dd>
+    </dl>
+  </div>
+  <div class="grid_2">
+    <dl class="status">
+      <dt>Total storage</dt>
+      <dd><%= number_to_human_size(Track.sum(:size)) %></dd>
+      <dt>Total allowed storage</dt>
+      <dd><%= number_to_human_size(User.sum(:max_storage)) %></dd>
+    </dl>
+  </div>
+  <div class="grid_2">
+    <dl class="status">
+      <dt>No. artists</dt>
+      <dd><%= Artist.count %></dd>
+      <dt>No. labels</dt>
+      <dd><%= Label.count %></dd>
+    </dl>
+  </div>
+  <div class="grid_2">
+    <dl class="status">
+      <dt>No. releases</dt>
+      <dd><%= Release.count %></dd>
+      <dt>No. tracks</dt>
+      <dd><%= Track.count %></dd>
+    </dl>
+  </div>
+  <div class="grid_2">
+    <dl class="status">
+      <dt>$/month (approx.)</dt>
+      <dd><%= number_to_currency(0) %></dd>
+      <dt>$/year (approx.)</dt>
+      <dd><%= number_to_currency(0) %></dd>
+    </dl>
+  </div>
+</div>

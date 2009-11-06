@@ -25,6 +25,8 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :payments, :collection => { :paypal_ipn => :post, :success => :get, :cancel => :get }
   
+  map.status 'admin/status', :controller => 'admin', :action => 'status'
+  
   map.root :controller => 'pages', :action => 'index'
 
 end

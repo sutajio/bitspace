@@ -48,3 +48,5 @@ sup { font-size: smaller; vertical-align: super; }
 
 .years .releases li { list-style: none; margin: 0; float: left; line-height: 0; }
 .years h1 span { font-size: 10px; }
+
+.status dd { font-size: 24px; }
