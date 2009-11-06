@@ -4,7 +4,7 @@
       <dt>Jobs in the queue</dt>
       <dd><%= Delayed::Job.count %></dd>
       <dt>Failed jobs</dt>
-      <dd><%= Delayed::Job.count(:conditions => ['last_error IS NOT NULL']) %></dd>
+      <dd><%= link_to(Delayed::Job.count(:conditions => ['last_error IS NOT NULL']), admin_jobs_path) %></dd>
     </dl>
   </div>
   <div class="grid_2">

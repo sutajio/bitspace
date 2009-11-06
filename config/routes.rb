@@ -25,7 +25,10 @@ ActionController::Routing::Routes.draw do |map|
   
   map.resources :payments, :collection => { :paypal_ipn => :post, :success => :get, :cancel => :get }
   
-  map.status 'admin/status', :controller => 'admin', :action => 'status'
+  map.admin_status 'admin/status', :controller => 'admin', :action => 'status'
+  map.admin_jobs 'admin/jobs', :controller => 'admin', :action => 'jobs'
+  map.admin_run_job 'admin/run_job', :controller => 'admin', :action => 'run_job', :requirements => { :method => :post }
+  map.admin_delete_job 'admin/delete_job', :controller => 'admin', :action => 'delete_job', :requirements => { :method => :delete }
   
   map.root :controller => 'pages', :action => 'index'
 

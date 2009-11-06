@@ -1,0 +1,39 @@
+<div class="container_12 clearfix aligncenter">
+  <table>
+    <thead>
+      <th class="grid_1">Priority</th>
+      <th class="grid_1">Attempts</th>
+      <th class="grid_3">Run at</th>
+      <th class="grid_3">Created at</th>
+      <th class="grid_1">Handler</th>
+      <th class="grid_1">Last error</th>
+      <th class="grid_2">Actions</th>
+    </thead>
+    <tbody>
+      <% @jobs.each do |job| %>
+      <tr>
+        <td class="grid_1"><%= job.priority %></td>
+        <td class="grid_1"><%= job.attempts %></td>
+        <td class="grid_3"><%= job.run_at %></td>
+        <td class="grid_3"><%= job.created_at %></td>
+        <td class="grid_1">
+          <%= link_to('Show', "##{dom_id(job)}_handler", :rel => 'shadowbox') %>
+          <div id="<%= dom_id(job) %>_handler" style="display:none;"><pre style="padding:20px;"><%=h job.handler %></pre></div>
+        </td>
+        <td class="grid_1">
+          <%= link_to('Show', "##{dom_id(job)}_last_error", :rel => 'shadowbox') %>
+          <div id="<%= dom_id(job) %>_last_error" style="display:none;"><pre style="padding:20px;"><%=h job.last_error %></pre></div>
+        </td>
+        <td class="grid_2">
+          <%= link_to('Run now', admin_run_job_path(:id => job), :method => :post) %> &bull;
+          <%= link_to('Delete', admin_delete_job_path(:id => job), :method => :delete) %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= will_paginate(@jobs) %>
+</div>
+<script type="text/javascript">
+Shadowbox.init();
+</script>
