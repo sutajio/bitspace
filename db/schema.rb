@@ -145,8 +145,8 @@ ActiveRecord::Schema.define(:version => 20091106120316) do
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "perishable_token"
-    t.integer  "login_count",                                                      :default => 0
-    t.integer  "failed_login_count",                                               :default => 0
+    t.integer  "login_count",                       :default => 0
+    t.integer  "failed_login_count",                :default => 0
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -154,8 +154,8 @@ ActiveRecord::Schema.define(:version => 20091106120316) do
     t.string   "last_login_ip"
     t.boolean  "is_admin"
     t.string   "subscription_id"
-    t.string   "subscription_plan",                                                :default => "Bitspace Free"
-    t.integer  "max_storage",         :limit => 20, :precision => 20, :scale => 0, :default => 524288000
+    t.string   "subscription_plan",                 :default => "Bitspace Free"
+    t.integer  "max_storage",         :limit => 20, :default => 524288000
     t.datetime "created_at"
     t.datetime "updated_at"
   end

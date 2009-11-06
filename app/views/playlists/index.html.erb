@@ -1,7 +1,14 @@
 <div class="container_16 clearfix pane">
-  <div class="playlists clearfix infinite-scroll">
-    <div id="infscr-page-1" class="infscr-pages">
-      <%= render :partial => 'playlist', :collection => @playlists %>
-    </div>
+  <div class="grid_16">
+    <ul class="releases">
+      <li class="release clearfix">
+        <div class="info">
+          <h1>Favorites</h1>
+        </div>
+        <ol class="tracks">
+          <%= render :partial => 'tracks/track', :collection => current_user.loved_tracks %>
+        </ol>
+      </li>
+    </ul>
   </div>
 </div>

@@ -66,7 +66,7 @@ class Track < ActiveRecord::Base
   end
   
   def love!
-    playlist_items.create
+    playlist_items.create(:user_id => user_id)
   end
   
   def unlove!
