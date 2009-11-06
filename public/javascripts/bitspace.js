@@ -89,7 +89,7 @@ $(function(){
         $('#status-release').text(self.attr('data-release')).attr('href',self.attr('data-release-url'));
         $('#status').fadeIn('slow');
         $('.playing').removeClass('playing').removeClass('loading');
-        self.addClass('playing');
+        $('a[href="'+$('audio#player').attr('src')+'"]').addClass('playing');
       });
     });
     var playlist_position = $(this).closest('ul').find('li a[rel=play]').index(this);
@@ -166,7 +166,9 @@ $(function(){
     }
   })
   .bind('playcurrent', function(e){
-    $(this).data('playlist')[$(this).data('playlist_position')]();
+    if($(this).data('playlist')[$(this).data('playlist_position')]) {
+      $(this).data('playlist')[$(this).data('playlist_position')]();
+    }
     if($(this).data('playlist_position') == 0) {
       if(($('#repeat').attr('checked') == false) && ($('#shuffle').attr('checked') == false)) {
         $('button[rel=prev]').attr('disabled', 'disabled');
