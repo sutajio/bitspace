@@ -24,7 +24,7 @@ class ReleasesController < ApplicationController
   protected
   
     def find_artist
-      @artist = Artist.find(params[:artist_id])
+      @artist = current_user.artists.find(params[:artist_id])
     end
   
 end

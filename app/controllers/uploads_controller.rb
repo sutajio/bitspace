@@ -19,7 +19,9 @@ class UploadsController < ApplicationController
   end
   
   def create
-    @upload = Upload.new(params[:upload].reverse_merge(:bucket => s3_upload_bucket))
+    @upload = Upload.new(params[:upload].reverse_merge(
+      :bucket => s3_upload_bucket,
+      :user_id => current_user.id))
     @upload.save!
     Delayed::Job.enqueue(@upload, 1)
     head :ok

@@ -1,9 +1,11 @@
 class Release < ActiveRecord::Base
   
+  belongs_to :user
   belongs_to :artist, :counter_cache => true
   belongs_to :label
   has_many :tracks
   
+  validates_presence_of :user_id
   validates_presence_of :artist_id
   validates_presence_of :title
   

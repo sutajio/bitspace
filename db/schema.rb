@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091106102235) do
+ActiveRecord::Schema.define(:version => 20091106120316) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -17,11 +17,13 @@ ActiveRecord::Schema.define(:version => 20091106102235) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "releases_count"
+    t.integer  "user_id"
   end
 
   add_index "artists", ["mbid"], :name => "index_artists_on_mbid"
   add_index "artists", ["name"], :name => "index_artists_on_name"
   add_index "artists", ["releases_count"], :name => "index_artists_on_releases_count"
+  add_index "artists", ["user_id"], :name => "index_artists_on_user_id"
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0
@@ -52,10 +54,12 @@ ActiveRecord::Schema.define(:version => 20091106102235) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "labels", ["mbid"], :name => "index_labels_on_mbid"
   add_index "labels", ["name"], :name => "index_labels_on_name"
+  add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
 
   create_table "playlist_items", :force => true do |t|
     t.integer  "playlist_id"
@@ -90,12 +94,14 @@ ActiveRecord::Schema.define(:version => 20091106102235) do
     t.string   "artwork_content_type"
     t.integer  "artwork_file_size"
     t.datetime "artwork_updated_at"
+    t.integer  "user_id"
   end
 
   add_index "releases", ["artist_id"], :name => "index_releases_on_artist_id"
   add_index "releases", ["label_id"], :name => "index_releases_on_label_id"
   add_index "releases", ["mbid"], :name => "index_releases_on_mbid"
   add_index "releases", ["title"], :name => "index_releases_on_title"
+  add_index "releases", ["user_id"], :name => "index_releases_on_user_id"
   add_index "releases", ["year"], :name => "index_releases_on_year"
 
   create_table "tracks", :force => true do |t|
@@ -113,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20091106102235) do
     t.integer  "samplerate"
     t.boolean  "vbr"
     t.string   "content_type"
+    t.integer  "user_id"
   end
 
   add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
@@ -121,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20091106102235) do
   add_index "tracks", ["release_id"], :name => "index_tracks_on_release_id"
   add_index "tracks", ["title"], :name => "index_tracks_on_title"
   add_index "tracks", ["track_nr"], :name => "index_tracks_on_track_nr"
+  add_index "tracks", ["user_id"], :name => "index_tracks_on_user_id"
 
   create_table "uploads", :force => true do |t|
     t.integer  "user_id"

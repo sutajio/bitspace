@@ -1,7 +1,7 @@
 class ArtistsController < ApplicationController
   
   def index
-    @artists = Artist.search_for(params[:q]).paginate(
+    @artists = current_user.artists.search_for(params[:q]).paginate(
         :page => params[:page],
         :include => [:releases],
         :conditions => ['releases_count > 0'])
@@ -12,7 +12,7 @@ class ArtistsController < ApplicationController
   end
   
   def show
-    @artist = Artist.find(params[:id])
+    @artist = current_user.artists.find(params[:id])
     expires_in(5.minutes, :public => true)
     fresh_when(:last_modified => @artist.updated_at.utc, :public => true)
   end

@@ -1,8 +1,10 @@
 class Artist < ActiveRecord::Base
   
+  belongs_to :user
   has_many :releases
   has_many :tracks, :through => :releases
   
+  validates_presence_of :user_id
   validates_presence_of :name
   
   validates_uniqueness_of :name
@@ -19,8 +21,10 @@ class Artist < ActiveRecord::Base
   
   class <<self
     def find(*args)
-      if args.size == 1 && args.first.respond_to?(:to_str)
-        by_name(args.first.tr('+',' ').sub('%2F','/')).first or raise ActiveRecord::RecordNotFound
+      if args.first.is_a?(String)
+        with_scope(:find => args.size == 2 ? args.last : nil) do
+          by_name(args.first.tr('+',' ').sub('%2F','/')).first or raise ActiveRecord::RecordNotFound
+        end
       else
         super
       end

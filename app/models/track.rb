@@ -1,10 +1,12 @@
 class Track < ActiveRecord::Base
   
+  belongs_to :user
   belongs_to :release
   belongs_to :artist
   
   has_many :playlist_items
   
+  validates_presence_of :user_id
   validates_presence_of :release_id
   validates_presence_of :fingerprint
   validates_presence_of :title

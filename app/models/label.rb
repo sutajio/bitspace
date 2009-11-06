@@ -1,9 +1,11 @@
 class Label < ActiveRecord::Base
   
+  belongs_to :user
   has_many :releases
   has_many :artists, :through => :releases
   has_many :tracks, :through => :releases
   
+  validates_presence_of :user_id
   validates_presence_of :name
   validates_uniqueness_of :mbid, :allow_nil => true
   

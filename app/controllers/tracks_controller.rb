@@ -1,7 +1,7 @@
 class TracksController < ApplicationController
   
   def love
-    @track = Track.find(params[:id])
+    @track = current_user.tracks.find(params[:id])
     @track.toggle_love!
     head :ok
   end
