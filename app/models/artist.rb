@@ -19,7 +19,7 @@ class Artist < ActiveRecord::Base
   
   class <<self
     def find(*args)
-      if args.first.is_a?(String)
+      if args.first.is_a?(String) && args.first.to_i.to_s != args.first
         with_scope(:find => args.size == 2 ? args.last : nil) do
           by_name(args.first.tr('+',' ').sub('%2F','/')).first or raise ActiveRecord::RecordNotFound
         end
