@@ -129,7 +129,7 @@ class Upload < ActiveRecord::Base
     def generate_fingerprint(filename, position, length)
       File.open(filename) do |f|
         f.seek(position)
-        Digest::SHA1.hexdigest(file.read(length))
+        Digest::SHA1.hexdigest(f.read(length))
       end
     end
 
