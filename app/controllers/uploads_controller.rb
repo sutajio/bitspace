@@ -3,7 +3,7 @@ class UploadsController < ApplicationController
   layout nil
   include UploadsHelper
   
-  def show
+  def new
     respond_to do |with|
       with.html
       with.json do
@@ -19,10 +19,9 @@ class UploadsController < ApplicationController
   end
   
   def create
-    Track.import(
-      :bucket => s3_upload_bucket || params[:bucket],
-      :key => params[:key]
-    )
+    @upload = Upload.new(params[:upload].reverse_merge(:bucket => s3_upload_bucket))
+    @upload.save!
+    Delayed::Job.enqueue(@upload, 1)
     head :ok
   end
   

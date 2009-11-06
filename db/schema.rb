@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091105164139) do
+ActiveRecord::Schema.define(:version => 20091106102235) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -121,6 +121,14 @@ ActiveRecord::Schema.define(:version => 20091105164139) do
   add_index "tracks", ["release_id"], :name => "index_tracks_on_release_id"
   add_index "tracks", ["title"], :name => "index_tracks_on_title"
   add_index "tracks", ["track_nr"], :name => "index_tracks_on_track_nr"
+
+  create_table "uploads", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "bucket"
+    t.string   "key"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", :force => true do |t|
     t.integer  "facebook_uid"

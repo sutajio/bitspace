@@ -50,8 +50,8 @@
         .bind('uploadComplete', function(e, file){
             var self = this;
             $('#upload-status').text('Queueing file for processing...');
-            $.post("<%= upload_url %>",
-              { key: "<%= s3_upload_key_prefix %>"+file.name },
+            $.post("<%= uploads_url %>",
+              { 'upload[key]': "<%= s3_upload_key_prefix %>"+file.name },
               function(){
                 $('#upload-status').text('Upload finished.');
                 $(self).swfupload('startUpload');

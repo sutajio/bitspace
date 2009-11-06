@@ -1,7 +1,7 @@
 ActionController::Routing::Routes.draw do |map|
 
-  map.resource :upload
   map.resource :search
+  map.resources :uploads
   map.resources :artists do |artists|
     artists.resources :releases
   end
