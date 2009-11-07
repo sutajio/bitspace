@@ -14,14 +14,14 @@ class Artist < ActiveRecord::Base
   searchable_on :name
   
   def to_param
-    name.tr(' ','+').sub('/','%2F').sub('?','%3F')
+    CGI.escape(name)
   end
   
   class <<self
     def find(*args)
       if args.first.is_a?(String) && args.first.to_i.to_s != args.first
-        with_scope(:find => args.size == 2 ? args.last : nil) do
-          by_name(args.first.tr('+',' ').sub('%2F','/')).first or raise ActiveRecord::RecordNotFound
+        with_scope(:find => args.size == 2 ? args.last : {}) do
+          by_name(CGI.unescape(args.first)).first or raise ActiveRecord::RecordNotFound
         end
       else
         super
@@ -56,7 +56,7 @@ class Artist < ActiveRecord::Base
     end
   end
   
-  after_create :update_meta_data
+  after_create :update_meta_data unless Rails.env.test?
   handle_asynchronously :update_meta_data if Rails.env.production?
   
 end
