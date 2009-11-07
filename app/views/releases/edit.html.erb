@@ -26,7 +26,7 @@
         $(function(){
           $('#upload-button').each(function(){
             $(this).swfupload({
-              upload_url: "<%= artist_release_path(@artist, @release) %>",
+              upload_url: "<%= artist_release_path_with_session_information(@artist, @release) %>",
               post_params: { '_method': 'put', <%= request_forgery_protection_token.to_s %>: '<%= form_authenticity_token %>' },
               file_size_limit: 0,
               file_types: "*.jpg;*.png;*.gif",

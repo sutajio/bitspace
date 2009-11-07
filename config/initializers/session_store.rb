@@ -13,3 +13,9 @@ ActionController::Base.session = {
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rake db:sessions:create")
 # ActionController::Base.session_store = :active_record_store
+
+# Load custom rack middleware that intercepts and enables sessions
+# for SwfUpload.
+ActionController::Dispatcher.middleware.use(
+  'FlashSessionCookieMiddleware',
+  ActionController::Base.session_options[:key])
