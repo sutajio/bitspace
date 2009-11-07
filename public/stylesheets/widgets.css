@@ -43,6 +43,7 @@ sup { font-size: smaller; vertical-align: super; }
 .release ol.tracks li a { padding-left: 19px; }
 
 .track-title { width: 500px; overflow: hidden; display: block; float: left; }
+.track-artist a { padding: 0 !important; }
 .track-length { width: 50px; display: block; float: left; text-align: right; }
 .track-love {  width:46px; display: block; float:left; padding-left: 0 !important; text-align: center; }
 

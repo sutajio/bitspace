@@ -6,7 +6,15 @@
           <h1>Favorites</h1>
         </div>
         <ol class="tracks">
-          <%= render :partial => 'tracks/track', :collection => current_user.loved_tracks %>
+          <%= render :partial => 'tracks/track', :collection => current_user.loved_tracks.all(:order => 'created_at DESC') %>
+        </ol>
+      </li>
+      <li class="release clearfix">
+        <div class="info">
+          <h1>Latest</h1>
+        </div>
+        <ol class="tracks">
+          <%= render :partial => 'tracks/track', :collection => current_user.tracks.all(:order => 'created_at DESC', :limit => 20), :locals => { :show_artist => true } %>
         </ol>
       </li>
     </ul>
