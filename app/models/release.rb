@@ -48,6 +48,12 @@ class Release < ActiveRecord::Base
       self.year = album.release_date.year
     end
     self.save!
+  rescue OpenURI::HTTPError => e
+    if e.io.status[0] == '404'
+      return true
+    else
+      raise
+    end
   end
   
   after_create :update_meta_data

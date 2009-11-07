@@ -33,8 +33,12 @@ class Artist < ActiveRecord::Base
     lastfm_artist = Scrobbler::Artist.new(name)
     self.mbid = lastfm_artist.mbid if lastfm_artist.mbid.present?
     discogs_artist = Discogs::Artist.new(name)
-    self.releases.find(:all, :conditions => { :title => discogs_artist.releases.map(&:title) }).each do |release|
-      discogs_release = discogs_artist.releases.find {|r| r.title == release.title }
+    discogs_releases = discogs_artist.releases.map do |r|
+      r.title rescue OpenURI::HTTPError
+      r
+    end
+    self.releases.find(:all, :conditions => { :title => discogs_releases.map(&:title) }).each do |release|
+      discogs_release = discogs_releases.find {|r| r.title == release.title }
       if discogs_release.labels.present?
         release.label = Label.find_or_create_by_name(:name => discogs_release.labels.first, :user_id => user.id)
       end
@@ -44,6 +48,12 @@ class Artist < ActiveRecord::Base
       release.save!
     end
     self.save!
+  rescue OpenURI::HTTPError => e
+    if e.io.status[0] == '404'
+      return true
+    else
+      raise
+    end
   end
   
   after_create :update_meta_data

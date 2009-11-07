@@ -14,6 +14,12 @@ class Label < ActiveRecord::Base
   searchable_on :name
   
   def update_meta_data
+  rescue OpenURI::HTTPError => e
+    if e.io.status[0] == '404'
+      return true
+    else
+      raise
+    end
   end
   
   after_create :update_meta_data
