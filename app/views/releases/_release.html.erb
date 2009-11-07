@@ -13,9 +13,9 @@
     </h2>
     <h3><%= link_to(h(release.artist.name), release.artist, :target => '_self') %></h3>
   </div>
-  <% release.tracks.group_by(&:set_nr).each do |set_nr, tracks| %>
+  <% release.tracks.sort_by{|t| t.set_nr.to_i }.group_by(&:set_nr).each do |set_nr, tracks| %>
   <ol class="tracks">
-    <%= render :partial => 'tracks/track', :collection => tracks %>
+    <%= render :partial => 'tracks/track', :collection => tracks.sort_by(&:track_nr) %>
   </ol>
   <% end %>
 <% end %>
