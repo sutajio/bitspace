@@ -5,7 +5,7 @@
   <% if track.artist %>
   &ndash; <span class="track-artist"><%=h track.artist.name %></span>
   <% elsif show_artist %>
-  &ndash; <span class="track-artist"><%= link_to(h(track.release.artist.name), track.release.artist) %></span>
+  &ndash; <span class="track-artist"><%= link_to(h(track.release.artist.name), track.release.artist, :target => '_self') %></span>
   <% end %>
   </span>
   <span class="track-length"><%= seconds_to_time(track.length) %></span>
