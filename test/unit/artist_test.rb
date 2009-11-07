@@ -7,7 +7,7 @@ class ArtistTest < ActiveSupport::TestCase
     'Atlas Sound' => 'Atlas+Sound',
     'Akron/Family' => 'Akron%2FFamily',
     'Why?' => 'Why%3F',
-    'Aoki Takamasa + Tujiko Noriko' => 'Aoki+Takamasa+%2B+Tujiko+Noriko'
+    'Aoki Takamasa + Tujiko Noriko' => 'Aoki%2BTakamasa%2B%252B%2BTujiko%2BNoriko'
   }
 
   test "should handle weird characters in the artist name when the artist is used in an URL" do
@@ -20,8 +20,8 @@ class ArtistTest < ActiveSupport::TestCase
   test "should be able to find artists with weird characters in their name" do
     TRICKY_ARTISTS.each do |x,y|
       Artist.create(:name => x, :user_id => 1)
-      assert Artist.find(y)
-      assert Artist.find(y, :conditions => { :user_id => 1 })
+      assert Artist.find(URI.unescape(y))
+      assert Artist.find(URI.unescape(y), :conditions => { :user_id => 1 })
     end
   end
 
