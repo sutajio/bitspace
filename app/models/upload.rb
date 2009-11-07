@@ -48,6 +48,8 @@ class Upload < ActiveRecord::Base
         track_nr =
           mp3info.tag.tracknum.blank? ?
             self.class.parse_filename(key)[:track_nr] : mp3info.tag.tracknum
+        track_set_nr =
+          mp3info.tag2['TPOS']
         
         logger.info("Title: #{track_title}")
         logger.info("Artist: #{track_artist_name}")
@@ -55,6 +57,7 @@ class Upload < ActiveRecord::Base
         logger.info("Release: #{release_title}")
         logger.info("Year: #{release_year}")
         logger.info("Track No.: #{track_nr}")
+        logger.info("Track Set No.: #{track_set_nr}")
         logger.info("Length: #{mp3info.length}")
         logger.info("Bitrate: #{mp3info.bitrate}")
         logger.info("Sample rate: #{mp3info.samplerate}")
@@ -91,6 +94,7 @@ class Upload < ActiveRecord::Base
               mp3info.audio_content.first, mp3info.audio_content.last),
             :title => track_title,
             :track_nr => track_nr,
+            :set_nr => track_set_nr,
             :length => mp3info.length,
             :bitrate => mp3info.bitrate,
             :samplerate => mp3info.samplerate,

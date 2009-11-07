@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091106120316) do
+ActiveRecord::Schema.define(:version => 20091107005356) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -120,6 +120,7 @@ ActiveRecord::Schema.define(:version => 20091106120316) do
     t.boolean  "vbr"
     t.string   "content_type"
     t.integer  "user_id"
+    t.integer  "set_nr"
   end
 
   add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
