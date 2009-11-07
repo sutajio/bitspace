@@ -5,7 +5,7 @@ class ArtistsController < ApplicationController
         :page => params[:page],
         :include => [:releases],
         :conditions => ['releases_count > 0'])
-    expires_in(5.minutes, :public => true)
+    expires_in(30.seconds, :public => true)
     if request.xhr? && @artists.empty?
       render :nothing => true
     end
@@ -13,8 +13,7 @@ class ArtistsController < ApplicationController
   
   def show
     @artist = current_user.artists.find(params[:id])
-    expires_in(5.minutes, :public => true)
-    fresh_when(:last_modified => @artist.updated_at.utc, :public => true)
+    expires_in(30.seconds, :public => true)
   end
   
 end
