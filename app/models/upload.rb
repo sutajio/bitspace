@@ -86,7 +86,7 @@ class Upload < ActiveRecord::Base
             logger.error(release.errors.full_messages.to_sentence)
             raise
           end
-          track = release.tracks.find_or_create_by_title(
+          track = release.tracks.find_or_create_by_title_and_track_nr(
             :user => user,
             :artist => track_artist,
             :release => release,
