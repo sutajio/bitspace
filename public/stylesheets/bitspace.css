@@ -41,4 +41,4 @@ body.black .years .releases { background: -webkit-gradient(linear, left top, lef
 body.black .track-love { opacity: 0.5; background: url(/images/love.png) no-repeat 50% 0; text-indent: -9999px; }
 body.black .track-love:hover { opacity: 0.5; background-position: 50% -19px; }
 body.black .track-love.loved { opacity: 1; background-position: 50% -38px; }
-body.black .error { color: #f00; }
+body.black .error { color: #f33; text-shadow: #000 1px 1px 1px; }

@@ -12,10 +12,12 @@ class UserSessionsController < ApplicationController
     if @user_session = UserSession.create(@user)
       redirect_to root_path
     else
-      render :text => @user_session.errors.full_messages.to_sentence, :status => :forbidden
+      flash[:error] = @user_session.errors.full_messages.to_sentence
+      redirect_to root_path
     end
   rescue ActiveRecord::RecordNotFound => e
-    render :text => 'Sorry, Bitspace is currently invitation only.', :status => :forbidden
+    flash[:error] = 'Sorry, Bitspace is currently invitation only.'
+    redirect_to root_path
   end
 
   def destroy

@@ -14,7 +14,11 @@
     
     <div class="aligncenter">
       <p><%= facebook_login_button %></p>
+      <% if flash[:error] %>
+      <p class="error"><%=h flash[:error] %></p>
+      <% else %>
       <p class="small grey">Bitspace is currently invitation only.</p>
+      <% end %>
     </div>
   </div>
 </div>
