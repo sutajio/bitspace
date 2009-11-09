@@ -51,3 +51,5 @@ sup { font-size: smaller; vertical-align: super; }
 .years h1 span { font-size: 10px; }
 
 .status dd { font-size: 24px; }
+
+.external { padding-right: 15px; background: url(/images/external.gif) no-repeat 100% 49%; white-space: nowrap; zoom: 1; }
