@@ -1,0 +1,7 @@
+<% div_for(post) do %>
+<h2 style="margin: 0"><%=h post.title %></h2>
+<div class="small grey" style="margin-bottom:10px"><%= post.created_at %></div>
+<div class="body">
+  <%= simple_format(post.body) %>
+</div>
+<% end %>

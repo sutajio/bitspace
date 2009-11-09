@@ -30,7 +30,7 @@
           <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Tour', tour_path, :class => params[:action] == 'tour' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Help', help_path, :class => params[:action] == 'help' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:action] == 'blog' ? 'current' : nil) %></li>
+          <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:controller] == 'blog_posts' ? 'current' : nil) %></li>
           <li class="grid_3 prefix_3 last">
             <% form_tag(search_path, :method => 'get') do %>
               <input type="search" results="5" name="q" id="search-q" />

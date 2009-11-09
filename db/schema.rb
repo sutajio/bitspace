@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091107005356) do
+ActiveRecord::Schema.define(:version => 20091109155725) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -24,6 +24,14 @@ ActiveRecord::Schema.define(:version => 20091107005356) do
   add_index "artists", ["name"], :name => "index_artists_on_name"
   add_index "artists", ["releases_count"], :name => "index_artists_on_releases_count"
   add_index "artists", ["user_id"], :name => "index_artists_on_user_id"
+
+  create_table "blog_posts", :force => true do |t|
+    t.string   "title"
+    t.text     "body"
+    t.boolean  "published"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "delayed_jobs", :force => true do |t|
     t.integer  "priority",   :default => 0

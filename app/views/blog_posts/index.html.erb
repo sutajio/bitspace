@@ -1,0 +1,9 @@
+<div class="container_16 clearfix">
+  <div class="grid_9 prefix_1">
+    <%= render :partial => 'post', :collection => @posts %>
+    <%= will_paginate(@posts) %>
+  </div>
+  <div class="grid_5 suffix_1">
+    <%= render :partial => 'sidebar' %>
+  </div>
+</div>
