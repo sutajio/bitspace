@@ -1,0 +1,58 @@
+<div class="container_16 clearfix aligncenter">
+  <% if @latest.size == 3 %>
+    <div class="grid_16">
+      <div class="dashboard clearfix">
+        <% @latest.each do |release| %>
+        <%= link_to(image_tag(release.artwork.url(:medium), :size => '313x313', :alt => 'Cover art'), [release.artist, release], :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
+        <% end %>
+      </div>
+    </div>
+  <% else %>
+    <div class="grid_10">
+      <div class="pane" style="height:200px; padding:20px;">
+        <h1>Welcome to your Bitspace</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        </p>
+      </div>
+    </div>
+    <div class="grid_6" style="padding:43px 0;">
+      <iframe src="<%= new_upload_path %>" width="100%" height="114" border="0"></iframe>
+    </div>
+  <% end %>
+  <hr style="border-color:transparent;" />
+  <div class="grid_4">
+    <div class="aligncenter" style="height:120px;">
+      <%= link_to(image_tag('/images/dashboard-facebook.png'), 'http://www.facebook.com/pages/Bitspace/172171790806', :target => '_blank') %>
+    </div>
+  </div>
+  <div class="grid_4">
+    <div class="aligncenter" style="height:120px;">
+      <%= link_to(image_tag('/images/dashboard-lastfm.png'), '#lastfm', :rel => 'shadowbox;width=400;height=182') %>
+      <div style="display:none" id="lastfm">
+        <div class="dialog aligncenter">
+        <p><%= image_tag('/images/lastfm_red.gif') %></p>
+        <p class="grey">We're still working on the Last.fm integration.
+        When we're finished you will be able to connect with your Last.fm
+        account and scrobble the music you listen to.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="grid_4">
+    <div class="aligncenter" style="height:120px;">
+      <%= link_to(image_tag('/images/dashboard-twitter.png'), 'http://twitter.com/bitspaced', :target => '_blank') %>
+    </div>
+  </div>
+  <div class="grid_4">
+    <div class="pane alignleft" style="height:120px; background: url(/images/dashboard-empty.png) no-repeat;">
+      <ul style="list-style:none;">
+      <% current_user.loved_tracks.all(:limit => 6).each do |track| %>
+        <li style="margin:0 20px;">
+          <%= link_to(h(truncate(track.title, :length => 15)), artist_release_path(track.release.artist, track.release), :target => '_self', :class => 'track-title', :style => 'width: 161px; overflow: hidden; height: 1.3em;') %>
+          <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love', :style => 'width:19px;') %>
+        </li>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

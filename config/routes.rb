@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
 
+  map.resource :dashboard
   map.resource :search
   map.resources :uploads
   map.resources :artists do |artists|

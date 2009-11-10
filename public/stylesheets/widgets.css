@@ -2,6 +2,9 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 
 sup { font-size: smaller; vertical-align: super; }
 
+.dashboard a:first-child img { -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; }
+.dashboard a:last-child img { -webkit-border-top-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; }
+
 .pane { padding: 10px 0; -webkit-border-radius: 5px; }
 .dialog { padding: 20px; }
 

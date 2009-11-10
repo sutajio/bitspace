@@ -33,7 +33,7 @@ $(function(){
   // Shadowbox and current playing track, etc...
   $.address.change(function(e){
     $('#error').fadeOut();
-    $('#page').load(e.value, null, function(){
+    $('#page').load(e.value == '/' ? '/dashboard' : e.value, null, function(){
       $(window).scrollTop(0);
       var links = $('#page a[rel*=shadowbox]');
       if(links.length) {
