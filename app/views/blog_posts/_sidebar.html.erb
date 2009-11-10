@@ -3,7 +3,7 @@
   <ul>
     <% BlogPost.published.all.each do |post| %>
     <li>
-      <%= link_to(h(post.title), blog_post_path(post)) %>
+      <%= link_to(h(post.title), blog_archive_path(post.year, post.month, post.slug)) %>
       <div class="small grey">
         <%= post.created_at %>
       </div>
@@ -12,7 +12,7 @@
   </ul>
   <h3>Subscribe</h3>
   <ul>
-    <li>Subscribe to the <%= link_to('RSS-feed', '#', :class => 'external') %>.</li>
+    <li>Subscribe to the <%= link_to('RSS-feed', blog_feed_path, :class => 'external') %>.</li>
     <li>Follow us on <%= link_to('Twitter', 'http://twitter.com/bitspaced', :class => 'external') %>.</li>
     <li>Become a fan on <%= link_to('Facebook', 'http://www.facebook.com/pages/Bitspace/172171790806', :class => 'external') %>.</li>
 </div>

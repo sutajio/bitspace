@@ -13,6 +13,7 @@ body.black #menu a:hover { color: #999; }
 body.black #menu .first a.current { background: none; }
 body.black #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
 body.black #footer { color: #666; }
+body.black hr { border-color: #222; }
 body.black .grey { color: #555; }
 body.black .small { font-size: 11px; }
 body.black .progress,
@@ -42,3 +43,4 @@ body.black .track-love { opacity: 0.5; background: url(/images/love.png) no-repe
 body.black .track-love:hover { opacity: 0.5; background-position: 50% -19px; }
 body.black .track-love.loved { opacity: 1; background-position: 50% -38px; }
 body.black .error { color: #f33; text-shadow: #000 1px 1px 1px; }
+body.black .fallback { color: #777; }

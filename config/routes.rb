@@ -23,6 +23,8 @@ ActionController::Routing::Routes.draw do |map|
   map.tour 'tour', :controller => 'pages', :action => 'tour'
   map.help 'help', :controller => 'pages', :action => 'help'
   map.blog 'blog', :controller => 'blog_posts', :action => 'index'
+  map.blog_archive 'blog/archive/:year/:month/:slug', :controller => 'blog_posts', :action => 'show'
+  map.blog_feed 'blog.atom', :controller => 'blog_posts', :action => 'index', :format => 'atom'
   
   map.resources :payments, :collection => { :paypal_ipn => :post, :success => :get, :cancel => :get }
   
