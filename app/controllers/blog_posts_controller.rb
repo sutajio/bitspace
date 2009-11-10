@@ -5,10 +5,14 @@ class BlogPostsController < ApplicationController
   
   def index
     @posts = BlogPost.published.paginate(:page => params[:page])
+    respond_to do |with|
+      with.html
+      with.atom
+    end
   end
   
   def show
-    @post = BlogPost.published.find(params[:id])
+    @post = BlogPost.published.find_by_year_and_month_and_slug(params[:year], params[:month], params[:slug]) or raise ActiveRecord::RecordNotFound
   end
   
   def preview

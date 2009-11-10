@@ -25,6 +25,10 @@ class PaymentsController < ApplicationController
       when 'subscr_cancelled':
         user = User.find_by_subscription_id(params[:subscr_id])
         user.cancel_subscription
+      when 'subscr_eot':
+        # Subscription expired (should never happen)
+      when 'subscr_modify':
+        # Subscription modified
       end
     end
     

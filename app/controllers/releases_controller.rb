@@ -5,7 +5,6 @@ class ReleasesController < ApplicationController
   
   def show
     @release = @artist.releases.find(params[:id])
-    expires_in(30.seconds, :public => true) if Rails.env.production?
   end
   
   def edit

@@ -29,6 +29,9 @@ ActiveRecord::Schema.define(:version => 20091109155725) do
     t.string   "title"
     t.text     "body"
     t.boolean  "published"
+    t.string   "slug"
+    t.integer  "year"
+    t.integer  "month"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

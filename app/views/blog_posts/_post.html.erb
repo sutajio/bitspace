@@ -1,7 +1,12 @@
 <% div_for(post) do %>
-<h2 style="margin: 0"><%= link_to(h(post.title), blog_post_path(post)) %></h2>
+<h2 style="margin: 0"><%= link_to(h(post.title), blog_archive_path(post.year, post.month, post.slug)) %></h2>
 <div class="small grey" style="margin-bottom:10px"><%= post.created_at %></div>
 <div class="body">
   <%= simple_format(post.body) %>
 </div>
+<p class="small grey">
+  <%= link_to('Comment', blog_archive_path(post.year, post.month, post.slug, :anchor => 'comments')) %> &bull;
+  <%= link_to('Share', "http://www.facebook.com/sharer.php?u=#{CGI.escape(blog_archive_url(post.year, post.month, post.slug))}&t=#{CGI.escape(post.title)}", :rel => 'shadowbox;width=550;height=350') %>
+</p>
+<hr />
 <% end %>
