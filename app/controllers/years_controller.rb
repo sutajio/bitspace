@@ -8,7 +8,6 @@ class YearsController < ApplicationController
     @years << ['1970-1960', current_user.releases.by_year(1960..1970).paginate(:page => 1, :per_page => 10)]
     @years << ['1960-1950', current_user.releases.by_year(1950..1960).paginate(:page => 1, :per_page => 10)]
     @years << ['1950-1940', current_user.releases.by_year(1940..1950).paginate(:page => 1, :per_page => 10)]
-    expires_in(30.seconds, :public => true) if Rails.env.production?
   end
   
   def show
@@ -20,7 +19,6 @@ class YearsController < ApplicationController
       years = @year
     end
     @releases = current_user.releases.by_year(years)
-    expires_in(30.seconds, :public => true) if Rails.env.production?
   end
   
 end
