@@ -42,3 +42,5 @@ body.black .track-love { opacity: 0.5; background: url(/images/love.png) no-repe
 body.black .track-love:hover { opacity: 0.5; background-position: 50% -19px; }
 body.black .track-love.loved { opacity: 1; background-position: 50% -38px; }
 body.black .error { color: #f33; text-shadow: #000 1px 1px 1px; }
+body.black #user-menu li { color: #999; }
+body.black #user-menu li span { color: #fff; }
