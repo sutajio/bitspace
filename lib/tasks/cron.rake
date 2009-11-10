@@ -1,6 +1,5 @@
 task :cron => :environment do
   puts ">> Heartbeat at #{Time.now}"
-  Rake::Task['cron:metadata'].invoke
 end
 
 namespace :cron do
