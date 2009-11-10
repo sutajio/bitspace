@@ -1,6 +1,10 @@
 <div class="container_16 clearfix">
   <div class="grid_9 prefix_1">
     <%= render :partial => 'post', :object => @post %>
+    <div class="comments">
+      <h4>Comments</h4>
+      <fb:comments xid="bitspace_blog_comments" canpost="true" candelete="false" simple="true" width="400px" css="http://bitspace.at/stylesheet/facebook.css?1"></fb:comments>
+    </div>
   </div>
   <div class="grid_5 suffix_1">
     <%= render :partial => 'sidebar' %>
