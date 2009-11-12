@@ -11,13 +11,9 @@ $(function(){
       $('#page').fadeTo('fast', 1);
       switch(status) {
         case 'error':
-          switch(xhr.status) {
-            case 403:
-              $('#error').text(xhr.responseText).fadeIn('slow');
-            break
-            default:
-              $('#error').text('Error ' + xhr.status + ' ' + xhr.responseText).fadeIn('slow');
-          }
+          $('#error').text('Error ' + xhr.status).append(
+            $('<div/>').append(xhr.responseText)
+          ).fadeIn('slow');
         break;
         case 'timeout':
           alert("Connection lost");
