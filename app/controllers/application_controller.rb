@@ -25,6 +25,8 @@ class ApplicationController < ActionController::Base
     redirect_to root_path
   end
   
+  before_filter :require_chrome_frame_if_ie
+  
   protected
     
     def current_layout
@@ -85,6 +87,16 @@ class ApplicationController < ActionController::Base
             render :text => "You must connect to Facebook to access that page.", :status => :forbidden
           else
             redirect_to root_path
+          end
+        end
+      end
+    end
+    
+    def require_chrome_frame_if_ie
+      if current_user
+        if request.headers['User-Agent'].include?('MSIE')
+          unless request.headers['User-Agent'].include?('chromeframe')
+            redirect_to 'http://www.google.com/chromeframe'
           end
         end
       end
