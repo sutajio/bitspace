@@ -11,7 +11,10 @@
     <%= javascript_include_tag :upload %>
   </head>
   <body class="black">
-    <div id="upload" class="dialog">
+    <div id="upload" class="dialog" style="height:74px;">
+      <% if current_user.storage_left <= 0 %>
+      <div class="aligncenter">You don't have any storage left. Sorry!</div>
+      <% else %>
       <div id="upload-button">
         <div id="upload-button-swf"></div>
       </div>
@@ -21,49 +24,50 @@
         </div>
         <div id="upload-status" class="progress-status">Please select files to upload.</div>
       </div>
-    </div>
-    <script type="text/javascript">
-    $(function(){
-      $('#upload-button').each(function(){
-        $(this).swfupload({
-          upload_url: "<%= s3_upload_url %>",
-          file_size_limit: 0,
-          file_types: "*.mp3",
-          file_types_description: "MP3 Audio files",
-          file_post_name: "file",
-          button_image_url : "../../images/button-select-files.png",
-          button_placeholder_id : "upload-button-swf",
-          button_width: 100,
-          button_height: 32,
-          button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
-          button_cursor: SWFUpload.CURSOR.HAND,
-          flash_url: "/vendor/swfupload/swfupload.swf",
-          post_params: <%= s3_upload_params(
-                            :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
-                            :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
-                            :meta_fields => %w(),
-                            :flash => true) %>
-        })
-        .bind('fileQueued', function(e, file){
-          $(this).swfupload('startUpload');
-        })
-        .bind('uploadComplete', function(e, file){
-            var self = this;
-            $('#upload-status').text('Queueing file for processing...');
-            $.post("<%= uploads_url %>",
-              { 'upload[key]': "<%= s3_upload_key_prefix %>"+file.name },
-              function(){
-                $('#upload-status').text('Upload finished.');
-                $(self).swfupload('startUpload');
-              });
-        })
-        .bind('uploadProgress', function(e, file, bytesLoaded){
-          var percent = Math.ceil((bytesLoaded / file.size) * 100);
-          $('#upload-progress .gauge').width(percent + '%');
-          $('#upload-status').text(file.name + ' – ' + percent + '%');
+      <script type="text/javascript">
+      $(function(){
+        $('#upload-button').each(function(){
+          $(this).swfupload({
+            upload_url: "<%= s3_upload_url %>",
+            file_size_limit: 0,
+            file_types: "*.mp3",
+            file_types_description: "MP3 Audio files",
+            file_post_name: "file",
+            button_image_url : "../../images/button-select-files.png",
+            button_placeholder_id : "upload-button-swf",
+            button_width: 100,
+            button_height: 32,
+            button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+            button_cursor: SWFUpload.CURSOR.HAND,
+            flash_url: "/vendor/swfupload/swfupload.swf",
+            post_params: <%= s3_upload_params(
+                              :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
+                              :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'],
+                              :meta_fields => %w(),
+                              :flash => true) %>
+          })
+          .bind('fileQueued', function(e, file){
+            $(this).swfupload('startUpload');
+          })
+          .bind('uploadComplete', function(e, file){
+              var self = this;
+              $('#upload-status').text('Queueing file for processing...');
+              $.post("<%= uploads_url %>",
+                { 'upload[key]': "<%= s3_upload_key_prefix %>"+file.name },
+                function(){
+                  $('#upload-status').text('Upload finished.');
+                  $(self).swfupload('startUpload');
+                });
+          })
+          .bind('uploadProgress', function(e, file, bytesLoaded){
+            var percent = Math.ceil((bytesLoaded / file.size) * 100);
+            $('#upload-progress .gauge').width(percent + '%');
+            $('#upload-status').text(file.name + ' – ' + percent + '%');
+          });
         });
       });
-    });
-    </script>
+      </script>
+      <% end %>
+    </div>
   </body>
 </html>

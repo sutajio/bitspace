@@ -3,6 +3,8 @@ class UploadsController < ApplicationController
   layout nil
   include UploadsHelper
   
+  before_filter :enforce_storage_constraints, :only => [:create]
+  
   def new
     respond_to do |with|
       with.html
@@ -26,5 +28,17 @@ class UploadsController < ApplicationController
     Delayed::Job.enqueue(@upload, 1)
     head :ok
   end
+  
+  protected
+  
+    def enforce_storage_constraints
+      if current_user.storage_left <= 0
+        if request.xhr?
+          render :text => "You don't have any space left. Sorry!", :status => :forbidden
+        else
+          redirect_to root_path
+        end
+      end
+    end
   
 end
