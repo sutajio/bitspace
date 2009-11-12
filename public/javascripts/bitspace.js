@@ -8,6 +8,7 @@ $(function(){
   // Handle Ajax error in a nice way.
   $.ajaxSetup({
     error: function(xhr, status, error){
+      $('#page').fadeTo('fast', 1);
       switch(status) {
         case 'error':
           switch(xhr.status) {
@@ -33,7 +34,9 @@ $(function(){
   // Shadowbox and current playing track, etc...
   $.address.change(function(e){
     $('#error').fadeOut();
+    $('#page').fadeTo('fast', 0.25);
     $('#page').load(e.value == '/' ? '/dashboard' : e.value, null, function(){
+      $('#page').fadeTo('slow', 1);
       $(window).scrollTop(0);
       var links = $('#page a[rel*=shadowbox]');
       if(links.length) {
