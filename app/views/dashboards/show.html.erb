@@ -64,7 +64,7 @@
       <ul style="list-style:none;">
       <% current_user.loved_tracks.all(:limit => 6).each do |track| %>
         <li style="margin:0 20px;">
-          <%= link_to(h(truncate(track.title, :length => 15)), artist_release_path(track.release.artist, track.release), :target => '_self', :class => 'track-title', :style => 'width: 161px; overflow: hidden; height: 17px;') %>
+          <%= link_to(h(truncate(track.title, :length => 23)), artist_release_path(track.release.artist, track.release), :target => '_self', :class => 'track-title', :style => 'width: 161px; overflow: hidden; height: 17px;') %>
           <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love', :style => 'width:19px;') %>
         </li>
       <% end %>
