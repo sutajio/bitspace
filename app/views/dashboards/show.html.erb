@@ -9,20 +9,36 @@
     </div>
   <% else %>
     <div class="grid_10">
-      <div class="pane" style="height:200px; padding:20px;">
-        <h1>Welcome to your Bitspace</h1>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+      <div class="pane dashboard" style="height:200px; padding:20px 30px;">
+        <h1>Welcome to your Bitspace!</h1>
+        <p style="font-family: Georgia, Times, serif; font-size: 14px; font-weight: normal;">
+          <%= image_tag('/images/kitten.png', :style => 'float:right;') %>
+          We realize trying out a new service may seem a little daunting at
+          first, so we want to make things as easy for you as possible.
+          We hope that you enjoy using Bitspace, and would love to hear what
+          you have to say, whether it be suggestions or any questions about
+          the service. Feel free to drop us a line at 
+          <%= mail_to('support@bitspace.se') %>.
+        </p>
+        <p class="grey">
+          Regards, The Bitspace Team
         </p>
       </div>
     </div>
-    <div class="grid_6" style="padding:43px 0;">
-      <iframe src="<%= new_upload_path %>" width="100%" height="114" border="0"></iframe>
+    <div class="grid_6">
+      <div style="padding:43px 56px; margin: 0 -38px 0 -56px; background: url(/images/dashboard-blue-bubble.png) no-repeat; height: 114px; font-size: 18px; font-family: Georgia; font-style: italic; text-shadow: #00f 0px 0px 1px;">
+        <div style="padding:18px 0;">Konichiwa! You can start uploading your music collection right now. Just click the &raquo;Upload&laquo; button below.</div>
+      </div>
     </div>
   <% end %>
   <hr style="border-color:transparent;" />
   <div class="grid_4">
     <div class="aligncenter" style="height:120px;">
-      <%= link_to(image_tag('/images/dashboard-facebook.png'), 'http://www.facebook.com/pages/Bitspace/172171790806', :target => '_blank') %>
+      <% if rand > 0.5 %>
+        <%= link_to(image_tag('/images/dashboard-facebook.png'), 'http://www.facebook.com/pages/Bitspace/172171790806', :target => '_blank') %>
+      <% else %>
+        <%= link_to(image_tag('/images/dashboard-twitter.png'), 'http://twitter.com/bitspaced', :target => '_blank') %>
+      <% end %>
     </div>
   </div>
   <div class="grid_4">
@@ -39,20 +55,35 @@
     </div>
   </div>
   <div class="grid_4">
-    <div class="aligncenter" style="height:120px;">
-      <%= link_to(image_tag('/images/dashboard-twitter.png'), 'http://twitter.com/bitspaced', :target => '_blank') %>
-    </div>
-  </div>
-  <div class="grid_4">
-    <div class="pane alignleft" style="height:120px; background: url(/images/dashboard-empty.png) no-repeat;">
+    <div class="pane alignleft" style="height:120px;">
+      <% if current_user.loved_tracks.empty? %>
+      <div class="fallback">
+        No loved tracks yet.
+      </div>
+      <% else %>
       <ul style="list-style:none;">
       <% current_user.loved_tracks.all(:limit => 6).each do |track| %>
         <li style="margin:0 20px;">
-          <%= link_to(h(truncate(track.title, :length => 15)), artist_release_path(track.release.artist, track.release), :target => '_self', :class => 'track-title', :style => 'width: 161px; overflow: hidden; height: 1.3em;') %>
+          <%= link_to(h(truncate(track.title, :length => 15)), artist_release_path(track.release.artist, track.release), :target => '_self', :class => 'track-title', :style => 'width: 161px; overflow: hidden; height: 17px;') %>
           <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love', :style => 'width:19px;') %>
         </li>
       <% end %>
       </ul>
+      <% end %>
+    </div>
+  </div>
+  <div class="grid_4">
+    <div class="pane alignleft" style="height:120px; text-shadow: #000 1px 1px 1px">
+      <div style="text-align:center; font-size:16px;">
+        <div><%= pluralize(current_user.artists.with_releases.size, 'artists') %></div>
+        <div><%= pluralize(current_user.releases.size, 'releases') %></div>
+        <div><%= pluralize(current_user.tracks.size, 'tracks') %></div>
+        <div>
+          <%= number_to_human_size(current_user.tracks.sum(:size)) %> /
+          <%= number_to_human_size(current_user.max_storage) %>
+        </div>
+        <div><%= seconds_to_time(current_user.tracks.sum(:length)) %>s</div>
+      </div>
     </div>
   </div>
 </div>

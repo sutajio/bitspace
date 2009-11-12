@@ -10,6 +10,7 @@ class Artist < ActiveRecord::Base
   
   default_scope :order => 'name'
   named_scope :by_name, lambda { |name| { :conditions => { :name => name } } }
+  named_scope :with_releases, :conditions => ['releases_count > 0']
   
   searchable_on :name
   
