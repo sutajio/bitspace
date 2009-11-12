@@ -20,6 +20,7 @@
     <%= javascript_include_tag :application %>
   </head>
   <body class="black">
+    <%= render :partial => 'layouts/google_chrome_frame' %>
     <%= fb_connect_javascript_tag %>
     <script type="text/javascript">
     FB.init("<%= ENV['FACEBOOK_API_KEY'] %>","/xd_receiver.htm");
@@ -101,6 +102,5 @@
     </audio>
     <%#= render :partial => 'layouts/feedback' %>
     <%= render :partial => 'layouts/google_analytics' %>
-    <%= render :partial => 'layouts/google_chrome_frame' %>
   </body>
 </html>
