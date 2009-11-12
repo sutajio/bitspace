@@ -41,7 +41,7 @@ class Artist < ActiveRecord::Base
     self.releases.find(:all, :conditions => { :title => discogs_releases.map(&:title) }).each do |release|
       discogs_release = discogs_releases.find {|r| r.title == release.title }
       if discogs_release.labels.present?
-        release.label = Label.find_or_create_by_name(:name => discogs_release.labels.first, :user_id => user.id)
+        release.label = Label.find_or_create_by_name_and_user_id(:name => discogs_release.labels.first, :user_id => user.id)
       end
       unless release.artwork.file?
         release.artwork = open(discogs_release.images.first.uri) if discogs_release.images.first.try(:uri)
