@@ -51,10 +51,10 @@ class Upload < ActiveRecord::Base
         track_set_nr =
           mp3info.tag2['TPOS']
         
-        track_artist_name = track_artist_name.titleize
-        album_artist_name = album_artist_name.titleize
-        release_title = release_title.titleize
-        track_title = track_title.titleize
+        track_artist_name = track_artist_name.anal_title_case
+        album_artist_name = album_artist_name.anal_title_case
+        release_title = release_title.anal_title_case
+        track_title = track_title.anal_title_case
         
         logger.info("Title: #{track_title}")
         logger.info("Artist: #{track_artist_name}")
