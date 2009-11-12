@@ -22,7 +22,7 @@ class PaymentsController < ApplicationController
       when 'subscr_failed':
         user = User.find_by_subscription_id(params[:subscr_id])
         user.handle_failed_payment
-      when 'subscr_cancelled':
+      when 'subscr_cancel':
         user = User.find_by_subscription_id(params[:subscr_id])
         user.cancel_subscription
       when 'subscr_eot':
