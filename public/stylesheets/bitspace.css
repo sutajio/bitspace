@@ -7,6 +7,8 @@ body.white .release ol.tracks li.even { background: #fff; }
 body.black { background: #060606; color: #fff; }
 body.black #root { background: #151515; }
 body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
+body.black #user-menu li { color: #999; }
+body.black #user-menu li span { color: #fff; }
 body.black #menu { border-bottom: 1px solid #222; }
 body.black #menu a { color: #666; }
 body.black #menu a:hover { color: #999; }

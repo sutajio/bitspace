@@ -26,14 +26,14 @@
     </script>
     <div id="root">
       <div class="container_16 clearfix">
-        <div class="grid_3 prefix_13">
+        <div class="grid_3 prefix_13" style="overflow: hidden;">
           <ul id="user-menu" class="clearfix">
             <% if current_user.name.present? %>
             <li><%=h current_user.name %></li>
             <% else %>
-            <li><fb:name uid="loggedinuser" useyou="false" linked="false"></fb:name></li>
+            <li><span><fb:name uid="loggedinuser" useyou="false" linked="false"></fb:name></span></li>
             <% end %>
-            <li><%= link_to("Logout", logout_path, :method => :delete) %></li>
+            <li><%= link_to("Sign out", logout_path, :method => :delete) %></li>
           </ul>
         </div>
       </div>
