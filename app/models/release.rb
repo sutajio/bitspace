@@ -22,7 +22,7 @@ class Release < ActiveRecord::Base
   scoped_search :in => :tracks, :on => [:title]
   
   has_attached_file :artwork,
-    :path => ":class/:attachment/:style/:id_partition.png",
+    :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
     :styles => { :medium => ["500x500>", :png], :small => ["125x125#", :png] },
     :whiny => false,
     :storage => :s3,
