@@ -9,7 +9,7 @@ class ReleasesController < ApplicationController
         :per_page => 6,
         :include => [:artist],
         :order => 'created_at DESC',
-        :conditions => ['artwork_file_size > ?', 32.kilobytes])
+        :conditions => ['artwork_file_size > 0'])
     if request.xhr? && @releases.empty?
       render :nothing => true
     end
