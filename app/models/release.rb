@@ -23,7 +23,7 @@ class Release < ActiveRecord::Base
   
   has_attached_file :artwork,
     :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
-    :styles => { :medium => ["500x500>", :png], :small => ["125x125#", :png] },
+    :styles => { :large => ["500x500>", :png], :small => ["125x125#", :png] },
     :whiny => false,
     :storage => :s3,
     :s3_credentials => {

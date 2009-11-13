@@ -3,7 +3,7 @@
     <div class="grid_16">
       <div class="dashboard clearfix">
         <% @latest.each do |release| %>
-        <%= link_to(image_tag(release.artwork.url(:medium), :size => '313x313', :alt => 'Cover art'), [release.artist, release], :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
+        <%= link_to(image_tag(release.artwork.url(:large), :size => '313x313', :alt => 'Cover art'), [release.artist, release], :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
         <% end %>
       </div>
     </div>
