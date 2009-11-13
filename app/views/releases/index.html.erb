@@ -1,0 +1,14 @@
+<div class="container_16 clearfix pane" style="padding:0;">
+  <div class="releases clearfix infinite-scroll">
+    <div id="infscr-page-1" class="infscr-pages">
+      <% @releases.each do |release| %>
+      <div>
+        <% link_to([release.artist, release], :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;', :title => release_title(release)) do %>
+          <%= image_tag(release.artwork.url(:large), :size => '320x320', :alt => 'Cover art') %>
+        <% end %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+  <%= more(@releases) %>
+</div>
