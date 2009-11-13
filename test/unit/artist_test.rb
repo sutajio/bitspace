@@ -7,7 +7,8 @@ class ArtistTest < ActiveSupport::TestCase
     'Atlas Sound' => 'Atlas+Sound',
     'Akron/Family' => 'Akron%2FFamily',
     'Why?' => 'Why%3F',
-    'Aoki Takamasa + Tujiko Noriko' => 'Aoki%2BTakamasa%2B%252B%2BTujiko%2BNoriko'
+    'Aoki Takamasa + Tujiko Noriko' => 'Aoki%2BTakamasa%2B%252B%2BTujiko%2BNoriko',
+    'O.Lamm' => 'O%2ELamm'
   }
 
   test "should handle weird characters in the artist name when the artist is used in an URL" do
