@@ -45,7 +45,7 @@ class Release < ActiveRecord::Base
     end
     self.mbid = album.mbid if album.mbid.present?
     if album.release_date.present? && !album.release_date.today?
-      self.year = album.release_date.year
+      self.year ||= album.release_date.year
     end
     self.save!
   rescue OpenURI::HTTPError => e
