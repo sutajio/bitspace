@@ -29,7 +29,7 @@
               upload_url: "<%= artist_release_path_with_session_information(@artist, @release) %>",
               post_params: { '_method': 'put', <%= request_forgery_protection_token.to_s %>: '<%= form_authenticity_token %>' },
               file_size_limit: 0,
-              file_types: "*.jpg;*.png;*.gif",
+              file_types: "*.jpg;*.jpeg;*.png;*.gif",
               file_types_description: "Image files",
               file_post_name: "release[artwork]",
               file_upload_limit: 1,
