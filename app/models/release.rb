@@ -10,7 +10,7 @@ class Release < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title, :scope => [:artist_id]
   
-  default_scope :order => 'year DESC'
+  default_scope :order => 'year DESC', :include => [:artist]
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
   
   def self.first_with_artwork
