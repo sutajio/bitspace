@@ -1,4 +1,32 @@
-body.white { background: #fff; color: #000; }
+@font-face { font-family:GraublauWeb; src:url(/fonts/GraublauWeb.otf) format("opentype") }
+@font-face { font-family:GraublauWeb; src:url(/fonts/GraublauWebBold.otf) format("opentype"); font-weight:bold }
+
+body.white { background: #eee; font: 11px/18px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif; color: #333 }
+body.white #root { background: #fff; }
+body.white #menu { border-bottom: 1px solid #eee; }
+body.white #menu a { color: #666; font-size: 12px; }
+body.white #menu a:hover { color: #999; }
+body.white #menu .first a.current { background: none; }
+body.white #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
+body.white #footer { background: #111; color: #ccc; text-shadow: #000 1px 1px 1px !important; }
+body.white #footer a { color: #fff; text-shadow: #000 1px 1px 1px !important; }
+body.white #footer h2, body.white #footer h2 a { text-shadow: #000 1px 1px 1px !important; }
+body.white #footer h3, body.white #footer h3 a { text-shadow: #000 1px 1px 1px !important; }
+body.white #globalfooter { color: #666; }
+body.white hr { border-color: #eee; }
+body.white .grey { color: #aaa; }
+body.white .small {}
+body.white a { color: #09f; text-decoration: none; text-shadow: #eee 1px 1px 0px; transition:all 0.2s ease-in-out; -webkit-transition:all 0.2s ease-in-out; -moz-transition:all 0.2s ease-in-out; }
+body.white a:hover { color: #3cf; }
+body.white a:focus { outline:none }
+body.white h1 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 30px/40px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
+body.white h2 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 20px/20px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
+body.white h3 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 15px/20px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
+body.white h1 a, body.white h2 a, body.white h3 a { text-shadow: #fff 1px 1px 1px; }
+body.white h1 em, body.white h2 em, body.white h3 em { text-shadow: #000 0px 0px 1px; }
+body.white .pane {  -webkit-box-shadow: 1px 1px 5px #aaa; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); border: 2px solid #fff; }
+body.white .box {  -webkit-box-shadow: 1px 1px 5px #aaa; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); border: 2px solid #fff; }
+body.white #sb-body { color: #fff; }
 body.white .release { background: #eee; }
 body.white .release ol.tracks { background: #fff; }
 body.white .release ol.tracks li.odd { background: #f0f5fa; }

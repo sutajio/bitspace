@@ -5,8 +5,8 @@
   </div>
   
   <div class="grid_4 prefix_2 aligncenter">
-    <div class="pane" style="height: 236px; overflow: hidden; line-height: normal;">
-      <h2><%= User::SUBSCRIPTION_PLANS[:free][:name] %></h2>
+    <div class="box" style="height: 236px; overflow: hidden; line-height: normal;">
+      <h2><strong><%= User::SUBSCRIPTION_PLANS[:free][:name] %></strong></h2>
       <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:free][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
         <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:free][:storage]) %></strong> storage</li>
@@ -19,8 +19,8 @@
   </div>
     
   <div class="grid_4 aligncenter">
-    <div class="pane" style="height: 236px; overflow: hidden; border: 2px solid #555; position: relative; top: -2px; line-height: normal;">
-      <h2><%= User::SUBSCRIPTION_PLANS[:premium][:name] %></h2>
+    <div class="box" style="height: 236px; overflow: hidden; line-height: normal;">
+      <h2><strong><%= User::SUBSCRIPTION_PLANS[:premium][:name] %></strong></h2>
       <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:premium][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
         <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> storage</li>
@@ -37,8 +37,8 @@
   </div>
   
   <div class="grid_4 suffix_2 aligncenter">
-    <div class="pane" style="height: 236px; overflow: hidden; line-height: normal;">
-      <h2><%= User::SUBSCRIPTION_PLANS[:unlimited][:name] %></h2>
+    <div class="box" style="height: 236px; overflow: hidden; line-height: normal;">
+      <h2><strong><%= User::SUBSCRIPTION_PLANS[:unlimited][:name] %></strong></h2>
       <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:unlimited][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
         <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:unlimited][:storage]) || 'Unlimited' %></strong> storage</li>

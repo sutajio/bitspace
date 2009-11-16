@@ -8,6 +8,7 @@ sup { font-size: smaller; vertical-align: super; }
 .dashboard p { text-shadow: #000 1px 1px 1px; }
 
 .pane { padding: 10px 0; -webkit-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; }
+.box { padding: 20px; -webkit-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; }
 .dialog { padding: 20px; }
 
 .progress, .ui-slider { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; position: relative; overflow: hidden; }

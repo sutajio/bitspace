@@ -26,7 +26,7 @@
       });
     </script>
   </head>
-  <body class="black">
+  <body class="white">
     <%= fb_connect_javascript_tag %>
     <script type="text/javascript">
     FB.init("<%= ENV['FACEBOOK_API_KEY'] %>","/xd_receiver.htm");
@@ -34,14 +34,17 @@
     <div id="root">
       <div class="container_12 clearfix">
         <ul id="menu" class="clearfix">
-          <li class="grid_2 first"><%= link_to(image_tag('/images/logos/logo.png'), root_path, :rel => 'start') %></li>
-          <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
+          <li class="grid_2 first"><%= link_to(image_tag('/images/white/logo.png'), root_path, :rel => 'start') %></li>
           <li class="grid_1"><%= link_to('Tour', tour_path, :class => params[:action] == 'tour' ? 'current' : nil) %></li>
+          <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Help', help_path, :class => params[:action] == 'help' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:controller] == 'blog_posts' ? 'current' : nil) %></li>
           <li class="grid_3 prefix_3 last">
-            <% form_tag(search_path, :method => 'get') do %>
-              <input type="search" results="5" name="q" id="search-q" />
+            <div><%= facebook_login_button %></div>
+            <% if flash[:error] %>
+            <div class="error"><%=h flash[:error] %></div>
+            <% else %>
+            <div class="small grey">Bitspace is currently invitation only.</div>
             <% end %>
           </li>
         </ul>
@@ -51,7 +54,7 @@
       </div>
     </div>
     <div id="error"></div>
-    <div id="footer">
+    <div id="globalfooter">
       <div class="container_16 clearfix">
         <div class="grid_4">
           Bitspace&trade; 2009 &ndash; The Bitspace Group
@@ -59,6 +62,47 @@
         <div class="grid_12 alignright">
           <a href="http://twitter.com/bitspaced">Twitter</a>,
           <a href="http://www.facebook.com/pages/Bitspace/172171790806">Facebook</a>
+        </div>
+      </div>
+    </div>
+    <div id="footer">
+      <div class="container_16 clearfix">
+        <div class="grid_4">
+          <%= image_tag('/images/logo_200x200_inverted.png') %>
+        </div>
+        <div class="grid_12">
+          <h2>The Bitspace Group <span>a part of <a href="http://www.koneko-collective.com/">The Koneko Collective</a></span></h2>
+          <div class="grid_3 alpha">
+            <h3>Stockholm</h3>
+            <address>
+              Bitspace AB<br />
+              Observatoriegatan 9<br />
+              113 29 Stockholm<br />
+              Sweden
+            </address>
+          </div>
+          <div class="grid_3">
+            <h3>New York</h3>
+            <address>
+              Bitspace Inc.<br />
+              79 N. 11th Street<br />
+              Brooklyn, NY 11211<br />
+              United States
+            </address>
+          </div>
+          <div class="grid_3">
+            <h3>Tokyo</h3>
+            <address>
+              Bitspace Nippon<br />
+              目黒区駒場<br />
+              ４－１－１４ Tokyo<br />
+              Japan
+            </address>
+          </div>
+          <div class="grid_3 omega">
+            <%= mail_to('hello@bitspace.se', nil, :encode => 'javascript') %> /<br />
+            We like you.
+          </div>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ class BlogPost < ActiveRecord::Base
   validates_presence_of :month
   validates_uniqueness_of :slug, :scope => [:year,:month]
 
-  default_scope :order => 'created_at'
+  default_scope :order => 'created_at DESC'
   named_scope :published, :conditions => { :published => true }
   
   def generate_permalink

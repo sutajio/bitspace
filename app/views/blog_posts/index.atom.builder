@@ -1,6 +1,6 @@
 atom_feed(:root_url => blog_url) do |feed|
   feed.title('Bitspace')
-  feed.updated(@posts.first.created_at)
+  feed.updated(@posts.first.created_at) if @posts.present?
 
   @posts.each do |post|
     feed.entry(post, :url => blog_archive_url(post.year, post.month, post.slug)) do |entry|

@@ -1,6 +1,6 @@
 <% div_for(post) do %>
 <h2 style="margin: 0"><%= link_to(h(post.title), blog_archive_path(post.year, post.month, post.slug)) %></h2>
-<div class="small grey" style="margin-bottom:10px"><%= post.created_at %></div>
+<div class="small grey" style="margin-bottom:10px"><%= post.created_at.to_formatted_s(:short) %></div>
 <div class="body">
   <%= simple_format(post.body) %>
 </div>

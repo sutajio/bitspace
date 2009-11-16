@@ -1,11 +1,11 @@
-<div class="pane" style="padding: 20px">
+<div class="box">
   <h3>Archive</h3>
   <ul>
     <% BlogPost.published.all.each do |post| %>
     <li>
       <%= link_to(h(post.title), blog_archive_path(post.year, post.month, post.slug)) %>
       <div class="small grey">
-        <%= post.created_at %>
+        <%= post.created_at.to_date.to_formatted_s(:long) %>
       </div>
     </li>
     <% end %>
