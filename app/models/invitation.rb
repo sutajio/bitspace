@@ -19,7 +19,7 @@ class Invitation < ActiveRecord::Base
   def generate_token
     if self.token.blank?
       self.token =
-        Base64.encode64(Digest::SHA256.digest("#{Time.now}-#{rand}")).slice(-17,15).sub('/','x')
+        Base64.encode64(Digest::SHA256.digest("#{Time.now}-#{rand}")).slice(-17,15).gsub('/','x')
       return true
     end
   end
