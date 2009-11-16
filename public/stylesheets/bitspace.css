@@ -24,8 +24,8 @@ body.white h2 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 20px/2
 body.white h3 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 15px/20px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
 body.white h1 a, body.white h2 a, body.white h3 a { text-shadow: #fff 1px 1px 1px; }
 body.white h1 em, body.white h2 em, body.white h3 em { text-shadow: #000 0px 0px 1px; }
-body.white .pane { box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
-body.white .box { box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
+body.white .pane { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
+body.white .box { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
 body.white #sb-body { color: #fff; }
 body.white .release { background: #eee; }
 body.white .release ol.tracks { background: #fff; }

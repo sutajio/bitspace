@@ -2,13 +2,13 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 
 sup { font-size: smaller; vertical-align: super; }
 
-.dashboard { -webkit-box-shadow: 1px 1px 5px #000; }
+.dashboard { -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .dashboard a:first-child img { -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; }
 .dashboard a:last-child img { -webkit-border-top-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; }
 .dashboard p { text-shadow: #000 1px 1px 1px; }
 
-.pane { padding: 10px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; box-shadow: 1px 1px 5px #000; }
-.box { padding: 20px; -webkit-border-radius: 5px; -moz-border-radius: 5px; box-shadow: 1px 1px 5px #000; }
+.pane { padding: 10px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
+.box { padding: 20px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .dialog { padding: 20px; }
 
 .progress, .ui-slider { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; position: relative; overflow: hidden; }
@@ -28,13 +28,13 @@ sup { font-size: smaller; vertical-align: super; }
 
 .artists { padding: 20px 30px; }
 .artist { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
-.artist img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; }
+.artist img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
 .artist a.name { display: block; font-weight: bold; }
 .artist span.meta { display: block; font-size: 10px; }
 
 .labels { padding: 20px 30px; }
 .label { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
-.label img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; }
+.label img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
 .label a.name { display: block; font-weight: bold; }
 .label span.meta { display: block; font-size: 10px; }
 
