@@ -38,7 +38,7 @@ class User < ActiveRecord::Base
   end
   
   def storage_used
-    Track.sum(:size)
+    tracks.sum(:size)
   end
   
   def paying_customer?
