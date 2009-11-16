@@ -13,6 +13,8 @@
       <dd><%= User.count %></dd>
       <dt>Paying users</dt>
       <dd><%= User.count(:conditions => { :subscription_plan => ['Bitspace Premium', 'Bitspace Unlimited'] }) %></dd>
+      <dt>Paying ratio</dt>
+      <dd><%= number_to_percentage((User.count(:conditions => { :subscription_plan => ['Bitspace Premium', 'Bitspace Unlimited'] }).to_f / User.count.to_f) * 100.0, :precision => 1) %></dd>
     </dl>
   </div>
   <div class="grid_2">
@@ -21,6 +23,8 @@
       <dd><%= number_to_human_size(Track.sum(:size)) %></dd>
       <dt>Total allowed storage</dt>
       <dd><%= number_to_human_size(User.sum(:max_storage)) %></dd>
+      <dt>Real storage (approx.)</dt>
+      <dd><%= number_to_human_size(Track.sum(:size, :group => 'fingerprint').values.sum) %></dd>
     </dl>
   </div>
   <div class="grid_2">
@@ -41,9 +45,9 @@
   </div>
   <div class="grid_2">
     <dl class="status">
-      <dt>$/month (approx.)</dt>
+      <dt>$/month in (approx.)</dt>
       <dd><%= number_to_currency(0) %></dd>
-      <dt>$/year (approx.)</dt>
+      <dt>$/year in (approx.)</dt>
       <dd><%= number_to_currency(0) %></dd>
     </dl>
   </div>
