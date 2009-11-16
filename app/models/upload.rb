@@ -161,6 +161,7 @@ class Upload < ActiveRecord::Base
 
     def image_from_id3_apic_tag(apic_tag)
       if apic_tag
+        apic_tag = apic_tag.first if apic_tag.is_a?(Array)
         encoding, mime_type, type, desc = apic_tag.unpack('BZ*BZ*')
         StringIO.new(apic_tag[(4+mime_type.size+desc.size)..-1])
       end
