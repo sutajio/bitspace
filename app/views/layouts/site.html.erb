@@ -37,7 +37,7 @@
           <li class="grid_2 first"><%= link_to(image_tag('/images/white/logo.png'), root_path, :rel => 'start') %></li>
           <li class="grid_1"><%= link_to('Tour', tour_path, :class => params[:action] == 'tour' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('Help', help_path, :class => params[:action] == 'help' ? 'current' : nil) %></li>
+          <li class="grid_1"><%= link_to('About', about_path, :class => params[:action] == 'about' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:controller] == 'blog_posts' ? 'current' : nil) %></li>
           <li class="grid_3 prefix_3 last">
             <div><%= facebook_login_button %></div>

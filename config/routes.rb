@@ -22,7 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   
   map.price 'price', :controller => 'pages', :action => 'price'
   map.tour 'tour', :controller => 'pages', :action => 'tour'
-  map.help 'help', :controller => 'pages', :action => 'help'
+  map.about 'about', :controller => 'pages', :action => 'about'
   map.blog 'blog', :controller => 'blog_posts', :action => 'index'
   map.blog_archive 'blog/archive/:year/:month/:slug', :controller => 'blog_posts', :action => 'show'
   map.blog_feed 'blog.atom', :controller => 'blog_posts', :action => 'index', :format => 'atom'

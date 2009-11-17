@@ -12,7 +12,7 @@ class PagesController < ApplicationController
   def tour
   end
   
-  def help
+  def about
   end
   
 end
