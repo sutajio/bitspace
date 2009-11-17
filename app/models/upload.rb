@@ -3,7 +3,6 @@ class Upload < ActiveRecord::Base
   belongs_to :user
 
   validates_presence_of :key
-  validates_presence_of :bucket
 
   cattr_accessor :unknown_artist
   self.unknown_artist = '[Unknown Artist]'
@@ -23,7 +22,7 @@ class Upload < ActiveRecord::Base
 
   def import
     download do |file|
-      logger.info("Importing #{key} from #{bucket}")
+      logger.info("Importing #{key} from #{bucket || 'the interwebs'}")
       
       Mp3Info.open(file.path, :encoding => 'utf-8') do |mp3info|
         
@@ -120,18 +119,28 @@ class Upload < ActiveRecord::Base
   def download(&block)
     require 'tempfile'
     Tempfile.open('upload', File.join(Rails.root, 'tmp')) do |file|
-      AWS::S3::Base.establish_connection!(
-        :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
-        :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'])
-      AWS::S3::S3Object.stream(key, bucket) do |chunk|
-        file.write(chunk)
+      if bucket.present?
+        AWS::S3::Base.establish_connection!(
+          :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
+          :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'])
+        AWS::S3::S3Object.stream(key, bucket) do |chunk|
+          file.write(chunk)
+        end
+      else
+        require 'net/http'
+        uri = URI(key)
+        Net::HTTP.get_response(uri) do |res|
+          res.read_body do |chunk|
+            file.write(chunk)
+          end
+        end
       end
       yield(file)
     end
   end
 
   def before_destroy
-    AWS::S3::S3Object.delete(key, bucket)
+    AWS::S3::S3Object.delete(key, bucket) if bucket.present?
   end
 
   class <<self

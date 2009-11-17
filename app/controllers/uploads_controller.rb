@@ -3,7 +3,8 @@ class UploadsController < ApplicationController
   layout nil
   include UploadsHelper
   
-  before_filter :enforce_storage_constraints, :only => [:create]
+  before_filter :enforce_storage_constraints, :only => [:create, :import]
+  skip_before_filter :verify_authenticity_token, :only => [:import]
   
   def new
     respond_to do |with|
@@ -20,12 +21,20 @@ class UploadsController < ApplicationController
   end
   
   def create
-    @upload = Upload.new(params[:upload].reverse_merge(
-      :bucket => s3_upload_bucket,
-      :user_id => current_user.id))
+    @upload = Upload.new(
+      params[:upload].reverse_merge(
+        :bucket => s3_upload_bucket).merge(
+        :user_id => current_user.id))
     @upload.save!
     Delayed::Job.enqueue(@upload, 1)
-    head :ok
+    render :json => @upload
+  end
+  
+  def import
+    @upload = Upload.new(:user_id => current_user.id, :key => params[:url])
+    @upload.save!
+    Delayed::Job.enqueue(@upload, 1)
+    render :json => @upload
   end
   
   protected

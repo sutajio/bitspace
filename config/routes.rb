@@ -2,7 +2,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resource :dashboard
   map.resource :search
-  map.resources :uploads
+  map.resources :uploads, :collection => { :import => :post }
   map.resources :artists do |artists|
     artists.resources :releases
   end
