@@ -316,5 +316,19 @@ $(function(){
       $(this).next('label').removeClass('checked');
     }
   });
+  
+  $('#upload-info').click(function(e){
+    $(this).fadeOut('slow');
+    $('#upload-info-arrow').fadeOut('slow')
+    if($(this).hasClass('finished') == false) {
+      $('#upload-spinner').fadeIn('slow');
+    }
+  });
+  
+  $('#upload-spinner').click(function(e){
+    $(this).fadeOut('slow');
+    $('#upload-info').fadeIn('slow');
+    $('#upload-info-arrow').fadeIn('slow')
+  });
 
 });

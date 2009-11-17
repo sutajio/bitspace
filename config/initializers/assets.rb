@@ -11,6 +11,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
   ],
   :upload => [
     '/vendor/swfupload/swfupload.js',
+    '/vendor/swfupload/swfupload.queue.js',
     '/vendor/plugins/jquery.swfupload.js'
   ],
   :shadowbox => [

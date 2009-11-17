@@ -17,6 +17,7 @@
     <%= stylesheet_link_tag :application %>
     <%= javascript_include_tag :defaults %>
     <%= javascript_include_tag :shadowbox %>
+    <%= javascript_include_tag :upload %>
     <%= javascript_include_tag :application %>
   </head>
   <body class="black">
@@ -92,7 +93,7 @@
           </div>
           <div id="nav-progress"></div>
           <div id="nav-upload">
-            <%= link_to('Upload', new_upload_path, :rel => 'shadowbox;width=325;height=114') %>
+            <%= render :partial => 'uploads/form' %>
           </div>
         </div>
       </div>

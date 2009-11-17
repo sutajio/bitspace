@@ -43,6 +43,9 @@ body.black #menu a:hover { color: #999; }
 body.black #menu .first a.current { background: none; }
 body.black #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
 body.black #footer { color: #666; }
+body.black #upload-info { background: #000; -webkit-border-radius: 20px; -moz-border-radius: 20px; opacity: 0.95; -webkit-box-shadow: 0px 0px 5px #444; }
+body.black #upload-info-arrow { background: url(/images/black/upload-bubble-arrow.png) no-repeat; }
+body.black #upload-spinner { background: url(/images/black/upload-spinner.gif) no-repeat 50% 50%; }
 body.black hr { border-color: #222; }
 body.black .grey { color: #555; }
 body.black .small { font-size: 11px; }

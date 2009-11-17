@@ -7,7 +7,6 @@ class UploadsController < ApplicationController
   
   def new
     respond_to do |with|
-      with.html
       with.json do
         render :json => {
           :url => s3_upload_url,
