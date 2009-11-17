@@ -1,6 +1,7 @@
 class BlogPostsController < ApplicationController
   layout 'site'
   skip_before_filter :require_user
+  skip_before_filter :require_chrome_frame_if_ie
   before_filter :authenticate, :except => [:index, :show]
   
   def index

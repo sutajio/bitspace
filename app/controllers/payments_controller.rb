@@ -3,6 +3,7 @@ class PaymentsController < ApplicationController
   
   skip_before_filter :require_user
   skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn]
+  skip_before_filter :require_chrome_frame_if_ie
   
   def paypal_ipn
     notify = Paypal::Notification.new(request.raw_post)
