@@ -27,7 +27,11 @@ class BlogPostsController < ApplicationController
   def create
     @post = BlogPost.new(params[:blog_post])
     @post.save!
-    redirect_to blog_path
+    if @post.published?
+      redirect_to blog_path
+    else
+      redirect_to admin_blog_path
+    end
   rescue ActiveRecord::RecordInvalid => e
     render :action => 'new'
   end
@@ -39,7 +43,11 @@ class BlogPostsController < ApplicationController
   def update
     @post = BlogPost.find(params[:id])
     @post.update_attributes!(params[:blog_post])
-    redirect_to blog_path
+    if @post.published?
+      redirect_to blog_path
+    else
+      redirect_to admin_blog_path
+    end
   rescue ActiveRecord::RecordInvalid => e
     render :action => 'edit'
   end
