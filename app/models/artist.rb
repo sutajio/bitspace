@@ -14,8 +14,10 @@ class Artist < ActiveRecord::Base
   
   searchable_on :name
   
-  def to_param
-    name.include?('+') ? CGI.escape(CGI.escape(name).sub('.','%2E')) : CGI.escape(name).sub('.','%2E')
+  def to_param(double_encode_if_nessecary = true)
+    name.include?('+') && double_encode_if_nessecary ?
+      CGI.escape(CGI.escape(name).sub('.','%2E')) :
+      CGI.escape(name).sub('.','%2E')
   end
   
   class <<self
