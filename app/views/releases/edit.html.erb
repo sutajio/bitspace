@@ -11,20 +11,19 @@
       </div>
       <div class="grid_7 suffix_6">
         <div class="dialog" style="background:none">
-          <div id="upload-button">
-            <div id="upload-button-swf"></div>
+          <div id="release-artwork-upload-button">
+            <div id="release-artwork-upload-button-swf"></div>
           </div>
-          <div id="upload-info">
-            <div id="upload-progress" class="progress">
+          <div id="release-artwork-upload-info">
+            <div id="release-artwork-upload-progress" class="progress">
               <div class="gauge"></div>
             </div>
-            <div id="upload-status" class="progress-status">Please select an image to upload.</div>
+            <div id="release-artwork-upload-status" class="progress-status">Please select an image to upload.</div>
           </div>
         </div>
-        <%= javascript_include_tag :upload %>
         <script type="text/javascript">
         $(function(){
-          $('#upload-button').each(function(){
+          $('#release-artwork-upload-button').each(function(){
             $(this).swfupload({
               upload_url: "<%= artist_release_path_with_session_information(@artist, @release) %>",
               post_params: { '_method': 'put', <%= request_forgery_protection_token.to_s %>: '<%= form_authenticity_token %>' },
@@ -35,7 +34,7 @@
               file_upload_limit: 1,
               file_queue_limit: 1,
               button_image_url : "../../images/button-select-files.png",
-              button_placeholder_id : "upload-button-swf",
+              button_placeholder_id : "release-artwork-upload-button-swf",
               button_width: 100,
               button_height: 32,
               button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
@@ -46,16 +45,16 @@
               $(this).swfupload('startUpload');
             })
             .bind('uploadComplete', function(e, file){
-                $('#upload-status').text('Upload finished.');
-                setTimeout(function(){ $.address.value("<%= artist_release_path(@artist, @release) %>"); }, 2000);
+                $('#release-artwork-upload-status').text('Upload finished.');
+                setTimeout(function(){ $.address.value("<%= artist_release_path(@artist, @release) %>"); }, 1000);
             })
             .bind('uploadProgress', function(e, file, bytesLoaded){
               var percent = Math.ceil((bytesLoaded / file.size) * 100);
-              $('#upload-progress .gauge').width(percent + '%');
-              $('#upload-status').text(file.name + ' – ' + percent + '%');
+              $('#release-artwork-upload-progress .gauge').width(percent + '%');
+              $('#release-artwork-upload-status').text(file.name + ' – ' + percent + '%');
             })
             .bind('uploadError', function(e, file, code, message){
-              $('#upload-status').text('Error: ' + message);
+              $('#release-artwork-upload-status').text('Error: ' + message);
             });
           });
         });
