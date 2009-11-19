@@ -33,7 +33,11 @@ class Release < ActiveRecord::Base
     :default_url => '/images/cover-art.png',
     :url => ":s3_alias_url",
     :s3_host_alias => ENV['CDN_HOST'],
-    :bucket => ENV['S3_BUCKET']
+    :bucket => ENV['S3_BUCKET'],
+    :s3_headers => {
+      'cache-control' => "max-age=#{10.years.to_i}",
+      'expires' => 10.years.from_now.utc.httpdate
+    }
   
   def update_meta_data
     require 'open-uri'
