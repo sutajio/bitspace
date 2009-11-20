@@ -31,6 +31,15 @@ $(function(){
   $.address.change(function(e){
     $('#error').fadeOut();
     $('#page').fadeTo('fast', 0.25);
+    $.infinitescroll.currPage = 1;
+    $.infinitescroll.loadingImg = undefined;
+    $.infinitescroll.loadingMsg = undefined;
+    $.infinitescroll.container = undefined;
+    $.infinitescroll.currDOMChunk = null;
+    $.infinitescroll.isDuringAjax = false;
+    $.infinitescroll.isInvalidPage = false;
+    $.infinitescroll.isDone = false;
+    $(window).unbind('scroll.infscr');
     $('#page').load(e.value == '/' ? '/dashboard' : e.value, null, function(){
       $('#page').fadeTo('slow', 1);
       $(window).scrollTop(0);
@@ -54,15 +63,6 @@ $(function(){
   
   // Intinite scroll
   $('.infinite-scroll').livequery(function(){
-    $.infinitescroll.currPage = 1;
-    $.infinitescroll.loadingImg = undefined;
-    $.infinitescroll.loadingMsg = undefined;
-    $.infinitescroll.container = undefined;
-    $.infinitescroll.currDOMChunk = null;
-    $.infinitescroll.isDuringAjax = false;
-    $.infinitescroll.isInvalidPage = false;
-    $.infinitescroll.isDone = false;
-    $(window).unbind('scroll.infscr');
     $(this).infinitescroll({
       navSelector: '.more',
       nextSelector: '.more',
