@@ -10,7 +10,7 @@ class Release < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title, :scope => [:artist_id]
   
-  default_scope :order => 'year DESC', :include => [:artist]
+  default_scope :order => 'year DESC, release_date DESC', :include => [:artist]
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
   
   def self.first_with_artwork
@@ -50,6 +50,7 @@ class Release < ActiveRecord::Base
     self.mbid = album.mbid if album.mbid.present?
     if album.release_date.present? && !album.release_date.today?
       self.year ||= album.release_date.year
+      self.release_date ||= album.release_date
     end
     self.save!
   rescue OpenURI::HTTPError => e

@@ -1,6 +1,7 @@
 h1 span, h2 span { font-weight: normal; font-size: 12px; }
 
 sup { font-size: smaller; vertical-align: super; }
+label { font-weight: bold; }
 
 .dashboard { -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .dashboard a:first-child img { -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; }
@@ -43,6 +44,7 @@ sup { font-size: smaller; vertical-align: super; }
 .release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
 .release h2 { margin: 0; font-size: 12px; }
 .release h3 { font-size: 10px; font-weight: normal; }
+.release .meta { margin-left: 210px; }
 
 .release ol.tracks { width: 630px; margin-left: 180px; }
 .release ol.tracks li { padding: 2px; }

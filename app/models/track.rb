@@ -5,6 +5,7 @@ class Track < ActiveRecord::Base
   belongs_to :artist
   
   has_many :playlist_items
+  has_many :scrobbles
   
   validates_presence_of :user_id
   validates_presence_of :release_id
