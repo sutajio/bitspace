@@ -82,7 +82,9 @@
           <%= number_to_human_size(current_user.tracks.sum(:size)) %> /
           <%= number_to_human_size(current_user.max_storage) %>
         </div>
-        <div><%= seconds_to_time(current_user.tracks.sum(:length)) %>s</div>
+        <div>
+          <span class="time"><%= seconds_to_time(current_user.tracks.sum(:length)) %></span>
+        </div>
       </div>
     </div>
   </div>

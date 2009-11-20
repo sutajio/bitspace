@@ -63,3 +63,5 @@ label { font-weight: bold; }
 .external { padding-right: 15px; background: url(/images/external.gif) no-repeat 100% 49%; white-space: nowrap; zoom: 1; }
 
 .fallback { text-align: center; font-style: italic; }
+
+.time { background: url(/images/clock.png) no-repeat; padding-left: 16px; padding-right: 16px; }
