@@ -5,8 +5,10 @@ module TracksHelper
       "0:#{seconds.to_i}"
     elsif seconds < 1.hour
       Time.at(seconds.to_i).gmtime.strftime('%M:%S').gsub(/^0([1-9]+)/,'\1')
-    else
+    elsif seconds < 24.hours
       Time.at(seconds.to_i).gmtime.strftime('%R:%S').gsub(/^0([1-9]+)/,'\1')
+    else
+      pluralize(seconds / 60 / 60 / 24, 'day')
     end
   end
   
