@@ -11,7 +11,9 @@ class User < ActiveRecord::Base
   SUBSCRIPTION_PLANS = {
     :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0 },
     :beta => { :name => 'Bitspace Beta', :storage => 1.gigabyte, :price_in_euro => 0 },
-    :premium => { :name => 'Bitspace Premium', :storage => 25.gigabytes, :price_in_euro => 7.99 },
+    :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99 },
+    :standard => { :name => 'Bitspace Standard', :storage => 25.gigabyte, :price_in_euro => 7.99 },
+    :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 17.99 },
     :unlimited => { :name => 'Bitspace Unlimited', :storage => nil, :price_in_euro => 79.99 }
   }
   
