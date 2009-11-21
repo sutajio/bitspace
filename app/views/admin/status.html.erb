@@ -1,4 +1,6 @@
 <div class="container_12 clearfix aligncenter">
+  <%= render :partial => 'menu' %>
+  <hr />
   <div class="grid_2">
     <dl class="status">
       <dt>Jobs in the queue</dt>
@@ -10,7 +12,7 @@
   <div class="grid_2">
     <dl class="status">
       <dt>No. users</dt>
-      <dd><%= User.count %></dd>
+      <dd><%= link_to(User.count, admin_users_path) %></dd>
       <dt>Paying users</dt>
       <dd><%= User.count(:conditions => { :subscription_plan => ['Bitspace Premium', 'Bitspace Unlimited'] }) %></dd>
       <dt>Paying ratio</dt>

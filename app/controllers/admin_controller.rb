@@ -22,6 +22,10 @@ class AdminController < ApplicationController
     @job.destroy
     redirect_to :back
   end
+  
+  def users
+    @users = User.paginate(:page => params[:page], :order => 'created_at DESC')
+  end
 
   protected
 
