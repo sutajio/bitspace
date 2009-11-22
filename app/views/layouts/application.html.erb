@@ -32,7 +32,7 @@
             <% if current_user.name.present? %>
             <li><%=h current_user.name %></li>
             <% else %>
-            <li><span><fb:name uid="loggedinuser" useyou="false" linked="false"></fb:name></span></li>
+            <li><span><fb:name uid="<%= current_user.facebook_uid %>" useyou="false" linked="false"></fb:name></span></li>
             <% end %>
             <li><%= link_to("Sign out", logout_path, :method => :delete) %></li>
           </ul>
