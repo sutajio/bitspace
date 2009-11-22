@@ -46,14 +46,14 @@ label { font-weight: bold; }
 .release h3 { font-size: 10px; font-weight: normal; }
 .release .meta { margin-left: 210px; }
 
-.release ol.tracks { width: 630px; margin-left: 180px; }
+.release ol.tracks { width: 620px; margin-left: 180px; }
 .release ol.tracks li { padding: 2px; }
 .release ol.tracks li a { padding-left: 19px; }
 
 .track-title { width: 500px; overflow: hidden; display: block; float: left; overflow: hidden; height: 19px; }
 .track-artist a { padding: 0 !important; }
 .track-length { width: 50px; display: block; float: left; text-align: right; }
-.track-love {  width:46px; display: block; float:left; padding-left: 0 !important; text-align: center; }
+.track-love {  width: 36px; display: block; float:left; padding-left: 0 !important; text-align: center; }
 
 .years .releases li { list-style: none; margin: 0; float: left; line-height: 0; }
 .years h1 span { font-size: 10px; }
