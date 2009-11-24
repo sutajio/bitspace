@@ -1,7 +1,8 @@
 <div class="container_16 clearfix pane">
-  <div class="labels clearfix">
+  <div class="labels clearfix infinite-scroll">
     <div id="infscr-page-1" class="infscr-pages">
       <%= render :partial => 'label', :collection => @labels %>
     </div>
   </div>
+  <%= more(@labels) %>
 </div>
