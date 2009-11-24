@@ -72,6 +72,7 @@ body.black .release ol.tracks li a.loading { background: url(/images/black/loadi
 body.black .release ol.tracks li span.track-artist a { color: #777; }
 body.black .years .year { border-top: 1px solid #1d1d1d; }
 body.black .years .releases { background: -webkit-gradient(linear, left top, left bottom, from(rgba(34,34,34, .5)), color-stop(0.55, rgba(34,34,34, .01)), to(transparent)); }
+body.black .scroll-box-shade { background: -webkit-gradient(linear, right top, left top, from(rgba(42,42,42, 1)), color-stop(0.55, rgba(34,34,34, .01)), to(transparent)); }
 body.black .track-love { opacity: 0.5; background: url(/images/love.png) no-repeat 50% 0; text-indent: -9999px; }
 body.black .track-love:hover { opacity: 0.5; background-position: 50% -19px; }
 body.black .track-love.loved { opacity: 1; background-position: 50% -38px; }

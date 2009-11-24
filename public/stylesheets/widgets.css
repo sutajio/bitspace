@@ -55,8 +55,12 @@ label { font-weight: bold; }
 .track-length { width: 50px; display: block; float: left; text-align: right; }
 .track-love {  width: 36px; display: block; float:left; padding-left: 0 !important; text-align: center; }
 
+.years .releases { width: 760px; }
 .years .releases li { list-style: none; margin: 0; float: left; line-height: 0; }
 .years h1 span { font-size: 10px; }
+
+.scroll-box { overflow: hidden; position: relative; }
+.scroll-box-shade { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
 .status dd { font-size: 24px; margin: 10px 0; }
 

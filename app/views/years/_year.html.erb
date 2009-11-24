@@ -6,14 +6,17 @@
     </h1>
   </div>
   <div class="grid_12">
-    <ul class="releases clearfix">
-      <% year.last.each do |release| %>
-      <li>
-        <% link_to([release.artist, release], :target => '_self', :title => release_title(release)) do %>
-          <%= image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+    <div class="scroll-box">
+      <ul class="releases clearfix">
+        <% year.last.each do |release| %>
+        <li>
+          <% link_to([release.artist, release], :target => '_self', :title => release_title(release)) do %>
+            <%= image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+          <% end %>
+        </li>
         <% end %>
-      </li>
-      <% end %>
-    </ul>
+      </ul>
+      <div class="scroll-box-shade"></div>
+    </div>
   </div>
 <% end %>
