@@ -3,9 +3,9 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 sup { font-size: smaller; vertical-align: super; }
 label { font-weight: bold; }
 
-.dashboard { -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
-.dashboard a:first-child img { -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; }
-.dashboard a:last-child img { -webkit-border-top-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; }
+.dashboard { -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.dashboard a:first-child img { -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; -moz-border-radius-topleft: 5px; -moz-border-radius-bottomleft: 5px; }
+.dashboard a:last-child img { -webkit-border-top-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; }
 .dashboard p { text-shadow: #000 1px 1px 1px; }
 
 .pane { padding: 10px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
