@@ -54,7 +54,7 @@
         <p class="grey">You can revoke access for the Bitspace
         application at anytime by going to your Last.fm settings page,
         <%= link_to('here', 'http://last.fm/settings/applications', :class => 'external', :target => '_blank') %>.</p>
-        <%= button_to('Connect with Last.fm', authorize_lastfm_path, :method => :get) %>
+        <%= button_to('Connect with Last.fm', authorize_lastfm_path, :method => :get, :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
         </div>
       </div>
     </div>
