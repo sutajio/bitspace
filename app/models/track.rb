@@ -64,6 +64,7 @@ class Track < ActiveRecord::Base
   before_save :upload_track
   
   def update_meta_data
+    sleep(2.seconds)
     track = Scrobbler::Track.new(artist ? artist.name : release.artist.name, title)
     self.mbid = track.mbid if track.mbid.present?
     self.save!

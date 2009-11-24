@@ -33,6 +33,7 @@ class Artist < ActiveRecord::Base
   end
   
   def update_meta_data
+    sleep(2.seconds)
     lastfm_artist = Scrobbler::Artist.new(name)
     self.mbid = lastfm_artist.mbid if lastfm_artist.mbid.present?
     discogs_artist = Discogs::Artist.new(name)

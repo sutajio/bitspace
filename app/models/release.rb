@@ -41,6 +41,7 @@ class Release < ActiveRecord::Base
   
   def update_meta_data
     require 'open-uri'
+    sleep(2.seconds)
     album = Scrobbler::Album.new(artist.name, title, :include_info => true)
     unless self.artwork.file?
       if album.image_large.present? && !album.image_large.include?('default')
