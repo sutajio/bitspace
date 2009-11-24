@@ -81,14 +81,38 @@ $(function(){
     var playlist = [];
     $(this).closest('ul').find('a[rel=play]').each(function(){
       var self = $(this);
-      playlist.push(function(){
-        $('audio#player').trigger('start', self.attr('href'));
-        $('#status-artist').text(self.attr('data-artist')).attr('href',self.attr('data-artist-url'));
-        $('#status-track').text(self.attr('data-track')).attr('href',self.attr('data-track-url'));
-        $('#status-release').text(self.attr('data-release')).attr('href',self.attr('data-release-url'));
-        $('#status').fadeIn('slow');
-        $('.playing').removeClass('playing').removeClass('loading');
-        $('a[href="'+$('audio#player').attr('src')+'"]').addClass('playing');
+      playlist.push({
+        play: function(){
+          $('audio#player')
+            .trigger('start', self.attr('href'));
+          $('#status-artist')
+            .text(self.attr('data-artist'))
+            .attr('href',self.attr('data-artist-url'));
+          $('#status-track')
+            .text(self.attr('data-track'))
+            .attr('href',self.attr('data-track-url'));
+          $('#status-release')
+            .text(self.attr('data-release'))
+            .attr('href',self.attr('data-release-url'));
+          $('#status')
+            .fadeIn('slow');
+          $('.playing')
+            .removeClass('playing')
+            .removeClass('loading');
+          $('a[href="'+$('audio#player')
+            .attr('src')+'"]')
+            .addClass('playing');
+          if(parseFloat(self.attr('data-length')) > 30.0) {
+            this.started_playing = new Date();
+            $.post(self.attr('data-now-playing-url'));
+          }
+        },
+        scrobble: function(){
+          if(parseFloat(self.attr('data-length')) > 30.0) {
+            $.post(self.attr('data-scrobble-url'),
+                   { started_playing: this.started_playing.toUTCString() });
+          }
+        }
       });
     });
     var playlist_position = $(this).closest('ul').find('li a[rel=play]').index(this);
@@ -147,6 +171,9 @@ $(function(){
     if(this.paused) { this.play(); } else { this.pause(); }
   })
   .bind('ended', function(e){
+    if($(this).data('playlist')[$(this).data('playlist_position')]) {
+      $(this).data('playlist')[$(this).data('playlist_position')].scrobble();
+    }
     if($(this).data('playlist_position') == $(this).data('playlist').length) {
       if(($('#repeat').attr('checked') == true) || ($('#shuffle').attr('checked') == true)) {
         $(this).trigger('next');
@@ -166,7 +193,7 @@ $(function(){
   })
   .bind('playcurrent', function(e){
     if($(this).data('playlist')[$(this).data('playlist_position')]) {
-      $(this).data('playlist')[$(this).data('playlist_position')]();
+      $(this).data('playlist')[$(this).data('playlist_position')].play();
     }
     if($(this).data('playlist_position') == 0) {
       if(($('#repeat').attr('checked') == false) && ($('#shuffle').attr('checked') == false)) {

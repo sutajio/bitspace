@@ -1,7 +1,7 @@
 <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
   <% show_artist = (defined? show_artist) ? show_artist : false %>
   <span class="track-title">
-  <%= link_to(h(truncate(track.title, :length => 70)), track.url, :rel => 'play', 'data-track' => h(track.title), 'data-release' => h(track.release.title), 'data-artist' => h(track.artist.try(:name) || track.release.artist.name), 'data-artist-url' => url_for(track.release.artist), 'data-release-url' => url_for([track.release.artist, track.release]), 'data-track-url' => artist_release_path(track.release.artist, track.release, :anchor => dom_id(track))) %>
+  <%= link_to(h(truncate(track.title, :length => 70)), track.url, :rel => 'play', 'data-track' => h(track.title), 'data-release' => h(track.release.title), 'data-artist' => h(track.artist.try(:name) || track.release.artist.name), 'data-artist-url' => url_for(track.release.artist), 'data-release-url' => url_for([track.release.artist, track.release]), 'data-track-url' => artist_release_path(track.release.artist, track.release, :anchor => dom_id(track)), 'data-now-playing-url' => now_playing_track_path(track), 'data-scrobble-url' => scrobble_track_path(track), 'data-length' => track.length) %>
   <% if track.artist %>
   &ndash; <span class="track-artist"><%=h track.artist.name %></span>
   <% elsif show_artist %>

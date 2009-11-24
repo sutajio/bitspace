@@ -11,8 +11,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :years do |years|
     years.resources :releases
   end
-  map.resources :tracks, :member => { :love => :put }
+  map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
   map.resources :playlists
+  
+  map.resources :lastfm, :collection => { :authorize => :get, :callback => :get }
   
   map.resources :invitations
   map.resources :user_sessions

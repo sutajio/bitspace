@@ -57,4 +57,9 @@ class User < ActiveRecord::Base
     self.save!
   end
   
+  def connected_to_lastfm?
+    self.lastfm_session_key.present? &&
+    self.lastfm_username.present?
+  end
+  
 end

@@ -47,9 +47,8 @@
       <div style="display:none" id="lastfm">
         <div class="dialog aligncenter">
         <p><%= image_tag('/images/lastfm_red.gif') %></p>
-        <p class="grey">We're still working on the Last.fm integration.
-        When we're finished you will be able to connect with your Last.fm
-        account and scrobble the music you listen to.</p>
+        <p class="grey">Click the link below to securely connect with your Last.fm account. We don't store your password.</p>
+        <%= link_to('Connect with Last.fm', authorize_lastfm_path, :class => 'external') %>
         </div>
       </div>
     </div>

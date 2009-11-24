@@ -6,4 +6,21 @@ class TracksController < ApplicationController
     head :ok
   end
   
+  def now_playing
+    @track = current_user.tracks.find(params[:id])
+    Scrobble.now_playing(@track, current_user)
+    head :ok
+  end
+  
+  def scrobble
+    @track = current_user.tracks.find(params[:id])
+    @scrobble = @track.scrobbles.create!(
+        :user_id => current_user.id,
+        :started_playing => params[:started_playing] ? 
+                              Time.parse(params[:started_playing]) :
+                              Time.now.utc)
+    Delayed::Job.enqueue(@scrobble)
+    head :ok
+  end
+  
 end
