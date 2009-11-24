@@ -16,7 +16,7 @@
         </li>
         <% end %>
       </ul>
-      <div class="scroll-box-shade"></div>
+      <%= link_to(format_year(year.first), year_path(year.first), :target => '_self', :class => 'scroll-box-shade') %>
     </div>
   </div>
 <% end %>

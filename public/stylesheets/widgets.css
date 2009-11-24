@@ -60,7 +60,7 @@ label { font-weight: bold; }
 .years h1 span { font-size: 10px; }
 
 .scroll-box { overflow: hidden; position: relative; }
-.scroll-box-shade { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+.scroll-box-shade { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; text-indent: -9999px; }
 
 .status dd { font-size: 24px; margin: 10px 0; }
 
