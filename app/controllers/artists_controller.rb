@@ -3,7 +3,7 @@ class ArtistsController < ApplicationController
   def index
     @artists = current_user.artists.search_for(params[:q]).paginate(
         :page => params[:page],
-        :include => [:releases],
+        :per_page => 10,
         :conditions => ['releases_count > 0'])
     if request.xhr? && @artists.empty?
       render :nothing => true

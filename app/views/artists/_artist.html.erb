@@ -4,7 +4,7 @@
   <% end %>
   <%= link_to(h(artist.name), artist, :class => 'name', :target => '_self') %>
   <span class="meta">
-    <%= pluralize(artist.releases.size, 'release') %>,
-    <%= pluralize(artist.tracks.size, 'track')%>
+    <%= pluralize(artist.releases_count, 'release') %>,
+    <%= pluralize(artist.releases.inject(0) {|sum,r| sum += r.tracks_count }, 'track')%>
   </span>
 <% end %>
