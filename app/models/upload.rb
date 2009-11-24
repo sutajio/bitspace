@@ -24,31 +24,35 @@ class Upload < ActiveRecord::Base
     download do |file|
       logger.info("Importing #{key} from #{bucket || 'the interwebs'}")
       
-      Mp3Info.open(file.path, :encoding => 'utf-8') do |mp3info|
+      require 'audioinfo/audioinfo'
+      
+      AudioInfo.open(file.path, :extension => File.extname(key)[1..-1],
+                                :encoding => 'utf-8') do |tags|
         
         track_artist_name = 
-          mp3info.tag.artist.blank? ? 
-            self.class.parse_filename(key)[:artist] : mp3info.tag.artist
-        if mp3info.tag2['TCMP'] == '1'
-          album_artist_name = mp3info.tag2['TPE2'].present? ? 
-            mp3info.tag2['TPE2'] : various_artists
+          tags.artist.blank? ? 
+            self.class.parse_filename(key)[:artist] : tags.artist
+        if tags.compilation?
+          album_artist_name = tags.album_artist.present? ? 
+            tags.album_artist : various_artists
         else
           album_artist_name = track_artist_name
         end
         release_title = 
-          mp3info.tag.album.blank? ? 
-            self.class.parse_filename(key)[:release] : mp3info.tag.album
+          tags.album.blank? ? 
+            self.class.parse_filename(key)[:release] : tags.album
         release_year = 
-          mp3info.tag.year.blank? ? 
-            self.class.parse_filename(key)[:year] : mp3info.tag.year
+          tags.year.blank? ? 
+            self.class.parse_filename(key)[:year] : tags.year
         track_title = 
-          mp3info.tag.title.blank? ? 
-            self.class.parse_filename(key)[:title] : mp3info.tag.title
+          tags.title.blank? ? 
+            self.class.parse_filename(key)[:title] : tags.title
         track_nr =
-          mp3info.tag.tracknum.blank? ?
-            self.class.parse_filename(key)[:track_nr] : mp3info.tag.tracknum
+          tags.tracknum.blank? ?
+            self.class.parse_filename(key)[:track_nr] : tags.tracknum
         track_set_nr =
-          mp3info.tag2['TPOS']
+          tags.setnum.blank? ?
+            self.class.parse_filename(key)[:set_nr] : tags.setnum
         
         track_artist_name = track_artist_name.anal_title_case
         album_artist_name = album_artist_name.anal_title_case
@@ -62,10 +66,10 @@ class Upload < ActiveRecord::Base
         logger.info("Year: #{release_year}")
         logger.info("Track No.: #{track_nr}")
         logger.info("Track Set No.: #{track_set_nr}")
-        logger.info("Length: #{mp3info.length}")
-        logger.info("Bitrate: #{mp3info.bitrate}")
-        logger.info("Sample rate: #{mp3info.samplerate}")
-        logger.info("VBR: #{mp3info.vbr}")
+        logger.info("Length: #{tags.length}")
+        logger.info("Bitrate: #{tags.bitrate}")
+        logger.info("Sample rate: #{tags.samplerate}")
+        logger.info("VBR: #{tags.vbr}")
         
         transaction do
           if track_artist_name != album_artist_name
@@ -85,7 +89,7 @@ class Upload < ActiveRecord::Base
             :artist => album_artist,
             :title => release_title,
             :year => release_year,
-            :artwork => self.class.image_from_id3_apic_tag(mp3info.tag2['APIC']))
+            :artwork => tags.cover)
           unless release.valid?
             logger.error(release.errors.full_messages.to_sentence)
             raise release.errors.full_messages.to_sentence
@@ -94,16 +98,15 @@ class Upload < ActiveRecord::Base
             :user => user,
             :artist => track_artist,
             :release => release,
-            :fingerprint => self.class.generate_fingerprint(file.path,
-              mp3info.audio_content.first, mp3info.audio_content.last),
+            :fingerprint => self.class.generate_fingerprint(tags.audio_content),
             :title => track_title,
             :track_nr => track_nr,
             :set_nr => track_set_nr,
-            :length => mp3info.length,
-            :bitrate => mp3info.bitrate,
-            :samplerate => mp3info.samplerate,
-            :vbr => mp3info.vbr,
-            :content_type => 'audio/mpeg',
+            :length => tags.length,
+            :bitrate => tags.bitrate,
+            :samplerate => tags.samplerate,
+            :vbr => tags.vbr,
+            :content_type => tags.content_type,
             :size => file.size,
             :file => file)
           unless track.valid?
@@ -144,11 +147,8 @@ class Upload < ActiveRecord::Base
   end
 
   class <<self
-    def generate_fingerprint(filename, position, length)
-      File.open(filename) do |f|
-        f.seek(position)
-        Digest::SHA1.hexdigest(f.read(length))
-      end
+    def generate_fingerprint(data)
+      Digest::SHA1.hexdigest(data)
     end
 
     def parse_filename(original_filename)
@@ -166,14 +166,6 @@ class Upload < ActiveRecord::Base
         :release => parts.size > 2 &&  parts[1] != track_nr ? parts[1] :
                                                               unknown_release
       }
-    end
-
-    def image_from_id3_apic_tag(apic_tag)
-      if apic_tag
-        apic_tag = apic_tag.first if apic_tag.is_a?(Array)
-        encoding, mime_type, type, desc = apic_tag.unpack('BZ*BZ*')
-        StringIO.new(apic_tag[(4+mime_type.size+desc.size)..-1])
-      end
     end
   end
 

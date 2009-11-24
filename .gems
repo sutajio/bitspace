@@ -9,3 +9,7 @@ discogs
 scrobbler
 facebooker
 activemerchant
+MP4Info
+ruby-ogginfo
+wmainfo-rb
+flacinfo-rb

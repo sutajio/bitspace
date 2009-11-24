@@ -30,7 +30,19 @@ class Track < ActiveRecord::Base
   end
   
   def key
-    "tracks/#{fingerprint}.mp3"
+    "tracks/#{fingerprint}.#{format}"
+  end
+  
+  def format
+    case content_type
+    when 'audio/mpeg': 'mp3'
+    when 'audio/ogg': 'oga'
+    when 'application/ogg': 'ogg'
+    when 'audio/x-ms-wma': 'wma'
+    when 'audio/mp4': 'm4a'
+    when 'application/mp4': 'mp4'
+    when 'audio/x-flac': 'flac'
+    end
   end
   
   attr_writer :file
@@ -39,7 +51,7 @@ class Track < ActiveRecord::Base
     if @file
       unless AWS::S3::S3Object.exists?(key, ENV['S3_BUCKET'])
         AWS::S3::S3Object.store(key, @file, ENV['S3_BUCKET'],
-          :content_type => 'audio/mpeg',
+          :content_type => content_type,
           :access => :public_read,
           'cache-control' => "max-age=#{10.years.to_i}",
           'expires' => 10.years.from_now.utc.httpdate)
