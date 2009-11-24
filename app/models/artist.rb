@@ -16,8 +16,8 @@ class Artist < ActiveRecord::Base
   
   def to_param(double_encode_if_nessecary = true)
     name.include?('+') && double_encode_if_nessecary ?
-      CGI.escape(CGI.escape(name).sub('.','%2E')) :
-      CGI.escape(name).sub('.','%2E')
+      CGI.escape(CGI.escape(name).gsub('.','%2E')) :
+      CGI.escape(name).gsub('.','%2E')
   end
   
   class <<self
