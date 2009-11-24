@@ -18,6 +18,7 @@
     <%= render :partial => 'tracks/track', :collection => tracks.sort_by(&:track_nr) %>
   </ol>
   <% end %>
+  <% if params[:controller] == 'releases' && params[:action] == 'show' %>
   <div class="meta">
     <% if release.release_date.present? %>
     <p class="release-date small grey">
@@ -25,4 +26,5 @@
     </p>
     <% end %>
   </div>
+  <% end %>
 <% end %>
