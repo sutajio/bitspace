@@ -1,7 +1,7 @@
 class Track < ActiveRecord::Base
   
   belongs_to :user
-  belongs_to :release
+  belongs_to :release, :counter_cache => true
   belongs_to :artist
   
   has_many :playlist_items

@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(:version => 20091120122312) do
     t.datetime "artwork_updated_at"
     t.integer  "user_id"
     t.date     "release_date"
+    t.integer  "tracks_count"
   end
 
   add_index "releases", ["artist_id"], :name => "index_releases_on_artist_id"
