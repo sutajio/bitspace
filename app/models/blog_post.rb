@@ -10,7 +10,7 @@ class BlogPost < ActiveRecord::Base
   named_scope :published, :conditions => { :published => true }
   
   def generate_permalink
-    self.slug = CGI.escape(title.downcase).gsub('+','-').gsub('.','-')
+    self.slug = title.parameterize
     self.year = Time.now.year
     self.month = Time.now.month
   end
