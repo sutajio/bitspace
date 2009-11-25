@@ -44,6 +44,10 @@ label { font-weight: bold; }
 .release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
 .release h2 { margin: 0; font-size: 12px; }
 .release h3 { font-size: 10px; font-weight: normal; }
+.release .actions { float: right; padding-right: 11px; }
+.release .actions a { opacity: 0.25; }
+.release .actions a:hover { opacity: 1; }
+.release .actions img { margin: 0; }
 .release .meta { margin-left: 210px; }
 
 .release ol.tracks { width: 620px; margin-left: 180px; }

@@ -1,6 +1,9 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
-    <div><%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %> &ndash; <%= link_to(h(@release.title), [@release.artist, @release], :target => '_self') %></div>
+    <div class="breadcrumbs">
+      <%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %> &rsaquo;
+      <%= link_to(h(@release.title), [@release.artist, @release], :target => '_self') %>
+    </div>
     <h1>Upload artwork for this release...</h1>
   </div>
 </div>
