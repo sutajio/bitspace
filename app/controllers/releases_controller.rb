@@ -6,10 +6,9 @@ class ReleasesController < ApplicationController
   def index
     @releases = current_user.releases.search_for(params[:q]).paginate(
         :page => params[:page],
-        :per_page => 6,
+        :per_page => 8,
         :include => [:artist],
-        :order => 'created_at DESC',
-        :conditions => ['artwork_file_size > 0'])
+        :order => 'created_at DESC')
     if request.xhr? && @releases.empty?
       render :nothing => true
     end
