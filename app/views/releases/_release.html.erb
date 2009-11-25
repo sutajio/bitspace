@@ -20,9 +20,9 @@
   <% end %>
   <% if params[:controller] == 'releases' && params[:action] == 'show' %>
   <div class="actions">
-    <%= link_to(image_tag('/images/share.png'), '#share', :title => 'Share', :rel => 'shadowbox') %>
+    <!--<%= link_to(image_tag('/images/share.png'), '#share', :title => 'Share', :rel => 'shadowbox') %>-->
     <%= link_to(image_tag('/images/edit.png'), edit_artist_release_path(release.artist, release), :target => '_self', :title => 'Edit') %>
-    <%= link_to(image_tag('/images/comments.png'), '#comments', :title => 'Comments', :rel => 'shadowbox') %>
+    <!--<%= link_to(image_tag('/images/comments.png'), '#comments', :title => 'Comments', :rel => 'shadowbox') %>-->
     <div id="share"></div>
     <div id="comments">
       <fb:comments xid="<%= dom_id(release) %>" canpost="true" candelete="false" width="400px"></fb:comments>
