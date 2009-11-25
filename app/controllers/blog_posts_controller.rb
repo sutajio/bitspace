@@ -14,6 +14,7 @@ class BlogPostsController < ApplicationController
   
   def show
     @post = BlogPost.published.find_by_year_and_month_and_slug(params[:year], params[:month], params[:slug]) or raise ActiveRecord::RecordNotFound
+    @site_title = @post.title
   end
   
   def preview

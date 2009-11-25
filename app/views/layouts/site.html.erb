@@ -12,7 +12,11 @@
     <meta content='width = 960, initial-scale = 1.0' name='viewport' />
     <meta content='yes' name='apple-mobile-web-app-capable' />
     <meta content='black-translucent' name='apple-mobile-web-app-status-bar-style' />
-    <title>Bitspace</title>
+    <% if @site_title.present? %>
+      <title><%=h @site_title %> - Bitspace</title>
+    <% else %>
+      <title>Bitspace</title>
+    <% end %>
     <%= stylesheet_link_tag :defaults %>
     <%= stylesheet_link_tag :shadowbox %>
     <%= stylesheet_link_tag :application %>
