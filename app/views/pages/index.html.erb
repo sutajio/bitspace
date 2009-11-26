@@ -1,17 +1,58 @@
 <% if current_user.nil? %>
-<div class="container_16 clearfix">
-  <div class="grid_11">
-    <% link_to(tour_path) do %>
-    <img src="/images/billboard.png" width="640" height="440" alt="1 GB free!" />
-    <% end %>
+<div class="color-1">
+  <div class="container_16 clearfix">
+    <div class="grid_11">
+      <% link_to(tour_path) do %>
+      <p><img src="/images/billboard.png" width="640" height="440" alt="1 GB free!" /></p>
+      <% end %>
+    </div>
+    <div class="grid_5" style="padding-top: 100px; line-height: normal;">
+      <h1>No One Puts Music<br /> In A Corner.</h1>
+      <h3>Bitspace is <em>a better way to store and listen to music</em>.
+      Simply upload your collection and enjoy 
+      it everyday and from anywhere.</h3>
+      <h2><%= link_to('Take a look inside ➔', tour_path) %></h2>
+    </div>
   </div>
-  <div class="grid_5" style="padding-top: 100px; line-height: normal;">
-    <h1>No One Puts Music<br /> In A Corner.</h1>
-    <h3>Bitspace is <em>a better way to store and listen to music</em>.
-    We believe that music should be easy, beautiful and 
-    available. Simply upload your collection and enjoy 
-    it everyday and from anywhere.</h3>
-    <h2><%= link_to('Take a look inside ➔', tour_path) %></h2>
+</div>
+<hr />
+<div class="color-2">
+  <div class="container_16 clearfix">
+    <div class="grid_4">
+      <h2>Backup your music collection</h2>
+      <p><strong>External harddrives are slow, clunky, loud, ugly,
+        inconvenient and tend to crash when you least expect it.</strong>
+        Bitspace is nothing like a harddrive. It's beautiful, safe and just
+        works. Easily and securely backup music that you have bought in
+        iTunes Music Store or at eMusic for example. That way you don't have
+        to buy all your lost music again when your harddrive crashes.</p>
+    </div>
+    <div class="grid_4">
+      <h2>A better way to organize music</h2>
+      <p><strong>Tired of trying to keep your digital music library organized?
+         Can't find the music you want when you need it? Or just want a good
+         overview when you don't know what you want to listen to?</strong> We help you
+         out by organizing the music for you. We make sure your meta data is
+         correct and kept up to date, and we generate views
+         that help you find music in a smart way.
+    </div>
+    <div class="grid_4">
+      <h2>Always available &ndash; in the cloud</h2>
+      <p><strong>Want to access your music from anywhere?</strong>
+         Bitspace works just as well from your work computer as from your 
+         iPhone or from an internet café in Thailand. There is no need for
+         slow synchronizations between computers. You always have full
+         access to all your favorite music, without worries.</p>
+    </div>
+    <div class="grid_4">
+      <h2>HTML5 &ndash; for a better web</h2>
+      <p><strong>We use the latest web technologies in order to bring you the best
+        possible product.</strong> With HTML5 we can utilize the native audio
+        playback support in modern web browsers like Safari and Google Chrome.
+        No need for a bug ridden Flash Player that crashes your browser after
+        an hour. Bitspace can import and play pretty much all audio file formats
+        in common use, like MP3, MP4, OGG, WMA and Flac.</p> 
+    </div>
   </div>
 </div>
 <% end %>
