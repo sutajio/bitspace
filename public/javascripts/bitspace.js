@@ -11,7 +11,8 @@ $(function(){
       $('#page').fadeTo('fast', 1);
       switch(status) {
         case 'error':
-          $('#error').text('Error ' + xhr.status).append(
+          $('#error').text('Error ' + 
+            (xhr.status == 0 ? ' - Connection lost' : xhr.status)).append(
             $('<div/>').append(xhr.responseText)
           ).fadeIn('slow');
         break;
