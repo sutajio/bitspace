@@ -23,6 +23,7 @@ $(function(){
     }
   });
   
+  // Hide the error message when it is clicked.
   $('#error').click(function(e){
     $(this).fadeOut('slow');
   });
@@ -116,8 +117,12 @@ $(function(){
         }
       });
     });
-    var playlist_position = $(this).closest('ul').find('li a[rel=play]').index(this);
-    $('audio#player').data('playlist', playlist).data('playlist_position', playlist_position).trigger('playcurrent');
+    var playlist_position = 
+      $(this).closest('ul').find('li a[rel=play]').index(this);
+    $('audio#player')
+      .data('playlist', playlist)
+      .data('playlist_position', playlist_position)
+      .trigger('playcurrent');
   });
   
   // Buttons with rel="play-pause" acts as play/pause buttons. Triggers the
@@ -153,7 +158,9 @@ $(function(){
     }
   }).slider('disable');
   
-  // The audio player object.
+  // The audio player object. Handles playback of the audio files and all
+  // related events that can be triggered during that process, like buffering,
+  // network errors, etc...
   $('audio#player')
   .bind('start', function(e,data){
     this.src = data;
@@ -176,13 +183,15 @@ $(function(){
       $(this).data('playlist')[$(this).data('playlist_position')].scrobble();
     }
     if($(this).data('playlist_position') == $(this).data('playlist').length) {
-      if(($('#repeat').attr('checked') == true) || ($('#shuffle').attr('checked') == true)) {
+      if(($('#repeat').attr('checked') == true) ||
+         ($('#shuffle').attr('checked') == true)) {
         $(this).trigger('next');
       } else {
         $(this).data('playlist', null);
         $(this).data('playlist_position', null);
         $('#nav-progress').slider('disable').slider('value', 0);
-        $('button[rel=play-pause]').attr('disabled','disabled').removeClass('pause');
+        $('button[rel=play-pause]').attr('disabled','disabled')
+                                   .removeClass('pause');
         $('button[rel=next]').attr('disabled', 'disabled');
         $('button[rel=prev]').attr('disabled', 'disabled');
         $('.playing').removeClass('playing');
@@ -197,7 +206,8 @@ $(function(){
       $(this).data('playlist')[$(this).data('playlist_position')].play();
     }
     if($(this).data('playlist_position') == 0) {
-      if(($('#repeat').attr('checked') == false) && ($('#shuffle').attr('checked') == false)) {
+      if(($('#repeat').attr('checked') == false) &&
+         ($('#shuffle').attr('checked') == false)) {
         $('button[rel=prev]').attr('disabled', 'disabled');
       } else {
         $('button[rel=prev]').attr('disabled', '');
@@ -205,8 +215,10 @@ $(function(){
     } else {
       $('button[rel=prev]').attr('disabled', '');
     }
-    if($(this).data('playlist_position') == ($(this).data('playlist').length - 1)) {
-      if(($('#repeat').attr('checked') == false) && ($('#shuffle').attr('checked') == false)) {
+    if($(this).data('playlist_position') ==
+      ($(this).data('playlist').length - 1)) {
+      if(($('#repeat').attr('checked') == false) &&
+         ($('#shuffle').attr('checked') == false)) {
         $('button[rel=next]').attr('disabled', 'disabled');
       } else {
         $('button[rel=next]').attr('disabled', '');
@@ -217,23 +229,40 @@ $(function(){
   })
   .bind('next', function(e){
     if($('#shuffle').attr('checked')) {
-      $(this).data('playlist_position', Math.floor(Math.random()*$(this).data('playlist').length)).trigger('playcurrent');
+      $(this)
+        .data('playlist_position', 
+          Math.floor(Math.random()*$(this).data('playlist').length))
+        .trigger('playcurrent');
     } else {
-      if($('#repeat').attr('checked') && ($(this).data('playlist_position') == ($(this).data('playlist').length - 1))) {
-        $(this).data('playlist_position', 0).trigger('playcurrent');
+      if($('#repeat').attr('checked') &&
+          ($(this).data('playlist_position') ==
+          ($(this).data('playlist').length - 1))) {
+        $(this)
+          .data('playlist_position', 0)
+          .trigger('playcurrent');
       } else {
-        $(this).data('playlist_position', $(this).data('playlist_position') + 1).trigger('playcurrent');
+        $(this)
+          .data('playlist_position', $(this).data('playlist_position') + 1)
+          .trigger('playcurrent');
       }
     }
   })
   .bind('prev', function(e){
     if($('#shuffle').attr('checked')) {
-      $(this).data('playlist_position', Math.floor(Math.random()*$(this).data('playlist').length)).trigger('playcurrent');
+      $(this)
+        .data('playlist_position',
+          Math.floor(Math.random()*$(this).data('playlist').length))
+        .trigger('playcurrent');
     } else {
-      if($('#repeat').attr('checked') && ($(this).data('playlist_position') == 0)) {
-        $(this).data('playlist_position', $(this).data('playlist').length - 1).trigger('playcurrent');
+      if($('#repeat').attr('checked') &&
+        ($(this).data('playlist_position') == 0)) {
+        $(this)
+          .data('playlist_position', $(this).data('playlist').length - 1)
+          .trigger('playcurrent');
       } else {
-        $(this).data('playlist_position', $(this).data('playlist_position') - 1).trigger('playcurrent');
+        $(this)
+          .data('playlist_position', $(this).data('playlist_position') - 1)
+          .trigger('playcurrent');
       }
     }
   })
@@ -265,15 +294,26 @@ $(function(){
     window.status = 'Error';
   });
   
-  $(window).shortkeys({
+  // Bind some keyboard shortcuts for easier navigation in the UI:
+  //
+  //    Space   - Play/pause toggle
+  //    m       - Mute on/off
+  //    k       - Go to and play next track in playlist
+  //    j       - Go to and play previous track in playlist
+  //
+  $(document).shortkeys({
     'Space': function () { $('audio#player').trigger('toggle'); },
     'm': function() {
       if($('audio#player').attr('muted')) {
         $('audio#player').attr('muted', false);
-        $('#mute').attr('checked', '').next('label').removeClass('checked');;
+        $('#mute')
+          .attr('checked', '')
+          .next('label').removeClass('checked');
       } else {
         $('audio#player').attr('muted', true);
-        $('#mute').attr('checked', 'checked').next('label').addClass('checked');
+        $('#mute')
+          .attr('checked', 'checked')
+          .next('label').addClass('checked');
       }
     },
     'k': function() {
@@ -284,6 +324,9 @@ $(function(){
     }
   });
   
+  // Handle the submit on the search form by changing the URL using the
+  // address plug-in (will update the page with the search results using
+  // Ajax).
   $('#search-q').closest('form').submit(function(e){
     e.preventDefault();
     var q = $('#search-q').val();
@@ -292,6 +335,9 @@ $(function(){
     }
   });
   
+  // Links with rel="love" acts as toggle buttons that sends a HTTP POST
+  // request using Ajax to the URL specified in the links href attribute.
+  // If the POST is successful the state of the link is updated to "loved".
   $('a[rel=love]').livequery('click', function(e){
     e.preventDefault();
     var self = $(this);
@@ -299,16 +345,9 @@ $(function(){
       self.toggleClass('loved');
     });
   });
-
-  $('form#new_user_session').livequery('submit', function(e){
-    e.preventDefault();
-    $(this).ajaxSubmit({
-      success: function(){
-        $.address.value('/');
-      }
-    });
-  });
   
+  // The mute button (is actually a HTML checkbox).
+  // Toggles the "muted" attribute in the audio player.
   $('#mute').change(function(e){
     if($(this).attr('checked')) {
       $('audio#player').attr('muted', true);
@@ -319,6 +358,10 @@ $(function(){
     }
   });
   
+  // The repeat button (is actually a HTML checkbox).
+  // Holds the on/off state for the repeat mode and updates the disabled state
+  // for the transport buttons (play/pause/next/prev) in accordance with the
+  // current state.
   $('#repeat').change(function(e){
     if($(this).attr('checked')) {
       $(this).next('label').addClass('checked');
@@ -331,12 +374,15 @@ $(function(){
       if($('audio#player').data('playlist_position') == 0) {
         $('button[rel=prev]').attr('disabled', 'disabled');
       }
-      if($('audio#player').data('playlist_position') == ($('audio#player').data('playlist').length - 1)) {
+      if($('audio#player').data('playlist_position') ==
+        ($('audio#player').data('playlist').length - 1)) {
         $('button[rel=next]').attr('disabled', 'disabled');
       }
     }
   });
   
+  // The shuffle button (is actually a HTML checkbox).
+  // Holds the on/off state for the shuffle mode.
   $('#shuffle').change(function(e){
     if($(this).attr('checked')) {
       $(this).next('label').addClass('checked');
@@ -345,6 +391,8 @@ $(function(){
     }
   });
   
+  // Hide the upload info bubble when it is clicked and show the upload
+  // spinner instead.
   $('#upload-info').click(function(e){
     $(this).fadeOut('slow');
     $('#upload-info-arrow').fadeOut('slow')
@@ -353,6 +401,8 @@ $(function(){
     }
   });
   
+  // Hide the upload spinner when it is clicked and show the upload info
+  // bubble instead.
   $('#upload-spinner').click(function(e){
     $(this).fadeOut('slow');
     $('#upload-info').fadeIn('slow');
