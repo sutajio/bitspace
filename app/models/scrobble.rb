@@ -44,6 +44,8 @@ class Scrobble < ActiveRecord::Base
       playing.submit!
       logger.info("Playing Submission Status: #{playing.status}")
     end
+  rescue BadSessionError => e
+    logger.warn('BADSESSION error when submitting now playing track to Last.fm.')
   end
   
   protected
