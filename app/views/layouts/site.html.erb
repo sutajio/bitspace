@@ -60,58 +60,7 @@
       </div>
     </div>
     <div id="error"></div>
-    <div id="globalfooter">
-      <div class="container_16 clearfix">
-        <div class="grid_4">
-          Bitspace&trade; 2009 &ndash; The Bitspace Group
-        </div>
-        <div class="grid_12 alignright">
-          <a href="http://twitter.com/bitspaced">Twitter</a>,
-          <a href="http://www.facebook.com/pages/Bitspace/172171790806">Facebook</a>
-        </div>
-      </div>
-    </div>
-    <div id="footer">
-      <div class="container_16 clearfix">
-        <div class="grid_4">
-          <%= image_tag('/images/logo_200x200_inverted.png') %>
-        </div>
-        <div class="grid_12">
-          <h2>The Bitspace Group <span>a part of <a href="http://www.koneko-collective.com/">The Koneko Collective</a></span></h2>
-          <!--<div class="grid_3 alpha">
-            <h3>Stockholm</h3>
-            <address>
-              Bitspace AB<br />
-              Observatoriegatan 9<br />
-              113 29 Stockholm<br />
-              Sweden
-            </address>
-          </div>
-          <div class="grid_3">
-            <h3>New York</h3>
-            <address>
-              Bitspace Inc.<br />
-              79 N. 11th Street<br />
-              Brooklyn, NY 11211<br />
-              United States
-            </address>
-          </div>
-          <div class="grid_3">
-            <h3>Tokyo</h3>
-            <address>
-              Bitspace Nippon<br />
-              目黒区駒場<br />
-              ４－１－１４ Tokyo<br />
-              Japan
-            </address>
-          </div> -->
-          <div class="grid_3 alpha omega">
-            <%= mail_to('hello@bitspace.se', nil, :encode => 'javascript') %> /<br />
-            We like you.
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render :partial => 'layouts/global_footer' %>
     <%= render :partial => 'layouts/google_analytics' %>
   </body>
 </html>

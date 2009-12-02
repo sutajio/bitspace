@@ -8,11 +8,11 @@ body.white #menu a { color: #666; font-size: 12px; }
 body.white #menu a:hover { color: #999; }
 body.white #menu .first a.current { background: none; }
 body.white #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
-body.white #footer { background: #111; color: #ccc; text-shadow: #000 1px 1px 1px !important; }
-body.white #footer a { color: #fff; text-shadow: #000 1px 1px 1px !important; }
-body.white #footer h2, body.white #footer h2 a { text-shadow: #000 1px 1px 1px !important; }
-body.white #footer h3, body.white #footer h3 a { text-shadow: #000 1px 1px 1px !important; }
-body.white #globalfooter { color: #666; }
+body.white #company-footer { background: #111; color: #ccc; text-shadow: #000 1px 1px 1px !important; }
+body.white #company-footer a { color: #fff; text-shadow: #000 1px 1px 1px !important; }
+body.white #company-footer h2, body.white #footer h2 a { text-shadow: #000 1px 1px 1px !important; }
+body.white #company-footer h3, body.white #footer h3 a { text-shadow: #000 1px 1px 1px !important; }
+body.white #share-footer { color: #666; }
 body.white hr { border-color: #eee; }
 body.white .grey { color: #aaa; }
 body.white .small {}
@@ -27,10 +27,11 @@ body.white h1 em, body.white h2 em, body.white h3 em { text-shadow: #000 0px 0px
 body.white .pane { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
 body.white .box { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
 body.white #sb-body { color: #fff; }
-body.white .release { background: #eee; }
-body.white .release ol.tracks { background: #fff; }
-body.white .release ol.tracks li.odd { background: #f0f5fa; }
-body.white .release ol.tracks li.even { background: #fff; }
+body.white .share img { -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
+body.white .share ol.tracks { background: #fff; }
+body.white .share ol.tracks li.odd { background: #f0f5fa; }
+body.white .share ol.tracks li.even { background: #fff; }
+body.white .share .track-title { font-weight: bold; }
 
 body.black { background: #060606; color: #fff; }
 body.black #root { background: #151515; }

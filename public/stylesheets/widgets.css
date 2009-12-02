@@ -73,3 +73,6 @@ label { font-weight: bold; }
 .fallback { text-align: center; font-style: italic; }
 
 .time { background: url(/images/clock.png) no-repeat; padding-left: 16px; padding-right: 16px; }
+
+.save-elsewhere { margin: 20px 0 0 0; }
+.save-elsewhere a { margin: 0 10px 0 0; }
