@@ -19,7 +19,7 @@ class TracksController < ApplicationController
         :started_playing => params[:started_playing] ? 
                               Time.parse(params[:started_playing]) :
                               Time.now.utc)
-    Delayed::Job.enqueue(@scrobble)
+    Delayed::Job.enqueue(@scrobble, 2)
     head :ok
   end
   

@@ -29,23 +29,27 @@ class Scrobble < ActiveRecord::Base
     end
   end
   
-  def self.now_playing(track, user)
-    lastfm_session(user) do |session|
-      playing = Scrobbler::Playing.new(
-                          :session_id => session.session_id,
-                          :now_playing_url => session.now_playing_url,
-                          :artist => track.artist ? track.artist.name :
-                                                    track.release.artist.name,
-                          :track => track.title,
-                          :album => track.release.title,
-                          :length => track.length,
-                          :track_number => track.track_nr,
-                          :mb_track_id => track.mbid)
-      playing.submit!
-      logger.info("Playing Submission Status: #{playing.status}")
+  class <<self
+    def now_playing(track, user)
+      lastfm_session(user) do |session|
+        playing = Scrobbler::Playing.new(
+                            :session_id => session.session_id,
+                            :now_playing_url => session.now_playing_url,
+                            :artist => track.artist ? track.artist.name :
+                                                      track.release.artist.name,
+                            :track => track.title,
+                            :album => track.release.title,
+                            :length => track.length,
+                            :track_number => track.track_nr,
+                            :mb_track_id => track.mbid)
+        playing.submit!
+        logger.info("Playing Submission Status: #{playing.status}")
+      end
+    rescue BadSessionError => e
+      logger.warn('BADSESSION error when submitting now playing track to Last.fm.')
     end
-  rescue BadSessionError => e
-    logger.warn('BADSESSION error when submitting now playing track to Last.fm.')
+    
+    handle_asynchronously :now_playing
   end
   
   protected
