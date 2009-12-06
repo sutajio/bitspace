@@ -1,3 +1,10 @@
+<% content_for :html_head do %>
+<style type="text/css">
+tr.failed td { text-decoration: line-through; }
+tr.locked td { font-weight: bold; color: green; }
+tr.backlog td { font-weight: bold; }
+</style>
+<% end %>
 <div class="container_12 clearfix aligncenter">
   <%= render :partial => 'menu' %>
   <hr />
@@ -13,7 +20,7 @@
     </thead>
     <tbody>
       <% @jobs.each do |job| %>
-      <tr>
+      <tr class="<%= job_status_as_dom_class(job) %>">
         <td class="grid_1"><%= job.priority %></td>
         <td class="grid_1"><%= job.attempts %></td>
         <td class="grid_3"><%= job.run_at %></td>

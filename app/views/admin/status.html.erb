@@ -4,9 +4,13 @@
   <div class="grid_2">
     <dl class="status">
       <dt>Jobs in the queue</dt>
-      <dd><%= Delayed::Job.count %></dd>
+      <dd><%= link_to(Delayed::Job.count(:conditions => { :failed_at => nil }), admin_jobs_path) %></dd>
       <dt>Failed jobs</dt>
-      <dd><%= link_to(Delayed::Job.count(:conditions => ['last_error IS NOT NULL']), admin_jobs_path) %></dd>
+      <dd><%= Delayed::Job.count(:conditions => ['last_error IS NOT NULL']) %></dd>
+      <dt>Retrying jobs</dt>
+      <dd><%= Delayed::Job.count(:conditions => ['last_error IS NOT NULL AND failed_at IS NULL']) %></dd>
+      <dt>Backlog</dt>
+      <dd><%= Delayed::Job.count(:conditions => ['run_at <= ? AND failed_at IS NULL', Time.now.utc]) %></dd>
     </dl>
   </div>
   <div class="grid_2">
@@ -14,9 +18,11 @@
       <dt>No. users</dt>
       <dd><%= link_to(User.count, admin_users_path) %></dd>
       <dt>Paying users</dt>
-      <dd><%= User.count(:conditions => { :subscription_plan => ['Bitspace Premium', 'Bitspace Unlimited'] }) %></dd>
+      <dd><%= User.count(:conditions => { :subscription_plan => User::SUBSCRIPTION_PLANS.values.select {|p| p[:price_in_euro] > 0 }.map {|p| p[:name] } }) %></dd>
+      <dt>Paying users</dt>
+      <dd><%= User.count(:conditions => { :subscription_plan => User::SUBSCRIPTION_PLANS.values.select {|p| p[:price_in_euro] == 0 }.map {|p| p[:name] } }) %></dd>
       <dt>Paying ratio</dt>
-      <dd><%= number_to_percentage((User.count(:conditions => { :subscription_plan => ['Bitspace Premium', 'Bitspace Unlimited'] }).to_f / User.count.to_f) * 100.0, :precision => 1) %></dd>
+      <dd><%= number_to_percentage((User.count(:conditions => { :subscription_plan => User::SUBSCRIPTION_PLANS.values.select {|p| p[:price_in_euro] > 0 }.map {|p| p[:name] } }).to_f / User.count.to_f) * 100.0, :precision => 1) %></dd>
     </dl>
   </div>
   <div class="grid_2">

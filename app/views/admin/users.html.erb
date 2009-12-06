@@ -6,15 +6,16 @@
       <th class="grid_1">Facebook</th>
       <th class="grid_3">E-mail</th>
       <th class="grid_1">Login</th>
-      <th class="grid_3">Last login</th>
+      <th class="grid_2">Last login</th>
       <th class="grid_1">Storage</th>
-      <th class="grid_3">Created</th>
+      <th class="grid_2">Subscription plan</th>
+      <th class="grid_2">Created at</th>
     </thead>
     <tbody>
       <% @users.each do |user| %>
       <tr>
         <td class="grid_1"><%= user.facebook_uid %></td>
-        <th class="grid_3">
+        <td class="grid_3">
           <%= link_to(user.email, "##{dom_id(user)}_handler", :rel => 'shadowbox') %>
           <div id="<%= dom_id(user) %>_handler" style="display:none;">
             <pre style="padding:20px;">E-mail: <%=h user.email %>
@@ -31,11 +32,12 @@ Artists: <%= pluralize(user.artists.with_releases.size, 'artists') %>
 Releases: <%= pluralize(user.releases.size, 'releases') %>
 Tracks: <%= pluralize(user.tracks.size, 'tracks') %></pre>
           </div>
-        </th>
-        <th class="grid_1"><%= user.login_count %></th>
-        <th class="grid_3"><%= user.last_login_at %></th>
-        <th class="grid_1"><%= number_to_human_size(user.tracks.sum(:size)) %></th>
-        <th class="grid_3"><%= user.created_at %></th>
+        </td>
+        <td class="grid_1"><%= user.login_count %></td>
+        <td class="grid_2"><%= time_ago_in_words(user.last_login_at) %> ago</td>
+        <td class="grid_1"><%= number_to_human_size(user.tracks.sum(:size)) %></td>
+        <td class="grid_2"><%= user.subscription_plan %></td>
+        <td class="grid_2"><%= time_ago_in_words(user.created_at) %> ago</td>
       </tr>
       <% end %>
     </tbody>
