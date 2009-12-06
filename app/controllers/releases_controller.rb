@@ -30,6 +30,12 @@ class ReleasesController < ApplicationController
     raise e
   end
   
+  def destroy
+    @release = @artist.releases.find(params[:id])
+    @release.destroy
+    head :ok
+  end
+  
   protected
   
     def find_artist

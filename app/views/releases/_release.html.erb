@@ -24,12 +24,8 @@
   <div class="actions">
     <!--<%= link_to(image_tag('/images/share.png'), '#share', :title => 'Share', :rel => 'shadowbox') %>-->
     <%= link_to(image_tag('/images/edit.png'), edit_artist_release_path(release.artist, release), :target => '_self', :title => 'Edit') %>
-    <!--<%= link_to(image_tag('/images/comments.png'), '#comments', :title => 'Comments', :rel => 'shadowbox') %>-->
+    <%= link_to(image_tag('/images/delete.png'), artist_release_path(release.artist, release), :title => 'Delete', :rel => 'delete') %>
     <div id="share"></div>
-    <div id="comments">
-      <fb:comments xid="<%= dom_id(release) %>" canpost="true" candelete="false" width="400px"></fb:comments>
-    </div>
-    <div id="tags"></div>
   </div>
   <div class="meta">
     <% if release.release_date.present? %>
