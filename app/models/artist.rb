@@ -33,7 +33,7 @@ class Artist < ActiveRecord::Base
   end
   
   def update_meta_data
-    sleep(2.seconds)
+    sleep(2.seconds.to_i)
     lastfm_artist = Scrobbler::Artist.new(name)
     self.mbid = lastfm_artist.mbid if lastfm_artist.mbid.present?
     discogs_artist = Discogs::Artist.new(name)
@@ -61,6 +61,6 @@ class Artist < ActiveRecord::Base
   end
   
   after_create :update_meta_data unless Rails.env.test?
-  handle_asynchronously :update_meta_data if Rails.env.production?
+  handle_asynchronously :update_meta_data
   
 end

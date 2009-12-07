@@ -64,7 +64,7 @@ class Track < ActiveRecord::Base
   before_save :upload_track
   
   def update_meta_data
-    sleep(2.seconds)
+    sleep(2.seconds.to_i)
     track = Scrobbler::Track.new(artist ? artist.name : release.artist.name, title)
     self.mbid = track.mbid if track.mbid.present?
     self.save!
@@ -76,8 +76,8 @@ class Track < ActiveRecord::Base
     end
   end
   
-  after_create :update_meta_data
-  handle_asynchronously :update_meta_data if Rails.env.production?
+  after_create :update_meta_data unless Rails.env.test?
+  handle_asynchronously :update_meta_data
   
   def toggle_love!
     loved? ? unlove! : love!

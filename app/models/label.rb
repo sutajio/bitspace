@@ -22,7 +22,7 @@ class Label < ActiveRecord::Base
     end
   end
   
-  after_create :update_meta_data
-  handle_asynchronously :update_meta_data if Rails.env.production?
+  after_create :update_meta_data unless Rails.env.test?
+  handle_asynchronously :update_meta_data
   
 end

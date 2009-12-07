@@ -41,7 +41,7 @@ class Release < ActiveRecord::Base
   
   def update_meta_data
     require 'open-uri'
-    sleep(2.seconds)
+    sleep(2.seconds.to_i)
     album = Scrobbler::Album.new(artist.name, title, :include_info => true)
     unless self.artwork.file?
       if album.image_large.present? && !album.image_large.include?('default')
@@ -62,6 +62,6 @@ class Release < ActiveRecord::Base
     end
   end
   
-  after_create :update_meta_data
-  handle_asynchronously :update_meta_data if Rails.env.production?
+  after_create :update_meta_data unless Rails.env.test?
+  handle_asynchronously :update_meta_data
 end
