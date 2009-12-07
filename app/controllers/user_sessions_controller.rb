@@ -10,7 +10,7 @@ class UserSessionsController < ApplicationController
     @user = User.find_by_facebook_uid(facebook_session_user_uid) or raise ActiveRecord::RecordNotFound
     @user.valid? or raise ActiveRecord::RecordNotFound
     if @user_session = UserSession.create(@user)
-      redirect_to root_path
+      redirect_to player_path(:trailing_slash => true)
     else
       flash[:error] = @user_session.errors.full_messages.to_sentence
       redirect_to root_path
