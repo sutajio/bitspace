@@ -138,7 +138,7 @@ class Upload < ActiveRecord::Base
           end
         end
       end
-      yield(file)
+      yield(file.flush)
     end
   end
 
