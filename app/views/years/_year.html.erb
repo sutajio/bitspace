@@ -1,22 +1,24 @@
-<% content_tag(:li, :id => "year_#{year.first}", :class => 'year clearfix') do %>
-  <div class="grid_3">
-    <h1>
-      <%= link_to(format_year(year.first), year_path(year.first), :target => '_self') %><br />
-      <span class="meta"><%= pluralize(year.last.total_entries, 'release') %></span>
-    </h1>
-  </div>
-  <div class="grid_12">
-    <div class="scroll-box">
-      <ul class="releases clearfix">
-        <% year.last.each do |release| %>
-        <li>
-          <% link_to([release.artist, release], :target => '_self', :title => release_title(release)) do %>
-            <%= image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
-          <% end %>
-        </li>
-        <% end %>
-      </ul>
-      <%= link_to(format_year(year.first), year_path(year.first), :target => '_self', :class => 'scroll-box-shade') %>
+<% cache year do %>
+  <% content_tag(:li, :id => "year_#{year.first}", :class => 'year clearfix') do %>
+    <div class="grid_3">
+      <h1>
+        <%= link_to(format_year(year.first), year_path(year.first), :target => '_self') %><br />
+        <span class="meta"><%= pluralize(year.last.total_entries, 'release') %></span>
+      </h1>
     </div>
-  </div>
+    <div class="grid_12">
+      <div class="scroll-box">
+        <ul class="releases clearfix">
+          <% year.last.each do |release| %>
+          <li>
+            <% link_to([release.artist, release], :target => '_self', :title => release_title(release)) do %>
+              <%= image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+            <% end %>
+          </li>
+          <% end %>
+        </ul>
+        <%= link_to(format_year(year.first), year_path(year.first), :target => '_self', :class => 'scroll-box-shade') %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
