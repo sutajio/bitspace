@@ -85,10 +85,12 @@ class Track < ActiveRecord::Base
   
   def love!
     playlist_items.create(:user_id => user_id)
+    touch
   end
   
   def unlove!
     playlist_items.all.each(&:destroy)
+    touch
   end
   
   def loved?

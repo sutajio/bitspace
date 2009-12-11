@@ -1,13 +1,15 @@
 <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
   <% show_artist = (defined? show_artist) ? show_artist : false %>
-  <span class="track-title">
-  <%= link_to(h(truncate(track.title, :length => 70)), track.url, :rel => 'play', 'data-track' => h(track.title), 'data-release' => h(track.release.title), 'data-artist' => h(track.artist.try(:name) || track.release.artist.name), 'data-artist-url' => url_for(track.release.artist), 'data-release-url' => url_for([track.release.artist, track.release]), 'data-track-url' => artist_release_path(track.release.artist, track.release, :anchor => dom_id(track)), 'data-now-playing-url' => now_playing_track_path(track), 'data-scrobble-url' => scrobble_track_path(track), 'data-length' => track.length) %>
-  <% if track.artist %>
-  &ndash; <span class="track-artist"><%=h track.artist.name %></span>
-  <% elsif show_artist %>
-  &ndash; <span class="track-artist"><%= link_to(h(track.release.artist.name), track.release.artist, :target => '_self') %></span>
+  <% cache [track, show_artist] do %>
+    <span class="track-title">
+    <%= link_to(h(truncate(track.title, :length => 70)), track.url, :rel => 'play', 'data-track' => h(track.title), 'data-release' => h(track.release.title), 'data-artist' => h(track.artist.try(:name) || track.release.artist.name), 'data-artist-url' => url_for(track.release.artist), 'data-release-url' => url_for([track.release.artist, track.release]), 'data-track-url' => artist_release_path(track.release.artist, track.release, :anchor => dom_id(track)), 'data-now-playing-url' => now_playing_track_path(track), 'data-scrobble-url' => scrobble_track_path(track), 'data-length' => track.length) %>
+    <% if track.artist %>
+    &ndash; <span class="track-artist"><%=h track.artist.name %></span>
+    <% elsif show_artist %>
+    &ndash; <span class="track-artist"><%= link_to(h(track.release.artist.name), track.release.artist, :target => '_self') %></span>
+    <% end %>
+    </span>
+    <span class="track-length"><%= seconds_to_time(track.length) %></span>
+    <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love') %>
   <% end %>
-  </span>
-  <span class="track-length"><%= seconds_to_time(track.length) %></span>
-  <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love') %>
 <% end %>
