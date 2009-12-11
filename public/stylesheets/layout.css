@@ -17,7 +17,7 @@
 #nav-next { background: url(/images/button-next-prev.png) no-repeat -32px 0; }
 #nav-next:hover { background-position: -32px -32px; }
 #nav-next:active { background-position: -32px -64px; }
-#nav-progress { position: absolute; left: 200px; top: 0; width: 540px; margin: 13px 0; }
+#nav-progress { position: absolute; left: 200px; top: 0; width: 665px; margin: 13px 0; }
 #nav-mute { position: absolute; left: 118px; }
 #nav-mute input[type=checkbox] { display: none; }
 #nav-mute label { background: url(/images/button-mute.png) no-repeat; width: 20px; height: 38px; display: block; text-indent: -9999px; cursor: pointer; }
