@@ -12,6 +12,8 @@ class Release < ActiveRecord::Base
   
   default_scope :order => 'year DESC, release_date DESC', :include => [:artist]
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
+  named_scope :with_archived, :conditions => { :archived => [true, false] }
+  named_scope :without_archived, :conditions => { :archived => false }
   
   def self.first_with_artwork
     first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
@@ -64,4 +66,17 @@ class Release < ActiveRecord::Base
   
   after_create :update_meta_data unless Rails.env.test?
   handle_asynchronously :update_meta_data
+  
+  def toggle_archive!
+    archived? ? unarchive! : archive!
+  end
+  
+  def archive!
+    update_attribute(:archived, true)
+  end
+  
+  def unarchive!
+    update_attribute(:archived, false)
+  end
+  
 end

@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search
   map.resources :uploads, :collection => { :import => :post }
   map.resources :artists do |artists|
-    artists.resources :releases
+    artists.resources :releases, :member => { :archive => :put }
   end
   map.resources :releases
   map.resources :labels

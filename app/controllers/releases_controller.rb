@@ -8,7 +8,8 @@ class ReleasesController < ApplicationController
         :page => params[:page],
         :per_page => 8,
         :include => [:artist],
-        :order => 'created_at DESC')
+        :order => 'created_at DESC',
+        :conditions => { :archived => params[:q].present? ? [true,false] : false })
     if request.xhr? && @releases.empty?
       render :nothing => true
     end
@@ -28,6 +29,12 @@ class ReleasesController < ApplicationController
     head :ok
   rescue ActiveRecord::RecordInvalid => e
     raise e
+  end
+  
+  def archive
+    @release = @artist.releases.find(params[:id])
+    @release.toggle_archive!
+    head :ok
   end
   
   def destroy

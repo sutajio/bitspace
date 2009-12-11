@@ -421,5 +421,16 @@ $(function(){
       });
     }
   });
+  
+  // Links with rel="archive" acts as toggle buttons that sends a HTTP POST
+  // request using Ajax to the URL specified in the links href attribute.
+  // If the POST is successful the state of the link is updated to "archived".
+  $('a[rel=archive]').livequery('click', function(e){
+    e.preventDefault();
+    var self = $(this);
+    $.post(this.href, { '_method': 'put' }, function(){
+      self.toggleClass('archived');
+    });
+  });
 
 });
