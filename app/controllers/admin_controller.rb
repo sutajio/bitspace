@@ -7,7 +7,7 @@ class AdminController < ApplicationController
   end
 
   def jobs
-    @jobs = Delayed::Job.paginate(:page => params[:page], :order => 'run_at')
+    @jobs = Delayed::Job.paginate(:page => params[:page], :order => 'created_at DESC')
   end
 
   def run_job

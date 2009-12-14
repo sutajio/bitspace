@@ -24,7 +24,7 @@ tr.backlog td { font-weight: bold; }
         <td class="grid_1"><%= job.priority %></td>
         <td class="grid_1"><%= job.attempts %></td>
         <td class="grid_3"><%= job.run_at %></td>
-        <td class="grid_3"><%= job.created_at %></td>
+        <td class="grid_3"><%= time_ago_in_words(job.created_at) %> ago</td>
         <td class="grid_1">
           <%= link_to('Show', "##{dom_id(job)}_handler", :rel => 'shadowbox') %>
           <div id="<%= dom_id(job) %>_handler" style="display:none;"><pre style="padding:20px;"><%=h job.handler %></pre></div>
