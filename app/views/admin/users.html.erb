@@ -6,7 +6,7 @@
       <th class="grid_1">Facebook</th>
       <th class="grid_3">E-mail</th>
       <th class="grid_1">Login</th>
-      <th class="grid_2">Last login</th>
+      <th class="grid_2">Last request</th>
       <th class="grid_1">Storage</th>
       <th class="grid_2">Subscription plan</th>
       <th class="grid_2">Created at</th>
@@ -34,7 +34,7 @@ Tracks: <%= pluralize(user.tracks.size, 'tracks') %></pre>
           </div>
         </td>
         <td class="grid_1"><%= user.login_count %></td>
-        <td class="grid_2"><%= time_ago_in_words(user.last_login_at) %> ago</td>
+        <td class="grid_2"><%= time_ago_in_words(user.last_request_at) %> ago</td>
         <td class="grid_1"><%= number_to_human_size(user.tracks.sum(:size)) %></td>
         <td class="grid_2"><%= user.subscription_plan %></td>
         <td class="grid_2"><%= time_ago_in_words(user.created_at) %> ago</td>
