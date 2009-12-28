@@ -33,8 +33,7 @@ body.white .share ol.tracks li.odd { background: #f0f5fa; }
 body.white .share ol.tracks li.even { background: #fff; }
 body.white .share .track-title { font-weight: bold; }
 
-body.black { background: #060606; color: #fff; }
-body.black #root { background: #151515; }
+body.black { background: #151515; color: #fff; }
 body.black #nav { background: url(/images/black/nav-shade.png) repeat-x; }
 body.black #user-menu li { color: #999; }
 body.black #user-menu li span { color: #fff; }
