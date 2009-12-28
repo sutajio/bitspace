@@ -3,7 +3,7 @@
     <div id="infscr-page-1" class="infscr-pages">
       <% @releases.each do |release| %>
       <div>
-        <% link_to([release.artist, release], :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;', :title => release_title(release)) do %>
+        <% link_to([release.artist, release], :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') do %>
           <%= image_tag(release.artwork.url(:large, false), :size => '240x240', :alt => 'Cover art') %>
           <span class="info-overlay">
             <%=h release.artist.name %><br />
