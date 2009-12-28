@@ -432,5 +432,14 @@ $(function(){
       self.toggleClass('archived');
     });
   });
+  
+  // Show nice looking (and above all clear and useful) tooltips for all
+  // elements with the class "tooltipped". The tooltip will gravitate towards
+  // the most appropriate edge of the element depending on the available
+  // surrounding space. It will also have a subtle fade effect to better match
+  // the overall feel of the UI.
+  $('.tooltipped').livequery(function(){
+    $(this).tipsy({ gravity: $.fn.tipsy.autoNS, fade: true });
+  });
 
 });

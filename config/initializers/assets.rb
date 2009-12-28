@@ -7,7 +7,8 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.shortkeys.js',
     '/vendor/plugins/jquery.infinitescroll.js',
     '/vendor/plugins/jquery.ui.js',
-    '/vendor/plugins/jquery.form.js'
+    '/vendor/plugins/jquery.form.js',
+    '/vendor/plugins/jquery.tipsy.js'
   ],
   :upload => [
     '/vendor/swfupload/swfupload.js',
