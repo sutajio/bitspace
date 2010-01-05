@@ -4,6 +4,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.livequery.js',
     '/vendor/plugins/jquery.form.js',
     '/vendor/plugins/jquery.tipsy.js',
+    '/vendor/plugins/jquery.input-hint.js',
     '/vendor/shadowbox/shadowbox.js'
   ],
   :application => [
