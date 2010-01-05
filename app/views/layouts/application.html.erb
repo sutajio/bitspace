@@ -26,12 +26,12 @@
       <div class="container_16 clearfix">
         <div class="grid_16 alignright" style="overflow: hidden;">
           <ul id="user-menu" class="clearfix">
-            <% if current_user.name.present? %>
-            <li><%=h current_user.name %></li>
-            <% else %>
+            <% if facebook_session %>
             <li><span><fb:name uid="<%= current_user.facebook_uid %>" useyou="false" linked="false"></fb:name></span></li>
-            <% end %>
+            <li><%= link_to("Sign out", facebook_logout_path, :method => :delete) %></li>
+            <% else %>
             <li><%= link_to("Sign out", logout_path, :method => :delete) %></li>
+            <% end %>
           </ul>
         </div>
       </div>

@@ -10,13 +10,12 @@ class ApplicationController < ActionController::Base
   
   layout :current_layout
   
+  before_filter :require_user
   helper_method :current_user_session, :current_user
   
   include Facebooker::Rails::Controller
-  
-  before_filter :require_user
   before_filter :set_facebook_session
-  
+  helper_method :facebook_session
   rescue_from Facebooker::Session::SessionExpired do |exception|
     clear_facebook_session_information
     clear_fb_cookies!
