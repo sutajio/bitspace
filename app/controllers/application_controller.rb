@@ -51,7 +51,7 @@ class ApplicationController < ActionController::Base
         if request.xhr?
           render :text => "You must be logged in to access that page.", :status => :forbidden
         else
-          redirect_to root_path
+          redirect_to login_path
         end
         return false
       end
@@ -62,7 +62,7 @@ class ApplicationController < ActionController::Base
         if request.xhr?
           render :text => "You must be logged out to access that page.", :status => :forbidden
         else
-          redirect_to root_path
+          redirect_to player_path(:trailing_slash => true)
         end
         return false
       end
@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
         if request.xhr?
           render :text => "You must be admin access that page.", :status => :forbidden
         else
-          redirect_to root_path
+          redirect_to login_path
         end
         return false
       end
@@ -85,7 +85,7 @@ class ApplicationController < ActionController::Base
           if request.xhr?
             render :text => "You must connect to Facebook to access that page.", :status => :forbidden
           else
-            redirect_to root_path
+            redirect_to login_path
           end
         end
       end

@@ -1,7 +1,38 @@
 <div class="container_16 clearfix">
-  <div class="grid_4 prefix_6 suffix_6 aligncenter">
-    <div class="pane">
-      <%= facebook_login_button %>
+  <div class="grid_8 prefix_4 suffix_4 aligncenter">
+    <div id="logo-box">
+      
+      <div class="box" id="login-box">
+        <% if flash[:error].present? %>
+          <div id="login-error" class="bubble bubble-south">
+            <div class="bubble-inner">
+              <%=h flash[:error] %>
+            </div>
+          </div>
+        <% end %>
+        
+        <% form_tag user_sessions_path, :method => :post do %>
+          <div class="field">
+            <%= text_field_tag :login %>
+            <kbd>Username</kbd>
+          </div>
+        
+          <div class="field">
+            <%= password_field_tag :password %>
+            <kbd>Password</kbd>
+          </div>
+        
+          <div class="small grey">
+            <%= check_box_tag :remember_me %>
+            <%= label_tag :remember_me, 'Remember me on this computer' %>
+          </div>
+        
+          <div class="submit-row">
+            <%= submit_tag 'Sign in' %>
+          </div>
+        <% end %>
+      </div>
+      
     </div>
   </div>
 </div>
