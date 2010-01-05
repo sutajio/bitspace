@@ -12,15 +12,12 @@
     <meta content='yes' name='apple-mobile-web-app-capable' />
     <meta content='black-translucent' name='apple-mobile-web-app-status-bar-style' />
     <title><%=h current_user.subscription_plan %></title>
-    <%= stylesheet_link_tag :defaults %>
-    <%= stylesheet_link_tag :shadowbox %>
+    <%= stylesheet_link_tag :common %>
     <%= stylesheet_link_tag :application %>
-    <%= javascript_include_tag :defaults %>
-    <%= javascript_include_tag :shadowbox %>
-    <%= javascript_include_tag :upload %>
+    <%= javascript_include_tag :common %>
     <%= javascript_include_tag :application %>
   </head>
-  <body class="black">
+  <body>
     <%= fb_connect_javascript_tag %>
     <script type="text/javascript">
     FB.init("<%= ENV['FACEBOOK_API_KEY'] %>","/xd_receiver.htm");

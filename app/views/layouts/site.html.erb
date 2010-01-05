@@ -23,21 +23,12 @@
     <% if @page_keywords.present? %>
     <meta name="keywords" content="<%= @page_keywords %>" />
     <% end %>
-    <%= stylesheet_link_tag :defaults %>
-    <%= stylesheet_link_tag :shadowbox %>
-    <%= stylesheet_link_tag :application %>
-    <%= javascript_include_tag :defaults %>
-    <%= javascript_include_tag :shadowbox %>
-    <script type="text/javascript">
-      $(function(){
-        if(Shadowbox) {
-          Shadowbox.init({ skipSetup: true });
-          Shadowbox.setup();
-        }
-      });
-    </script>
+    <%= stylesheet_link_tag :common %>
+    <%= stylesheet_link_tag :site %>
+    <%= javascript_include_tag :common %>
+    <%= javascript_include_tag :site %>
   </head>
-  <body class="white">
+  <body>
     <%= fb_connect_javascript_tag %>
     <script type="text/javascript">
     FB.init("<%= ENV['FACEBOOK_API_KEY'] %>","/xd_receiver.htm");

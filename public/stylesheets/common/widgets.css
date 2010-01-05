@@ -3,11 +3,6 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 sup { font-size: smaller; vertical-align: super; }
 label { font-weight: bold; }
 
-.dashboard { -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
-.dashboard a:first-child img { -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; -moz-border-radius-topleft: 5px; -moz-border-radius-bottomleft: 5px; }
-.dashboard a:last-child img { -webkit-border-top-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; }
-.dashboard p { text-shadow: #000 1px 1px 1px; }
-
 .pane { padding: 10px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .box { padding: 20px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .dialog { padding: 20px; }
@@ -26,42 +21,6 @@ label { font-weight: bold; }
 .aligncenter { text-align: center; }
 .alignright { text-align: right; }
 .alignleft { text-align: left; }
-
-.artists { padding: 20px 30px; }
-.artist { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
-.artist img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
-.artist a.name { display: block; font-weight: bold; }
-.artist span.meta { display: block; font-size: 10px; }
-
-.labels { padding: 20px 30px; }
-.label { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
-.label img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
-.label a.name { display: block; font-weight: bold; }
-.label span.meta { display: block; font-size: 10px; }
-
-.release { background: #eee; width: 800px; margin: 0; }
-.release .info { padding: 10px; width: 150px; text-align: center; float: left; }
-.release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
-.release h2 { margin: 0; font-size: 12px; }
-.release h3 { font-size: 10px; font-weight: normal; }
-.release .actions { float: right; padding-right: 11px; }
-.release .actions a { opacity: 0.25; }
-.release .actions a:hover { opacity: 1; }
-.release .actions img { margin: 0; }
-.release .meta { margin-left: 210px; }
-
-.release ol.tracks { width: 620px; margin-left: 180px; }
-.release ol.tracks li { padding: 2px; }
-.release ol.tracks li a { padding-left: 19px; }
-
-.track-title { width: 500px; overflow: hidden; display: block; float: left; overflow: hidden; height: 19px; }
-.track-artist a { padding: 0 !important; }
-.track-length { width: 50px; display: block; float: left; text-align: right; }
-.track-love {  width: 36px; display: block; float:left; padding-left: 0 !important; text-align: center; }
-
-.years .releases { width: 760px; }
-.years .releases li { list-style: none; margin: 0; float: left; line-height: 0; }
-.years h1 span { font-size: 10px; }
 
 .scroll-box { overflow: hidden; position: relative; }
 .scroll-box-shade { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; text-indent: -9999px; }
@@ -88,4 +47,3 @@ label { font-weight: bold; }
 .tipsy-south { background-position: bottom center; }
 .tipsy-east { background-position: right center; }
 .tipsy-west { background-position: left center; }
-

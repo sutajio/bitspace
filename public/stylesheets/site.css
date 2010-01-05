@@ -1,0 +1,34 @@
+@font-face { font-family:GraublauWeb; src:url(/fonts/GraublauWeb.otf) format("opentype") }
+@font-face { font-family:GraublauWeb; src:url(/fonts/GraublauWebBold.otf) format("opentype"); font-weight:bold }
+
+body { background: #eee; font: 11px/18px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif; color: #333 }
+#root { background: #fff; }
+#menu { border-bottom: 1px solid #eee; }
+#menu a { color: #666; font-size: 12px; }
+#menu a:hover { color: #999; }
+#menu .first a.current { background: none; }
+#menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
+#company-footer { background: #111; color: #ccc; text-shadow: #000 1px 1px 1px !important; }
+#company-footer a { color: #fff; text-shadow: #000 1px 1px 1px !important; }
+#company-footer h2, #footer h2 a { text-shadow: #000 1px 1px 1px !important; }
+#company-footer h3, #footer h3 a { text-shadow: #000 1px 1px 1px !important; }
+#share-footer { color: #666; }
+hr { border-color: #eee; }
+.grey { color: #aaa; }
+.small {}
+a { color: #09f; text-decoration: none; text-shadow: #eee 1px 1px 0px; transition:all 0.2s ease-in-out; -webkit-transition:all 0.2s ease-in-out; -moz-transition:all 0.2s ease-in-out; }
+a:hover { color: #3cf; }
+a:focus { outline:none }
+h1 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 30px/40px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
+h2 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 20px/20px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
+h3 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 15px/20px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
+h1 a, h2 a, h3 a { text-shadow: #fff 1px 1px 1px; }
+h1 em, h2 em, h3 em { text-shadow: #000 0px 0px 1px; }
+.pane { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
+.box { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
+#sb-{ color: #fff; }
+.share img { -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
+.share ol.tracks { background: #fff; }
+.share ol.tracks li.odd { background: #f0f5fa; }
+.share ol.tracks li.even { background: #fff; }
+.share .track-title { font-weight: bold; }
