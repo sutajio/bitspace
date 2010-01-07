@@ -8,7 +8,7 @@ a:hover { color: #fff; }
 #login-error { bottom: 240px; }
 kbd { display: none; }
 input.hint { color: #777; background: #999; background: -webkit-gradient(linear, left top, left bottom, from(#777), color-stop(0.3, #999), to(#999)); }
-.field input { text-align: center; font-size: 18px; text-shadow: #999 0px 0px 1px; padding: 5px; -webkit-border-radius: 5px; border: none; }
+.field input { width: 230px; text-align: center; font-size: 18px; text-shadow: #999 0px 0px 1px; padding: 5px; -webkit-border-radius: 5px; border: none; }
 input[type=submit] { cursor: pointer; padding: 5px 10px; font-size: 14px; font-weight: bold; color: #333; text-shadow: #fff 0px 0px 1px; border: 3px solid #eee; -webkit-border-radius: 15px; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); }
 input[type=submit]:hover { border-color: #ddd; }
 input[type=submit]:active { background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#ccc)); }

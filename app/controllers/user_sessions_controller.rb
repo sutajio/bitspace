@@ -5,12 +5,11 @@ class UserSessionsController < ApplicationController
   layout 'login'
   
   def new
+    @user_session = UserSession.new
   end
   
   def create
-    @user_session = UserSession.create(:login => params[:login],
-                                       :password => params[:password],
-                                       :remember_me => true)
+    @user_session = UserSession.create(params[:user_session])
     if @user_session.valid?
       redirect_to player_path(:trailing_slash => true)
     else
