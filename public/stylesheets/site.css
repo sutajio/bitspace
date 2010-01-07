@@ -32,3 +32,9 @@ h1 em, h2 em, h3 em { text-shadow: #000 0px 0px 1px; }
 .share ol.tracks li.odd { background: #f0f5fa; }
 .share ol.tracks li.even { background: #fff; }
 .share .track-title { font-weight: bold; }
+
+#signup-form input { font-size: 18px; padding: 5px; width: 65%; text-align: center; border: 1px solid #ccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+#signup-form input.hint { color: #ccc; }
+#signup-form label { display: block; font-size: 16px; color: #999; font-weight: normal; margin: 15px 0 5px 0; }
+#signup-form kbd { display: none; }
+#signup-form label.error { display: block; color: #f66; font-size: 12px; margin: 0; }

@@ -1,5 +1,9 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
+  acts_as_authentic do
+    merge_validates_uniqueness_of_login_field_options :case_sensitive => true
+    merge_validates_format_of_login_field_options :with => /^[a-z][a-z0-9_]+$/,
+      :message => 'Should use only lowercase letters, numbers, and underscore please.'
+  end
   
   has_many :artists
   has_many :releases

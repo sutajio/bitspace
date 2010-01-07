@@ -6,8 +6,7 @@ class InvitationsController < ApplicationController
   
   def show
     if @invitation = Invitation.find_by_token(params[:id])
-      @user = User.find_by_email(@invitation.email) ||
-              User.new(:email => @invitation.email)
+      @user = User.new(:email => @invitation.email)
       @user.subscription_plan = User::SUBSCRIPTION_PLANS[:beta][:name] if ENV['PRIVATE_BETA']
       @user.setup_subscription_plan_details
     else
@@ -17,11 +16,9 @@ class InvitationsController < ApplicationController
   
   def update
     if @invitation = Invitation.find_by_token(params[:id])
-      @user = User.find_by_email(@invitation.email) ||
-              User.new(:email => @invitation.email)
+      @user = User.new(params[:user])
       @user.subscription_plan = User::SUBSCRIPTION_PLANS[:beta][:name] if ENV['PRIVATE_BETA']
       @user.setup_subscription_plan_details
-      @user.facebook_uid = facebook_session.user.id
       @user.save!
       @invitation.destroy
       UserSession.create(@user)

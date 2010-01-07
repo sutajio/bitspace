@@ -10,30 +10,42 @@
       You will get <%= number_to_human_size(@user.max_storage) %> of music storage, wow!
     </h3>
     <div class="box">
-      <% form_for @invitation, :html => { :id => 'invitation-form' } do |f| %>
+      <% form_for @user, :url => invitation_path(@invitation), :html => { :id => 'signup-form', :method => :put } do |f| %>
         <%= f.error_messages %>
         <div class="field">
-          <%= f.text_field :email, :class => 'aligncenter', :style => 'font-size: 18px; padding: 5px; width: 65%;' %>
+          <%= f.label :email %>
+          <%= f.text_field :email, :class => 'required email' %>
+          <kbd>Your email address</kbd>
+        </div>
+        <div class="field">
+          <%= f.label :login %>
+          <%= f.text_field :login, :class => 'required' %>
+          <kbd>Username, can be anything</kbd>
+        </div>
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password, :class => 'required' %>
+          <kbd>A secure password</kbd>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, :class => 'required' %>
+          <kbd>A secure password</kbd>
         </div>
         <div class="submit-row">
           <p>
-            <fb:login-button v="2" size="medium" onlogin="$('#invitation-form').submit()">Connect with Facebook</fb:login-button>
+            <button type="submit">Create my account</button>
           </p>
           <p class="small grey">
-            You will be using your Facebook account for logging in to 
-            Bitspace. It's sweet because then you don't have to worry about
-            remembering yet another set of username and password for yet
-            another random site (that would be us). ;)
-            That's why we only need to ask you for your email address (it
-            should already be filled in, but you can change it if you want).
-            Go ahead and click on the "Connect with Facebook" button now.
-          </p>
-          <p class="small">
             Please note that audio-playback in <strong>Firefox</strong> is not yet supported.
             We recommend that you try using <a href="http://www.apple.com/safari/download/" target="_blank" class="external">Apple Safari</a>
             or <a href="http://www.google.com/chrome" target="_blank" class="external">Google Chrome</a> instead.
             <strong>Internet Explorer</strong> is not supported at all, unless you have
             <a href="http://www.google.com/chromeframe" target="_blank" class="external">Google Chrome Frame</a> installed.
+          </p>
+          <p class="small grey">
+            By clicking on 'Create my account' above,<br/>
+            you confirm that you accept the <%= link_to('Terms of Service', '/terms') %>.
           </p>
         </div>
       <% end %>
