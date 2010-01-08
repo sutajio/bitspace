@@ -1,0 +1,17 @@
+<div id="account">
+  <div class="container_16 clearfix">
+    <div class="grid_16">
+      <h1>
+        Account details
+        <span class="member-since grey">
+          Member since <%= current_user.created_at.to_date.to_formatted_s(:long) %>
+        </span>
+      </h1>
+    </div>
+  </div>
+  <div class="container_16 clearfix">
+    <div class="pane clearfix">
+      <div class="fallback">Nothing to see here yet.</div>
+    </div>
+  </div>
+</div>

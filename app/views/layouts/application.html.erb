@@ -19,17 +19,6 @@
   </head>
   <body>
     <div id="root">
-      <div class="container_16 clearfix">
-        <div class="grid_16 alignright" style="overflow: hidden;">
-          <ul id="user-menu" class="clearfix">
-            <% if facebook_session %>
-            <li><%= link_to("Sign out", facebook_logout_path, :method => :delete) %></li>
-            <% else %>
-            <li><%= link_to("Sign out", logout_path, :method => :delete) %></li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
       <div class="container_12 clearfix">
         <ul id="menu" class="clearfix">
           <li class="grid_2 first"><%= link_to(image_tag('/images/black/logo.png'), root_path, :target => '_self', :rel => 'start') %></li>
@@ -38,7 +27,17 @@
           <li class="grid_1"><%= link_to('Labels', labels_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Years', years_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Playlists', playlists_path, :target => '_self', :rel => 'contents') %></li>
-          <li class="grid_3 prefix_2 last">
+          <li class="grid_1 prefix_1 usernav">
+            <%= link_to('Account', account_path, :target => '_self', :title => 'Change your account settings here', :class => 'tooltipped') %>
+          </li>
+          <li class="grid_1 usernav">
+            <% if facebook_session %>
+              <%= link_to("Sign out", facebook_logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
+            <% else %>
+              <%= link_to("Sign out", logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
+            <% end %>
+          </li>
+          <li class="grid_2 last">
             <% form_tag(search_path, :method => 'get') do %>
               <input type="search" results="5" name="q" id="search-q" />
             <% end %>
