@@ -1,0 +1,32 @@
+<div class="container_16 clearfix">
+  <div class="grid_8 prefix_4 suffix_4 aligncenter">
+    <div class="reflected-container">
+
+      <div class="box" id="forgot-password-box">
+        <h1>Forgot your password?</h1>
+        <p>We will send password reset instructions to the email address
+           associated with your account.</p>
+        
+        <% form_tag password_path, :method => :post do %>
+          <% if flash[:alert].present? %>
+            <div class="bubble bubble-south">
+              <div class="bubble-inner">
+                <%=h flash[:alert] %>
+              </div>
+            </div>
+          <% end %>
+          
+          <div class="field">
+            <%= text_field_tag :email, nil, :size => 30 %>
+            <kbd>Your email address or username</kbd>
+          </div>
+          
+          <div class="submit-row">
+            <%= submit_tag 'Send instructions' %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

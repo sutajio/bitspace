@@ -18,16 +18,11 @@
     <%= javascript_include_tag :application %>
   </head>
   <body>
-    <%= fb_connect_javascript_tag %>
-    <script type="text/javascript">
-    FB.init("<%= ENV['FACEBOOK_API_KEY'] %>","/xd_receiver.htm");
-    </script>
     <div id="root">
       <div class="container_16 clearfix">
         <div class="grid_16 alignright" style="overflow: hidden;">
           <ul id="user-menu" class="clearfix">
             <% if facebook_session %>
-            <li><span><fb:name uid="<%= current_user.facebook_uid %>" useyou="false" linked="false"></fb:name></span></li>
             <li><%= link_to("Sign out", facebook_logout_path, :method => :delete) %></li>
             <% else %>
             <li><%= link_to("Sign out", logout_path, :method => :delete) %></li>

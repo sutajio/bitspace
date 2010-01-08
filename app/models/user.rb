@@ -66,4 +66,10 @@ class User < ActiveRecord::Base
     self.lastfm_username.present?
   end
   
+  def forgot_password
+    PasswordMailer.deliver_reset_password_link(self)
+  end
+  
+  handle_asynchronously :forgot_password
+  
 end

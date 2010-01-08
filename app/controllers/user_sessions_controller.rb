@@ -13,7 +13,7 @@ class UserSessionsController < ApplicationController
     if @user_session.valid?
       redirect_to player_path(:trailing_slash => true)
     else
-      flash[:error] = @user_session.errors.full_messages.to_sentence
+      flash[:alert] = @user_session.errors.full_messages.to_sentence
       redirect_to login_path
     end
   end

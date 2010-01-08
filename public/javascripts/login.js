@@ -1,6 +1,9 @@
 $(function(){
   
-  $('#user_session_login').inputHint({ using: '+kbd' });
-  $('#user_session_password').inputHint({ using: '+kbd' });
+  $('.field input').inputHint({ using: '+kbd' });
+  
+  $('#reset-password-form').validate({
+    rules: { password: { required: true, minlength: 4 } }
+  });
   
 });

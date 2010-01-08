@@ -1,0 +1,33 @@
+<div class="container_16 clearfix">
+  <div class="grid_8 prefix_4 suffix_4 aligncenter">
+    <div class="reflected-container">
+
+      <div class="box" id="reset-password-box">
+        <h1>Change your password</h1>
+        <p>Please choose a password to use with your account</p>
+        
+        <% form_tag password_path, :method => :put, :id => 'reset-password-form' do %>
+          <%= hidden_field_tag :token, params[:token] %>
+          
+          <% if flash[:alert].present? %>
+            <div class="bubble bubble-south">
+              <div class="bubble-inner">
+                <%=h flash[:alert] %>
+              </div>
+            </div>
+          <% end %>
+          
+          <div class="field">
+            <%= password_field_tag :password, nil %>
+            <kbd>Tricky password</kbd>
+          </div>
+          
+          <div class="submit-row">
+            <%= submit_tag 'Save change' %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

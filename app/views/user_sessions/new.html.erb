@@ -1,12 +1,21 @@
 <div class="container_16 clearfix">
   <div class="grid_8 prefix_4 suffix_4 aligncenter">
-    <div id="logo-box">
+    <div class="reflected-container" id="logo-box">
       
       <div class="box" id="login-box">
-        <% if flash[:error].present? %>
-          <div id="login-error" class="bubble bubble-south">
+        <% if flash[:alert].present? %>
+          <div class="bubble bubble-south">
             <div class="bubble-inner">
-              <%=h flash[:error] %>
+              <%=h flash[:alert] %><br />
+              <%= link_to('Need to reset your password?', forgot_password_path) %>
+            </div>
+          </div>
+        <% end %>
+        
+        <% if flash[:notice].present? %>
+          <div class="bubble bubble-south">
+            <div class="bubble-inner">
+              <%=h flash[:notice] %>
             </div>
           </div>
         <% end %>
