@@ -5,6 +5,8 @@ $(function(){
     Shadowbox.setup();
   }
   
+  $('.save-elsewhere a').tipsy({ gravity: 's' });
+  
   $.validator.addMethod('username', function(value, element){
     return this.optional(element) || /^[a-z][a-z0-9_]+$/.test(value);
   }, 'Should use only lowercase letters, numbers, and underscore please.');

@@ -34,7 +34,7 @@ label { font-weight: bold; }
 .time { background: url(/images/clock.png) no-repeat; padding-left: 16px; padding-right: 16px; }
 
 .save-elsewhere { margin: 20px 0 0 0; }
-.save-elsewhere a { margin: 0 10px 0 0; }
+.save-elsewhere a { margin: 0 10px 0 0; padding: 5px 0; }
 
 .cover-art { position: relative; }
 .cover-art .info-overlay { padding: 10px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; background: #000; opacity: 0; position: absolute; top: 40%; left: 0; width: 100%; text-align: center; transition:all 0.2s ease-in-out; -webkit-transition:all 0.2s ease-in-out; -moz-transition:all 0.2s ease-in-out; }

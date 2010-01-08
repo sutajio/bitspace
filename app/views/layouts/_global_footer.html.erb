@@ -9,16 +9,16 @@
         Bitspace is currently PRIVATE BETA software.
       </div>
       <div class="save-elsewhere">
-        <% link_to("http://del.icio.us/post?url=#{root_url}&title=Bitspace", :target => '_blank') do %>
+        <% link_to("http://del.icio.us/post?url=#{root_url}&title=Bitspace", :target => '_blank', :title => 'Save on del.icio.us') do %>
           <%= image_tag('/images/share/delicious.gif') %>
         <% end %>
-        <% link_to("http://www.facebook.com/share.php?u=#{root_url}&t=Bitspace", :target => '_blank') do %>
+        <% link_to("http://www.facebook.com/share.php?u=#{root_url}&t=Bitspace", :target => '_blank', :title => 'Share on Facebook') do %>
           <%= image_tag('/images/share/facebook.gif') %>
         <% end %>
-        <% link_to("http://digg.com/submit?url=#{root_url}&title=Bitspace&bodytext=&media=news&topic=music", :target => '_blank') do %>
+        <% link_to("http://digg.com/submit?url=#{root_url}&title=Bitspace&bodytext=&media=news&topic=music", :target => '_blank', :title => 'Post at Digg') do %>
           <%= image_tag('/images/share/digg.gif') %>
         <% end %>
-        <% link_to("http://twitter.com/home?status=Bitspace:%20#{root_url}", :target => '_blank') do %>
+        <% link_to("http://twitter.com/home?status=Bitspace:%20#{root_url}", :target => '_blank', :title => 'Tweet on Twitter') do %>
           <%= image_tag('/images/share/twitter.gif') %>
         <% end %>
       </div>
