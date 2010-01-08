@@ -103,6 +103,7 @@
 
 body { background: #151515; color: #fff; }
 #nav { background: url(/images/black/nav-shade.png) repeat-x; }
+#nav-fade { height: 39px; background: url(/images/black/nav-fade.png) no-repeat 50% 0; }
 #user-menu li { color: #999; }
 #user-menu li span { color: #fff; }
 #menu { border-bottom: 1px solid #222; }

@@ -63,28 +63,30 @@
       </div>
     </div>
     <div id="nav">
-      <div class="container_16 clearfix">
-        <div class="grid_16">
-          <div id="nav-playback">
-            <button rel="prev" id="nav-prev" disabled="disabled">← Prev</button>
-            <button rel="play-pause" id="nav-play-pause" disabled="disabled">Play/Pause</button>
-            <button rel="next" id="nav-next" disabled="disabled">Next →</button>
-          </div>
-          <div id="nav-mute">
-            <%= check_box_tag :mute, true %>
-            <%= label_tag :mute, 'Mute', :title => 'Mute', :class => 'tooltipped' %>
-          </div>
-          <div id="nav-repeat">
-            <%= check_box_tag :repeat, true %>
-            <%= label_tag :repeat, 'Repeat', :title => 'Repeat', :class => 'tooltipped' %>
-          </div>
-          <div id="nav-shuffle">
-            <%= check_box_tag :shuffle, true %>
-            <%= label_tag :shuffle, 'Shuffle', :title => 'Shuffle', :class => 'tooltipped' %>
-          </div>
-          <div id="nav-progress"></div>
-          <div id="nav-upload">
-            <%= render :partial => 'uploads/form' %>
+      <div id="nav-fade">
+        <div class="container_16 clearfix">
+          <div class="grid_16">
+            <div id="nav-playback">
+              <button rel="prev" id="nav-prev" disabled="disabled">← Prev</button>
+              <button rel="play-pause" id="nav-play-pause" disabled="disabled">Play/Pause</button>
+              <button rel="next" id="nav-next" disabled="disabled">Next →</button>
+            </div>
+            <div id="nav-mute">
+              <%= check_box_tag :mute, true %>
+              <%= label_tag :mute, 'Mute', :title => 'Mute', :class => 'tooltipped' %>
+            </div>
+            <div id="nav-repeat">
+              <%= check_box_tag :repeat, true %>
+              <%= label_tag :repeat, 'Repeat', :title => 'Repeat', :class => 'tooltipped' %>
+            </div>
+            <div id="nav-shuffle">
+              <%= check_box_tag :shuffle, true %>
+              <%= label_tag :shuffle, 'Shuffle', :title => 'Shuffle', :class => 'tooltipped' %>
+            </div>
+            <div id="nav-progress"></div>
+            <div id="nav-upload">
+              <%= render :partial => 'uploads/form' %>
+            </div>
           </div>
         </div>
       </div>
