@@ -14,24 +14,6 @@ class Artist < ActiveRecord::Base
   
   searchable_on :name
   
-  def to_param(double_encode_if_nessecary = true)
-    name.include?('+') && double_encode_if_nessecary ?
-      CGI.escape(CGI.escape(name).gsub('.','%2E')) :
-      CGI.escape(name).gsub('.','%2E')
-  end
-  
-  class <<self
-    def find(*args)
-      if args.first.is_a?(String) && args.first.to_i.to_s != args.first
-        with_scope(:find => args.size == 2 ? args.last : {}) do
-          by_name(CGI.unescape(args.first)).first or raise ActiveRecord::RecordNotFound
-        end
-      else
-        super
-      end
-    end
-  end
-  
   def update_meta_data
     sleep(2.seconds.to_i)
     lastfm_artist = Scrobbler::Artist.new(name)
