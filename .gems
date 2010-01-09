@@ -7,7 +7,7 @@ right_aws
 authlogic
 discogs
 scrobbler
-facebooker
+facebooker --version 1.0.54
 activemerchant
 MP4Info
 ruby-ogginfo
