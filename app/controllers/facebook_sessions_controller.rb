@@ -8,7 +8,6 @@ class FacebookSessionsController < ApplicationController
   
   def create
     @user = User.find_by_facebook_uid(facebook_session_user_uid) or raise ActiveRecord::RecordNotFound
-    @user.valid? or raise ActiveRecord::RecordNotFound
     if @user_session = UserSession.create(@user)
       redirect_to player_path(:trailing_slash => true)
     else
