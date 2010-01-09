@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091229172810) do
+ActiveRecord::Schema.define(:version => 20100108192501) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -32,6 +32,28 @@ ActiveRecord::Schema.define(:version => 20091229172810) do
     t.string   "slug"
     t.integer  "year"
     t.integer  "month"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "client_versions", :force => true do |t|
+    t.integer  "client_id"
+    t.string   "version"
+    t.text     "release_notes"
+    t.integer  "downloads"
+    t.string   "signature"
+    t.string   "download_file_name"
+    t.string   "download_content_type"
+    t.integer  "download_file_size"
+    t.datetime "download_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "clients", :force => true do |t|
+    t.string   "name"
+    t.string   "slug"
+    t.text     "info"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

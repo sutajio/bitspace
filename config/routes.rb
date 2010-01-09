@@ -53,6 +53,10 @@ ActionController::Routing::Routes.draw do |map|
   map.admin_blog 'blog/admin', :controller => 'blog_posts', :action => 'admin'
   map.resources :blog_posts
   
+  # Clients
+  map.resources :clients, :member => { :changelog => :get, :release_notes => :get, :download => :get }
+  map.resources :client_versions, :member => { :download => :get }
+  
   # Root
   map.root :controller => 'pages', :action => 'index'
 

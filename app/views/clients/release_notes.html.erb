@@ -1,0 +1,16 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title><%= @client.name %> Release Notes</title>
+  </head>
+  <body>
+    <% @client.client_versions.each do |client_version| %>
+    <div class="version">
+      <h3>Version <%= client_version.version %></h3>
+      <p><%= markdown(client_version.release_notes) %></p>
+    </div>
+    <% end %>
+  </body>
+</html>

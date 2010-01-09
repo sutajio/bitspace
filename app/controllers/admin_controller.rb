@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   layout 'site'
   skip_before_filter :require_user
-  before_filter :authenticate
+  before_filter :require_admin
 
   def status
   end
@@ -26,13 +26,5 @@ class AdminController < ApplicationController
   def users
     @users = User.paginate(:page => params[:page], :order => 'created_at DESC')
   end
-
-  protected
-
-    def authenticate
-      authenticate_or_request_with_http_basic do |username, password|
-        username == 'admin' && password == ENV['ADMIN_PASSWORD']
-      end
-    end
 
 end
