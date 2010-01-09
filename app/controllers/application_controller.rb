@@ -22,6 +22,12 @@ class ApplicationController < ActionController::Base
     current_user_session.destroy if current_user_session
     redirect_to root_path
   end
+  rescue_from Facebooker::Session::IncorrectSignature do |exception|
+    clear_facebook_session_information
+    clear_fb_cookies!
+    current_user_session.destroy if current_user_session
+    redirect_to root_path
+  end
   
   before_filter :require_chrome_frame_if_ie
   
