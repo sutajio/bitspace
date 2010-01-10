@@ -6,7 +6,7 @@ class ReleasesController < ApplicationController
   def index
     @releases = current_user.releases.search_for(params[:q]).paginate(
         :page => params[:page],
-        :per_page => 8,
+        :per_page => 16,
         :include => [:artist],
         :order => 'created_at DESC',
         :conditions => { :archived => params[:q].present? ? [true,false] : false })

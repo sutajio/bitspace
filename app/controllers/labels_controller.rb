@@ -3,7 +3,7 @@ class LabelsController < ApplicationController
   def index
     @labels = current_user.labels.search_for(params[:q]).paginate(
         :page => params[:page],
-        :per_page => 10)
+        :per_page => 20)
     if request.xhr? && @labels.empty?
       render :nothing => true
     end
