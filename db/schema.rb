@@ -71,6 +71,12 @@ ActiveRecord::Schema.define(:version => 20100108192501) do
     t.datetime "updated_at"
   end
 
+  create_table "invitation_requests", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "invitations", :force => true do |t|
     t.integer  "user_id"
     t.string   "email"

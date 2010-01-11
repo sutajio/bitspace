@@ -2,7 +2,6 @@ class InvitationsController < ApplicationController
   skip_before_filter :require_user
   skip_before_filter :require_chrome_frame_if_ie
   before_filter :require_no_user
-  before_filter :require_connected_user, :only => [:update]
   
   def show
     if @invitation = Invitation.find_by_token(params[:id])

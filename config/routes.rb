@@ -22,6 +22,7 @@ ActionController::Routing::Routes.draw do |map|
   # Users and invitations
   map.resources :users, :collection => { :unique => :get }
   map.resources :invitations
+  map.resources :invitation_requests
   map.resources :user_sessions
   map.resources :facebook_sessions
   map.facebook_logout 'fb-logout', :controller => 'facebook_sessions', :action => 'destroy', :requirements => { :method => 'delete' }

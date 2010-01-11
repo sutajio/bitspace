@@ -5,12 +5,18 @@
       <p><img src="/images/billboard.png" width="640" height="440" alt="1 GB free!" /></p>
       <% end %>
     </div>
-    <div class="grid_5" style="padding-top: 100px; line-height: normal;">
+    <div class="grid_5" style="padding-top: 80px; line-height: normal;">
       <h1>No One Puts Music<br /> In A Corner.</h1>
       <h3>Bitspace is <em>a better way to store and listen to music</em>.
       Simply upload your collection and enjoy 
       it everyday and from anywhere.</h3>
-      <h2><%= link_to('Take a look inside ➔', tour_path) %></h2>
+      <hr />
+      <% form_for InvitationRequest.new do |f| %>
+        <h3>Subscribe for beta invite...</h3>
+        <%= f.text_field :email, :class => 'required email', :hint => 'Enter your email address' %>
+        <%= f.submit 'Subscribe' %>
+        <%=h flash[:notice] %>
+      <% end %>
     </div>
   </div>
 </div>

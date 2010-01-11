@@ -5,6 +5,9 @@ $(function(){
     Shadowbox.setup();
   }
   
+  $('#invitation_request_email').inputHint({ hintAttr: 'hint' });
+  $('#new_invitation_request').validate();
+  
   $('.save-elsewhere a').tipsy({ gravity: 's' });
   
   $.validator.addMethod('username', function(value, element){
