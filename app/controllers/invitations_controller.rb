@@ -21,7 +21,7 @@ class InvitationsController < ApplicationController
       @user.save!
       @invitation.destroy
       UserSession.create(@user)
-      redirect_to root_path
+      redirect_to player_path(:trailing_slash => true)
     else
       raise ActiveRecord::RecordNotFound
     end
