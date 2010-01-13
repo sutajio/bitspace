@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
     if self.max_storage
       self.max_storage - self.storage_used
     else
-      Infinity
+      1.0/0 # Infinity
     end
   end
   

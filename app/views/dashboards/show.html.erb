@@ -85,7 +85,7 @@
         <div><%= pluralize(current_user.tracks.size, 'tracks') %></div>
         <div>
           <%= number_to_human_size(current_user.tracks.sum(:size)) %> /
-          <%= number_to_human_size(current_user.max_storage) %>
+          <%= number_to_human_size(current_user.max_storage) || 'Unlimited' %>
         </div>
         <div>
           <span class="time"><%= seconds_to_time(current_user.tracks.sum(:length)) %></span>

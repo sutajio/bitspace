@@ -6,6 +6,7 @@ class InvitationsController < ApplicationController
   def show
     if @invitation = Invitation.find_by_token(params[:id])
       @user = User.new(:email => @invitation.email)
+      @user.subscription_plan = @invitation.subscription_plan if @invitation.subscription_plan
       @user.subscription_plan = User::SUBSCRIPTION_PLANS[:beta][:name] if ENV['PRIVATE_BETA']
       @user.setup_subscription_plan_details
     else
@@ -16,7 +17,12 @@ class InvitationsController < ApplicationController
   def update
     if @invitation = Invitation.find_by_token(params[:id])
       @user = User.new(params[:user])
-      @user.subscription_plan = User::SUBSCRIPTION_PLANS[:beta][:name] if ENV['PRIVATE_BETA']
+      if @invitation.first_name.present? || @invitation.last_name.present?
+        @user.name = [@invitation.first_name, @invitation.last_name].compact.join(' ')
+      end
+      @user.subscription_id = @invitation.subscription_id
+      @user.subscription_plan = @invitation.subscription_plan if @invitation.subscription_plan
+      @user.subscription_plan ||= User::SUBSCRIPTION_PLANS[:beta][:name] if ENV['PRIVATE_BETA']
       @user.setup_subscription_plan_details
       @user.save!
       @invitation.destroy

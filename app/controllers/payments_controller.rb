@@ -11,13 +11,12 @@ class PaymentsController < ApplicationController
     if notify.acknowledge && params[:receiver_email] == 'paypal@bitspace.se'
       case notify.type
       when 'subscr_signup':
-        user = User.find_or_create_by_email(
+        Invitation.create(
           :email => params[:payer_email],
           :subscription_id => params[:subscr_id],
           :subscription_plan => params[:item_name],
-          :name => [params[:first_name], params[:last_name]].join(' '))
-        user.save!
-        Invitation.create(:email => user.email)
+          :first_name => params[:first_name],
+          :last_name => params[:last_name])
       when 'subscr_payment':
         # Send reciept?
       when 'subscr_failed':
