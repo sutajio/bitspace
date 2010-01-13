@@ -5,7 +5,7 @@
   <%= simple_format(post.body) %>
 </div>
 <p class="small grey">
-  <%= link_to('Comment', blog_archive_path(post.year, post.month, post.slug, :anchor => 'comments')) %> &bull;
+  <%= link_to('Comments', blog_archive_path(post.year, post.month, post.slug, :anchor => 'disqus_thread')) %> &bull;
   <%= link_to('Share', "http://www.facebook.com/sharer.php?u=#{CGI.escape(blog_archive_url(post.year, post.month, post.slug))}&t=#{CGI.escape(post.title)}", :rel => 'shadowbox;width=550;height=350') %>
 </p>
 <hr />

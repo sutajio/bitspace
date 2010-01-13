@@ -3,7 +3,12 @@
     <%= render :partial => 'post', :object => @post %>
     <div class="comments" id="comments">
       <h4>Comments</h4>
-      <fb:comments xid="<%= CGI.escape(request.request_uri) %>" canpost="true" candelete="false" width="400px"></fb:comments>
+      <% if Rails.env.development? %>
+      <script type="text/javascript">
+      var disqus_developer = true;
+      </script>
+      <% end %>
+      <div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/bitspace/embed.js"></script><noscript><a href="http://disqus.com/forums/bitspace/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
     </div>
   </div>
   <div class="grid_5 suffix_1">
