@@ -17,7 +17,7 @@
   </div>
   <% release.tracks.sort_by{|t| t.set_nr.to_i }.group_by(&:set_nr).each do |set_nr, tracks| %>
   <ol class="tracks">
-    <%= render :partial => 'tracks/track', :collection => tracks.sort_by(&:track_nr) %>
+    <%= render :partial => 'tracks/track', :collection => tracks.sort_by {|t| t.track_nr } %>
   </ol>
   <% end %>
   <% if params[:controller] == 'releases' && params[:action] == 'show' %>
