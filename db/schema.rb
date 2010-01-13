@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100108192501) do
+ActiveRecord::Schema.define(:version => 20100113153111) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -84,6 +84,10 @@ ActiveRecord::Schema.define(:version => 20100108192501) do
     t.datetime "deleted_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "subscription_id"
+    t.string   "subscription_plan"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "invitations", ["token"], :name => "index_invitations_on_token"
