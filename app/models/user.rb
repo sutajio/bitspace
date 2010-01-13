@@ -72,4 +72,8 @@ class User < ActiveRecord::Base
   
   handle_asynchronously :forgot_password
   
+  def has_credentials?
+    login.present? && crypted_password.present?
+  end
+  
 end

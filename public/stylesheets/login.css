@@ -28,3 +28,6 @@ label.error { display: block; color: #f66; font-size: 12px; margin: 0; }
 #login-box .bubble { bottom: 240px; }
 #login-box .field input { width: 230px; }
 #forgot-password-box .bubble { bottom: 270px; left: 100px; }
+#account-credentials-box { margin: 20px 0; }
+#account-credentials-box p.feedback { background: #222; padding: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+#account-credentials-box p.feedback a { text-shadow: #111 1px 1px 0px; }

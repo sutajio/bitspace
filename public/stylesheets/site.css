@@ -8,6 +8,9 @@ body { background: #eee; font: 11px/18px "Lucida Sans", "Lucida Grande", "Lucida
 #menu a:hover { color: #999; }
 #menu .first a.current { background: none; }
 #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
+#menu a.button { background: #f9f9f9; border: 1px solid #eee; padding: 5px 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f9f9f9)); }
+#menu a.button:hover { border-color: #ccc; }
+#menu a.button:active { background: #fff; background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#fff)); }
 #company-footer { background: #111; color: #ccc; text-shadow: #000 1px 1px 1px !important; }
 #company-footer a { color: #fff; text-shadow: #000 1px 1px 1px !important; }
 #company-footer h2, #footer h2 a { text-shadow: #000 1px 1px 1px !important; }
