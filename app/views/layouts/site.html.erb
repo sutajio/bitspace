@@ -41,16 +41,14 @@
           <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('About', about_path, :class => params[:action] == 'about' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:controller] == 'blog_posts' ? 'current' : nil) %></li>
-          <li class="grid_4 prefix_2 last">
+          <li class="grid_6 last">
             <% if current_user %>
               <%= link_to('Go to player →', player_path(:trailing_slash => true), :class => 'button') %>
             <% else %>
               <%= link_to('Sign in', login_path, :class => 'button') %> or
               <%= facebook_login_button('Connect with Facebook') %>
-              <% if flash[:error] %>
-              <div class="error"><%=h flash[:error] %></div>
-              <% else %>
-              <div class="small grey">Bitspace is currently invitation only.</div>
+              <% if flash[:alert] %>
+              <div class="error"><%=h flash[:alert] %></div>
               <% end %>
             <% end %>
           </li>

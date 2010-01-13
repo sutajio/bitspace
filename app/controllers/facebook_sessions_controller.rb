@@ -34,7 +34,7 @@ class FacebookSessionsController < ApplicationController
       redirect_to root_path
     end
   rescue ActiveRecord::RecordNotFound => e
-    flash[:error] = 'Sorry, Bitspace is currently invitation only.'
+    flash[:alert] = 'Sorry, Bitspace is currently invitation only.'
     redirect_to root_path
   end
   
