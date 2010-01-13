@@ -13,22 +13,6 @@ class ApplicationController < ActionController::Base
   before_filter :require_user
   helper_method :current_user_session, :current_user
   
-  include Facebooker::Rails::Controller
-  before_filter :set_facebook_session
-  helper_method :facebook_session
-  rescue_from Facebooker::Session::SessionExpired do |exception|
-    clear_facebook_session_information
-    clear_fb_cookies!
-    current_user_session.destroy if current_user_session
-    redirect_to root_path
-  end
-  rescue_from Facebooker::Session::IncorrectSignature do |exception|
-    clear_facebook_session_information
-    clear_fb_cookies!
-    current_user_session.destroy if current_user_session
-    redirect_to root_path
-  end
-  
   before_filter :require_chrome_frame_if_ie
   
   protected
@@ -81,18 +65,6 @@ class ApplicationController < ActionController::Base
           redirect_to login_path
         end
         return false
-      end
-    end
-    
-    def require_connected_user
-      if Rails.env.production?
-        unless facebook_session
-          if request.xhr?
-            render :text => "You must connect to Facebook to access that page.", :status => :forbidden
-          else
-            redirect_to login_path
-          end
-        end
       end
     end
     

@@ -31,11 +31,7 @@
             <%= link_to('Account', account_path, :target => '_self', :title => 'Change your account settings here', :class => 'tooltipped') %>
           </li>
           <li class="grid_1 usernav">
-            <% if facebook_session %>
-              <%= link_to("Sign out", facebook_logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
-            <% else %>
-              <%= link_to("Sign out", logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
-            <% end %>
+            <%= link_to("Sign out", facebook_logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
           </li>
           <li class="grid_2 last">
             <% form_tag(search_path, :method => 'get') do %>

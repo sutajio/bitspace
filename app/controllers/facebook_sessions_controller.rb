@@ -1,5 +1,24 @@
 class FacebookSessionsController < ApplicationController
+  include Facebooker::Rails::Controller
+  
+  helper_method :facebook_session
+  
+  rescue_from Facebooker::Session::SessionExpired do |exception|
+    clear_facebook_session_information
+    clear_fb_cookies!
+    current_user_session.destroy if current_user_session
+    redirect_to root_path
+  end
+  
+  rescue_from Facebooker::Session::IncorrectSignature do |exception|
+    clear_facebook_session_information
+    clear_fb_cookies!
+    current_user_session.destroy if current_user_session
+    redirect_to root_path
+  end
+  
   skip_before_filter :require_user
+  before_filter :set_facebook_session
   before_filter :require_no_user, :only => [:new, :create]
   before_filter :require_connected_user, :only => [:create]
   
@@ -18,7 +37,7 @@ class FacebookSessionsController < ApplicationController
     flash[:error] = 'Sorry, Bitspace is currently invitation only.'
     redirect_to root_path
   end
-
+  
   def destroy
     clear_facebook_session_information
     clear_fb_cookies!
@@ -30,6 +49,16 @@ class FacebookSessionsController < ApplicationController
   
     def facebook_session_user_uid
       facebook_session.user.uid
+    end
+    
+    def require_connected_user
+      unless facebook_session
+        if request.xhr?
+          render :text => "You must connect to Facebook to access that page.", :status => :forbidden
+        else
+          redirect_to login_path
+        end
+      end
     end
 
 end
