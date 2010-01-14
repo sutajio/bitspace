@@ -117,6 +117,7 @@ body { background: #151515; color: #fff; }
 #upload-spinner { background: url(/images/black/upload-spinner.gif) no-repeat 50% 50%; }
 hr { border-color: #222; }
 .grey { color: #555; }
+.grey a { color: #555; }
 .small { font-size: 11px; }
 .progress,
 .ui-slider { background-color: #2a2a2a; border: 1px solid #191919; }

@@ -27,12 +27,9 @@
     <%= link_to('Archive', archive_artist_release_path(release.artist, release), :title => 'If archived, a release will be hidden and will only show up in search results.', :rel => 'archive', :class => release.archived? ? 'archived tooltipped' : 'tooltipped') %>
     <%= link_to('Delete', artist_release_path(release.artist, release), :title => 'The release will be permanently deleted from your library. This can not be undone!', :rel => 'delete', :class => 'tooltipped') %>
   </div>
-  <div class="meta">
-    <% if release.release_date.present? %>
-    <p class="release-date small grey">
-      <label>Released:</label> <%= release.release_date %>
-    </p>
-    <% end %>
+  <div class="meta small grey">
+    <% if release.release_date.present? %><label>Released:</label> <%= link_to(release.release_date, year_path(release.release_date.year), :target => '_self') %><br /><% end %>
+    <% if release.label.present? %><label>Label:</label> <%= link_to(h(release.label.name), label_path(release.label), :target => '_self') %><% end %>
   </div>
   <% end %>
 <% end %>
