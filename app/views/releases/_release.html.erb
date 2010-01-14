@@ -23,9 +23,9 @@
   <% if params[:controller] == 'releases' && params[:action] == 'show' %>
   <div class="actions">
     <!-- <%= link_to(image_tag('/images/share.png'), artist_release_url(release.artist, release), :title => 'Share', :target => '_blank') %> -->
-    <%= link_to(image_tag('/images/edit.png'), edit_artist_release_path(release.artist, release), :target => '_self', :title => 'Edit', :class => 'tooltipped') %>
-    <%= link_to(image_tag('/images/smiley_frown.png'), archive_artist_release_path(release.artist, release), :title => 'Archive', :rel => 'archive', :class => release.archived? ? 'archived tooltipped' : 'tooltipped') %>
-    <%= link_to(image_tag('/images/delete.png'), artist_release_path(release.artist, release), :title => 'Delete', :rel => 'delete', :class => 'tooltipped') %>
+    <%= link_to('Upload artwork', edit_artist_release_path(release.artist, release), :target => '_self') %>
+    <%= link_to('Archive', archive_artist_release_path(release.artist, release), :title => 'If archived, a release will be hidden and will only show up in search results.', :rel => 'archive', :class => release.archived? ? 'archived tooltipped' : 'tooltipped') %>
+    <%= link_to('Delete', artist_release_path(release.artist, release), :title => 'The release will be permanently deleted from your library. This can not be undone!', :rel => 'delete', :class => 'tooltipped') %>
   </div>
   <div class="meta">
     <% if release.release_date.present? %>
