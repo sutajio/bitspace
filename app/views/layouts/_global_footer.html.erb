@@ -6,7 +6,7 @@
         Become a fan on <a href="http://www.facebook.com/pages/Bitspace/172171790806">Facebook</a>
       </div>
       <div class="grey">
-        Bitspace is currently PRIVATE BETA software.
+        Bitspace is currently <%= 'PRIVATE' if ENV['PRIVATE_BETA'] %> BETA software.
       </div>
       <div class="save-elsewhere">
         <% link_to("http://del.icio.us/post?url=#{root_url}&title=Bitspace", :target => '_blank', :title => 'Save on del.icio.us') do %>
@@ -29,7 +29,7 @@
   <div class="container_16 clearfix">
     <div class="grid_16 aligncenter">
       <p><%= image_tag('/images/logo_200x200_inverted.png', :size => '150x150') %></p>
-      <h2>Bitspace<span>&trade;</span> <span>is a product from <a href="http://www.koneko-collective.com/">The Koneko Collective</a></span></h2>
+      <h2>Bitspace<span>&trade;</span> <span>is a product from the <a href="http://www.koneko-collective.com/">Koneko Collective</a></span></h2>
       <div>
         <%= link_to('About', about_path) %> /
         <%= mail_to('hello@bitspace.se', 'Contact', :encode => 'javascript') %> /
@@ -38,7 +38,7 @@
         <%= link_to('Signup and Pricing', price_path) %>
       </div>
       <div class="grey">
-        All text and design is copyright &copy;2009 Koneko Collective, Ltd. All rights reserved.
+        All text and design is copyright &copy;<%= Time.now.year %> Koneko Collective. All rights reserved.
       </div>
       <div class="grey">
         <em>We like you.</em>

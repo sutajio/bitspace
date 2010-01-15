@@ -1,83 +1,13 @@
 <div class="container_12 clearfix">
-  <div class="grid_4">
-    <h3>Please help me understand! What is Bitspace?</h3>
-    <p>Bitspace is a convenient and inexpensive way to store and listen to
-       your music collection.</p>
-       
-    <h3>Tell me more...</h3>
-    <p>You know that harddrive you have in your closet &ndash; filled with
-       music you never listen to &ndash; simply because you can't be bothered
-       to to take it out and look through it? Finding and experiencing music
-       should be instant.</p>
-    <p>Starting to get frustrated with an overloaded iTunes library or an
-       empty Spotify playlist staring back at you? Yeah, we too. That's why
-       we created Bitspace. We believe that music should be easy, beautiful
-       and always available.</p>
-    <p>That feeling of looking through a box of vinyls in a record shop, that
-       special smell and the huge artwork. Or the feeling of downloading that
-       obscure bootleg you have been looking for for months. That's what we
-       are aiming at recreating.</p>
-    
-    <h3>Does it Scrobble&trade;?</h3>
-    <p>Yes, we are fully integrated with
-       <a href="http://last.fm/" class="external">Last.fm</a>.</p>
-    
-    <h3>Can I share my music with my friends?</h3>
-    <p>Yes, you can share your music using many integrated sharing services
-       (a feature that will be launched sometime in the coming weeks).
-       We are for example working on an integration with the <a
-       href="http://developer.spotify.com/en/metadata-api/overview/" class="external">Spotify API</a>.</p>
-
-    <h3>How can I get Bitspace?</h3>
-    <p>Either you get invited and can start out with a free account, or you
-       <%= link_to('sign up', price_path) %> for a <strong>Basic</strong>, <strong>Standard</strong> or
-       <strong>Premium</strong> account. All three are free for the first 30 days
-       and you can of course choose to end your subscription at any time.</p>
-    
-    <h3>How do I use Bitspace?</h3>
-    <p>You login and upload your music. Then you listen to it. It's that simple.</h3>
-    
-    <h3>Do I have to listen to or look at ads?</h3>
-    <p>No, we will never ever show banners or make you listen to ads between
-       tracks on Bitspace. Not even on the free plan.</p>
-    
-    <h3>Why should I use Bitspace instead of iTunes or Spotify, for example?</h3>
-    <p>iTunes Music Store is a great way to buy music and the iTunes music player is
-    a great music player and a great way to organize your music collection.
-    But what happens when your harddrive crashes, or when you want to listen
-    to your own music at your friends place, at work or while traveling?
-    Bitspace solves all of that.</p>
-    <p>Spotify is a great service for sharing music. It allows you to easily
-    send a link to your friends that they can listen to for free. But
-    Spotify is not a great way to organize your music collection. A label
-    or artist can suddenly decide to withdraw all its music, and a lot of
-    music is not available on Spotify at all to begin with. Bitspace on the
-    other hand does not limit your taste in music.</p>
+  <div class="grid_8">
+    <h2>FAQ</h2>
+    <hr />
   </div>
   <div class="grid_4">
-    <h3>Can I use Bitspace just like I use iTunes or Spotify?</h3>
-    <p>Yes. Right now the only thing you need is a Webkit based browser like
-       <a href="http://www.apple.com/safari/download/" class="external">Apple Safari</a>
-       and <a href="http://www.google.com/chrome" class="external">Google Chrome</a>
-       (or <a href="http://www.google.com/chromeframe" class="external">Google Chrome Frame</a>
-       in IE). The listening experience is exactly the same.</p>
-    
-    <h3>Do I have to use Bitspace in my browser?</h3>
-    <p>We are considering releasing a desktop client, but haven't made up our minds yet.
-       Meanwhile, if you want a more desktop like experience, we recommend
-       that you try out <a href="http://fluidapp.com/" class="external">
-       Fluid</a> (on OS X).</p>
-    
-    <h3>Why not Firefox?</h3>
-    <p>Firefox does not support playing MP3 files using the HTML5 audio-tag,
-       only Ogg Vorbis files. We are working on a fix.</p>
-    
-    <h3>Is there an iPhone app?</h3>
-    <p>We're working on it. We believe we have some great ideas about how the
-       mobile music experience can be improved overall and some new and
-       innovative features that we hope you will enjoy using. It's going to be
-       awesome. That's all we can say.</p>
-    
+    <h2>Help / Support</h2>
+    <hr />
+  </div>
+  <div class="grid_4">
     <h3>Is my precious music safe on Bitspace?</h3>
     <p>We take very good care of your music here at Bitspace. We're like the
        nice friend that you pay to feed your Tamagotchi while you'r away doing
@@ -94,6 +24,39 @@
       Content Delivery Network (CDN) with edge locations in the US, EU and
       Asia to stream the music to you. That means your songs load just as fast
       from Tokyo or Hong Kong as from Stockholm or New York.</p>
+      
+    <h3>Does it Scrobble&trade;?</h3>
+    <p>Yes, we are fully integrated with
+       <a href="http://last.fm/" class="external">Last.fm</a>.</p>
+    
+    <h3>How can I get Bitspace?</h3>
+    <p>You <%= link_to('sign up', price_path) %> for a <strong>Basic</strong>, <strong>Standard</strong> or
+       <strong>Premium</strong> account. All three are free for the first 30 days
+       and you can of course choose to end your subscription at any time.</p>
+    
+    <h3>Do I have to listen to or look at ads?</h3>
+    <p>No, we will never ever show banners or make you listen to ads between
+       tracks on Bitspace. Not even on the free plan.</p>
+
+  </div>
+  <div class="grid_4">
+    <h3>What are the system requirements?</h3>
+    <p>Right now the only thing you need is a Webkit based browser like
+       <a href="http://www.apple.com/safari/download/" class="external">Apple Safari</a>
+       and <a href="http://www.google.com/chrome" class="external">Google Chrome</a>
+       (or <a href="http://www.google.com/chromeframe" class="external">Google Chrome Frame</a>
+       in IE).</p>
+    
+   <h3>Why not Firefox?</h3>
+   <p>Firefox does not support playing MP3 files using the HTML5 audio-tag,
+      only Ogg Vorbis files. We are working on a fix.</p>
+    
+    <h3>Do I have to use Bitspace in my browser?</h3>
+    <p>No, we currently have an official desktop client for OS X that can be 
+      downloaded from the <%= link_to('download page', '/downloads') %>.</p>
+    
+    <h3>What about mobile devices?</h3>
+    <p>We're working on it.</p>
     
     <h3>How does the 30-day free trial work?</h3>
     <p>If you cancel a paying plan within 30 days of signing up you won’t be
