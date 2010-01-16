@@ -64,20 +64,20 @@ class Track < ActiveRecord::Base
   before_save :upload_track
   
   def update_meta_data
-    sleep(2.seconds.to_i)
-    track = Scrobbler::Track.new(artist ? artist.name : release.artist.name, title)
-    self.mbid = track.mbid if track.mbid.present?
-    self.save!
-  rescue OpenURI::HTTPError => e
-    if e.io.status[0] == '404'
-      return true
-    else
-      raise
-    end
+    identify_mbid unless mbid
   end
   
   after_create :update_meta_data unless Rails.env.test?
   handle_asynchronously :update_meta_data
+  
+  def identify_mbid
+    with_lastfm do |info|
+      if info['mbid'].present?
+        self.mbid = info['mbid']
+        self.save!
+      end
+    end
+  end
   
   def toggle_love!
     loved? ? unlove! : love!
@@ -96,5 +96,15 @@ class Track < ActiveRecord::Base
   def loved?
     playlist_items.present?
   end
+  
+  protected
+  
+    def with_lastfm(&block)
+      Scrobbler2::Base.api_key = ENV['LASTFM_API_KEY']
+      lastfm_track = Scrobbler2::Track.new(artist ? artist.name : release.artist.name, title)
+      if lastfm_track.info
+        yield(lastfm_track.info)
+      end
+    end
   
 end

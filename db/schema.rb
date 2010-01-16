@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100113153111) do
+ActiveRecord::Schema.define(:version => 20100116222349) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -18,6 +18,10 @@ ActiveRecord::Schema.define(:version => 20100113153111) do
     t.datetime "updated_at"
     t.integer  "releases_count"
     t.integer  "user_id"
+    t.string   "artwork_file_name"
+    t.string   "artwork_content_type"
+    t.integer  "artwork_file_size"
+    t.datetime "artwork_updated_at"
   end
 
   add_index "artists", ["mbid"], :name => "index_artists_on_mbid"
@@ -98,6 +102,10 @@ ActiveRecord::Schema.define(:version => 20100113153111) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "user_id"
+    t.string   "artwork_file_name"
+    t.string   "artwork_content_type"
+    t.integer  "artwork_file_size"
+    t.datetime "artwork_updated_at"
   end
 
   add_index "labels", ["mbid"], :name => "index_labels_on_mbid"

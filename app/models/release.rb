@@ -42,30 +42,62 @@ class Release < ActiveRecord::Base
     }
   
   def update_meta_data
-    require 'open-uri'
-    sleep(2.seconds.to_i)
-    album = Scrobbler::Album.new(artist.name, title, :include_info => true)
-    unless self.artwork.file?
-      if album.image_large.present? && !album.image_large.include?('default')
-        self.artwork = open(album.image_large)
-      end
-    end
-    self.mbid = album.mbid if album.mbid.present?
-    if album.release_date.present? && !album.release_date.today?
-      self.year ||= album.release_date.year
-      self.release_date ||= album.release_date
-    end
-    self.save!
-  rescue OpenURI::HTTPError => e
-    if e.io.status[0] == '404'
-      return true
-    else
-      raise
-    end
+    identify_mbid unless mbid
+    update_release_date unless release_date
+    update_label unless label
+    fetch_artwork unless artwork.file?
   end
   
   after_create :update_meta_data unless Rails.env.test?
   handle_asynchronously :update_meta_data
+  
+  def identify_mbid
+    with_lastfm do |info|
+      if info['mbid'].present?
+        self.mbid = info['mbid']
+        self.save!
+      end
+    end
+  end
+  
+  def update_release_date
+    with_lastfm do |info|
+      now = Time.now
+      date = Time.parse(info['releasedate'].strip, now)
+      if date != now
+        self.release_date = date
+        self.year = date.year
+        self.save!
+      end
+    end
+  end
+  
+  def update_label
+    if mbid
+      sleep(2)
+      q = MusicBrainz::Webservice::Query.new
+      release = q.get_release_by_id(mbid, :release_events => true, :labels => true)
+      if release && release.release_events.present?
+        label = release.release_events[0].label
+        if label
+          transaction do
+            self.label = Label.find_or_create_by_name_and_user_id(
+                                :name => label.name, :user_id => user.id)
+            self.save!
+          end
+        end
+      end
+    end
+  end
+  
+  def fetch_artwork
+    with_lastfm do |info|
+      if info['image'].present? && info['image'].last['#text'].present?
+        self.artwork = open(info['image'].last['#text']) rescue artwork
+        self.save!
+      end
+    end
+  end
   
   def toggle_archive!
     archived? ? unarchive! : archive!
@@ -78,5 +110,15 @@ class Release < ActiveRecord::Base
   def unarchive!
     update_attribute(:archived, false)
   end
+  
+  protected
+  
+    def with_lastfm(&block)
+      Scrobbler2::Base.api_key = ENV['LASTFM_API_KEY']
+      lastfm_album = Scrobbler2::Album.new(artist.name, title)
+      if lastfm_album.info
+        yield(lastfm_album.info)
+      end
+    end
   
 end

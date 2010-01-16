@@ -1,6 +1,10 @@
 <% content_tag_for(:div, artist, :class => 'grid_3') do %>
   <% link_to(artist, :target => '_self') do %>
-    <%= image_tag((artist.releases.first_with_artwork || Release.new).artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+    <% if artist.artwork.file? %>
+      <%= image_tag(artist.artwork.url(:small, false), :size => '125x125', :alt => 'Artwork') %>
+    <% else %>
+      <%= image_tag((artist.releases.first_with_artwork || Release.new).artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+    <% end %>
   <% end %>
   <%= link_to(h(artist.name), artist, :class => 'name', :target => '_self') %>
   <span class="meta">

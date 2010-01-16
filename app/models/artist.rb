@@ -14,35 +14,59 @@ class Artist < ActiveRecord::Base
   
   searchable_on :name
   
+  has_attached_file :artwork,
+    :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
+    :styles => { :small => ["125x125#", :png] },
+    :whiny => false,
+    :storage => :s3,
+    :s3_credentials => {
+      :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY']
+    },
+    :default_url => '/images/cover-art.png',
+    :url => ":s3_alias_url",
+    :s3_host_alias => ENV['CDN_HOST'],
+    :bucket => ENV['S3_BUCKET'],
+    :s3_headers => {
+      'cache-control' => "max-age=#{10.years.to_i}",
+      'expires' => 10.years.from_now.utc.httpdate
+    }
+  
   def update_meta_data
-    sleep(2.seconds.to_i)
-    lastfm_artist = Scrobbler::Artist.new(name)
-    self.mbid = lastfm_artist.mbid if lastfm_artist.mbid.present?
-    discogs_artist = Discogs::Artist.new(name)
-    discogs_releases = discogs_artist.releases.map do |r|
-      r.title rescue OpenURI::HTTPError
-      r
-    end
-    self.releases.find(:all, :conditions => { :title => discogs_releases.map(&:title) }).each do |release|
-      discogs_release = discogs_releases.find {|r| r.title == release.title }
-      if discogs_release.labels.present?
-        release.label = Label.find_or_create_by_name_and_user_id(:name => discogs_release.labels.first, :user_id => user.id)
-      end
-      unless release.artwork.file?
-        release.artwork = open(discogs_release.images.first.uri) if discogs_release.images.first.try(:uri)
-      end
-      release.save!
-    end
-    self.save!
-  rescue OpenURI::HTTPError => e
-    if e.io.status[0] == '404'
-      return true
-    else
-      raise
-    end
+    identify_mbid unless mbid
+    fetch_artwork unless artwork.file?
   end
   
   after_create :update_meta_data unless Rails.env.test?
   handle_asynchronously :update_meta_data
+  
+  def identify_mbid
+    with_lastfm do |info|
+      if info['mbid'].present?
+        self.mbid = info['mbid']
+        self.save!
+      end
+    end
+  end
+  
+  def fetch_artwork
+    return if name == Upload.various_artists
+    with_lastfm do |info|
+      if info['image'].present? && info['image'].last['#text'].present?
+        self.artwork = open(info['image'].last['#text']) rescue artwork
+        self.save!
+      end
+    end
+  end
+  
+  protected
+  
+    def with_lastfm(&block)
+      Scrobbler2::Base.api_key = ENV['LASTFM_API_KEY']
+      lastfm_artist = Scrobbler2::Artist.new(name)
+      if lastfm_artist.info
+        yield(lastfm_artist.info)
+      end
+    end
   
 end
