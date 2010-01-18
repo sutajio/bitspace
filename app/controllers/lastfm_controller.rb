@@ -11,7 +11,7 @@ class LastfmController < ApplicationController
       :lastfm_username => result['session']['name'],
       :lastfm_subscriber => result['session']['subscriber'].to_i)
     current_user.save
-    redirect_to root_path
+    redirect_to player_path(:trailing_slash => true)
   end
 
 end
