@@ -303,19 +303,6 @@ $(function(){
   //
   $(document).shortkeys({
     'Space': function () { $('audio#player').trigger('toggle'); },
-    'm': function() {
-      if($('audio#player').attr('muted')) {
-        $('audio#player').attr('muted', false);
-        $('#mute')
-          .attr('checked', '')
-          .next('label').removeClass('checked');
-      } else {
-        $('audio#player').attr('muted', true);
-        $('#mute')
-          .attr('checked', 'checked')
-          .next('label').addClass('checked');
-      }
-    },
     'k': function() {
       $('audio#player').trigger('next');
     },
@@ -350,10 +337,10 @@ $(function(){
   // Toggles the "muted" attribute in the audio player.
   $('#mute').change(function(e){
     if($(this).attr('checked')) {
-      $('audio#player').attr('muted', true);
+      $('audio#player').animate({ volume: 0.1 });
       $(this).next('label').addClass('checked');
     } else {
-      $('audio#player').attr('muted', false);
+      $('audio#player').animate({ volume: 1.0 });
       $(this).next('label').removeClass('checked');
     }
   });
