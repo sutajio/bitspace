@@ -47,3 +47,10 @@ label { font-weight: bold; }
 .tipsy-south { background-position: bottom center; }
 .tipsy-east { background-position: right center; }
 .tipsy-west { background-position: left center; }
+
+.tabnav { list-style: none; height: 25px; }
+.tabnav li { margin: 0; float: left; margin-right: 10px; }
+.tabnav li a { display: block; padding: 1px 10px; font-weight: bold; color: #111; text-shadow: #444 0px 1px 0px; background: #333; -webkit-border-radius: 15px; -moz-border-radius: 15px; }
+.tabnav li a:hover { background: #222; color: #aaa; text-shadow: #111 0px 1px 0px; }
+.tabnav li a:active { background: -webkit-gradient(linear, left top, left bottom, from(#111), color-stop(0.1, #111), to(#191919)); }
+.tabnav li a.current { background: #555; color: #111; text-shadow: #666 0px 1px 0px; }
