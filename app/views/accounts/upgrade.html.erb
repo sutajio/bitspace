@@ -1,0 +1,88 @@
+<div class="account" id="account-upgrade">
+  <div class="container_16 clearfix">
+    <div class="pane clearfix">
+      <%= render :partial => 'accounts/navigation' %>
+      
+      <hr />
+      
+      <div class="grid_16 alpha">
+        <table class="subscriptions-chart">
+          <thead>
+            <th>Subscription plan</th>
+            <th>Storage</th>
+            <th>Albums</th>
+            <th>Tracks</th>
+            <th><span title="Professional grade global Content Delivery Network for low latency streaming." class="tooltipped help">CDN</span></th>
+            <th><span title="Support for scrobbling played tracks to your Last.fm account." class="tooltipped help">Last.fm</span></th>
+            <th><span title="Personal technical email support during office hours." class="tooltipped help">Support</span></th>
+            <th></th>
+            <th></th>
+          </thead>
+          <tbody>
+            <% User::SUBSCRIPTION_PLANS.values.sort_by {|plan| plan[:price_in_euro].to_i }.reverse.each do |plan| %>
+              <% if plan[:official] %>
+                <tr>
+                  <th>
+                    <%= plan[:name] %><br />
+                    <span class="grey"><%= number_to_currency(plan[:price_in_euro], :unit => '€') %>/month</span>
+                  </th>
+                  <td><%= number_to_human_size(plan[:storage]) || 'Unlimited' %></td>
+                  <td><%= bytes_to_albums(plan[:storage]) %></td>
+                  <td><%= bytes_to_tracks(plan[:storage]) %></td>
+                  <td><%= image_tag('check.png') if plan[:price_in_euro] > 0 %></td>
+                  <td><%= image_tag('check.png') if plan[:price_in_euro] > 0 %></td>
+                  <td><%= image_tag('check.png') if plan[:price_in_euro] > 0 %></td>
+                  <td><em><%= plan[:tagline] %></em></td>
+                  <td>
+                    <% if current_user.subscription_plan == plan[:name] %>
+                      <strong>Your current plan</strong>
+                    <% elsif plan[:paypal_button_id] == nil %>
+                      <%= button_to(plan[:storage] > current_user.max_storage ? 'Upgrade' : 'Downgrade', "https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=#{URI.encode(ENV['PAYPAL_USERNAME'])}", :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
+                    <% else %>
+                      <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                        <input type="hidden" name="cmd" value="_s-xclick" />
+                        <input type="hidden" name="hosted_button_id" value="<%= plan[:paypal_button_id] %>" />
+                        <input type="hidden" name="modify" value="1" />
+                        <%= submit_tag plan[:storage] > current_user.max_storage ? 'Upgrade' : 'Downgrade', :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?' %>
+                      </form>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      
+      <hr />
+      
+      <div class="grid_4 alpha grey">
+        <strong>Need to cancel your account?</strong>
+        <p>You can cancel your subscription at any time by clicking the button below.
+        Your subscription will expire at the end of the current billing period.</p>
+        <%= button_to('Cancel my account', "https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=#{URI.encode(ENV['PAYPAL_USERNAME'])}", :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
+      </div>
+      
+      <div class="grid_4 grey">
+        <strong>What happens when I downgrade or cancel my subscription?</strong>
+        <p>You will be given 14 days to delete enough releases from your
+        library to fullfil your new quota. If you haven't deleted enough
+        releases by that date we will automatically delete releases for you
+        starting with archived and old releases.</p>
+      </div>
+      
+      <div class="grid_4 grey">
+        <strong>What happens if I upgrade or downgrade in the middle of a billing cycle?</strong>
+        <p>If you upgrade or downgrade you'll be charged the new rate for your
+        new plan starting on your next billing cycle.</p>
+      </div>
+      
+      <div class="grid_4 omega grey">
+        <strong>We accept...</strong>
+        <%= image_tag('paypal.png', :style => 'float:right;') %>
+        <p>Visa, American Express, Mastercard, and any other payment method supported by PayPal. We don't accept checks, invoices, or POs, sorry.</p>
+      </div>
+      
+    </div>
+  </div>
+</div>

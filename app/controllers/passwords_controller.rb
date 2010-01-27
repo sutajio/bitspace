@@ -1,7 +1,6 @@
 class PasswordsController < ApplicationController
   
   skip_before_filter :require_user
-  before_filter :require_no_user
   before_filter :find_user_using_perishable_token, :only => [:reset, :update]
   layout 'login'
   
@@ -14,7 +13,7 @@ class PasswordsController < ApplicationController
     raise ActiveRecord::RecordNotFound if @user.nil?
     @user.forgot_password
     flash[:notice] = 'Ok, we\'ve sent the instructions to your email. Go check it!'
-    redirect_to login_path
+    redirect_to forgot_password_path
   rescue ActiveRecord::RecordNotFound => e
     flash[:alert] = 'Oh, snap! We couldn\'t find you!'
     redirect_to forgot_password_path

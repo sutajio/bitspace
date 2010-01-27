@@ -11,12 +11,12 @@ class User < ActiveRecord::Base
   has_many :labels
   
   SUBSCRIPTION_PLANS = {
-    :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0 },
+    :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0, :official => true },
     :beta => { :name => 'Bitspace Beta', :storage => 1.gigabyte, :price_in_euro => 0 },
-    :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99 },
-    :standard => { :name => 'Bitspace Standard', :storage => 25.gigabyte, :price_in_euro => 7.99 },
-    :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 17.99 },
-    :unlimited => { :name => 'Bitspace Unlimited', :storage => nil, :price_in_euro => 79.99 }
+    :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99, :paypal_button_id => 9893430, :official => true, :tagline => 'Great way to start out' },
+    :standard => { :name => 'Bitspace Standard', :storage => 25.gigabyte, :price_in_euro => 7.99, :paypal_button_id => 9893454, :official => true, :tagline => 'Great value for your money' },
+    :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 17.99, :paypal_button_id => 9369035, :official => true, :tagline => 'Great for big collections' },
+    :unlimited => { :name => 'Bitspace Unlimited', :storage => nil, :price_in_euro => 79.99, :paypal_button_id => 9369365 }
   }
   
   validates_uniqueness_of :facebook_uid, :allow_nil => true
@@ -45,15 +45,32 @@ class User < ActiveRecord::Base
     tracks.sum(:size)
   end
   
+  def storage_used_in_percent
+    if self.max_storage && self.max_storage != 0
+      (self.storage_used.to_f / self.max_storage.to_f) * 100.0
+    else
+      0.0
+    end
+  end
+  
   def paying_customer?
     subscription_plan != SUBSCRIPTION_PLANS[:free][:name]
   end
   
-  def handle_failed_payment
+  def upgrade_subscription_plan!(options = {})
+    self.first_name = options[:first_name]
+    self.last_name = options[:last_name]
+    self.subscription_id = options[:subscription_id]
+    self.subscription_plan = options[:subscription_plan]
+    self.setup_subscription_plan_details
+    self.save!
+  end
+  
+  def handle_failed_payment!
     
   end
   
-  def cancel_subscription
+  def cancel_subscription!
     self.subscription_plan = SUBSCRIPTION_PLANS[:free][:name]
     self.setup_subscription_plan_details
     self.save!

@@ -15,6 +15,13 @@
               </div>
             </div>
           <% end %>
+          <% if flash[:notice].present? %>
+            <div class="bubble bubble-south">
+              <div class="bubble-inner">
+                <%=h flash[:notice] %>
+              </div>
+            </div>
+          <% end %>
           
           <div class="field">
             <%= text_field_tag :email, nil, :size => 30 %>

@@ -10,7 +10,7 @@ module PagesHelper
   
   def bytes_to_albums(bytes)
     if bytes
-      number_with_delimiter(bytes / bytes_per_album)
+      number_with_delimiter(number_without_precision(bytes / bytes_per_album))
     else
       'Unlimited'
     end
@@ -18,10 +18,16 @@ module PagesHelper
   
   def bytes_to_tracks(bytes)
     if bytes
-      number_with_delimiter((bytes / bytes_per_album) * tracks_per_album)
+      number_with_delimiter(number_without_precision((bytes / bytes_per_album) * tracks_per_album))
     else
       'Unlimited'
     end
+  end
+  
+  def number_without_precision(number)
+    cardinality = ((Math.log(number) / Math.log(10)).to_i)
+    cardinality = 10 ** cardinality
+    number / cardinality * cardinality
   end
   
 end

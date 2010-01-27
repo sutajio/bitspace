@@ -2,6 +2,7 @@ h1 span, h2 span { font-weight: normal; font-size: 12px; }
 
 sup { font-size: smaller; vertical-align: super; }
 label { font-weight: bold; }
+abbr, acronym, .help { cursor: help; border-bottom: 1px dotted #555; }
 
 .pane { padding: 10px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .box { padding: 20px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
@@ -25,7 +26,7 @@ label { font-weight: bold; }
 .scroll-box { overflow: hidden; position: relative; }
 .scroll-box-shade { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: block; text-indent: -9999px; }
 
-.status dd { font-size: 24px; margin: 10px 0; }
+.status dd { font-size: 24px; margin: 10px 0; white-space: nowrap; }
 
 .external { padding-right: 15px; background: url(/images/external.gif) no-repeat 100% 49%; white-space: nowrap; zoom: 1; }
 
@@ -48,7 +49,7 @@ label { font-weight: bold; }
 .tipsy-east { background-position: right center; }
 .tipsy-west { background-position: left center; }
 
-.tabnav { list-style: none; height: 25px; }
+.tabnav { list-style: none; height: 25px; margin-top: 10px; }
 .tabnav li { margin: 0; float: left; margin-right: 10px; }
 .tabnav li a { display: block; padding: 1px 10px; font-weight: bold; color: #111; text-shadow: #444 0px 1px 0px; background: #333; -webkit-border-radius: 15px; -moz-border-radius: 15px; }
 .tabnav li a:hover { background: #222; color: #aaa; text-shadow: #111 0px 1px 0px; }

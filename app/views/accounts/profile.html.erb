@@ -1,0 +1,43 @@
+<div class="account" id="account-profile">
+  <div class="container_16 clearfix">
+    <div class="pane clearfix">
+      <%= render :partial => 'accounts/navigation' %>
+      
+      <hr />
+      
+      <% form_for current_user, :url => profile_account_path do |f| %>
+        <table>
+          <tbody>
+            <tr>
+              <th><%= label_tag :password, 'Current password' %></th>
+              <td>
+                <%= text_field_tag :password %>
+                <p class="hint"><%= link_to('Forgot your password?', forgot_password_path, :rel => 'shadowbox') %></p>
+              </td>
+            </tr>
+            <tr>
+              <th><%= f.label :email %></th>
+              <td><%= f.text_field :email %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :login, 'Username' %></th>
+              <td><%= f.text_field :login %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :password, 'New password' %></th>
+              <td><%= f.password_field :password %></td>
+            </tr>
+            <tr>
+              <th><%= f.label :password_confirmation, 'Verify new password' %></th>
+              <td><%= f.password_field :password_confirmation %></td>
+            </tr>
+            <tr>
+              <th></th>
+              <td><%= submit_tag 'Save changes' %></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>
