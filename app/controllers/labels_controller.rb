@@ -18,4 +18,11 @@ class LabelsController < ApplicationController
     @label = @user.labels.find(params[:id])
   end
   
+  def playlist
+    @label = current_user.labels.find(params[:id])
+    respond_to do |format|
+      format.json
+    end
+  end
+  
 end

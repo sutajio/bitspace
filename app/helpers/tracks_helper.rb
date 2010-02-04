@@ -14,4 +14,20 @@ module TracksHelper
     end
   end
   
+  def tracks_to_json(tracks)
+    tracks.map {|track|
+      {
+        :title => track.title,
+        :url => track.url,
+        :release => track.release.title,
+        :artist => track.artist.try(:name) || track.release.artist.name,
+        :track_url => release_url(track.release, :anchor => dom_id(track)),
+        :release_url => release_url(track.release),
+        :artist_url => artist_url(track.release.artist),
+        :now_playing_url => now_playing_track_url(track),
+        :scrobble_url => scrobble_track_url(track)
+      }
+    }.to_json
+  end
+  
 end

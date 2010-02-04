@@ -42,4 +42,11 @@ class ArtistsController < ApplicationController
     raise e
   end
   
+  def playlist
+    @artist = current_user.artists.with_releases.find(params[:id])
+    respond_to do |format|
+      format.json
+    end
+  end
+  
 end

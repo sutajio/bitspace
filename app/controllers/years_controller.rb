@@ -1,4 +1,5 @@
 class YearsController < ApplicationController
+  before_filter :find_years, :except => [:index]
   
   skip_before_filter :require_user, :only => [:index, :show]
   before_filter :find_user, :only => [:index, :show]
@@ -14,18 +15,30 @@ class YearsController < ApplicationController
   end
   
   def show
-    @year = params[:id]
-    if @year.split('-').size == 2
-      years = @year.split('-').sort.map(&:to_i)
-      years = years.first..years.last
-    elsif @year =~ /^\<[0-9]+/
-      years = 0..(@year[1..-1].to_i-1)
-    elsif @year =~ /^\>[0-9]+/
-      years = (@year[1..-1].to_i+1)..Time.now.year
-    else
-      years = @year
-    end
-    @releases = @user.releases.without_archived.by_year(years)
+    @releases = @user.releases.by_year(@years)
   end
+  
+  def playlist
+    @releases = @user.releases.without_archived.by_year(@years)
+    respond_to do |format|
+      format.json
+    end
+  end
+  
+  protected
+  
+    def find_years
+      @year = params[:id]
+      if @year.split('-').size == 2
+        @years = @year.split('-').sort.map(&:to_i)
+        @years = @years.first..@years.last
+      elsif @year =~ /^\<[0-9]+/
+        @years = 0..(@year[1..-1].to_i-1)
+      elsif @year =~ /^\>[0-9]+/
+        @years = (@year[1..-1].to_i+1)..Time.now.year
+      else
+        @years = @year
+      end
+    end
   
 end

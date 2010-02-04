@@ -94,4 +94,11 @@ class ReleasesController < ApplicationController
     head :ok
   end
   
+  def playlist
+    @release = @artist.releases.find(params[:id])
+    respond_to do |format|
+      format.json
+    end
+  end
+
 end
