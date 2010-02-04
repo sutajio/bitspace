@@ -9,8 +9,6 @@ class User < ActiveRecord::Base
   has_many :releases
   has_many :tracks
   has_many :labels
-  has_many :playlist_items
-  has_many :loved_tracks, :through => :playlist_items, :source => :track
   
   SUBSCRIPTION_PLANS = {
     :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0 },

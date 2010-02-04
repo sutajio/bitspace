@@ -15,6 +15,7 @@ class Track < ActiveRecord::Base
   validates_uniqueness_of :track_nr, :scope => [:release_id, :set_nr], :allow_nil => true
   
   default_scope :order => 'track_nr'
+  named_scope :loved, :conditions => ['loved_at IS NOT NULL']
   
   def url(use_cdn = true)
     if ENV['CDN_HOST'] && use_cdn

@@ -61,13 +61,13 @@
   </div>
   <div class="grid_4">
     <div class="pane alignleft" style="height:120px;">
-      <% if current_user.loved_tracks.empty? %>
+      <% if current_user.tracks.loved.empty? %>
       <div class="fallback">
         No loved tracks yet.
       </div>
       <% else %>
       <ul style="list-style:none;">
-      <% current_user.loved_tracks.all(:limit => 6, :order => 'playlist_items.created_at DESC').each do |track| %>
+      <% current_user.tracks.loved.all(:limit => 6).each do |track| %>
         <li style="margin:0 20px;">
           <%= link_to(h(truncate(track.title, :length => 23)), artist_release_path(track.release.artist, track.release), :target => '_self', :class => 'track-title', :style => 'width: 161px; overflow: hidden; height: 17px;') %>
           <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love', :style => 'width:19px;') %>
