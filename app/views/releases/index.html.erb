@@ -4,7 +4,7 @@
       <% @releases.each do |release| %>
       <div>
         <% link_to(release, :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') do %>
-          <%= image_tag(release.artwork.url(:large, false), :size => '240x240', :alt => 'Cover art') %>
+          <%= image_tag(release.artwork.url(:medium, false), :size => '240x240', :alt => 'Cover art') %>
           <span class="info-overlay">
             <%=h release.artist.name %><br />
             <strong><%=h release.title %></strong>
