@@ -4,7 +4,6 @@ class Track < ActiveRecord::Base
   belongs_to :release, :counter_cache => true
   belongs_to :artist
   
-  has_many :playlist_items
   has_many :scrobbles
   
   validates_presence_of :user_id
@@ -84,17 +83,16 @@ class Track < ActiveRecord::Base
   end
   
   def love!
-    playlist_items.create(:user_id => user_id)
-    touch
+    touch(:loved_at)
   end
   
   def unlove!
-    playlist_items.all.each(&:destroy)
-    touch
+    self.loved_at = nil
+    save!
   end
   
   def loved?
-    playlist_items.present?
+    loved_at.present?
   end
   
   protected
