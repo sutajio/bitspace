@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100204105759) do
+ActiveRecord::Schema.define(:version => 20100204132022) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -111,26 +111,6 @@ ActiveRecord::Schema.define(:version => 20100204105759) do
   add_index "labels", ["mbid"], :name => "index_labels_on_mbid"
   add_index "labels", ["name"], :name => "index_labels_on_name"
   add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
-
-  create_table "playlist_items", :force => true do |t|
-    t.integer  "playlist_id"
-    t.integer  "user_id"
-    t.integer  "track_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "playlist_items", ["playlist_id"], :name => "index_playlist_items_on_playlist_id"
-  add_index "playlist_items", ["track_id"], :name => "index_playlist_items_on_track_id"
-  add_index "playlist_items", ["user_id"], :name => "index_playlist_items_on_user_id"
-
-  create_table "playlists", :force => true do |t|
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "playlists", ["name"], :name => "index_playlists_on_name"
 
   create_table "releases", :force => true do |t|
     t.integer  "artist_id"

@@ -1,9 +1,0 @@
-<% content_tag_for(:div, playlist, :class => 'grid_3') do %>
-  <% link_to(playlist, :target => '_self') do %>
-    <%= image_tag((Release.new).artwork.url(:small), :size => '125x125', :alt => 'Cover art') %>
-  <% end %>
-  <%= link_to(h(playlist.name), playlist, :class => 'name', :target => '_self') %>
-  <span class="meta">
-    
-  </span>
-<% end %>
