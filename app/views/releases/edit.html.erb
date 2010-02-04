@@ -2,7 +2,7 @@
   <div class="grid_16">
     <div class="breadcrumbs">
       <%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %> &rsaquo;
-      <%= link_to(h(@release.title), [@release.artist, @release], :target => '_self') %>
+      <%= link_to(h(@release.title), @release, :target => '_self') %>
     </div>
     <h1>Upload artwork for this release...</h1>
   </div>
@@ -28,7 +28,7 @@
         $(function(){
           $('#release-artwork-upload-button').each(function(){
             $(this).swfupload({
-              upload_url: "<%= artist_release_path_with_session_information(@artist, @release) %>",
+              upload_url: "<%= release_path_with_session_information(@release) %>",
               post_params: { '_method': 'put', <%= request_forgery_protection_token.to_s %>: '<%= form_authenticity_token %>' },
               file_size_limit: 0,
               file_types: "*.jpg;*.jpeg;*.png;*.gif",
@@ -49,7 +49,7 @@
             })
             .bind('uploadComplete', function(e, file){
                 $('#release-artwork-upload-status').text('Upload finished.');
-                setTimeout(function(){ $.address.value("<%= artist_release_path(@artist, @release) %>"); }, 1000);
+                setTimeout(function(){ $.address.value("<%= release_path(@release) %>"); }, 1000);
             })
             .bind('uploadProgress', function(e, file, bytesLoaded){
               var percent = Math.ceil((bytesLoaded / file.size) * 100);

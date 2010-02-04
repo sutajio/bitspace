@@ -5,14 +5,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :dashboard
   map.resource :search
   map.resources :uploads, :collection => { :import => :post }
-  map.resources :artists do |artists|
-    artists.resources :releases, :member => { :archive => :put }
-  end
-  map.resources :releases
+  map.resources :artists
+  map.resources :releases, :member => { :archive => :put }
   map.resources :labels
-  map.resources :years do |years|
-    years.resources :releases
-  end
+  map.resources :years
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
   map.resources :playlists
   

@@ -1,6 +1,4 @@
 class ReleasesController < ApplicationController
-  
-  before_filter :find_artist, :except => [:index]
   skip_before_filter :verify_authenticity_token, :only => [:update]
   
   def index
@@ -16,15 +14,15 @@ class ReleasesController < ApplicationController
   end
   
   def show
-    @release = @artist.releases.find(params[:id])
+    @release = current_user.releases.find(params[:id])
   end
   
   def edit
-    @release = @artist.releases.find(params[:id])
+    @release = current_user.releases.find(params[:id])
   end
   
   def update
-    @release = @artist.releases.find(params[:id])
+    @release = current_user.releases.find(params[:id])
     @release.update_attributes!(:artwork => params[:release][:artwork])
     head :ok
   rescue ActiveRecord::RecordInvalid => e
@@ -32,21 +30,15 @@ class ReleasesController < ApplicationController
   end
   
   def archive
-    @release = @artist.releases.find(params[:id])
+    @release = current_user.releases.find(params[:id])
     @release.toggle_archive!
     head :ok
   end
   
   def destroy
-    @release = @artist.releases.find(params[:id])
+    @release = current_user.releases.find(params[:id])
     @release.destroy
     head :ok
   end
-  
-  protected
-  
-    def find_artist
-      @artist = current_user.artists.find(params[:artist_id])
-    end
   
 end
