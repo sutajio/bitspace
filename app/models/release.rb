@@ -111,6 +111,10 @@ class Release < ActiveRecord::Base
     update_attribute(:archived, false)
   end
   
+  def reprocess_artwork!
+    self.artwork.reprocess!
+  end
+  
   protected
   
     def with_lastfm(&block)
