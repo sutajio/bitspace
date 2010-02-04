@@ -106,7 +106,7 @@ $(function(){
             .addClass('playing');
           if(parseFloat(self.attr('data-length')) > 30.0) {
             this.started_playing = new Date();
-            $.post(self.attr('data-now-playing-url'));
+            $.post(self.attr('data-now-playing-url'), {});
           }
         },
         scrobble: function(){
