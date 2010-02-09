@@ -6,6 +6,10 @@ $(function(){
     rules: { password: { required: true, minlength: 4 } }
   });
   
+  $.validator.addMethod('username', function(value, element){
+    return this.optional(element) || /^[a-z][a-z0-9_]+$/.test(value);
+  }, 'Should use only lowercase letters, numbers, and underscore please.');
+  
   $('#account-credentials-form').validate({
     rules: {
       'user[login]': { rangelength: [3,100],
