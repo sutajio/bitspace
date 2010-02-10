@@ -15,7 +15,7 @@ class User < ActiveRecord::Base
     :beta => { :name => 'Bitspace Beta', :storage => 1.gigabyte, :price_in_euro => 0 },
     :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99, :paypal_button_id => 9893430, :official => true, :tagline => 'Great way to start out' },
     :standard => { :name => 'Bitspace Standard', :storage => 25.gigabyte, :price_in_euro => 7.99, :paypal_button_id => 9893454, :official => true, :tagline => 'Great value for your money' },
-    :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 17.99, :paypal_button_id => 9369035, :official => true, :tagline => 'Great for big collections' },
+    :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 14.99, :paypal_button_id => 9369035, :official => true, :tagline => 'Great for big collections' },
     :unlimited => { :name => 'Bitspace Unlimited', :storage => nil, :price_in_euro => 79.99, :paypal_button_id => 9369365 }
   }
   
