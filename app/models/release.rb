@@ -22,6 +22,7 @@ class Release < ActiveRecord::Base
   scoped_search :on => [:title]
   scoped_search :in => :artist, :on => [:name]
   scoped_search :in => :tracks, :on => [:title]
+  scoped_search :in => :label, :on => [:name]
   
   has_attached_file :artwork,
     :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
