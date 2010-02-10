@@ -4,7 +4,7 @@
 <ul class="tabnav">
   <% unless ENV['PRIVATE_BETA'] %>
   <li><%= link_to('Upgrade', upgrade_account_path, :target => '_self', :class => request.path == upgrade_account_path ? 'current' : nil) %></li>
-  <% end %>
   <li><%= link_to('Profile', profile_account_path, :target => '_self', :class => request.path == profile_account_path ? 'current' : nil) %></li>
   <li><%= link_to('Last.fm', lastfm_account_path, :target => '_self', :class => request.path == lastfm_account_path ? 'current' : nil) %></li>
+  <% end %>
 </ul>

@@ -58,7 +58,9 @@
             <%= button_to('Connect with Last.fm', authorize_lastfm_path, :method => :get, :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
           <% else %>
             <p class="grey">Last.fm scrobbling is only available to paying customers.</p>
-            <%= link_to('Click here to upgrade your account →', "##{upgrade_account_path}", :onclick => 'Shadowbox.close();') %>
+            <% unless ENV['PRIVATE_BETA'] %>
+              <%= link_to('Click here to upgrade your account →', "##{upgrade_account_path}", :onclick => 'Shadowbox.close();') %>
+            <% end %>
           <% end %>
         </div>
       </div>

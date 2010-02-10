@@ -10,8 +10,11 @@
         <h2>
           <%= current_user.subscription_plan %><br />
           <span><%= number_to_human_size(current_user.tracks.sum(:size)) %> /
-          <%= number_to_human_size(current_user.max_storage) || 'Unlimited' %><br /><br />
-          <%= link_to('Click here if you need to upgrade!', upgrade_account_path, :target => '_self') %></span>
+          <%= number_to_human_size(current_user.max_storage) || 'Unlimited' %>
+          <% unless ENV['PRIVATE_BETA'] %>
+            <br /><br />
+            <%= link_to('Click here if you need to upgrade!', upgrade_account_path, :target => '_self') %></span>
+          <% end %>
         </h2>
         
         <div class="storage-gauge">

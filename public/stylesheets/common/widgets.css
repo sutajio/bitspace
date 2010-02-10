@@ -49,7 +49,7 @@ abbr, acronym, .help { cursor: help; border-bottom: 1px dotted #555; }
 .tipsy-east { background-position: right center; }
 .tipsy-west { background-position: left center; }
 
-.tabnav { list-style: none; height: 25px; margin-top: 10px; }
+.tabnav { list-style: none; height: 25px; margin-top: 10px; margin-left: 10px; }
 .tabnav li { margin: 0; float: left; margin-right: 10px; }
 .tabnav li a { display: block; padding: 1px 10px; font-weight: bold; color: #111; text-shadow: #444 0px 1px 0px; background: #333; -webkit-border-radius: 15px; -moz-border-radius: 15px; }
 .tabnav li a:hover { background: #222; color: #aaa; text-shadow: #111 0px 1px 0px; }
