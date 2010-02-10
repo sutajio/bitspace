@@ -5,17 +5,28 @@
       <p><img src="/images/billboard.png" width="640" height="440" alt="1 GB free!" /></p>
       <% end %>
     </div>
-    <div class="grid_5" style="padding-top: 80px; line-height: normal;">
+    <div class="grid_5 aligncenter" style="padding-top: 80px; line-height: normal;">
       <h1>No One Puts Music<br /> In A Corner.</h1>
       <h3>Bitspace is <em>a better way to store and listen to music</em>.
       Simply upload your collection and enjoy 
       it everyday and from anywhere.</h3>
       <hr />
-      <% form_for InvitationRequest.new do |f| %>
-        <h3>Subscribe for beta invite...</h3>
-        <%= f.text_field :email, :class => 'required email', :hint => 'Enter your email address' %>
-        <%= f.submit 'Subscribe' %>
-        <%=h flash[:notice] %>
+      <% if ENV['PRIVATE_BETA'] %>
+        <% form_for InvitationRequest.new do |f| %>
+          <h3>Subscribe for beta invite...</h3>
+          <%= f.text_field :email, :class => 'required email', :hint => 'Enter your email address' %>
+          <%= f.submit 'Subscribe' %>
+          <%=h flash[:notice] %>
+        <% end %>
+      <% else %>
+        <div id="signup-button">
+          <h3>
+            <% link_to(price_path) do %>
+              See Plans and Pricing →<br />
+              <span>30-day free trial, sign up in 60 seconds</span>
+            <% end %>
+          </h3>
+        </div>
       <% end %>
     </div>
   </div>

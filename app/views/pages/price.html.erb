@@ -15,7 +15,7 @@
       <p class="grey"><%= User::SUBSCRIPTION_PLANS[:basic][:tagline] %></p>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:premium][:paypal_button_id] %>">
+      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:basic][:paypal_button_id] %>">
       <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"<% if ENV['PRIVATE_BETA'] %> disabled="disabled" style="opacity:0.5;"<% end %>>
       <img alt="" border="0" src="https://www.paypal.com/sv_SE/i/scr/pixel.gif" width="1" height="1">
       </form>
@@ -34,7 +34,7 @@
       <p class="grey"><%= User::SUBSCRIPTION_PLANS[:standard][:tagline] %></p>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:premium][:paypal_button_id] %>">
+      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:standard][:paypal_button_id] %>">
       <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"<% if ENV['PRIVATE_BETA'] %> disabled="disabled" style="opacity:0.5;"<% end %>>
       <img alt="" border="0" src="https://www.paypal.com/sv_SE/i/scr/pixel.gif" width="1" height="1">
       </form>

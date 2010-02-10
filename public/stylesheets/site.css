@@ -28,6 +28,7 @@ h2 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 20px/20px Graubla
 h3 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 15px/20px GraublauWeb, Georgia, Times, 'Times New Roman', serif; }
 h1 a, h2 a, h3 a { text-shadow: #fff 1px 1px 1px; }
 h1 em, h2 em, h3 em { text-shadow: #000 0px 0px 1px; }
+h1 span, h2 span, h3 span { font-size: 12px; }
 .pane { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
 .box { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
 
