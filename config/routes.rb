@@ -31,6 +31,7 @@ ActionController::Routing::Routes.draw do |map|
   map.price 'price', :controller => 'pages', :action => 'price'
   map.tour 'tour', :controller => 'pages', :action => 'tour'
   map.about 'about', :controller => 'pages', :action => 'about'
+  map.download 'download', :controller => 'pages', :action => 'download'
   
   # Blog
   map.blog 'blog', :controller => 'blog_posts', :action => 'index'

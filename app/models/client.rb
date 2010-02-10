@@ -18,6 +18,10 @@ class Client < ActiveRecord::Base
     client_versions.sum(:downloads)
   end
   
+  def latest_version
+    client_versions.first.try(:version)
+  end
+  
   def to_param
     slug
   end

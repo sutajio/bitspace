@@ -1,0 +1,14 @@
+<div class="container_16 clearfix">
+  <div class="grid_16 aligncenter">
+    <% @clients.each do |client| %>
+      <div class="client">
+        <h2>
+          <%= client.name %><br />
+          <span>Version <%= client.latest_version %></span>
+        </h2>
+        <p><%= client.info %></p>
+        <p><%= link_to('Download', download_client_path(client), :class => 'button') %></p>
+      </div>
+    <% end %>
+  </div>
+</div>

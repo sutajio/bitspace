@@ -24,4 +24,8 @@ class PagesController < ApplicationController
   def terms
   end
   
+  def download
+    @clients = Client.all
+  end
+  
 end
