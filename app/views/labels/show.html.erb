@@ -6,8 +6,14 @@
 
 <div class="container_16 clearfix pane">
   <div class="grid_16">
-    <ul class="releases">
-      <%= render :partial => 'releases/release', :collection => @label.releases %>
-    </ul>
+    <% if @label.releases.without_archived.empty? %>
+      <div class="fallback">
+        Sorry, didn't find anything. There is <%= pluralize(@label.releases.with_archived.size, 'archived release') %> not shown though.
+      </div>
+    <% else %>
+      <ul class="releases">
+        <%= render :partial => 'releases/release', :collection => @label.releases.without_archived %>
+      </ul>
+    <% end %>
   </div>
 </div>
