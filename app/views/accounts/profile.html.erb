@@ -5,23 +5,24 @@
       
       <hr />
       
-      <% form_for current_user, :url => profile_account_path do |f| %>
+      <% form_for current_user, :url => profile_account_path,
+                    :html => { :id => 'account-profile-form' } do |f| %>
         <table>
           <tbody>
             <tr>
               <th><%= label_tag :password, 'Current password' %></th>
               <td>
-                <%= text_field_tag :password %>
+                <%= password_field_tag :password, '', :class => 'required' %>
                 <p class="hint"><%= link_to('Forgot your password?', forgot_password_path, :rel => 'shadowbox') %></p>
               </td>
             </tr>
             <tr>
               <th><%= f.label :email %></th>
-              <td><%= f.text_field :email %></td>
+              <td><%= f.text_field :email, :class => 'required email' %></td>
             </tr>
             <tr>
               <th><%= f.label :login, 'Username' %></th>
-              <td><%= f.text_field :login %></td>
+              <td><%= f.text_field :login, :class => 'required' %></td>
             </tr>
             <tr>
               <th><%= f.label :password, 'New password' %></th>

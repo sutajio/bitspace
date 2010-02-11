@@ -48,7 +48,6 @@
 .account form td { padding: 10px 5px; }
 .account input[type="text"],
 .account input[type="password"] { background: #fff; -webkit-border-radius: 3px; -moz-border-radius: 3px; border: 1px solid #ccc; font-size: 13px; padding: 4px 5px; }
-.account label { text-shadow: #000 1px 1px 1px; }
 .account input[type=submit] { cursor: pointer; padding: 5px 10px; font-size: 14px; font-weight: bold; color: #333; text-shadow: #fff 0px 0px 1px; border: 3px solid #eee; -webkit-border-radius: 15px; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); }
 .account input[type=submit]:hover { border-color: #ddd; }
 .account input[type=submit]:active { background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#ccc)); }
@@ -152,6 +151,7 @@ a:hover { color: #fff; }
 h1, h2, h3 { text-shadow: #000 1px 1px 1px; }
 h1 a, h2 a, h3 a { text-shadow: #000 1px 1px 1px; }
 dl { text-shadow: #000 1px 1px 1px; }
+label { text-shadow: #000 1px 1px 1px; }
 .release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
 .release ol.tracks { background: #2f2f2f; color: #777; }
 .release ol.tracks li.odd { background: #252525; }

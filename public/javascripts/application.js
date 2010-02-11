@@ -428,5 +428,37 @@ $(function(){
   $('.tooltipped').livequery(function(){
     $(this).tipsy({ gravity: $.fn.tipsy.autoNS, fade: true });
   });
-
+  
+  // Custom validator for validating usernames.
+  $.validator.addMethod('username', function(value, element){
+    return this.optional(element) || /^[a-z][a-z0-9_]+$/.test(value);
+  }, 'Should use only lowercase letters, numbers, and underscore please.');
+  
+  // Handle validation for the user profile form in the account section.
+  // The form submits with Ajax in the submitHandler errors are handled by
+  // the global Ajax error handlers.
+  $('#account-profile-form').livequery(function(){
+    $(this).validate({
+      rules: {
+        'password': { remote: '/account/valid_password' },
+        'user[login]': { rangelength: [3,100],
+                         remote: '/users/unique',
+                         username: true },
+        'user[password]': { minlength: 4 },
+        'user[password_confirmation]': { equalTo: '#user_password' }
+      },
+      messages: {
+        'password': { remote: 'Invalid password' },
+        'user[login]': { remote: 'Sorry, username has already been taken.' }
+      },
+      submitHandler: function(form) {
+        $(form).ajaxSubmit({
+          success: function(){
+            $.address.value('/');
+          }
+        });
+      }
+    });
+  });
+  
 });
