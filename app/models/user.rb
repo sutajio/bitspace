@@ -54,6 +54,7 @@ class User < ActiveRecord::Base
   end
   
   def paying_customer?
+    subscription_plan == SUBSCRIPTION_PLANS[:beta][:name] ||
     subscription_plan != SUBSCRIPTION_PLANS[:free][:name]
   end
   

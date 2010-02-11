@@ -19,7 +19,7 @@
       <dd><%= link_to(User.count, admin_users_path) %></dd>
       <dt>Paying users</dt>
       <dd><%= User.count(:conditions => { :subscription_plan => User::SUBSCRIPTION_PLANS.values.select {|p| p[:price_in_euro] > 0 }.map {|p| p[:name] } }) %></dd>
-      <dt>Paying users</dt>
+      <dt>Free users</dt>
       <dd><%= User.count(:conditions => { :subscription_plan => User::SUBSCRIPTION_PLANS.values.select {|p| p[:price_in_euro] == 0 }.map {|p| p[:name] } }) %></dd>
       <dt>Paying ratio</dt>
       <dd><%= number_to_percentage((User.count(:conditions => { :subscription_plan => User::SUBSCRIPTION_PLANS.values.select {|p| p[:price_in_euro] > 0 }.map {|p| p[:name] } }).to_f / User.count.to_f) * 100.0, :precision => 1) %></dd>
