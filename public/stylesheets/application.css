@@ -62,6 +62,7 @@
 /* LAYOUT */
 
 #root { padding-bottom: 120px; }
+#player { text-indent: -9999px; display: none; }
 
 #nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 8px 0 0 0; font-size: 12px; height: 38px; }
 #nav .container_16 { position: relative; }
