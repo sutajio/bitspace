@@ -56,3 +56,15 @@ abbr, acronym, .help { cursor: help; border-bottom: 1px dotted #555; }
 .tabnav li a:hover { background: #222; color: #aaa; text-shadow: #111 0px 1px 0px; }
 .tabnav li a:active { background: -webkit-gradient(linear, left top, left bottom, from(#111), color-stop(0.1, #111), to(#191919)); }
 .tabnav li a.current { background: #555; color: #111; text-shadow: #666 0px 1px 0px; }
+
+.ac_results { background-color: #000; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 0px 0px 25px #000; opacity: 0.9; width: 200px; padding: 0; margin: 5px 0 0 -55px; list-style: none; position: absolute; z-index: 10000; display: none; }
+.ac_results li { margin: 0; padding: 10px; white-space: nowrap; text-align: left; }
+.ac_results li:first-child { -webkit-border-top-left-radius: 10px; -webkit-border-top-right-radius: 10px; -moz-border-radius-topleft: 10px; -moz-border-radius-topright: 10px; }
+.ac_results li:last-child { -webkit-border-bottom-left-radius: 10px; -webkit-border-bottom-right-radius: 10px; -moz-border-radius-bottomleft: 10px; -moz-border-radius-bottomright: 10px; }
+.ac_results li.ac_over { cursor: pointer; background-color: #111; }
+.ac_results li a { display: block; overflow: hidden; position: relative; }
+.ac_results li img { float: left; margin-right: 10px; -webkit-border-radius: 3px; -moz-border-radius: 3px; }
+.ac_results li .artist-name { display: block; font-size: 10px; }
+.ac_results li .release-title { display: block; }
+.ac_results li .limited-space-fade { background: url(/images/limited-space-fade.png) repeat-y 100% 0%; position: absolute; top: 0; right: 0; width: 20px; height: 100%; }
+.ac_results li.ac_over .limited-space-fade { background-image: url(/images/limited-space-fade-hover.png); }

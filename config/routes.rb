@@ -3,7 +3,7 @@ ActionController::Routing::Routes.draw do |map|
   # Player
   map.resource :player
   map.resource :dashboard
-  map.resource :search
+  map.resource :search, :collection => { :suggestions => :get }
   map.resources :uploads, :collection => { :import => :post }
   map.resources :artists
   map.resources :releases, :member => { :archive => :put }

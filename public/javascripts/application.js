@@ -314,7 +314,9 @@ $(function(){
   // Handle the submit on the search form by changing the URL using the
   // address plug-in (will update the page with the search results using
   // Ajax).
-  $('#search-q').closest('form').submit(function(e){
+  $('#search-q')
+  .suggest('/search/suggestions')
+  .closest('form').submit(function(e){
     e.preventDefault();
     var q = $('#search-q').val();
     if(q != "") {

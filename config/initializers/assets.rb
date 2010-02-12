@@ -17,6 +17,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.infinitescroll.js',
     '/vendor/plugins/jquery.ui.js',
     '/vendor/plugins/jquery.address.js',
+    '/vendor/plugins/jquery.suggest.js',
     'application'
   ],
   :login => [

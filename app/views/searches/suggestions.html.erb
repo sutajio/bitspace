@@ -1,0 +1,3 @@
+<% @releases.each do |release| -%>
+<% link_to(release_path(release), :target => '_self', :class => 'limited-space') do -%><%= image_tag(release.artwork.url(:small, false), :size => '34x34', :alt => 'Cover art') %><span class="artist-name"><%=h release.artist.name %></span> <span class="release-title"><%=h release.title %></span><span class="limited-space-fade"></span><% end %>
+<% end -%>
