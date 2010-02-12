@@ -8,29 +8,45 @@ namespace :cron do
     puts "-> Updating meta data."
     puts "Artists:"
     Artist.find_each do |artist|
-      artist.update_meta_data_without_send_later
-      print "."
+      begin
+        artist.update_meta_data_without_send_later
+        print "."
+      rescue Object => e
+        print "F"
+      end
       STDOUT.flush
     end
     puts
     puts "Labels:"
     Label.find_each do |label|
-      label.update_meta_data_without_send_later
-      print "."
+      begin
+        label.update_meta_data_without_send_later
+        print "."
+      rescue Object => e
+        print "F"
+      end
       STDOUT.flush
     end
     puts
     puts "Releases:"
     Release.find_each do |release|
-      release.update_meta_data_without_send_later
-      print "."
+      begin
+        release.update_meta_data_without_send_later
+        print "."
+      rescue Object => e
+        print "F"
+      end
       STDOUT.flush
     end
     puts
     puts "Tracks:"
     Track.find_each do |track|
-      track.update_meta_data_without_send_later
-      print "."
+      begin
+        track.update_meta_data_without_send_later
+        print "."
+      rescue Object => e
+        print "F"
+      end
       STDOUT.flush
     end
     puts
