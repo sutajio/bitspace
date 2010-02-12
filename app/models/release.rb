@@ -19,7 +19,7 @@ class Release < ActiveRecord::Base
     first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
   end
   
-  scoped_search :on => [:title]
+  scoped_search :on => [:title, :year]
   scoped_search :in => :artist, :on => [:name]
   scoped_search :in => :tracks, :on => [:title]
   scoped_search :in => :label, :on => [:name]
