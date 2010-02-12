@@ -19,7 +19,7 @@ class Release < ActiveRecord::Base
     first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
   end
   
-  scoped_search :on => [:title, :year]
+  scoped_search :on => [:title, :year, :tags]
   scoped_search :in => :artist, :on => [:name]
   scoped_search :in => :tracks, :on => [:title]
   scoped_search :in => :label, :on => [:name]
@@ -46,6 +46,7 @@ class Release < ActiveRecord::Base
     identify_mbid unless mbid
     update_release_date unless release_date
     update_label unless label
+    update_tags unless tags
     fetch_artwork unless artwork.file?
   end
   
@@ -74,11 +75,8 @@ class Release < ActiveRecord::Base
   end
   
   def update_label
-    if mbid
-      sleep(2)
-      q = MusicBrainz::Webservice::Query.new
-      release = q.get_release_by_id(mbid, :release_events => true, :labels => true)
-      if release && release.release_events.present?
+    with_music_brainz :release_events => true, :labels => true do |release|
+      if release.release_events.present?
         label = release.release_events[0].label
         if label
           transaction do
@@ -88,6 +86,13 @@ class Release < ActiveRecord::Base
           end
         end
       end
+    end
+  end
+  
+  def update_tags
+    with_music_brainz :tags => true do |release|
+      self.tags = release.tags.map(&:text).join(', ') if release.tags.present?
+      self.save! if changed?
     end
   end
   
@@ -123,6 +128,17 @@ class Release < ActiveRecord::Base
       lastfm_album = Scrobbler2::Album.new(artist.name, title)
       if lastfm_album.info
         yield(lastfm_album.info)
+      end
+    end
+    
+    def with_music_brainz(options = {}, &block)
+      if mbid
+        sleep(2)
+        q = MusicBrainz::Webservice::Query.new
+        release = q.get_release_by_id(mbid, options)
+        if release
+          yield(release)
+        end
       end
     end
   
