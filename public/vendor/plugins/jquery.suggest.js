@@ -56,7 +56,7 @@
 				var offset = $input.offset();
 				$results.css({
 					top: (offset.top + input.offsetHeight) + 'px',
-					left: offset.left + 'px'
+					left: (offset.left + (input.offsetWidth - $results.outerWidth())) + 'px'
 				});
 			}
 			
