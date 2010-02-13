@@ -339,7 +339,7 @@ $(function(){
   // Toggles the "muted" attribute in the audio player.
   $('#mute').change(function(e){
     if($(this).attr('checked')) {
-      $('audio#player').animate({ volume: 0.1 });
+      $('audio#player').animate({ volume: 0.2 });
       $(this).next('label').addClass('checked');
     } else {
       $('audio#player').animate({ volume: 1.0 });
