@@ -13,10 +13,13 @@ class User < ActiveRecord::Base
   SUBSCRIPTION_PLANS = {
     :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0, :official => true },
     :beta => { :name => 'Bitspace Beta', :storage => 1.gigabyte, :price_in_euro => 0 },
-    :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99, :paypal_button_id => 9893430, :official => true, :tagline => 'Great way to start out' },
-    :standard => { :name => 'Bitspace Standard', :storage => 25.gigabyte, :price_in_euro => 7.99, :paypal_button_id => 9893454, :official => true, :tagline => 'Great value for your money' },
-    :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 14.99, :paypal_button_id => 9369035, :official => true, :tagline => 'Great for big collections' },
-    :unlimited => { :name => 'Bitspace Unlimited', :storage => nil, :price_in_euro => 79.99, :paypal_button_id => 9369365 }
+    :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99, :paypal_button_id => '9893430', :official => true, :tagline => 'Great way to start out' },
+    :standard => { :name => 'Bitspace Standard', :storage => 25.gigabyte, :price_in_euro => 7.99, :paypal_button_id => '9893454', :official => true, :tagline => 'Great value for your money' },
+    :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 14.99, :paypal_button_id => '9369035', :official => true, :tagline => 'Great for big collections' },
+    :unlimited => { :name => 'Bitspace Unlimited', :storage => nil, :price_in_euro => 79.99, :paypal_button_id => '9369365' },
+    :double_basic => { :name => 'Bitspace Double Basic', :storage => 20.gigabytes, :price_in_euro => 3.99, :paypal_button_id => 'BDXDFU269SKZC' },
+    :double_standard => { :name => 'Bitspace Double Standard', :storage => 50.gigabytes, :price_in_euro => 7.99, :paypal_button_id => '932WV2DB6QV5S' },
+    :double_premium => { :name => 'Bitspace Double Premium', :storage => 100.gigabytes, :price_in_euro => 14.99, :paypal_button_id => '5VL5583RRK4QJ' }
   }
   
   validates_uniqueness_of :facebook_uid, :allow_nil => true
