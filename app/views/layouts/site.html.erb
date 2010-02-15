@@ -33,7 +33,7 @@
     <div id="root">
       <div class="container_12 clearfix">
         <ul id="menu" class="clearfix">
-          <li class="grid_2 first"><%= link_to(image_tag('/images/white/logo.png'), root_path, :rel => 'start') %></li>
+          <li class="grid_2 first"><%= link_to(image_tag('/images/white/logo.png'), root_path, :rel => 'start', :alt => 'Bitspace - Music Backup, Music Organizer, HTML5 Music Player') %></li>
           <li class="grid_1"><%= link_to('Tour', tour_path, :class => params[:action] == 'tour' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('About', about_path, :class => params[:action] == 'about' ? 'current' : nil) %></li>
