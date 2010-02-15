@@ -24,6 +24,7 @@ class InvitationsController < ApplicationController
       @user.subscription_plan = @invitation.subscription_plan if @invitation.subscription_plan.present?
       @user.setup_subscription_plan_details
       @user.save!
+      InvitationRequest.destroy_all(["email = ?", @invitation.email])
       @invitation.destroy
       UserSession.create(@user)
       redirect_to player_path(:trailing_slash => true)
