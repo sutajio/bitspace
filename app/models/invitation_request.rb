@@ -9,5 +9,10 @@ class InvitationRequest < ActiveRecord::Base
 
   after_create :send_notification
   handle_asynchronously :send_notification
+  
+  def send_invitation!
+    Invitation.create(:email => email)
+    self.destroy
+  end
 
 end
