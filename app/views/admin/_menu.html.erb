@@ -1,5 +1,7 @@
-<div class="grid_12">
-  <%= link_to('Status', admin_status_path) %> |
-  <%= link_to('Jobs', admin_jobs_path) %> |
-  <%= link_to('Users', admin_users_path) %>
+<div class="grid_12 clearfix">
+  <ul class="tabnav">
+    <li><%= link_to('Status', admin_status_path, :class => request.path == admin_status_path ? 'current' : nil) %></li>
+    <li><%= link_to('Jobs', admin_jobs_path, :class => request.path == admin_jobs_path ? 'current' : nil) %></li>
+    <li><%= link_to('Users', admin_users_path, :class => request.path == admin_users_path ? 'current' : nil) %></li>
+  </ul>
 </div>

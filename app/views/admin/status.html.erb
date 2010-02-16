@@ -1,6 +1,6 @@
 <div class="container_12 clearfix aligncenter">
   <%= render :partial => 'menu' %>
-  <hr />
+  <br style="clear:both;" />
   <div class="grid_2">
     <dl class="status">
       <dt>Jobs in the queue</dt>
@@ -53,10 +53,12 @@
   </div>
   <div class="grid_2">
     <dl class="status">
-      <dt>$/month in (approx.)</dt>
-      <dd><%= number_to_currency(0) %></dd>
-      <dt>$/year in (approx.)</dt>
-      <dd><%= number_to_currency(0) %></dd>
+      <dt>SEK/month in (approx.)</dt>
+      <dd><%= number_to_currency(approximate_revenue_in_sek, :unit => 'kr', :format => '%n %u') %></dd>
+      <dt>SEK/month out (approx.)</dt>
+      <dd><%= number_to_currency(approximate_cost_in_sek, :unit => 'kr', :format => '%n %u') %></dd>
+      <dt>Bandwidth cost (approx.)</dt>
+      <dd><%= number_to_currency(approximate_bandwidth_cost_in_sek, :unit => 'kr', :format => '%n %u') %></dd>
     </dl>
   </div>
 </div>

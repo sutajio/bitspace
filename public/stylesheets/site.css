@@ -47,3 +47,6 @@ a.button:hover { border-color: #ccc; }
 a.button:active { background: #fff; background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#fff)); }
 
 .client { margin-top: 30px; }
+
+.tabnav li a { display: block; padding: 1px 10px; font-weight: bold; color: #333; text-shadow: #fff 0px 1px 0px; background: #eee; -webkit-border-radius: 15px; -moz-border-radius: 15px; }
+.tabnav li a.current { background: #aaa; color: #111; text-shadow: #ccc 0px 1px 0px; }

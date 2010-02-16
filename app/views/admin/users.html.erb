@@ -1,11 +1,11 @@
 <div class="container_12 clearfix aligncenter">
   <%= render :partial => 'menu' %>
-  <hr />
+  <br style="clear:both;" />
   <table>
     <thead>
-      <th class="grid_1">Facebook</th>
+      <th class="grid_1">Username</th>
       <th class="grid_3">E-mail</th>
-      <th class="grid_1">Login</th>
+      <th class="grid_1">Logins</th>
       <th class="grid_2">Last request</th>
       <th class="grid_1">Storage</th>
       <th class="grid_2">Subscription plan</th>
@@ -14,11 +14,11 @@
     <tbody>
       <% @users.each do |user| %>
       <tr>
-        <td class="grid_1"><%= user.facebook_uid %></td>
+        <td class="grid_1"><%= user.login || user.facebook_uid %></td>
         <td class="grid_3">
           <%= link_to(user.email, "##{dom_id(user)}_handler", :rel => 'shadowbox') %>
           <div id="<%= dom_id(user) %>_handler" style="display:none;">
-            <pre style="padding:20px;">E-mail: <%=h user.email %>
+            <pre style="padding:20px; color:#fff;">E-mail: <%=h user.email %>
 Login count: <%= user.login_count %>
 Failed login count <%= user.failed_login_count %>
 Last request: <%= user.last_request_at %>
