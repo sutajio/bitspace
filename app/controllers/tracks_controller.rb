@@ -16,6 +16,7 @@ class TracksController < ApplicationController
     @track = current_user.tracks.find(params[:id])
     @scrobble = @track.scrobbles.create!(
         :user_id => current_user.id,
+        :ip => request.remote_ip,
         :started_playing => params[:started_playing] ? 
                               Time.parse(params[:started_playing]) :
                               Time.now.utc)
