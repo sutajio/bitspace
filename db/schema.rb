@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100212143306) do
+ActiveRecord::Schema.define(:version => 20100217132148) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -144,6 +144,7 @@ ActiveRecord::Schema.define(:version => 20100212143306) do
     t.integer  "user_id"
     t.integer  "track_id"
     t.datetime "started_playing"
+    t.string   "ip"
   end
 
   create_table "tracks", :force => true do |t|
