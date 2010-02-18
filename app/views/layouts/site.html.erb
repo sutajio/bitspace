@@ -43,8 +43,7 @@
             <% if current_user %>
               <%= link_to('Go to player →', player_path(:trailing_slash => true), :class => 'button') %>
             <% else %>
-              <%= link_to('Sign in', login_path, :class => 'button') %> or
-              <%= facebook_login_button('Connect with Facebook') %>
+              <%= link_to('Sign in →', login_path, :class => 'button') %>
               <% if flash[:alert] %>
               <div class="error"><%=h flash[:alert] %></div>
               <% end %>
