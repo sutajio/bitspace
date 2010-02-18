@@ -62,8 +62,7 @@ class User < ActiveRecord::Base
   end
   
   def upgrade_subscription_plan!(options = {})
-    self.first_name = options[:first_name]
-    self.last_name = options[:last_name]
+    self.name = [options[:first_name], options[:last_name]].reject(&:blank?).join(' ')
     self.subscription_id = options[:subscription_id]
     self.subscription_plan = options[:subscription_plan]
     self.setup_subscription_plan_details
