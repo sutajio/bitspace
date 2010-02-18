@@ -7,7 +7,7 @@ atom_feed(:root_url => blog_url) do |feed|
       entry.title(post.title)
       entry.content(simple_format(post.body), :type => 'html')
       entry.author do |author|
-        author.name('The Bitspace Group')
+        author.name('The Bitspace Team')
       end
     end
   end
