@@ -1,8 +1,14 @@
 Hi friend!
 
+<% if @invitation.subscription_id -%>
+You have registered for a <%= @invitation.subscription_plan %> account.
+
+To complete your registration, please click on this link:
+<% else -%>
 You have been invited to Bitspace.
 
 You can accept the invite by following this link:
+<% end %>
 
 <%= invitation_url(@invitation) %>
 
