@@ -1,34 +1,20 @@
 <div class="container_16 clearfix">
   <div class="grid_18 prefix_4 suffix_4 aligncenter">
-    <% if current_user.nil? %>
-      <h1>Thank you for signing up!</h1>
-      <h3>
-        Your payment succeeded and an invitation with further instructions has been
-        sent to your email address.
-      </h3>
-      <p class="small grey">
-        Your subscription is linked to the email address you entered on the
-        PayPal payment page. Before you can start using your account we need to
-        confirm your email address. We have sent you an email with a link.
-        Click on the link in the email and everything will be A-OK.
-      </p>
-      <p class="small grey">
-        If you do not receive the email within an hour, contact us at 
-        <%= mail_to('support@bitspace.se') %> and we will help you.
-        Make sure to check your spam folder as well.
-      </p>
-    <% else %>
-      <h1>Thank you for upgrading!</h1>
-      <h3>
-        Your payment succeeded and your account will be upgraded
-        as soon as we get a notification of the transaction from PayPal, which
-        should only take a minute or two.
-      </h3>
-      <p class="small grey">
-        If your account is not automatically upgraded within an hour, please
-        contact us at <%= mail_to('support@bitspace.se') %> and we will try
-        to help you.
-      </p>
-    <% end %>
+    <h1>Thank you for signing up!</h1>
+    <h3>
+      Your payment succeeded and an invitation with further instructions has been
+      sent to your email address.
+    </h3>
+    <p class="small grey">
+      Your subscription is linked to the email address you entered on the
+      PayPal payment page. Before you can start using your account we need to
+      confirm your email address. We have sent you an email with a link.
+      Click on the link in the email and everything will be A-OK.
+    </p>
+    <p class="small grey">
+      If you do not receive the email within an hour, contact us at 
+      <%= mail_to('support@bitspace.se') %> and we will help you.
+      Make sure to check your spam folder as well.
+    </p>
   </div>
 </div>

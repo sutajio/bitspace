@@ -54,6 +54,9 @@ class PaymentsController < ApplicationController
   def success
   end
   
+  def upgraded
+  end
+  
   def cancel
   end
   

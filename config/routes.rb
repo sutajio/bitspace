@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   map.blog_feed 'blog.atom', :controller => 'blog_posts', :action => 'index', :format => 'atom'
   
   # PayPal
-  map.resources :payments, :collection => { :paypal_ipn => :post, :success => :get, :cancel => :get }
+  map.resources :payments, :collection => { :paypal_ipn => :post, :success => :get, :upgraded => :get, :cancel => :get }
   
   # Admin
   map.admin 'admin', :controller => 'admin', :action => 'index'
