@@ -13,20 +13,20 @@ class PaymentsController < ApplicationController
     if notify.acknowledge && params[:receiver_email] == ENV['PAYPAL_USERNAME']
       case notify.type
       when 'subscr_signup':
-        user = User.find_by_email(params[:payer_email])
+        user = User.find_by_email(Iconv.conv('utf-8', params[:charset], params[:payer_email]))
         if user
           user.upgrade_subscription_plan!(
             :subscription_id => params[:subscr_id],
             :subscription_plan => params[:item_name],
-            :first_name => params[:first_name],
-            :last_name => params[:last_name])
+            :first_name => Iconv.conv('utf-8', params[:charset], params[:first_name]),
+            :last_name => Iconv.conv('utf-8', params[:charset], params[:last_name]))
         else
           Invitation.create(
-            :email => params[:payer_email],
+            :email => Iconv.conv('utf-8', params[:charset], params[:payer_email]),
             :subscription_id => params[:subscr_id],
             :subscription_plan => params[:item_name],
-            :first_name => params[:first_name],
-            :last_name => params[:last_name])
+            :first_name => Iconv.conv('utf-8', params[:charset], params[:first_name]),
+            :last_name => Iconv.conv('utf-8', params[:charset], params[:last_name]))
         end
       when 'subscr_payment':
         # Send reciept?
@@ -43,8 +43,8 @@ class PaymentsController < ApplicationController
         user.upgrade_subscription_plan!(
           :subscription_id => params[:subscr_id],
           :subscription_plan => params[:item_name],
-          :first_name => params[:first_name],
-          :last_name => params[:last_name]) if user
+          :first_name => Iconv.conv('utf-8', params[:charset], params[:first_name]),
+          :last_name => Iconv.conv('utf-8', params[:charset], params[:last_name])) if user
       end
     end
     
