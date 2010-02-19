@@ -121,12 +121,14 @@ class Upload < ActiveRecord::Base
 
   def download(&block)
     require 'tempfile'
+    require 'aws/s3/prepare_path_fix'
     Tempfile.open('upload', File.join(Rails.root, 'tmp')) do |file|
       if bucket.present?
         AWS::S3::Base.establish_connection!(
           :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
           :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'])
-        AWS::S3::S3Object.stream(key, bucket) do |chunk|
+        s3obj = AWS::S3::S3Object.find(key, bucket)
+        s3obj.value do |chunk|
           file.write(chunk)
         end
       else
@@ -140,6 +142,8 @@ class Upload < ActiveRecord::Base
       end
       yield(file.flush)
     end
+  rescue Net::HTTPNotFound => e
+    return
   end
 
   def before_destroy
