@@ -1,14 +1,15 @@
-<% content_tag_for(:div, label, :class => 'grid_3') do %>
-  <% link_to(label, :target => '_self') do %>
-    <% if label.artwork.file? %>
-      <%= image_tag(label.artwork.url(:small, false), :size => '125x125', :alt => 'Artwork') %>
-    <% else %>
-      <%= image_tag((label.releases.first_with_artwork || Release.new).artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+<% cache label do %>
+  <% content_tag_for(:div, label, :class => 'grid_3') do %>
+    <% link_to(label, :target => '_self') do %>
+      <% if label.artwork.file? %>
+        <%= image_tag(label.artwork.url(:small, false), :size => '125x125', :alt => 'Artwork') %>
+      <% else %>
+        <%= image_tag((label.releases.first_with_artwork || Release.new).artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+      <% end %>
     <% end %>
+    <%= link_to(h(label.name), label, :class => 'name', :target => '_self') %>
+    <span class="meta">
+      <%= pluralize(label.releases_count, 'release') %>
+    </span>
   <% end %>
-  <%= link_to(h(label.name), label, :class => 'name', :target => '_self') %>
-  <span class="meta">
-    <%= pluralize(label.artists.size, 'artist')%>,
-    <%= pluralize(label.releases.size, 'release') %>
-  </span>
 <% end %>
