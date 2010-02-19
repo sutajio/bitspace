@@ -16,3 +16,4 @@ wmainfo-rb
 flacinfo-rb
 bluecloth
 rbrainz
+memcache-auth
