@@ -59,6 +59,23 @@ class Artist < ActiveRecord::Base
     end
   end
   
+  def merge!(other)
+    transaction do
+      Track.update_all("artist_id = #{self.id}", "artist_id = #{other.id}")
+      other.releases.each do |release|
+        my_release = self.releases.find_by_title(release.title)
+        if my_release
+          my_release.merge!(release)
+        else
+          release.artist = self
+          release.save
+        end
+      end
+      other.destroy
+      self.touch
+    end
+  end
+  
   protected
   
     def with_lastfm(&block)

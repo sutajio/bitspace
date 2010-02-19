@@ -121,6 +121,17 @@ class Release < ActiveRecord::Base
     self.artwork.reprocess!
   end
   
+  def merge!(other)
+    transaction do
+      other.tracks.each do |track|
+        track.release = self
+        track.save
+      end
+      other.destroy
+      self.touch
+    end
+  end
+  
   protected
   
     def with_lastfm(&block)
