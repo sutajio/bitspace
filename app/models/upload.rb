@@ -71,48 +71,49 @@ class Upload < ActiveRecord::Base
         logger.info("Sample rate: #{tags.samplerate}")
         logger.info("VBR: #{tags.vbr}")
         
-        transaction do
-          if track_artist_name != album_artist_name
-            track_artist = user.artists.find_or_create_by_name(track_artist_name)
-            unless track_artist.valid?
-              logger.error(track_artist.errors.full_messages.to_sentence)
-              raise track_artist.errors.full_messages.to_sentence
-            end
+        if track_artist_name != album_artist_name
+          track_artist = user.artists.find_or_create_by_name(track_artist_name)
+          unless track_artist.valid?
+            logger.error(track_artist.errors.full_messages.to_sentence)
+            raise track_artist.errors.full_messages.to_sentence
           end
-          album_artist = user.artists.find_or_create_by_name(album_artist_name)
-          unless album_artist.valid?
-            logger.error(album_artist.errors.full_messages.to_sentence)
-            raise album_artist.errors.full_messages.to_sentence
-          end
-          release = album_artist.releases.find_or_create_by_title(
-            :user => user,
-            :artist => album_artist,
-            :title => release_title,
-            :year => release_year,
-            :artwork => tags.cover)
-          unless release.valid?
-            logger.error(release.errors.full_messages.to_sentence)
-            raise release.errors.full_messages.to_sentence
-          end
-          track = release.tracks.find_or_create_by_title_and_track_nr(
-            :user => user,
-            :artist => track_artist,
-            :release => release,
-            :fingerprint => self.class.generate_fingerprint(tags.audio_content),
-            :title => track_title,
-            :track_nr => track_nr,
-            :set_nr => track_set_nr,
-            :length => tags.length,
-            :bitrate => tags.bitrate,
-            :samplerate => tags.samplerate,
-            :vbr => tags.vbr,
-            :content_type => tags.content_type,
-            :size => file.size,
-            :file => file)
-          unless track.valid?
-            logger.error(track.errors.full_messages.to_sentence)
-            raise track.errors.full_messages.to_sentence
-          end
+        end
+        
+        album_artist = user.artists.find_or_create_by_name(album_artist_name)
+        unless album_artist.valid?
+          logger.error(album_artist.errors.full_messages.to_sentence)
+          raise album_artist.errors.full_messages.to_sentence
+        end
+        
+        release = album_artist.releases.find_or_create_by_title(
+          :user => user,
+          :artist => album_artist,
+          :title => release_title,
+          :year => release_year,
+          :artwork => tags.cover)
+        unless release.valid?
+          logger.error(release.errors.full_messages.to_sentence)
+          raise release.errors.full_messages.to_sentence
+        end
+        
+        track = release.tracks.find_or_create_by_title_and_track_nr(
+          :user => user,
+          :artist => track_artist,
+          :release => release,
+          :fingerprint => self.class.generate_fingerprint(tags.audio_content),
+          :title => track_title,
+          :track_nr => track_nr,
+          :set_nr => track_set_nr,
+          :length => tags.length,
+          :bitrate => tags.bitrate,
+          :samplerate => tags.samplerate,
+          :vbr => tags.vbr,
+          :content_type => tags.content_type,
+          :size => file.size,
+          :file => file)
+        unless track.valid?
+          logger.error(track.errors.full_messages.to_sentence)
+          raise track.errors.full_messages.to_sentence
         end
       end
     end
