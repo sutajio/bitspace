@@ -38,7 +38,7 @@
           <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('About', about_path, :class => params[:action] == 'about' ? 'current' : nil) %></li>
           <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:controller] == 'blog_posts' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('Download', download_path, :class => params[:action] == 'downloads' ? 'current' : nil) %></li>
+          <li class="grid_1"><%= link_to('Download', download_path, :class => params[:action] == 'download' ? 'current' : nil) %></li>
           <li class="grid_5 last">
             <% if current_user %>
               <%= link_to('Go to player →', player_path(:trailing_slash => true), :class => 'button') %>
