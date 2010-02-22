@@ -20,7 +20,7 @@ class User < ActiveRecord::Base
     :double_basic => { :name => 'Bitspace Double Basic', :storage => 20.gigabytes, :price_in_euro => 3.99, :paypal_button_id => 'BDXDFU269SKZC' },
     :double_standard => { :name => 'Bitspace Double Standard', :storage => 50.gigabytes, :price_in_euro => 7.99, :paypal_button_id => '932WV2DB6QV5S' },
     :double_premium => { :name => 'Bitspace Double Premium', :storage => 100.gigabytes, :price_in_euro => 14.99, :paypal_button_id => '5VL5583RRK4QJ' },
-    :custom_200 => { :name => 'Bitspace Custom 200', :storage => 200.gigabytes, :price_in_euro => 59.99, :paypal_button_id => 'PVCKWTUL7XLVA' }
+    :custom_200 => { :name => 'Bitspace Custom 200', :storage => 200.gigabytes, :price_in_euro => 29.99, :paypal_button_id => 'PVCKWTUL7XLVA' }
   }
   
   validates_uniqueness_of :facebook_uid, :allow_nil => true
