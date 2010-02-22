@@ -37,13 +37,13 @@
                     <% if current_user.subscription_plan == plan[:name] %>
                       <strong>Your current plan</strong>
                     <% elsif plan[:paypal_button_id] == nil %>
-                      <%= button_to(plan[:storage] > current_user.max_storage ? 'Upgrade' : 'Downgrade', "https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=#{URI.encode(ENV['PAYPAL_USERNAME'])}", :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
+                      <%= button_to(plan[:storage] > (current_user.max_storage || 1.0/0) ? 'Upgrade' : 'Downgrade', "https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=#{URI.encode(ENV['PAYPAL_USERNAME'])}", :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
                     <% else %>
                       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
                         <input type="hidden" name="cmd" value="_s-xclick" />
                         <input type="hidden" name="hosted_button_id" value="<%= plan[:upgrade_button_id] %>" />
                         <input type="hidden" name="modify" value="1" />
-                        <%= submit_tag plan[:storage] > current_user.max_storage ? 'Upgrade' : 'Downgrade', :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?' %>
+                        <%= submit_tag plan[:storage] > (current_user.max_storage || 1.0/0) ? 'Upgrade' : 'Downgrade', :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?' %>
                       </form>
                     <% end %>
                   </td>
