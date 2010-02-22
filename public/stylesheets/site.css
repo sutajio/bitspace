@@ -28,6 +28,8 @@ h1 em, h2 em, h3 em { text-shadow: #000 0px 0px 1px; }
 h1 span, h2 span, h3 span { font-size: 12px; }
 .pane { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
 .box { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
+blockquote.big-quote .start-quote { color: #3cf; }
+blockquote.big-quote .end-quote { color: #3cf; }
 
 #new_invitation_request { background: #f9f9f9; padding: 10px; }
 #new_invitation_request h3 { margin-bottom: 10px; }

@@ -5,6 +5,10 @@ label { font-weight: bold; }
 label.error { display: block; color: #f66; font-size: 12px; margin: 0; }
 abbr, acronym, .help { cursor: help; border-bottom: 1px dotted #555; }
 
+blockquote.big-quote { font-size: 30px; font-family: Georgia, Times, serif; font-style: italic; line-height: 40px; position: relative; margin-top: 30px; }
+blockquote.big-quote .start-quote { font-size: 90px; font-family: Arial; line-height: 0; position: absolute; top: 0.5em; left: -0.1em; }
+blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-height: 0; position: absolute; top: 0.5em; right: 0em; }
+
 .pane { padding: 10px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .box { padding: 20px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .dialog { padding: 20px; }
