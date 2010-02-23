@@ -34,10 +34,13 @@
   <hr style="border-color:transparent;" />
   <div class="grid_4">
     <div class="aligncenter" style="height:120px;">
-      <% if rand > 0.5 %>
+      <% case rand(5)
+         when 1: %>
         <%= link_to(image_tag('/images/dashboard-facebook.png'), 'http://www.facebook.com/pages/Bitspace/172171790806', :target => '_blank') %>
-      <% else %>
+      <% when 2: %>
         <%= link_to(image_tag('/images/dashboard-twitter.png'), 'http://twitter.com/bitspaced', :target => '_blank') %>
+      <% else %>
+        <%= link_to(image_tag('/images/dashboard-upgrade.png'), upgrade_account_path, :target => '_self') %>
       <% end %>
     </div>
   </div>
