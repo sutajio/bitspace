@@ -55,7 +55,7 @@ class Scrobble < ActiveRecord::Base
   protected
 
     def self.lastfm_session(user, &block)
-      return unless user.connected_to_lastfm?
+      return unless user.connected_to_lastfm? && user.scrobble_to_lastfm?
       auth = Scrobbler::WebserviceAuth.new(:user => user.lastfm_username,
                                            :session_key => user.lastfm_session_key,
                                            :api_key => ENV['LASTFM_API_KEY'],

@@ -42,4 +42,9 @@ class AccountsController < ApplicationController
     end
   end
   
+  def lastfm_scrobbling
+    current_user.toggle!(:scrobble_to_lastfm)
+    head :ok
+  end
+  
 end

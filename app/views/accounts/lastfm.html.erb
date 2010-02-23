@@ -7,16 +7,44 @@
       
       <div class="grid_8">
         <% if current_user.paying_customer? %>
-        <p class="grey">Click the button below to securely connect with your
-        Last.fm account and enable scrobbling of the music you listen to in
-        Bitspace. You wont have to give us your Last.fm password and we have
-        no way of finding it out. The process is completely secure.
-        <p class="grey">You can revoke access for the Bitspace
-        application at any time by going to your Last.fm settings page,
-        <%= link_to('here', 'http://last.fm/settings/applications', :class => 'external', :rel => 'shadowbox') %>.</p>
-        <p><%= button_to('Connect with Last.fm', authorize_lastfm_path, :method => :get, :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %></p>
+          <% if current_user.connected_to_lastfm? %>
+            <p class="lastfm-scrobbling-enabled"<%= ' style="display:none;"' unless current_user.scrobble_to_lastfm? %>>
+              <%= image_tag('yes.png', :style => 'margin-bottom:-4px;') %>
+              Last.fm scrobbling is currently enabled. <%= link_to('Disable it!', lastfm_scrobbling_account_path, :class => 'disable-lastfm-scrobbling') %>
+            </p>
+            <p class="lastfm-scrobbling-disabled"<%= ' style="display:none;"' if current_user.scrobble_to_lastfm? %>>
+              <%= image_tag('no.png', :style => 'margin-bottom:-4px;') %>
+              Last.fm scrobbling is currently disabled. <%= link_to('Enable it!', lastfm_scrobbling_account_path, :class => 'enable-lastfm-scrobbling') %>
+            </p>
+            <script type="text/javascript">
+            $(function(){
+              $('a.enable-lastfm-scrobbling').click(function(e){
+                e.preventDefault();
+                $.post(this.href, { '_method': 'put' }, function(){
+                  $('.lastfm-scrobbling-enabled').show();
+                  $('.lastfm-scrobbling-disabled').hide();
+                });
+              });
+              $('a.disable-lastfm-scrobbling').click(function(e){
+                e.preventDefault();
+                $.post(this.href, { '_method': 'put' }, function(){
+                  $('.lastfm-scrobbling-enabled').hide();
+                  $('.lastfm-scrobbling-disabled').show();
+                });
+              });
+            });
+            </script>
+          <% end %>
+          <p class="grey">Click the button below to securely connect with your
+          Last.fm account and enable scrobbling of the music you listen to in
+          Bitspace. You wont have to give us your Last.fm password and we have
+          no way of finding it out. The process is completely secure.
+          <p class="grey">You can revoke access for the Bitspace
+          application at any time by going to your Last.fm settings page,
+          <%= link_to('here', 'http://last.fm/settings/applications', :class => 'external', :rel => 'shadowbox') %>.</p>
+          <p><%= button_to('Connect with Last.fm', authorize_lastfm_path, :method => :get, :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %></p>
         <% else %>
-        <p class="grey">Last.fm scrobbling is only available to paying customers.</p>
+          <p class="grey">Last.fm scrobbling is only available to paying customers.</p>
         <% end %>
       </div>
       
