@@ -115,6 +115,11 @@ class Upload < ActiveRecord::Base
           logger.error(track.errors.full_messages.to_sentence)
           raise track.errors.full_messages.to_sentence
         end
+        
+        track_artist.try(:touch)
+        album_artist.try(:touch)
+        release.try(:touch)
+        track.try(:touch)
       end
     end
     return true

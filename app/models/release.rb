@@ -83,6 +83,7 @@ class Release < ActiveRecord::Base
             self.label = Label.find_or_create_by_name_and_user_id(
                                 :name => label.name, :user_id => user.id)
             self.save!
+            self.label.try(:touch)
           end
         end
       end
