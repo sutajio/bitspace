@@ -1,0 +1,7 @@
+<li class="release playlist clearfix">
+  <h2><%= playlist.first %></h2>
+  <%= render :partial => 'playlist_info', :locals => { :tracks => playlist.last } %>
+  <ol class="tracks">
+    <%= render :partial => 'tracks/track', :collection => playlist.last, :locals => { :show_artist => true } %>
+  </ol>
+</li>

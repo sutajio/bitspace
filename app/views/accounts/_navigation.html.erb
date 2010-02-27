@@ -2,6 +2,7 @@
   Member since <%= current_user.created_at.to_date.to_formatted_s(:long) %>
 </span>
 <ul class="tabnav">
+  <li><%= link_to('Overview', account_path, :target => '_self', :class => request.path == account_path ? 'current' : nil) %></li>
   <% unless ENV['PRIVATE_BETA'] %>
   <li><%= link_to('Upgrade', upgrade_account_path, :target => '_self', :class => request.path == upgrade_account_path ? 'current' : nil) %></li>
   <% end %>

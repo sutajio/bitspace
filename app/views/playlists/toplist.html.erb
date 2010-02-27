@@ -8,9 +8,6 @@
         <ol class="tracks">
           <%= render :partial => 'tracks/track', :collection => @tracks, :locals => { :show_artist => true } %>
         </ol>
-        <% if @tracks.total_entries > @tracks.size %>
-        <p class="fallback small" style="text-align:right;">Showing <%= pluralize(@tracks.size, 'tracks') %> out of <%= pluralize(@tracks.total_entries, 'loved tracks') %> in total.</p>
-        <% end %>
       </li>
     </ul>
   </div>
