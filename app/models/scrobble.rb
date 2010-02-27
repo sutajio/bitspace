@@ -8,7 +8,7 @@ class Scrobble < ActiveRecord::Base
   validates_presence_of :started_playing
 
   def perform
-    submit_to_lastfm
+    geocode && submit_to_lastfm
   end
   
   def submit_to_lastfm
@@ -28,6 +28,20 @@ class Scrobble < ActiveRecord::Base
       logger.info("Scrobbler Submission Status: #{scrobble.status}")
     end
   end
+  
+  def geocode
+    xml = REXML::Document.new(open("http://api.hostip.info/?ip=#{ip}").read)
+    self.city = REXML::XPath.first(xml, '//Hostip/gml:name', 'gml' => 'http://www.opengis.net/gml').try(:text)
+    self.country = REXML::XPath.first(xml, '//countryName').try(:text)
+    coordinates = REXML::XPath.first(xml, '//gml:coordinates', 'gml' => 'http://www.opengis.net/gml').try(:text)
+    if coordinates.present?
+      self.longitude = coordinates.split(',').first.to_f
+      self.latitude = coordinates.split(',').last.to_f
+    end
+    self.save
+  end
+  
+  handle_asynchronously :geocode
   
   class <<self
     def now_playing(track, user)
