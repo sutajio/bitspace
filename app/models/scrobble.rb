@@ -1,7 +1,7 @@
 class Scrobble < ActiveRecord::Base
 
   belongs_to :user
-  belongs_to :track
+  belongs_to :track, :counter_cache => true
 
   validates_presence_of :user_id
   validates_presence_of :track_id
