@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100223171800) do
+ActiveRecord::Schema.define(:version => 20100227220152) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -146,6 +146,11 @@ ActiveRecord::Schema.define(:version => 20100223171800) do
     t.integer  "track_id"
     t.datetime "started_playing"
     t.string   "ip"
+    t.string   "time_zone"
+    t.string   "country"
+    t.string   "city"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   create_table "tracks", :force => true do |t|
@@ -166,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20100223171800) do
     t.integer  "user_id"
     t.integer  "set_nr"
     t.datetime "loved_at"
+    t.integer  "scrobbles_count"
   end
 
   add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
