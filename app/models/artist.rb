@@ -76,6 +76,12 @@ class Artist < ActiveRecord::Base
     end
   end
   
+  def biography
+    with_lastfm do |info|
+      return info['bio']['content'] unless info['bio'].blank?
+    end
+  end
+  
   protected
   
     def with_lastfm(&block)

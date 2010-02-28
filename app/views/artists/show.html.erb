@@ -1,6 +1,15 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
     <h1><%= link_to(h(@artist.name), @artist, :target => '_self') %></h1>
+    <% if @artist.artwork.file? %>
+      <% cache [@artist, 'biography'], :ttl => 1.week do %>
+        <p class="clearfix grey">
+          <%= image_tag(@artist.artwork.url(:original, false), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0;') %>
+          <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
+        </p>
+        <hr />
+      <% end %>
+    <% end %>
   </div>
 </div>
 
