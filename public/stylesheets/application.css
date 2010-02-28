@@ -18,7 +18,12 @@
 .label a.name { display: block; font-weight: bold; }
 .label span.meta { display: block; font-size: 10px; }
 
-.release { background: #eee; width: 800px; margin: 0; }
+.track-title { width: 500px; overflow: hidden; display: block; float: left; overflow: hidden; height: 19px; }
+.track-artist a { padding: 0 !important; }
+.track-length { width: 50px; display: block; float: left; text-align: right; }
+.track-love {  width: 36px; display: block; float:left; padding-left: 0 !important; text-align: center; }
+
+.release { width: 800px; margin: 0; }
 .release .info { padding: 10px; width: 150px; text-align: center; float: left; }
 .release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
 .release h2 { margin: 0; font-size: 12px; }
@@ -33,10 +38,15 @@
 .release ol.tracks li { padding: 2px; }
 .release ol.tracks li a { padding-left: 19px; }
 
-.track-title { width: 500px; overflow: hidden; display: block; float: left; overflow: hidden; height: 19px; }
-.track-artist a { padding: 0 !important; }
-.track-length { width: 50px; display: block; float: left; text-align: right; }
-.track-love {  width: 36px; display: block; float:left; padding-left: 0 !important; text-align: center; }
+.playlist { width: 940px; margin: 0; }
+.playlist .info { padding: 10px; width: 150px; text-align: center; float: left; }
+.playlist img { margin: 11px 0; -webkit-box-reflect: none; }
+.playlist h2 { padding: 10px 10px; margin-left: 180px; font-size: 14px; }
+
+.playlist ol.tracks { width: 760px; margin-left: 180px; }
+.playlist ol.tracks li { padding: 2px; }
+.playlist ol.tracks li a { padding-left: 19px; }
+.playlist .track-title { width: 630px; }
 
 .years .releases { width: 760px; }
 .years .releases li { list-style: none; margin: 0; float: left; line-height: 0; }
@@ -160,6 +170,14 @@ label { text-shadow: #000 1px 1px 1px; }
 .release ol.tracks li a.playing { background: url(/images/black/playing.png) no-repeat; }
 .release ol.tracks li a.loading { background: url(/images/black/loading.gif) no-repeat; }
 .release ol.tracks li span.track-artist a { color: #777; }
+.playlist { background: #2a2a2a; border-top: 1px solid #222; }
+.playlist h2 { background: #2f2f2f -webkit-gradient(linear, left top, left bottom, from(rgba(34,34,34, .5)), color-stop(0.55, rgba(34,34,34, .01)), to(transparent)); color: #999; }
+.playlist ol.tracks { background: #2f2f2f; color: #777; }
+.playlist ol.tracks li.odd { background: #252525; }
+.playlist ol.tracks li.even { background: #2f2f2f; }
+.playlist ol.tracks li a.playing { background: url(/images/black/playing.png) no-repeat; }
+.playlist ol.tracks li a.loading { background: url(/images/black/loading.gif) no-repeat; }
+.playlist ol.tracks li span.track-artist a { color: #777; }
 .years .year { border-top: 1px solid #1d1d1d; }
 .years .releases { background: -webkit-gradient(linear, left top, left bottom, from(rgba(34,34,34, .5)), color-stop(0.55, rgba(34,34,34, .01)), to(transparent)); }
 .scroll-box-shade { background: -webkit-gradient(linear, right top, left top, from(rgba(42,42,42, 1)), color-stop(0.55, rgba(42,42,42, .01)), to(transparent)); }
