@@ -1,19 +1,21 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
+    <div class="actions" style="float:right; margin-top:15px;">
+      <%= link_to('Biography', '#biography', :rel => 'toggle') %>
+    </div>
     <h1><%= link_to(h(@artist.name), @artist, :target => '_self') %></h1>
     <% if @artist.artwork.file? %>
-      <% cache [@artist, 'truncated-biography-with-large-artwork'], :ttl => 1.week do %>
-        <p id="biography" class="clearfix grey">
+      <% cache [@artist, 'truncated-biography-with-large-artwork-and-toggle'], :ttl => 1.week do %>
+        <p id="biography" class="clearfix grey" style="display:none">
           <%= image_tag(@artist.artwork.url(:large, false), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0;') %>
           <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
         </p>
-        <hr />
       <% end %>
     <% end %>
   </div>
 </div>
 
-<div class="container_16 clearfix pane">
+<div class="container_16 clearfix pane" style="margin-bottom:20px;">
   <div class="grid_16">
     <% if @artist.releases.without_archived.empty? %>
       <div class="fallback">

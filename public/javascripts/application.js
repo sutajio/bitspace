@@ -471,4 +471,10 @@ $(function(){
     });
   });
   
+  $('a[rel=toggle]').livequery('click', function(e){
+    $(new RegExp('(#.+)$').exec(this.href)[1]).toggle('fast');
+    $(this).toggleClass('enabled');
+    e.preventDefault();
+  });
+  
 });

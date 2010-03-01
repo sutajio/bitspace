@@ -28,10 +28,6 @@
 .release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
 .release h2 { margin: 0; font-size: 12px; }
 .release h3 { font-size: 10px; font-weight: normal; }
-.release .actions { float: right; padding-right: 11px; }
-.release .actions a { opacity: 0.25; }
-.release .actions a:hover { opacity: 1; }
-.release .actions img { margin: 0; }
 .release .meta { margin-left: 210px; }
 
 .release ol.tracks { width: 620px; margin-left: 180px; }
@@ -68,6 +64,11 @@
 .account .subscriptions-chart thead th { background: #1c1c1c; }
 .account .storage-gauge { background: #222; border: 1px solid #191919; height: 20px; width: 500px; margin: 0 auto 40px auto; overflow: hidden; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 .account .storage-amount { background: #09f url(/images/progress-shade.png) repeat-x; height: 20px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+
+.actions { float: right; padding-right: 11px; }
+.actions a { opacity: 0.25; }
+.actions a:hover { opacity: 1; }
+.actions img { margin: 0; }
 
 /* LAYOUT */
 
@@ -186,5 +187,6 @@ label { text-shadow: #000 1px 1px 1px; }
 .track-love.loved { opacity: 1; background-position: 50% -38px; }
 .error { color: #f33; text-shadow: #000 1px 1px 1px; }
 .fallback { color: #777; }
-.release .actions a { font-size: 10px; padding: 5px 10px; border: 1px solid #666; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
-.release .actions a.archived { opacity: 1 !important; }
+.actions a { font-size: 10px; padding: 5px 10px; border: 1px solid #888; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.actions a.archived { opacity: 1 !important; }
+.actions a.enabled { opacity: 1 !important; }
