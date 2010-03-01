@@ -2,9 +2,9 @@
   <div class="grid_16">
     <h1><%= link_to(h(@artist.name), @artist, :target => '_self') %></h1>
     <% if @artist.artwork.file? %>
-      <% cache [@artist, 'truncated-biography'], :ttl => 1.week do %>
+      <% cache [@artist, 'truncated-biography-with-large-artwork'], :ttl => 1.week do %>
         <p id="biography" class="clearfix grey">
-          <%= image_tag(@artist.artwork.url(:original, false), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0;') %>
+          <%= image_tag(@artist.artwork.url(:large, false), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0;') %>
           <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
         </p>
         <hr />
