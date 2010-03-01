@@ -463,4 +463,12 @@ $(function(){
     });
   });
   
+  $('#biography').livequery(function(){
+    $(this).expander({
+      slicePoint: 1200,
+      expandText: '<span class="small">Read more</span>',
+      userCollapseText: '<span class="small">Show less</span>'
+    });
+  });
+  
 });
