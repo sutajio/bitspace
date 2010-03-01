@@ -16,7 +16,7 @@ class Artist < ActiveRecord::Base
   
   has_attached_file :artwork,
     :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
-    :styles => { :small => ["125x125#", :png] },
+    :styles => { :small => ["125x125#", :png], :large => ["500x350", :png] },
     :whiny => false,
     :storage => :s3,
     :s3_credentials => {
@@ -80,6 +80,10 @@ class Artist < ActiveRecord::Base
     with_lastfm do |info|
       return info['bio']['content'] unless info['bio'].blank?
     end
+  end
+  
+  def reprocess_artwork!
+    self.artwork.reprocess!
   end
   
   protected
