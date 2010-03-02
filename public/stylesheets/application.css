@@ -31,7 +31,7 @@
 .release .meta { margin-left: 210px; }
 
 .release ol.tracks { width: 620px; margin-left: 180px; }
-.release ol.tracks li { padding: 2px; }
+.release ol.tracks li { padding: 2px; height: 19px; }
 .release ol.tracks li a { padding-left: 19px; }
 
 .playlist { width: 940px; margin: 0; }
@@ -40,7 +40,7 @@
 .playlist h2 { padding: 10px 10px; margin-left: 180px; font-size: 14px; }
 
 .playlist ol.tracks { width: 760px; margin-left: 180px; }
-.playlist ol.tracks li { padding: 2px; }
+.playlist ol.tracks li { padding: 2px; height: 19px; }
 .playlist ol.tracks li a { padding-left: 19px; }
 .playlist .track-title { width: 630px; }
 
