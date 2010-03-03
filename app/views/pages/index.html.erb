@@ -1,38 +1,62 @@
 <div class="color-1">
-  <div class="container_16 clearfix">
-    <div class="grid_11">
-      <% link_to(tour_path) do %>
-      <p><img src="/images/billboard.png" width="640" height="440" alt="Konichiwa!" /></p>
-      <% end %>
-    </div>
-    <div class="grid_5 aligncenter" style="padding-top: 80px; line-height: normal;">
-      <h1>No One Puts Music<br /> In A Corner.</h1>
-      <h3>Bitspace is <em>a better way to store and listen to music</em>.
-      Simply upload your collection and enjoy 
-      it every day and from anywhere.</h3>
-      <hr />
-      <% if ENV['PRIVATE_BETA'] %>
-        <% form_for InvitationRequest.new do |f| %>
-          <h3>Subscribe for beta invite...</h3>
-          <%= f.text_field :email, :class => 'required email', :hint => 'Enter your email address' %>
-          <%= f.submit 'Subscribe' %>
-          <%=h flash[:notice] %>
+  <div class="billboard">
+    <div class="container_16 clearfix">
+      <div class="grid_11">
+        <% link_to(tour_path) do %>
+          <img src="/images/billboard-20100303.png" width="640" height="440" alt="Konichiwa!" />
         <% end %>
-      <% else %>
-        <div id="signup-button">
-          <h3>
-            <% link_to(price_path) do %>
-              See Plans and Pricing →<br />
-              <span>30-day free trial, sign up in 60 seconds</span>
-            <% end %>
-          </h3>
-        </div>
+      </div>
+      <div class="grid_5 aligncenter" style="padding-top: 80px; line-height: normal;">
+        <h1>No One Puts Music<br /> In A Corner.</h1>
+        <h3>Bitspace is <em>a better way to store and listen to music</em>.
+        Simply upload your collection and enjoy 
+        it every day and from anywhere.</h3>
+        <hr />
+        <% if ENV['PRIVATE_BETA'] %>
+          <% form_for InvitationRequest.new do |f| %>
+            <h3>Subscribe for beta invite...</h3>
+            <%= f.text_field :email, :class => 'required email', :hint => 'Enter your email address' %>
+            <%= f.submit 'Subscribe' %>
+            <%=h flash[:notice] %>
+          <% end %>
+        <% else %>
+          <div id="signup-button">
+            <h3>
+              <% link_to(price_path) do %>
+                See Plans and Pricing →<br />
+                <span>30-day free trial, sign up in 60 seconds</span>
+              <% end %>
+            </h3>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="color-2">
+  <div class="container_16 clearfix">
+    <div class="grid_16 aligncenter">
+      <% case rand(2)
+         when 0: %>
+      <blockquote class="big-quote">
+        <span class="start-quote">“</span>
+        Bitspace is a game changer. It’s the finest example of a powerful, beautiful and standards-compliant web application.
+        <span class="end-quote">”</span>
+      </blockquote>
+      - <a href="http://www.macstories.net/reviews/bitspace/" class="grey">MacStories.net</a>
+      <% when 1: %>
+      <blockquote class="big-quote">
+        <span class="start-quote">“</span>
+        Compared to Lala, Bitspace is definitely the prettier service and<br /> it's reliance on open web-standards is commendable.
+        <span class="end-quote">”</span>
+      </blockquote>
+      - <a href="http://www.readwriteweb.com/archives/bitspace_html5_streaming_music_and_music_backup_services.php" class="grey">ReadWriteWeb</a>
       <% end %>
     </div>
   </div>
 </div>
 <hr />
-<div class="color-2">
+<div class="color-3">
   <div class="container_16 clearfix">
     <div class="grid_4">
       <h2>Store your<br />music collection</h2>
@@ -64,32 +88,8 @@
       <p><strong>We use the latest web technologies in order to bring you the best
         possible product.</strong> With HTML5 we can utilize the native audio
         playback support in modern web browsers like Safari and Google Chrome.
-        No need for a bug ridden Flash Player that crashes your browser after
-        an hour. Bitspace can import and play pretty much all audio file formats
-        in common use, like MP3, MP4, OGG, WMA and Flac.</p> 
-    </div>
-  </div>
-</div>
-<hr />
-<div class="color-3">
-  <div class="container_16 clearfix">
-    <div class="grid_16 aligncenter">
-      <% case rand(2)
-         when 0: %>
-      <blockquote class="big-quote">
-        <span class="start-quote">“</span>
-        Bitspace is a game changer. It’s the finest example of a powerful, beautiful and standards-compliant web application.
-        <span class="end-quote">”</span>
-      </blockquote>
-      - <a href="http://www.macstories.net/reviews/bitspace/" class="grey">MacStories.net</a>
-      <% when 1: %>
-      <blockquote class="big-quote">
-        <span class="start-quote">“</span>
-        Compared to Lala, Bitspace is definitely the prettier service and<br /> it's reliance on open web-standards is commendable.
-        <span class="end-quote">”</span>
-      </blockquote>
-      - <a href="http://www.readwriteweb.com/archives/bitspace_html5_streaming_music_and_music_backup_services.php" class="grey">ReadWriteWeb</a>
-      <% end %>
+        Bitspace can import and play pretty much all audio file formats
+        in common use, like MP3, MP4, OGG, WMA and Flac with the click of a button.</p> 
     </div>
   </div>
 </div>
