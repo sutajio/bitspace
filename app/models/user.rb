@@ -88,6 +88,7 @@ class User < ActiveRecord::Base
   end
   
   def forgot_password
+    reset_perishable_token!
     PasswordMailer.deliver_reset_password_link(self)
   end
   
