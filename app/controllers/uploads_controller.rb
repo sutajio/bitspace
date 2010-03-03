@@ -3,7 +3,7 @@ class UploadsController < ApplicationController
   layout nil
   include UploadsHelper
   
-  before_filter :enforce_storage_constraints, :only => [:create, :import]
+  before_filter :enforce_storage_constraints
   skip_before_filter :verify_authenticity_token, :only => [:import]
   
   def new
@@ -41,11 +41,7 @@ class UploadsController < ApplicationController
   
     def enforce_storage_constraints
       if current_user.storage_left <= 0
-        if request.xhr?
-          render :text => "You don't have any space left. Sorry!", :status => :forbidden
-        else
-          redirect_to root_path
-        end
+        render :text => "You don't have any space left. Sorry!", :status => :forbidden
       end
     end
   
