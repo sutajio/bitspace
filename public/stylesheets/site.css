@@ -1,7 +1,7 @@
 @font-face { font-family:GraublauWeb; src:url(/fonts/GraublauWeb.otf) format("opentype") }
 @font-face { font-family:GraublauWeb; src:url(/fonts/GraublauWebBold.otf) format("opentype"); font-weight:bold }
 
-body { background: #eee; font: 11px/18px "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif; color: #333 }
+body { background: #eee; font: 11px/18px "Helvetica Neue", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif; color: #333; text-shadow: #fff 1px 1px 1px; }
 #root { background: #fff; }
 #menu { border-bottom: 1px solid #eee; }
 #menu a { color: #666; font-size: 12px; }
