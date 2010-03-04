@@ -41,7 +41,7 @@ class UploadsController < ApplicationController
   
     def enforce_storage_constraints
       if current_user.storage_left <= 0
-        render :text => "You don't have any space left. Sorry!", :status => :forbidden
+        render :text => "You don't have any space left. Sorry!", :status => :payment_required
       end
     end
   

@@ -40,7 +40,10 @@ class ApplicationController < ActionController::Base
         if request.xhr?
           render :text => "You must be logged in to access that page.", :status => :forbidden
         else
-          redirect_to login_path
+          respond_to do |format|
+            format.html { redirect_to login_path }
+            format.json { render :text => 'Invalid username or password.', :status => :unauthorized }
+          end
         end
         return false
       end
@@ -51,7 +54,10 @@ class ApplicationController < ActionController::Base
         if request.xhr?
           render :text => "You must be logged out to access that page.", :status => :forbidden
         else
-          redirect_to player_path(:trailing_slash => true)
+          respond_to do |format|
+            format.html { redirect_to player_path(:trailing_slash => true) }
+            format.json { head :forbidden }
+          end
         end
         return false
       end
@@ -60,9 +66,12 @@ class ApplicationController < ActionController::Base
     def require_admin_user
       unless current_user.is_admin?
         if request.xhr?
-          render :text => "You must be admin access that page.", :status => :forbidden
+          render :text => "You must be admin to access that page.", :status => :forbidden
         else
-          redirect_to login_path
+          respond_to do |format|
+            format.html { redirect_to login_path }
+            format.json { head :forbidden }
+          end
         end
         return false
       end
