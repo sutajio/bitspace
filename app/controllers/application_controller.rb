@@ -70,7 +70,7 @@ class ApplicationController < ActionController::Base
     
     def require_chrome_frame_if_ie
       if current_user
-        if request.headers['User-Agent'].include?('MSIE')
+        if (request.headers['User-Agent'] || []).include?('MSIE')
           unless request.headers['User-Agent'].include?('chromeframe')
             redirect_to 'http://www.google.com/chromeframe'
           end
