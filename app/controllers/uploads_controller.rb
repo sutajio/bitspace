@@ -11,9 +11,9 @@ class UploadsController < ApplicationController
       with.json do
         render :json => {
           :url => s3_upload_url,
-          :params => s3_upload_params(
+          :params => JSON.parse(s3_upload_params(
             :AWSAccessKeyId => ENV['AMAZON_ACCESS_KEY_ID'],
-            :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY']),
+            :AWSSecretAccessKey => ENV['AMAZON_SECRET_ACCESS_KEY'])),
           :file_param => s3_upload_file_param
         }
       end
