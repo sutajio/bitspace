@@ -8,4 +8,5 @@
   <% end %>
   <li><%= link_to('Profile', profile_account_path, :target => '_self', :class => request.path == profile_account_path ? 'current' : nil) %></li>
   <li><%= link_to('Last.fm', lastfm_account_path, :target => '_self', :class => request.path == lastfm_account_path ? 'current' : nil) %></li>
+  <li><%= link_to('API token', api_account_path, :target => '_self', :class => request.path == api_account_path ? 'current' : nil) %></li>
 </ul>

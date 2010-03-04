@@ -25,7 +25,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :requirements => { :method => 'delete' }
   map.resource :password, :member => { :forgot => :get, :reset => :get, :woohoo => :get }
-  map.resource :account, :member => { :credentials => :any, :upgrade => :any, :profile => :any, :lastfm => :any, :valid_password => :get, :lastfm_scrobbling => :put }
+  map.resource :account, :member => { :credentials => :any, :upgrade => :any, :profile => :any, :lastfm => :any, :api => :any, :valid_password => :get, :lastfm_scrobbling => :put }
   
   # Pages
   map.price 'price', :controller => 'pages', :action => 'price'
@@ -55,6 +55,9 @@ ActionController::Routing::Routes.draw do |map|
   # Clients
   map.resources :clients, :member => { :changelog => :get, :release_notes => :get, :download => :get }
   map.resources :client_versions, :member => { :download => :get }
+  
+  # Developerland
+  map.resource :developer, :member => { :overview => :get, :authentication => :get, :upload => :get, :library => :get }
   
   # Root
   map.root :controller => 'pages', :action => 'index'

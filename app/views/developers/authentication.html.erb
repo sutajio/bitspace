@@ -1,0 +1,38 @@
+<%= render :partial => 'header' %>
+
+<div class="container_12 clearfix">
+  <div class="grid_8 suffix_1">
+
+    <h2>Authentication</h2>
+    <p>Authentication is managed using HTTP authentication (only "Basic" is supported
+    right now). Every request must include the Authorization HTTP header. Use the
+    same username and password that you use to sign in to the Bitspace Player. Example
+    with Curl:</p>
+    
+    <pre><code>curl -u username:password http://url-to-api-here</code></pre>
+    
+    <p>You can also use an "API token" for authentication. Your API token changes
+      when you change your password and you can find your current token on the
+      "Account" page in the Bitspace Player. To use the API token for authenticating
+      requests to the API you add it as a query paramater to all API requests,
+      like this:</p>
+      
+    <pre><code>curl http://url-to-api?user_credentials=4LiXF7FiGUppIPubBPey</code></pre>
+    
+    <p>Note that you need to add the <code>user_credentials</code> paramater to <em>all</em>
+      calls to the API that you make. It is <em>not</em> persisted between requests.</p>
+    
+    <p>Be careful with how you handle your API token as it gives complete access to
+      your account without having to specify a username and password. You don't
+      want it to end up in the wrong hands. If that happens you can simply change
+      your password and the API token will be reset.</p>
+      
+    <h2>OAuth</h2>
+    <p>OAuth is currently not supported.</p>
+  
+  </div>
+  
+  <div class="grid_3">
+    <%= render :partial => 'navigation' %>
+  </div>
+</div>

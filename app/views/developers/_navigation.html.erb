@@ -1,0 +1,21 @@
+<% unless request.path == developer_path %>
+  <h2 style="margin-bottom:10px;">Table of Contents</h2>
+  <ul>
+    <li><%= link_to('Overview', developer_path) %></li>
+    <li><%= link_to('Authentication', authentication_developer_path) %></li>
+    <li><%= link_to('Upload API', upload_developer_path) %></li>
+    <li class="grey">Library API (soon)</li>
+    <li class="grey">Search API (soon)</li>
+    <li class="grey">Account API (soon)</li>
+    <li class="grey">Widgets (soon)</li>
+  </ul>
+<% end %>
+
+<h2 style="margin-bottom:10px;">API Mailing List</h2>
+<p><em>Discussion about all the APIs happens on the 
+  <a href="http://groups.google.com/group/bitspace-api">bitspace-api mailing 
+  list</a>.</em></p>
+
+<h2 style="margin-bottom:10px;">Commercial use</h2>
+<p><em>Please contact us at <%= mail_to('hello@bitspace.se') %> for more 
+  info.</em></p>
