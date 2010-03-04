@@ -4,7 +4,7 @@ class UploadsController < ApplicationController
   include UploadsHelper
   
   before_filter :enforce_storage_constraints
-  skip_before_filter :verify_authenticity_token, :only => [:import]
+  skip_before_filter :verify_authenticity_token, :only => [:create, :import]
   
   def new
     respond_to do |with|
