@@ -11,6 +11,10 @@
     
     <pre><code>curl -u username:password http://url-to-api-here</code></pre>
     
+    <p>If authentication fails the HTTP response will be either 403 Forbidden
+      (authentication succeeded, but you're not allowed to access the resource
+      anyway) or 401 Unauthorized (authentication details are wrong or missing).</p>
+    
     <p>You can also use an "API token" for authentication. Your API token changes
       when you change your password and you can find your current token on the
       "Account" page in the Bitspace Player. To use the API token for authenticating
