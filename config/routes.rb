@@ -20,8 +20,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :invitations
   map.resources :invitation_requests
   map.resources :user_sessions
-  map.resources :facebook_sessions
-  map.facebook_logout 'fb-logout', :controller => 'facebook_sessions', :action => 'destroy', :requirements => { :method => 'delete' }
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :requirements => { :method => 'delete' }
   map.resource :password, :member => { :forgot => :get, :reset => :get, :woohoo => :get }

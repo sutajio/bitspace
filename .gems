@@ -8,7 +8,6 @@ authlogic
 discogs
 scrobbler
 scrobbler2
-facebooker --version 1.0.54
 activemerchant
 MP4Info
 ruby-ogginfo
