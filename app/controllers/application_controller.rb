@@ -92,5 +92,9 @@ class ApplicationController < ActionController::Base
         username == 'admin' && password == ENV['ADMIN_PASSWORD']
       end
     end
+    
+    def single_access_allowed?
+      true
+    end
 
 end
