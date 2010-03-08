@@ -17,7 +17,8 @@
       and parameters that you need to pass along in order for your uploaded file to
       be accepted. Example with Curl:</p>
     
-    <pre><code>curl -u username:password <%= new_upload_url %></code></pre>
+    <pre><code>curl -u username:password -H "Accept: application/json" \
+  <%= new_upload_url %></code></pre>
     
     <p>The response will be a JSON document that will look something like this:</p>
     
@@ -69,6 +70,18 @@
     <p>If the authentication fails or if the upload fails for some other reason
       a standard HTTP error will be returned. It is important to note that you
       need to submit the request using UTF-8 encoding.</p>
+    
+    <p>If you are uploading multiple files in batch it is recommended best
+      practice to upload the files in the order that they were created on the
+      local file system. I.e. old files are uploaded first. This because
+      releases in the Bitspace Player UI is ordered by when they were
+      uploaded, so uploading old files first will most likely result in
+      the best overall experience for the end user.</p>
+    
+    <p>If you are implementing the upload manually without using a tool like
+      Curl you might need to supply an "Expect: 100-continue" header in the
+      upload request for the request to be accepted. This is done automatically
+      by most tools and some HTTP libraries.</p>
     
     <h2>After the upload has finished</h2>
     <p>When the upload has finished you need to manually notify Bitspace that

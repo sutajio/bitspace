@@ -15,11 +15,16 @@
       (authentication succeeded, but you're not allowed to access the resource
       anyway) or 401 Unauthorized (authentication details are wrong or missing).</p>
     
-    <p>You can also use an "API token" for authentication. Your API token changes
-      when you change your password and you can find your current token on the
-      "Account" page in the Bitspace Player. To use the API token for authenticating
-      requests to the API you add it as a query paramater to all API requests,
-      like this:</p>
+    <p>You need to supply an <code>Accept: application/json</code> HTTP header
+      for your requests to be interpreted as API requests. If you don't do that
+      you will instead get a 302 Redirect to the login page if the authentication
+      fails.</p>
+    
+    <p>You can also use an "API token" for authentication. You can find your
+    current token on the "Account" page in the Bitspace Player where you can
+    also reset the token if necessary. To use the API token for authenticating
+    requests to the API you add it as a query paramater to all API requests,
+    like this:</p>
       
     <pre><code>curl http://url-to-api?user_credentials=4LiXF7FiGUppIPubBPey</code></pre>
     
@@ -28,8 +33,8 @@
     
     <p>Be careful with how you handle your API token as it gives complete access to
       your account without having to specify a username and password. You don't
-      want it to end up in the wrong hands. If that happens you can simply change
-      your password and the API token will be reset.</p>
+      want it to end up in the wrong hands. If that happens you can simply reset
+      the API token from your account page.</p>
       
     <h2>OAuth</h2>
     <p>OAuth is currently not supported.</p>

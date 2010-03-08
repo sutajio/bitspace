@@ -11,7 +11,22 @@
         your Bitspace data. <strong>Be careful with your token</strong>
         &ndash; anyone who has your token can access your data.</p>
         
-        <p><%= text_field_tag :token, current_user.single_access_token, :readonly => true %></p>
+        <p>
+          <%= text_field_tag :token, current_user.single_access_token, :readonly => true %>
+          <%= link_to('Reset token', reset_api_token_account_path, :id => 'reset-api-token') %>
+          <script type="text/javascript">
+          $(function(){
+            $('#reset-api-token').click(function(e){
+              e.preventDefault();
+              if(confirm('Are you sure? Any application using the API token will stop working.')){
+                $.post(this.href, { '_method': 'PUT' }, function(new_token){
+                  $('#token').val(new_token);
+                });
+              }
+            });
+          });
+          </script>
+        </p>
       </div>
       
     </div>
