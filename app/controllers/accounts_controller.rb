@@ -52,4 +52,13 @@ class AccountsController < ApplicationController
     render :text => current_user.single_access_token
   end
   
+  def invitations
+    @invitation = Invitation.new(params[:invitation])
+    if request.post?
+      @invitation.user = current_user
+      @invitation.save!
+      head :ok
+    end
+  end
+  
 end

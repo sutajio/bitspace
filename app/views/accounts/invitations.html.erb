@@ -1,0 +1,60 @@
+<div class="account" id="account-invitations">
+  <div class="container_16 clearfix">
+    <div class="pane clearfix">
+      
+      <div class="grid_9">
+        <% if current_user.paying_customer? %>
+          <h3>Invite your friends to Bitspace</h3>
+          <% if current_user.invitations_left.to_i > 0 %>
+            <p class="grey">
+              You can send an invitation by
+              entering the email address of a friend below.
+              Your friend will be invited to create a Bitspace Free
+              account. Only users with a payed account plan can invite
+              other people.
+            </p>
+            <p class="grey">You currently have <%= pluralize(current_user.invitations_left, 'invitation') %> left.</p>
+            
+            <% form_for @invitation, :url => invitations_account_path do |f| %>
+              <p><%= f.text_field :email, :class => 'required email' %></p>
+              <p><%= button_to('Send invitation', reset_api_token_account_path, :id => 'reset-api-token') %></p>
+              <script type="text/javascript">
+              $(function(){
+                $('#new_invitation').validate({
+                  submitHandler: function(form) {
+                    $(form).ajaxSubmit({
+                      success: function(){
+                        $.address.value('/');
+                      }
+                    });
+                  }
+                });
+              });
+              </script>
+            <% end %>
+          <% else %>
+            <p class="grey">
+              <em>Sorry, you don't have any invitations left.</em>
+            </p>
+          <% end %>
+          <% if current_user.invitations.present? %>
+            <hr />
+            <ul><% current_user.invitations.each do |invitation| %>
+            <li class="grey"><code><%= link_to(invitation.token, invitation_path(invitation), :target => '_blank') %></code> &ndash;
+              Was sent to <strong><%=h invitation.email %></strong></li>
+            <% end %></ul>
+          <% end %>
+        <% else %>
+          <h3>Sorry, you don't have any invitations...</h3>
+          <p class="grey">
+            <em>Only paying users can send invitations. You are currently on the
+              <%= current_user.subscription_plan %> plan which does not include
+              any invitations.</em>
+          </p>
+          <p><%= link_to('Click here to upgrade →', upgrade_account_path, :target => '_self') %></p>
+        <% end %>
+      </div>
+      
+    </div>
+  </div>
+</div>

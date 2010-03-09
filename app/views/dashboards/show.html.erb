@@ -27,80 +27,21 @@
     </div>
     <div class="grid_6">
       <div style="padding:43px 56px; margin: 0 -38px 0 -56px; background: url(/images/dashboard-blue-bubble.png) no-repeat; height: 114px; font-size: 18px; font-family: Georgia; font-style: italic; text-shadow: #00f 0px 0px 1px;">
-        <div style="padding:18px 0;">Konichiwa! You can start uploading your music collection right now. Just click the &raquo;Upload&laquo; button below.</div>
+        <div style="padding:18px 0;">Konnichiwa! You can start uploading your music collection right now. Just click the &raquo;Upload&laquo; button below.</div>
       </div>
     </div>
   <% end %>
   <hr style="border-color:transparent;" />
   <div class="grid_4">
-    <div class="aligncenter" style="height:120px;">
-      <% case rand(5)
-         when 1: %>
-        <%= link_to(image_tag('/images/dashboard-facebook.png'), 'http://www.facebook.com/pages/Bitspace/172171790806', :target => '_blank') %>
-      <% when 2: %>
-        <%= link_to(image_tag('/images/dashboard-twitter.png'), 'http://twitter.com/bitspaced', :target => '_blank') %>
-      <% else %>
-        <%= link_to(image_tag('/images/dashboard-upgrade.png'), upgrade_account_path, :target => '_self') %>
-      <% end %>
-    </div>
+    <%= render :partial => 'promo_bitspace' %>
   </div>
   <div class="grid_4">
-    <div class="aligncenter" style="height:120px;">
-      <%= link_to(image_tag('/images/dashboard-lastfm.png'), '#lastfm', :rel => "shadowbox;width=400;height=#{current_user.paying_customer? ? 300 : 98}") %>
-      <div style="display:none" id="lastfm">
-        <div class="dialog aligncenter">
-          <% if current_user.paying_customer? %>
-            <p><%= image_tag('/images/lastfm_red.gif') %></p>
-            <p class="grey">Click the link below to securely connect with your
-            Last.fm account and <strong>enable scrobbling</strong> of the music you listen to in
-            Bitspace. You wont have to give us your Last.fm password and we have
-            no way of finding it out. The process is completely secure.
-            <p class="grey">You can revoke access for the Bitspace
-            application at any time by going to your Last.fm settings page,
-            <%= link_to('here', 'http://last.fm/settings/applications', :class => 'external', :target => '_blank') %>.</p>
-            <%= button_to('Connect with Last.fm', authorize_lastfm_path, :method => :get, :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
-          <% else %>
-            <p class="grey">Last.fm scrobbling is only available to paying customers.</p>
-            <% unless ENV['PRIVATE_BETA'] %>
-              <%= link_to('Click here to upgrade your account →', "##{upgrade_account_path}", :onclick => 'Shadowbox.close();') %>
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
+    <%= render :partial => 'promo_lastfm' %>
   </div>
   <div class="grid_4">
-    <div class="pane alignleft" style="height:120px;">
-      <% if current_user.tracks.loved.empty? %>
-      <div class="fallback">
-        No loved tracks yet.
-      </div>
-      <% else %>
-      <ul style="list-style:none;">
-      <% current_user.tracks.loved.all(:limit => 6).each do |track| %>
-        <li style="margin:0 20px;">
-          <%= link_to(h(truncate(track.title, :length => 23)), track.release, :target => '_self', :class => 'track-title', :style => 'width: 161px; overflow: hidden; height: 17px;') %>
-          <%= link_to('Love', love_track_path(track), :class => track.loved? ? 'track-love loved' : 'track-love', :rel => 'love', :style => 'width:19px;') %>
-        </li>
-      <% end %>
-      </ul>
-      <% end %>
-    </div>
+    <%= render :partial => 'promo_invitations' %>
   </div>
   <div class="grid_4">
-    <div class="pane alignleft" style="height:120px; text-shadow: #000 1px 1px 1px">
-      <div style="text-align:center; font-size:16px;">
-        <div><%= pluralize(current_user.artists.with_releases.size, 'artists') %></div>
-        <div><%= pluralize(current_user.releases.size, 'releases') %></div>
-        <div><%= pluralize(current_user.tracks.size, 'tracks') %></div>
-        <div>
-          <%= number_to_human_size(current_user.tracks.sum(:size)) %> /
-          <%= number_to_human_size(current_user.max_storage) || 'Unlimited' %>
-        </div>
-        <div>
-          <span class="time"><%= seconds_to_time(current_user.tracks.sum(:length)) %></span>
-        </div>
-      </div>
-    </div>
+    <%= render :partial => 'promo_events' %>
   </div>
 </div>

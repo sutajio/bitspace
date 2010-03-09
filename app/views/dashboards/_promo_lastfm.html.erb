@@ -1,0 +1,23 @@
+<div class="aligncenter" style="height:120px;">
+  <%= link_to(image_tag('/images/dashboard-lastfm.png'), '#lastfm', :rel => "shadowbox;width=400;height=#{current_user.paying_customer? ? 300 : 98}") %>
+  <div style="display:none" id="lastfm">
+    <div class="dialog aligncenter">
+      <% if current_user.paying_customer? %>
+        <p><%= image_tag('/images/lastfm_red.gif') %></p>
+        <p class="grey">Click the link below to securely connect with your
+        Last.fm account and <strong>enable scrobbling</strong> of the music you listen to in
+        Bitspace. You wont have to give us your Last.fm password and we have
+        no way of finding it out. The process is completely secure.
+        <p class="grey">You can revoke access for the Bitspace
+        application at any time by going to your Last.fm settings page,
+        <%= link_to('here', 'http://last.fm/settings/applications', :class => 'external', :target => '_blank') %>.</p>
+        <%= button_to('Connect with Last.fm', authorize_lastfm_path, :method => :get, :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
+      <% else %>
+        <p class="grey">Last.fm scrobbling is only available to paying customers.</p>
+        <% unless ENV['PRIVATE_BETA'] %>
+          <%= link_to('Click here to upgrade your account →', "##{upgrade_account_path}", :onclick => 'Shadowbox.close();') %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
