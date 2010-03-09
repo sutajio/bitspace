@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100228144907) do
+ActiveRecord::Schema.define(:version => 20100309152018) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -218,6 +218,7 @@ ActiveRecord::Schema.define(:version => 20100228144907) do
     t.string   "password_salt"
     t.boolean  "scrobble_to_lastfm",                :default => true
     t.boolean  "private_beta"
+    t.integer  "invitations_left",                  :default => 0
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
