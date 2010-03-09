@@ -78,11 +78,6 @@
       uploaded, so uploading old files first will most likely result in
       the best overall experience for the end user.</p>
     
-    <p>If you are implementing the upload manually without using a tool like
-      Curl you might need to supply an "Expect: 100-continue" header in the
-      upload request for the request to be accepted. This is done automatically
-      by most tools and some HTTP libraries.</p>
-    
     <h2>After the upload has finished</h2>
     <p>When the upload has finished you need to manually notify Bitspace that
       the file has been uploaded and need to be processed. Example with Curl:</p>
