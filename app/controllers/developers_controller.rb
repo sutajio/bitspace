@@ -6,7 +6,7 @@ class DevelopersController < ApplicationController
   def show
   end
   
-  def overview
+  def branding
   end
   
   def upload

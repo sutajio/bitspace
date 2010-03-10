@@ -55,7 +55,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :client_versions, :member => { :download => :get }
   
   # Developerland
-  map.resource :developer, :member => { :overview => :get, :authentication => :get, :upload => :get, :library => :get }
+  map.resource :developer, :member => { :branding => :get, :authentication => :get, :upload => :get, :library => :get }
   
   # Root
   map.root :controller => 'pages', :action => 'index'

@@ -1,0 +1,40 @@
+<%= render :partial => 'header' %>
+
+<div class="container_12 clearfix">
+  <div class="grid_8 suffix_1">
+    <h2>Branding guidelines</h2>
+    <p>The following guidelines will help you to correctly brand the tool
+      or app that your are creating. Please note that using the official Bitspace
+      branding is not a requirement and we encourage the use of custom designs
+      as long as such designs does not confuse or infringe on the official
+      Bitspace design. If you are using the API in a commercial
+      setting the guidelines are a bit stricter and you should always contact us
+      to get a formal approval before releasing a commercial product or service
+      that uses the Bitspace API and/or the Bitspace branding.</p>
+    
+    <h3>Logos and colors</h3>
+    <p>
+      <%= image_tag('/images/logo_200x200.png', :size => '200x200') %>
+      <%= image_tag('/images/logo_200x200_inverted.png', :size => '200x200') %>
+    </p>
+    <ul>
+      <li><%= link_to('200x200 color PNG', '/images/logo_200x200.png') %>, 44 Kb</li>
+      <li><%= link_to('200x200 inverted PNG', '/images/logo_200x200_inverted.png') %>, 36 Kb</li>
+      <li><%= link_to('16x16 favicon PNG', '/images/logos/favicon.png') %>, 4 Kb</li>
+      <li><%= link_to('16x16 favicon ICO', '/favicon.ico') %>, 4 Kb</li>
+    </ul>
+    <p>The color and inverted logos can be used interchangeably, but the inverted
+      logo is preferred in technical contexts. The official Bitspace color is
+      <code>#0099ff</code> in hexadecimal representation. Both logos can be used
+      on both a black and white background. Please avoid placing the logos on
+      backgrounds that is neither black or white or close to strongly colored
+      graphical elements.</p>
+    
+    <p><em>Important!</em><br /><strong>Do not use the logos in a way that imply
+      that your tool or app is an official Bitspace product.</strong></p>
+  </div>
+  
+  <div class="grid_3">
+    <%= render :partial => 'navigation' %>
+  </div>
+</div>
