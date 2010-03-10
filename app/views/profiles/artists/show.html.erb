@@ -1,0 +1,19 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <h1><%=h @artist.name %></h1>
+    <% if @artist.artwork.file? %>
+      <% cache [@artist, 'biography'], :ttl => 1.week do %>
+        <p id="biography" class="clearfix grey">
+          <%= image_tag(@artist.artwork.url(:large, false), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0; height:350px;') %>
+          <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
+        </p>
+      <% end %>
+    <% end %>
+    <hr />
+    <span class="grey">More at...</span><br />
+    <!-- <%= link_to('Spotify', "spotify:search:artist:\"#{CGI.escape(@artist.name)}\"", :rel => 'nofollow') %> / -->
+    <%= link_to('Last.fm', "http://www.last.fm/search?q=#{CGI.escape(@artist.name)}&type=artist", :rel => 'nofollow') %> /
+    <%= link_to('YouTube', "http://www.youtube.com/results?search_query=#{CGI.escape(@artist.name)}", :rel => 'nofollow') %> /
+    <%= link_to('Wikipedia', "http://en.wikipedia.org/wiki/#{CGI.escape(@artist.name.gsub(' ','_'))}", :rel => 'nofollow')%>
+  </div>
+</div>

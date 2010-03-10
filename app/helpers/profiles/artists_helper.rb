@@ -1,0 +1,2 @@
+module Profiles::ArtistsHelper
+end

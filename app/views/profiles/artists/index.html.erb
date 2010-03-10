@@ -1,0 +1,11 @@
+<div class="container_16 clearfix pane">
+  <div class="artists clearfix">
+    <%= render :partial => 'profiles/artists/artist', :collection => @artists %>
+  </div>
+</div>
+
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <%= will_paginate(@artists) %>
+  </div>
+</div>

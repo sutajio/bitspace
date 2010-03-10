@@ -6,6 +6,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.tipsy.js',
     '/vendor/plugins/jquery.input-hint.js',
     '/vendor/plugins/jquery.validation.js',
+    '/vendor/plugins/jquery.expander.js',
     '/vendor/shadowbox/shadowbox.js'
   ],
   :application => [
@@ -17,7 +18,6 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.ui.js',
     '/vendor/plugins/jquery.address.js',
     '/vendor/plugins/jquery.suggest.js',
-    '/vendor/plugins/jquery.expander.js',
     '/vendor/jplayer/jquery.jplayer.min.js',
     'application'
   ],

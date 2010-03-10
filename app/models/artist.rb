@@ -88,6 +88,10 @@ class Artist < ActiveRecord::Base
     self.artwork.reprocess!
   end
   
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+  
   protected
   
     def with_lastfm(&block)

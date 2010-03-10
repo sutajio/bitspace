@@ -1,0 +1,45 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <% if @release.artwork.file? %>
+    <%= image_tag(@release.artwork.url(:medium, false), :size => '240x240', :alt => 'Cover art', :style => 'float:left; margin:0 20px 20px 0;') %>
+    <% else %>
+    <%= image_tag(@release.artwork.url(:medium, false), :size => '240x240', :alt => 'Cover art', :style => 'float:left; margin:0 20px 20px 0;') %>
+    <% end %>
+    <h1>
+      <span class="artist-name"><%= link_to(h(@release.artist.name), artist_profile_path(@user.login, @release.artist), :target => '_self') %></span><br />
+      <%=h @release.title %>
+      <% if @release.year.present? %>
+      <span class="year">(<%= @release.year %>)</span>
+      <% end %>
+    </h1>
+    <% if @release.review.present? %>
+      <p id="review" class="grey" style="margin-left:260px; margin-right:100px;">
+        <%= auto_link(strip_links(@release.review), :urls, :target => '_blank') %>
+      </p>
+    <% end %>
+    <% if @release.label.present? || @release.release_date.present? %>
+      <p id="meta" class="grey small" style="margin-left:260px; margin-right:100px;">
+        <% if @release.tags.present? %>
+          <%= @release.tags.split(',').map{|t| "<strong class=\"tag\">#{h(t.anal_title_case)}</strong>" }.to_sentence %><br />
+        <% end %>
+        <%= [h(@release.label.try(:name)), @release.release_date].reject(&:blank?).join('<br />') %>
+      </p>
+    <% end %>
+    <hr />
+    <div style="float:right; text-align:right;">
+      <strong>Buy from…</strong><br />
+      <%= @release.buy_links %>
+      <%= link_to('Amazon', '#', :target => '_blank') %> /
+      <%= link_to('7digital', '#', :target => '_blank') %> /
+      <%= link_to('eMusic', '#', :target => '_blank') %> /
+      <%= link_to('iTunes', '#', :target => '_blank') %>
+    </div>
+    <div style="float:left;">
+      <strong>More at…</strong><br />
+      <!-- <%= link_to('Spotify', "spotify:search:artist:\"#{CGI.escape(@release.artist.name)}\"+album:\"#{CGI.escape(@release.title)}\"", :rel => 'nofollow') %> / -->
+      <%= link_to('Last.fm', "http://www.last.fm/search?q=#{CGI.escape(@release.title)}&type=album", :rel => 'nofollow') %> /
+      <%= link_to('YouTube', "http://www.youtube.com/results?search_query=\"#{CGI.escape(@release.artist.name)}\"+\"#{CGI.escape(@release.title)}\"", :rel => 'nofollow') %> /
+      <%= link_to('Wikipedia', "http://en.wikipedia.org/wiki/#{CGI.escape(@release.title.gsub(' ','_'))}", :rel => 'nofollow') %>
+    </div>
+  </div>
+</div>

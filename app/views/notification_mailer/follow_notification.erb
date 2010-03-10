@@ -1,0 +1,12 @@
+Hi friend!
+
+We just wanted to let you know that <%= @user.login %> is now following you on Bitspace.
+
+<% if @user.public_profile? -%>
+Find out more about <%= @user.login %> here: <%= profile_url(@user.login) %>
+<% end -%>
+
+
+Regards,
+
+The Bitspace Team

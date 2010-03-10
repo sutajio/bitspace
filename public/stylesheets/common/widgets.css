@@ -43,7 +43,7 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 .save-elsewhere a { margin: 0 10px 0 0; padding: 5px 0; }
 
 .cover-art { position: relative; }
-.cover-art .info-overlay { padding: 10px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; background: #000; opacity: 0; position: absolute; top: 40%; left: 0; width: 100%; text-align: center; transition:all 0.2s ease-in-out; -webkit-transition:all 0.2s ease-in-out; -moz-transition:all 0.2s ease-in-out; }
+.cover-art .info-overlay { padding: 10px; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box; background: #000; color: #fff; text-shadow: none; opacity: 0; position: absolute; top: 40%; left: 0; width: 100%; text-align: center; transition:all 0.2s ease-in-out; -webkit-transition:all 0.2s ease-in-out; -moz-transition:all 0.2s ease-in-out; }
 .cover-art:hover .info-overlay { opacity: 0.8; }
 
 .tipsy { padding: 5px; font-size: 10px; opacity: 0.8; filter: alpha(opacity=80); background-repeat: no-repeat; background-image: url(/images/tipsy.gif); }
@@ -74,3 +74,25 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 
 .delete { background: url(/images/delete.png) no-repeat; text-indent: -9999px; display: block; width: 16px; height: 16px; float: right; }
 .delete:hover { background-position: 0 -16px; }
+
+.dashboard { -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.dashboard :first-child img { -webkit-border-top-left-radius: 5px; -webkit-border-bottom-left-radius: 5px; -moz-border-radius-topleft: 5px; -moz-border-radius-bottomleft: 5px; }
+.dashboard :last-child img { -webkit-border-top-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; }
+.dashboard p { text-shadow: #000 1px 1px 1px; }
+
+.artists { padding: 20px 30px; }
+.artist { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
+.artist img { margin: 10px 0; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
+.artist a.name { display: block; font-weight: bold; }
+.artist span.meta { display: block; font-size: 10px; }
+
+.pagination { text-align: center; }
+.pagination a, .pagination span { float: left; margin-right: 5px; color: #fff; text-shadow: none; background: #333; -webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-bottomleft: 5px; -moz-border-radius-bottomright: 5px; padding: 10px; opacity: 0.8; }
+.pagination a:hover { color: #fff; opacity: 1.0; }
+.pagination .disabled { display: none; }
+.pagination .current { background: #fafafa; color: #333; border: 1px solid #ddd; border-top: none; }
+.pagination .gap { background: transparent; color: #333; }
+.pagination .prev_page { float: left; margin-right: 20px; }
+.pagination .next_page { float: right; margin-left: 20px; }
+
+.small { font-size: 9px; line-height: 12px; }

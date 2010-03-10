@@ -1,0 +1,41 @@
+<div class="container_16 clearfix aligncenter">
+  <div class="grid_16">
+    <div class="dashboard clearfix">
+      <% @user.releases.all(:limit => 3, :order => 'created_at DESC').each do |release| %>
+        <% link_to(release_profile_path(@user.login, release), :class => 'cover-art', :style => 'display:block; float:left;') do %>
+          <%= image_tag(release.artwork.url(:large, false), :size => '313x313', :alt => 'Cover art') %>
+          <span class="info-overlay">
+            <%=h release.artist.name %><br />
+            <strong><%=h release.title %></strong>
+          </span>
+        <% end %>
+      <% end %>
+    </div>
+    <hr />
+  </div>
+  <div class="grid_8 prefix_4 suffix_4">
+    <h3>
+      <%= pluralize(@user.artists.size, 'artist') %>,
+      <%= pluralize(@user.releases.size, 'release') %>,
+      <%= pluralize(@user.followers.size, 'follower') %>
+    </h3>
+    <% if @user.biography.present? %>
+    <hr />
+    <p class="bio">
+      <%= auto_link(h(@user.biography)) %>
+    </p>
+    <% end %>
+    <hr />
+    <p class="follow">
+      <% if current_user && current_user.follows?(@user) %>
+      <%= link_to('Unfollow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'button tooltipped', :title => "Unfollow #{h(@user.login)}") %>
+      <% else %>
+      <%= link_to('Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'button tooltipped', :title => "Follow #{h(@user.login)}") %>
+      <% end %>
+      <span class="grey">&mdash;</span>
+      <%= link_to('Subscribe', formatted_releases_profile_path(@user.login, :format => 'atom'), :class => 'button tooltipped', :title => "Subscribe to the ATOM feed for #{h(@user.login)}")%>
+      <span class="grey">&mdash;</span>
+      <%= link_to('Share', "http://www.addthis.com/bookmark.php", :rel => 'nofollow', :class => 'button tooltipped', :title => "Share #{h(@user.login)} with your friends") %>
+    </p>
+  </div>
+</div>

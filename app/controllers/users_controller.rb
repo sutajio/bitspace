@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  skip_before_filter :require_user, :only => [:unique]
+  skip_before_filter :require_user
   
   def unique
     if current_user

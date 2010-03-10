@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :scrobbles
   has_many :played_tracks, :through => :scrobbles, :source => :track
   has_many :invitations
+  has_many :followings
+  has_many :followers, :through => :followings, :order => 'followings.created_at DESC'
   
   SUBSCRIPTION_PLANS = {
     :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0, :official => true },
@@ -98,6 +100,28 @@ class User < ActiveRecord::Base
   
   def has_credentials?
     login.present? && crypted_password.present?
+  end
+  
+  def notify_of_new_release(release)
+    NotificationMailer.deliver_new_release(self, release)
+  end
+  
+  handle_asynchronously :notify_of_new_release
+  
+  def follows?(user)
+    user ? user.followers.include?(self) : false
+  end
+  
+  def follow!(user)
+    if user
+      user.followings.create!(:follower => self)
+    end
+  end
+  
+  def unfollow!(user)
+    if user
+      user.followings.find_by_follower_id(self.id).try(:destroy)
+    end
   end
   
 end

@@ -8,6 +8,7 @@ $(function(){
   $('#invitation_request_email').inputHint({ hintAttr: 'hint' });
   $('#new_invitation_request').validate();
   
+  $('.tooltipped').tipsy({ gravity: 's' });
   $('.save-elsewhere a').tipsy({ gravity: 's' });
   
   $.validator.addMethod('username', function(value, element){
@@ -29,6 +30,22 @@ $(function(){
       'user[email]': { remote: 'Sorry, an account with this email address already exists.' },
       'user[login]': { remote: 'Sorry, username has already been taken.' }
     }
+  });
+  
+  $('#biography').livequery(function(){
+    $(this).expander({
+      slicePoint: 1200,
+      expandText: '<span class="small">Read more</span>',
+      userCollapseText: '<span class="small">Show less</span>'
+    });
+  });
+  
+  $('#review').livequery(function(){
+    $(this).expander({
+      slicePoint: 450,
+      expandText: '<span class="small">Read more</span>',
+      userCollapseText: '<span class="small">Show less</span>'
+    });
   });
   
 });

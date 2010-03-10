@@ -135,6 +135,29 @@ class Release < ActiveRecord::Base
     self
   end
   
+  def notify_followers
+    if user.public_profile?
+      user.followers.each do |follower|
+        follower.notify_of_new_release(self)
+      end
+    end
+  end
+  
+  after_create :notify_followers unless Rails.env.test?
+  handle_asynchronously :notify_followers
+  
+  def review
+    "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+  end
+  
+  def buy_links
+    []
+  end
+  
+  def to_param
+    "#{id}-#{artist.name.parameterize}-#{title.parameterize}"
+  end
+  
   protected
   
     def with_lastfm(&block)

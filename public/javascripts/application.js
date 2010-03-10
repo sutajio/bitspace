@@ -526,7 +526,8 @@ $(function(){
                          remote: '/users/unique',
                          username: true },
         'user[password]': { minlength: 4 },
-        'user[password_confirmation]': { equalTo: '#user_password' }
+        'user[password_confirmation]': { equalTo: '#user_password' },
+        'user[biography]': { maxlength: 255 }
       },
       messages: {
         'password': { remote: 'Invalid password' },

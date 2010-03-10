@@ -32,6 +32,26 @@
               <th><%= f.label :password_confirmation, 'Verify new password' %></th>
               <td><%= f.password_field :password_confirmation %></td>
             </tr>
+            <% if current_user.private_beta? %>
+            <tr>
+              <th><%= f.label :biography %></th>
+              <td>
+                <%= f.text_field :biography %>
+              </td>
+            </tr>
+            <tr>
+              <th></th>
+              <td>
+                <%= f.check_box :public_profile %>
+                <%= f.label :public_profile, 'Enable my public profile' %>
+                <span class="grey small">(<%= link_to('What is this?', '#whatispublicprofiles', :rel => 'toggle') %>)</span>
+                <p id="whatispublicprofiles" class="grey" style="width:400px; display:none;">
+                  Your public profile is a way for you to share your music taste and to let your friends follow
+                  what you upload and listen to. You can find your public profile at: <%= link_to(profile_url(current_user.login), profile_url(current_user.login)) %>
+                </p>
+              </td>
+            </tr>
+            <% end %>
             <tr>
               <th></th>
               <td><%= submit_tag 'Save changes' %></td>

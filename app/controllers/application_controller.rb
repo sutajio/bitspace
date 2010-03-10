@@ -41,7 +41,7 @@ class ApplicationController < ActionController::Base
           render :text => "You must be logged in to access that page.", :status => :forbidden
         else
           respond_to do |format|
-            format.html { redirect_to login_path }
+            format.html { session[:return_to] = params[:return_to]; redirect_to login_path }
             format.json { render :text => 'Invalid username or password.', :status => :unauthorized }
           end
         end

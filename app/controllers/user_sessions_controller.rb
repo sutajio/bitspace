@@ -11,7 +11,12 @@ class UserSessionsController < ApplicationController
   def create
     @user_session = UserSession.create(params[:user_session])
     if @user_session.valid?
-      redirect_to player_path(:trailing_slash => true)
+      if session[:return_to]
+        redirect_to session[:return_to]
+        session[:return_to] = nil
+      else
+        redirect_to player_path(:trailing_slash => true)
+      end
     else
       flash[:alert] = @user_session.errors.full_messages.to_sentence
       redirect_to login_path

@@ -1,0 +1,12 @@
+Hi friend!
+
+We just wanted to let you know that <%= @release.user.login %> has just uploaded "<%= @release.title %>" by <%= @release.artist.name %>.
+
+Check it out at:
+
+<%= release_profile_url(@release.user.login, @release) %>
+
+
+Regards,
+
+The Bitspace Team

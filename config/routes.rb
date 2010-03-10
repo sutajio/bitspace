@@ -59,5 +59,19 @@ ActionController::Routing::Routes.draw do |map|
   
   # Root
   map.root :controller => 'pages', :action => 'index'
+  
+  # Public profiles
+  map.profile ':id', :controller => 'profiles/profiles', :action => 'show'
+  map.follow_profile ':id/follow', :controller => 'profiles/profiles', :action => 'follow', :requirements => { :method => :put }
+  map.artists_profile ':id/artists', :controller => 'profiles/artists', :action => 'index'
+  map.releases_profile ':id/releases', :controller => 'profiles/releases', :action => 'index'
+  map.followers_profile ':id/followers', :controller => 'profiles/followers', :action => 'index'
+  map.formatted_artists_profile ':id/artists.:format', :controller => 'profiles/artists', :action => 'index'
+  map.formatted_releases_profile ':id/releases.:format', :controller => 'profiles/releases', :action => 'index'
+  map.formatted_followers_profile ':id/followers.:format', :controller => 'profiles/followers', :action => 'index'
+  map.artist_profile ':profile_id/artists/:id', :controller => 'profiles/artists', :action => 'show'
+  map.release_profile ':profile_id/releases/:id', :controller => 'profiles/releases', :action => 'show'
+  map.formatted_artist_profile ':profile_id/artists/:id.:format', :controller => 'profiles/artists', :action => 'show'
+  map.formatted_release_profile ':profile_id/releases/:id.:format', :controller => 'profiles/releases', :action => 'show'
 
 end

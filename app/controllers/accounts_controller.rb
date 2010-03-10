@@ -23,6 +23,8 @@ class AccountsController < ApplicationController
         current_user.login = params[:user][:login] if params[:user][:login].present?
         current_user.password = params[:user][:password] if params[:user][:password].present?
         current_user.password_confirmation = params[:user][:password_confirmation] if params[:user][:password_confirmation].present?
+        current_user.biography = params[:user][:biography] if params[:user][:biography].present?
+        current_user.public_profile = params[:user][:public_profile] if params[:user][:public_profile].present?
         if current_user.save
           head :ok
         else
