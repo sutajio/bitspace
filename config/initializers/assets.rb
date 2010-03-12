@@ -13,7 +13,6 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/swfupload/swfupload.js',
     '/vendor/swfupload/swfupload.queue.js',
     '/vendor/plugins/jquery.swfupload.js',
-    '/vendor/plugins/jquery.shortkeys.js',
     '/vendor/plugins/jquery.infinitescroll.js',
     '/vendor/plugins/jquery.ui.js',
     '/vendor/plugins/jquery.address.js',

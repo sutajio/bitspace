@@ -311,17 +311,13 @@ $(function(){
   // Bind some keyboard shortcuts for easier navigation in the UI:
   //
   //    Space   - Play/pause toggle
-  //    m       - Mute on/off
-  //    k       - Go to and play next track in playlist
-  //    j       - Go to and play previous track in playlist
   //
-  $(document).shortkeys({
-    'Space': function () { $('audio#player').trigger('toggle'); },
-    'k': function() {
-      $('audio#player').trigger('next');
-    },
-    'j': function() {
-      $('audio#player').trigger('prev');
+  $(document).keydown(function(e){
+    if(e.keyCode == 32) {
+      if(e.target.tagName != 'INPUT') {
+        e.preventDefault();
+        $('audio#player').trigger('toggle');
+      }
     }
   });
   
