@@ -128,6 +128,8 @@
 
 #release-artwork-upload-button { margin-bottom: 10px; text-align: center; }
 
+#infscr-loading { display: none !important; }
+
 /* COLORS */
 
 body { background: #151515; color: #fff; }
