@@ -176,7 +176,9 @@ $(function(){
     $('button[rel=play-pause]').removeClass('pause');
   })
   .bind('toggle', function(e){
-    if(this.paused) { this.play(); } else { this.pause(); }
+    if($(this).data('playlist')) {
+      if(this.paused) { this.play(); } else { this.pause(); }
+    }
   })
   .bind('ended', function(e){
     if($(this).data('playlist')[$(this).data('playlist_position')]) {
