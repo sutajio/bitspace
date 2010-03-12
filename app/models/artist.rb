@@ -71,9 +71,11 @@ class Artist < ActiveRecord::Base
           release.save
         end
       end
+      other.reload
       other.destroy
       self.touch
     end
+    self
   end
   
   def biography

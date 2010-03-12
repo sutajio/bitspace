@@ -128,9 +128,11 @@ class Release < ActiveRecord::Base
         track.release = self
         track.save
       end
+      other.reload
       other.destroy
       self.touch
     end
+    self
   end
   
   protected
