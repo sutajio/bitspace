@@ -184,7 +184,8 @@ $(function(){
     if($(this).data('playlist')[$(this).data('playlist_position')]) {
       $(this).data('playlist')[$(this).data('playlist_position')].scrobble();
     }
-    if($(this).data('playlist_position') == $(this).data('playlist').length) {
+    if($(this).data('playlist_position') ==
+      ($(this).data('playlist').length - 1)) {
       if(($('#repeat').attr('checked') == true) ||
          ($('#shuffle').attr('checked') == true)) {
         $(this).trigger('next');
