@@ -3,7 +3,7 @@
     <% if release.artwork.file? %>
     <%= link_to(image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art'), release.artwork.url(:large, false), :class => 'cover-art', :rel => 'shadowbox') %>
     <% else %>
-    <%= link_to(image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art'), edit_release_path(release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
+    <%= link_to(image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art'), artwork_release_path(release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
     <% end %>
     <% unless (params[:controller] == 'releases' && params[:action] == 'show') %>
     <h2>
@@ -22,8 +22,7 @@
   <% end %>
   <% if params[:controller] == 'releases' && params[:action] == 'show' %>
   <div class="actions">
-    <!-- <%= link_to(image_tag('/images/share.png'), release_url(release), :title => 'Share', :target => '_blank') %> -->
-    <%= link_to('Upload artwork', edit_release_path(release), :target => '_self') %>
+    <%= link_to('Upload artwork', artwork_release_path(release), :target => '_self') %>
     <%= link_to('Archive', archive_release_path(release), :title => 'If archived, a release will be hidden and will only show up in search results.', :rel => 'archive', :class => release.archived? ? 'archived tooltipped' : 'tooltipped') %>
     <%= link_to('Delete', release_path(release), :title => 'The release will be permanently deleted from your library. This can not be undone!', :rel => 'delete', :class => 'tooltipped') %>
   </div>

@@ -23,8 +23,19 @@ class ReleasesController < ApplicationController
   
   def update
     @release = current_user.releases.find(params[:id])
-    @release.update_attributes!(:artwork => params[:release][:artwork])
-    head :ok
+    if @release.update_attributes(params[:release])
+      head :ok
+    else
+      render :text => @release.errors.full_messages.to_sentence
+    end
+  end
+  
+  def artwork
+    @release = current_user.releases.find(params[:id])
+    if request.put?
+      @release.update_attributes!(:artwork => params[:release][:artwork])
+      head :ok
+    end
   rescue ActiveRecord::RecordInvalid => e
     raise e
   end
