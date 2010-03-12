@@ -17,7 +17,7 @@ $(function(){
           ).fadeIn('slow');
         break;
         case 'timeout':
-          alert("Connection lost");
+          $('#error').text('Error - Connection timed out').fadeIn('slow');
         break;
       }
     }
@@ -60,6 +60,7 @@ $(function(){
   // Load all links that has target="_self" with Ajax.
   $('a[target=_self]').livequery('click', function(e){
     e.preventDefault();
+    $('#error').fadeOut('slow');
     $.address.value($(this).attr('href'));
   });
   
@@ -80,6 +81,7 @@ $(function(){
   // the links href=".." attribute.
   $('a[rel=play]').livequery('click', function(e){
     e.preventDefault();
+    $('#error').fadeOut('slow');
     var playlist = [];
     $(this).closest('ul').find('a[rel=play]').each(function(){
       var self = $(this);
@@ -281,20 +283,29 @@ $(function(){
   .bind('timeupdate', function(e){
     $('#nav-progress').slider('value', this.currentTime);
   })
-  .bind('abort', function(e){
-    window.status = "Abort";
-  })
   .bind('dataunavailable', function(e){
     window.status = 'Data unavailable';
-  })
-  .bind('emptied', function(e){
-    window.status = 'Emptied';
   })
   .bind('empty', function(e){
     window.status = 'Empty';
   })
   .bind('error', function(e){
-    window.status = 'Error';
+    $('a.loading').removeClass('loading');
+    switch(this.error.code) {
+      case MediaError.MEDIA_ERR_ABORTED:
+        $('#error').text('Error - Unable to play track.').fadeIn('slow');
+      break;
+      case MediaError.MEDIA_ERR_NETWORK:
+        $('#error').text('Error - Failed to load the track. ' +
+          'Check your internet connection.').fadeIn('slow');
+      break;
+      case MediaError.MEDIA_ERR_DECODE:
+      case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
+        $('#error').text('Error - Unable to play track. Either the file is ' +
+            ' corrupt or you might need to install a codec for the file type.'
+          ).fadeIn('slow');
+      break;
+    }
   });
   
   // Bind some keyboard shortcuts for easier navigation in the UI:
