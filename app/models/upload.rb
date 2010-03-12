@@ -96,7 +96,7 @@ class Upload < ActiveRecord::Base
           raise release.errors.full_messages.to_sentence
         end
         
-        track = release.tracks.find_or_create_by_title_and_track_nr(
+        track = release.tracks.find_or_create_by_fingerprint(
           :user => user,
           :artist => track_artist,
           :release => release,
