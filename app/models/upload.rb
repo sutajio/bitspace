@@ -54,10 +54,10 @@ class Upload < ActiveRecord::Base
           tags.setnum.blank? ?
             self.class.parse_filename(key)[:set_nr] : tags.setnum
         
-        track_artist_name = track_artist_name.anal_title_case
-        album_artist_name = album_artist_name.anal_title_case
-        release_title = release_title.anal_title_case
-        track_title = track_title.anal_title_case
+        track_artist_name = track_artist_name.anal_title_case.squish
+        album_artist_name = album_artist_name.anal_title_case.squish
+        release_title = release_title.anal_title_case.squish
+        track_title = track_title.anal_title_case.squish
         
         logger.info("Title: #{track_title}")
         logger.info("Artist: #{track_artist_name}")
