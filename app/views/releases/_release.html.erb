@@ -22,6 +22,7 @@
   <% end %>
   <% if params[:controller] == 'releases' && params[:action] == 'show' %>
   <div class="actions">
+    <%= link_to('Edit', edit_release_path(release), :target => '_self') %>
     <%= link_to('Upload artwork', artwork_release_path(release), :target => '_self') %>
     <%= link_to('Archive', archive_release_path(release), :title => 'If archived, a release will be hidden and will only show up in search results.', :rel => 'archive', :class => release.archived? ? 'archived tooltipped' : 'tooltipped') %>
     <%= link_to('Delete', release_path(release), :title => 'The release will be permanently deleted from your library. This can not be undone!', :rel => 'delete', :class => 'tooltipped') %>

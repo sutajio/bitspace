@@ -23,10 +23,46 @@ class ReleasesController < ApplicationController
   
   def update
     @release = current_user.releases.find(params[:id])
-    if @release.update_attributes(params[:release])
-      head :ok
+    @release.transaction do
+      if params[:release][:tracks]
+        params[:release][:tracks].each do |id,attributes|
+          track = @release.tracks.find_by_id(id)
+          track.title = attributes[:title]
+          track.save!
+        end
+      end
+      if params[:release][:title]
+        other_release = @release.artist.releases.find_by_title(params[:release][:title])
+        if other_release && other_release != @release
+          other_release.merge!(@release)
+          @release = other_release
+        else
+          @release.update_attributes!(:title => params[:release][:title])
+        end
+      end
+      if params[:release][:artist] && params[:release][:artist][:name]
+        artist = current_user.artists.find_or_create_by_name(params[:release][:artist][:name])
+        other_release = artist.releases.find_by_title(@release.title)
+        if other_release && other_release != @release
+          other_release.merge!(@release)
+          @release = other_release
+        else
+          old_artist = @release.artist
+          @release.artist = artist
+          @release.save!
+          old_artist.touch
+          artist.touch
+        end
+      end
+      if params[:release][:year]
+        @release.year = params[:release][:year].to_i == 0 ? nil : params[:release][:year].to_i
+        @release.save!
+      end
+    end
+    if request.xhr?
+      render :text => release_path(@release)
     else
-      render :text => @release.errors.full_messages.to_sentence
+      redirect_to release_path(@release)
     end
   end
   

@@ -487,4 +487,17 @@ $(function(){
     e.preventDefault();
   });
   
+  $('form.edit_release').livequery(function(){
+    $(this).validate({
+      submitHandler: function(form){
+        $(form).find('button').text('Saving...');
+        $(form).ajaxSubmit({
+          success: function(data){
+            $.address.value(data);
+          }
+        });
+      }
+    });
+  });
+  
 });

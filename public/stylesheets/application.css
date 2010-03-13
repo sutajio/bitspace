@@ -70,6 +70,13 @@
 .actions a:hover { opacity: 1; }
 .actions img { margin: 0; }
 
+.edit_release input { background: transparent; border: none; color: #ccc; border-bottom: 1px dashed #333; text-shadow: #000 1px 1px 0px; font-size: 13px; font-family: Helvetica, Arial, sans-serif; }
+.edit_release h1 input { font-size: 25px; }
+.edit_release h1 span input { font-size: 11px; }
+.edit_release .tracks input { border-bottom-color: #444; }
+.edit_release label.error { display: none !important; }
+.edit_release input.error { border-bottom-color: #f66; }
+
 /* LAYOUT */
 
 #root { padding-bottom: 120px; }
@@ -189,6 +196,7 @@ label { text-shadow: #000 1px 1px 1px; }
 .track-love.loved { opacity: 1; background-position: 50% -38px; }
 .error { color: #f33; text-shadow: #000 1px 1px 1px; }
 .fallback { color: #777; }
-.actions a { font-size: 10px; padding: 5px 10px; border: 1px solid #888; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.actions a, .actions button { font-size: 10px; padding: 5px 10px; border: 1px solid #888; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
 .actions a.archived { opacity: 1 !important; }
 .actions a.enabled { opacity: 1 !important; }
+.actions button { background: #333; cursor: pointer; }

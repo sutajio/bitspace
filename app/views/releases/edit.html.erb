@@ -1,0 +1,39 @@
+<% form_for @release do |f| %>
+  <div class="container_16 clearfix">
+    <div class="grid_16">
+      <h1>
+        <span><%= text_field_tag('release[artist][name]', @release.artist.name, :size => @release.artist.name.size+1, :class => 'required') %></span><br />
+        <%= f.text_field(:title, :size => @release.title.size+1, :class => 'required') %>
+        <span class="year">(<%= f.text_field(:year, :size => 4, :class => 'number') %>)</span>
+      </h1>
+    </div>
+  </div>
+  <div class="container_16 clearfix pane">
+    <div class="grid_16">
+      <ul class="releases">
+        <% content_tag_for(:li, @release, :class => 'clearfix') do %>
+          <div class="info">
+            <% if @release.artwork.file? %>
+            <%= link_to(image_tag(@release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art'), @release.artwork.url(:large, false), :class => 'cover-art', :rel => 'shadowbox') %>
+            <% else %>
+            <%= link_to(image_tag(@release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art'), edit_release_path(@release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
+            <% end %>
+          </div>
+          <% @release.tracks.sort_by{|t| t.set_nr.to_i }.group_by(&:set_nr).each do |set_nr, tracks| %>
+          <ol class="tracks">
+            <% tracks.sort_by {|t| t.track_nr.to_i }.each do |track| %>
+              <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
+                <%= text_field_tag "release[tracks][#{track.id}][title]", track.title, :class => 'required', :style => 'width:80%; margin-left:19px;' %>
+              <% end %>
+            <% end %>
+          </ol>
+          <% end %>
+          <div class="actions">
+            <button>Save</button>
+            <%= link_to('Cancel', release_path(@release), :target => '_self') %>
+          </div>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+<% end %>
