@@ -28,7 +28,7 @@
         $(function(){
           $('#release-artwork-upload-button').each(function(){
             $(this).swfupload({
-              upload_url: "<%= release_path_with_session_information(@release) %>",
+              upload_url: "<%= artwork_release_path_with_session_information(@release) %>",
               post_params: { '_method': 'put', <%= request_forgery_protection_token.to_s %>: '<%= form_authenticity_token %>' },
               file_size_limit: 0,
               file_types: "*.jpg;*.jpeg;*.png;*.gif",
