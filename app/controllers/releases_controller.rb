@@ -28,6 +28,9 @@ class ReleasesController < ApplicationController
         params[:release][:tracks].each do |id,attributes|
           track = @release.tracks.find_by_id(id)
           track.title = attributes[:title]
+          if attributes[:artist].present?
+            track.artist = current_user.artists.find_or_create_by_name(attributes[:artist])
+          end
           track.save!
         end
       end
