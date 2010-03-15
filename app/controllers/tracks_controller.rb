@@ -24,4 +24,10 @@ class TracksController < ApplicationController
     head :ok
   end
   
+  def destroy
+    @track = current_user.tracks.find(params[:id])
+    @track.destroy
+    head :ok
+  end
+  
 end

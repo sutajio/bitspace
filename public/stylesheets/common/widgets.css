@@ -71,3 +71,6 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 .ac_results li .release-title { display: block; }
 .ac_results li .limited-space-fade { background: url(/images/limited-space-fade.png) repeat-y 100% 0%; position: absolute; top: 0; right: 0; width: 20px; height: 100%; }
 .ac_results li.ac_over .limited-space-fade { background-image: url(/images/limited-space-fade-hover.png); }
+
+.delete { background: url(/images/delete.png) no-repeat; text-indent: -9999px; display: block; width: 16px; height: 16px; float: right; }
+.delete:hover { background-position: 0 -16px; }

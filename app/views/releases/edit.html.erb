@@ -25,6 +25,7 @@
               <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
                 <%= text_field_tag "release[tracks][#{track.id}][title]", track.title, :class => 'required', :style => 'width:50%; margin-left:19px;' %>
                 <%= text_field_tag "release[tracks][#{track.id}][artist]", track.artist.try(:name), :style => 'width:30%; margin-left:10px;', :class => 'tooltipped', :title => 'Track artist (optional)' %>
+                <%= link_to('Delete', track_path(track), :rel => 'delete', :class => 'delete tooltipped', :title => 'Delete track') %>
               <% end %>
             <% end %>
           </ol>

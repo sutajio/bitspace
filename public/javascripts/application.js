@@ -414,9 +414,7 @@ $(function(){
     if(confirm('Are you sure?')) {
       var self = $(this).closest('li').fadeTo('fast', 0.5);;
       $.post(this.href, { '_method': 'delete' }, function(){
-        self.closest('li').hide('slow', function(){
-          $.address.value('/');
-        });
+        self.closest('li').hide('slow');
       });
     }
   });
