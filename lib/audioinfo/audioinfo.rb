@@ -85,7 +85,7 @@ class AudioInfo
         @album_artist = @info.tag2['TPE2']
         @setnum = @info.tag2['TPOS']
         @year = @info.tag.year.to_i == 0 ? nil : @info.tag.year.to_i
-        @cover = image_from_id3_apic_tag(@info.tag2['APIC'])
+        @cover = self.class.image_from_id3_apic_tag(@info.tag2['APIC'])
         if @options[:include_audio_content]
           File.open(filename) do |f|
             f.seek(@info.audio_content.first)
@@ -270,7 +270,7 @@ class AudioInfo
     tags
   end
   
-  def image_from_id3_apic_tag(apic_tag)
+  def self.image_from_id3_apic_tag(apic_tag)
     if apic_tag
       apic_tag = apic_tag.first if apic_tag.is_a?(Array)
       encoding, mime_type, type, desc = apic_tag.unpack('BZ*BZ*')

@@ -1,4 +1,5 @@
 require 'test_helper'
+require 'audioinfo/audioinfo'
 
 class UploadTest < ActiveSupport::TestCase
   
@@ -11,10 +12,10 @@ class UploadTest < ActiveSupport::TestCase
     #      Description        <text string according to encoding> $00 (00)
     #      Picture data       <binary data>
     
-    assert_equal nil, Upload.image_from_id3_apic_tag(nil)
-    assert Upload.image_from_id3_apic_tag("\000image\\png\000\003\000blob").is_a?(StringIO)
-    assert_equal 'blob', Upload.image_from_id3_apic_tag("\000image\\png\000\003\000blob").read
-    assert_equal 'blob', Upload.image_from_id3_apic_tag("\000\000\003\000blob").read
+    assert_equal nil, AudioInfo.image_from_id3_apic_tag(nil)
+    assert AudioInfo.image_from_id3_apic_tag("\000image\\png\000\003\000blob").is_a?(StringIO)
+    assert_equal 'blob', AudioInfo.image_from_id3_apic_tag("\000image\\png\000\003\000blob").read
+    assert_equal 'blob', AudioInfo.image_from_id3_apic_tag("\000\000\003\000blob").read
   end
   
 end
