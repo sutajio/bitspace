@@ -1,7 +1,9 @@
 module TracksHelper
   
   def seconds_to_time(seconds)
-    if seconds < 1.minute
+    if seconds < 10.seconds
+      "0:0#{seconds.to_i}"
+    elsif seconds < 1.minute
       "0:#{seconds.to_i}"
     elsif seconds < 1.hour
       Time.at(seconds.to_i).gmtime.strftime('%M:%S').gsub(/^0([1-9]+)/,'\1')
