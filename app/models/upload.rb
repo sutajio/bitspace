@@ -59,6 +59,15 @@ class Upload < ActiveRecord::Base
         release_title = release_title.anal_title_case.squish.to_valid_utf8
         track_title = track_title.anal_title_case.squish.to_valid_utf8
         
+        [' feat. ', ' feat ', ' featuring ', ' ft. ', ' ft ',
+         ' Feat. ', ' Feat ', ' Featuring ', ' Ft. ', ' Ft '].each do |feat|
+          if album_artist_name == track_artist_name
+            name_parts = album_artist_name.split(feat)
+            album_artist_name = name_parts.first
+            track_artist_name = name_parts.last
+          end
+        end
+        
         logger.info("Title: #{track_title}")
         logger.info("Artist: #{track_artist_name}")
         logger.info("Album artist: #{album_artist_name}")
