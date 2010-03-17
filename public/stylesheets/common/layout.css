@@ -5,7 +5,7 @@
 #menu .first { }
 #menu .last { text-align: right; }
 #menu .grid_1 a { display: block; padding: 7px 0; font-weight: bold; }
-#menu #search-q { width: 140px; margin: 7px 0; }
+#menu #search-q { width: 140px; margin: 7px 0; -moz-border-radius: 8px; border: 0px transparent; padding: 3px; }
 #menu .usernav a { font-weight: normal; }
 
 #company-footer { padding: 20px 0; font-size: 11px; }

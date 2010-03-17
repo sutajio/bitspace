@@ -13,13 +13,13 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 .box { padding: 20px; -webkit-border-radius: 5px; -moz-border-radius: 5px; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
 .dialog { padding: 20px; }
 
-.progress, .ui-slider { -webkit-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; position: relative; overflow: hidden; }
+.progress, .ui-slider { -webkit-border-radius: 5px; -moz-border-radius: 5px; background: url(/images/progress-shade.png) repeat-x; position: relative; overflow: hidden; }
 .progress .gauge, .ui-slider .ui-slider-range { height: 10px; width: 0px; }
 .ui-slider .ui-slider-handle { background: #fff; height: 10px; width: 10px; position: absolute; top: 0; left: 0; }
 .ui-slider-disabled .ui-slider-handle { opacity: 0.5; cursor: default; }
 .progress-status { font-size: 10px; text-align: center; }
 
-.more { display: block; text-align: center; padding: 10px; margin: 0 10px; text-transform: lowercase; -webkit-border-radius: 5px; }
+.more { display: block; text-align: center; padding: 10px; margin: 0 10px; text-transform: lowercase; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
 
 .field { margin: 10px 0; }
 .submit-row { margin: 20px 0; }
@@ -58,7 +58,7 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 .tabnav li { margin: 0; float: left; margin-right: 10px; }
 .tabnav li a { display: block; padding: 1px 10px; font-weight: bold; color: #111; text-shadow: #666 0px 1px 0px; background: #555; -webkit-border-radius: 15px; -moz-border-radius: 15px; }
 .tabnav li a:hover { background: #666; text-shadow: #777 0px 1px 0px; }
-.tabnav li a.current { background: #999 -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); color: #111; text-shadow: #bbb 0px 1px 0px; }
+.tabnav li a.current { background: #999; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); color: #111; text-shadow: #bbb 0px 1px 0px; }
 
 .ac_results { background-color: #000; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 0px 0px 25px #000; opacity: 0.9; width: 250px; padding: 0; margin: 5px 0 0 0; list-style: none; position: absolute; z-index: 10000; display: none; }
 .ac_results li { margin: 0; padding: 10px; white-space: nowrap; text-align: left; }

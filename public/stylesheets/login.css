@@ -8,10 +8,10 @@ a:focus { outline:none }
 .box { position: relative; margin: 80px 0; background: #333; background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#2a2a2a)); border: 3px solid #333; text-shadow: #000 0px 0px 1px; }
 .field kbd { display: none; }
 .field input.hint { color: #777; background: #999; background: -webkit-gradient(linear, left top, left bottom, from(#777), color-stop(0.3, #999), to(#999)); }
-.field input { text-align: center; font-size: 18px; text-shadow: #999 0px 0px 1px; padding: 5px; -webkit-border-radius: 5px; border: none; }
-input[type=submit] { cursor: pointer; padding: 5px 10px; font-size: 14px; font-weight: bold; color: #333; text-shadow: #fff 0px 0px 1px; border: 3px solid #eee; -webkit-border-radius: 15px; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); }
+.field input { text-align: center; font-size: 18px; text-shadow: #999 0px 0px 1px; padding: 5px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border: none; }
+input[type=submit] { cursor: pointer; padding: 5px 10px; font-size: 14px; font-weight: bold; color: #333; text-shadow: #fff 0px 0px 1px; border: 3px solid #eee; -webkit-border-radius: 15px; -moz-border-radius: 15px; background: #aaa; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); }
 input[type=submit]:hover { border-color: #ddd; }
-input[type=submit]:active { background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#ccc)); }
+input[type=submit]:active { background: #888; background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#ccc)); }
 label { font-weight: normal; color: #eee; }
 
 .bubble { padding: 10px 20px; font-size: 12px; opacity: 0.8; filter: alpha(opacity=80); background-repeat: no-repeat; background-image: url(/images/bubble.png); position: absolute; }

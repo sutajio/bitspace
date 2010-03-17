@@ -8,13 +8,13 @@
 
 .artists { padding: 20px 30px; }
 .artist { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
-.artist img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
+.artist img { margin: 10px 0; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
 .artist a.name { display: block; font-weight: bold; }
 .artist span.meta { display: block; font-size: 10px; }
 
 .labels { padding: 20px 30px; }
 .label { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
-.label img { margin: 10px 0; -webkit-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
+.label img { margin: 10px 0; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
 .label a.name { display: block; font-weight: bold; }
 .label span.meta { display: block; font-size: 10px; }
 
@@ -54,9 +54,9 @@
 .account form td { padding: 10px 5px; }
 .account input[type="text"],
 .account input[type="password"] { background: #fff; -webkit-border-radius: 3px; -moz-border-radius: 3px; border: 1px solid #ccc; font-size: 13px; padding: 4px 5px; }
-.account input[type=submit] { cursor: pointer; padding: 5px 10px; font-size: 14px; font-weight: bold; color: #333; text-shadow: #fff 0px 0px 1px; border: 3px solid #eee; -webkit-border-radius: 15px; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); }
+.account input[type=submit] { cursor: pointer; padding: 5px 10px; font-size: 14px; font-weight: bold; color: #333; text-shadow: #fff 0px 0px 1px; border: 3px solid #eee; -webkit-border-radius: 15px; -moz-border-radius: 15px; background: #aaa; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); }
 .account input[type=submit]:hover { border-color: #ddd; }
-.account input[type=submit]:active { background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#ccc)); }
+.account input[type=submit]:active { background: #888; background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#ccc)); }
 .account .hint { font-size: 10px; margin-left: 3px; }
 .account .subscriptions-chart { width: 100%; }
 .account .subscriptions-chart th { padding: 10px; text-align: center; background: #222; }
@@ -80,7 +80,7 @@
 /* LAYOUT */
 
 #root { padding-bottom: 120px; }
-#player { text-indent: -9999px; display: none; }
+#player { position: absolute; left: -9999px; display: none; }
 
 #nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 8px 0 0 0; font-size: 12px; height: 38px; }
 #nav .container_16 { position: relative; }
