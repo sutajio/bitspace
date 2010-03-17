@@ -26,8 +26,8 @@ h3 { text-shadow: #fff 1px 1px 1px; font: normal normal normal 15px/20px Graubla
 h1 a, h2 a, h3 a { text-shadow: #fff 1px 1px 1px; }
 h1 em, h2 em, h3 em { text-shadow: #000 0px 0px 1px; }
 h1 span, h2 span, h3 span { font-size: 12px; }
-.pane { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
-.box { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #eee; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
+.pane { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #f6f6f6; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
+.box { -webkit-box-shadow: 1px 1px 5px #aaa; -moz-box-shadow: 1px 1px 5px #aaa; background: #f6f6f6; background: -webkit-gradient(linear, left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)); background: -moz-linear-gradient(left top, left bottom, from(#eee), color-stop(0.2, #f9f9f9), to(#fff)) no-repeat; border: 2px solid #fff; }
 blockquote.big-quote .start-quote { color: #3cf; }
 blockquote.big-quote .end-quote { color: #3cf; }
 pre { background: #222; color: #fff; text-shadow: none; padding: 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; overflow-x: auto; }
@@ -35,7 +35,7 @@ pre { background: #222; color: #fff; text-shadow: none; padding: 10px; -webkit-b
 .header h1, .header h3 { margin: 0; }
 .color-1 { background: #eee url(/images/noisey-grey.png); }
 .color-2 { margin-bottom: 30px; }
-.billboard { background: url(/images/billboard-glow.png) no-repeat 50% 0; padding: 40px 0 20px 0; }
+.billboard { background: url(/images/billboard-glow.jpg) no-repeat 50% 0; padding: 40px 0 20px 0; height: 440px; }
 
 #new_invitation_request { background: #f9f9f9; padding: 10px; }
 #new_invitation_request h3 { margin-bottom: 10px; }
