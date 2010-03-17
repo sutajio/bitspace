@@ -49,8 +49,8 @@ $(function(){
       if(links.length) {
         Shadowbox.setup(links);
       }
-      if($('audio#player').attr('paused') == false) {
-        $('a[href="'+$('audio#player').attr('src')+'"]').addClass('playing');
+      if($('#player').attr('paused') == false) {
+        $('a[href="'+$('#player').attr('src')+'"]').addClass('playing');
       }
     });
     $('a.current').removeClass('current');
@@ -87,7 +87,7 @@ $(function(){
       var self = $(this);
       playlist.push({
         play: function(){
-          $('audio#player')
+          $('#player')
             .trigger('start', self.attr('href'));
           $('#status-artist')
             .text(self.attr('data-artist'))
@@ -103,7 +103,7 @@ $(function(){
           $('.playing')
             .removeClass('playing')
             .removeClass('loading');
-          $('a[href="'+$('audio#player')
+          $('a[href="'+$('#player')
             .attr('src')+'"]')
             .addClass('playing');
           if(parseFloat(self.attr('data-length')) > 30.0) {
@@ -121,7 +121,7 @@ $(function(){
     });
     var playlist_position = 
       $(this).closest('ul').find('li a[rel=play]').index(this);
-    $('audio#player')
+    $('#player')
       .data('playlist', playlist)
       .data('playlist_position', playlist_position)
       .trigger('playcurrent');
@@ -131,21 +131,21 @@ $(function(){
   // "toggle" event on the audio player.
   $('button[rel=play-pause]').livequery('click', function(e){
     e.preventDefault();
-    $('audio#player').trigger('toggle');
+    $('#player').trigger('toggle');
   });
   
   // Buttons with rel="next" acts as next buttons. Triggers the
   // "next" event on the audio player.
   $('button[rel=next]').livequery('click', function(e){
     e.preventDefault();
-    $('audio#player').trigger('next');
+    $('#player').trigger('next');
   });
   
   // Buttons with rel="prev" acts as prev buttons. Triggers the
   // "prev" event on the audio player.
   $('button[rel=prev]').livequery('click', function(e){
     e.preventDefault();
-    $('audio#player').trigger('prev');
+    $('#player').trigger('prev');
   });
   
   // Apply slider functionality to the playback progress bar. Will seek the
@@ -156,14 +156,14 @@ $(function(){
     min: 0,
     max: 100,
     slide: function(e, ui){
-      $('audio#player').attr('currentTime', ui.value);
+      $('#player').attr('currentTime', ui.value);
     }
   }).slider('disable');
   
   // The audio player object. Handles playback of the audio files and all
   // related events that can be triggered during that process, like buffering,
   // network errors, etc...
-  $('audio#player')
+  $('#player')
   .bind('start', function(e,data){
     this.src = data;
     this.load();
@@ -316,7 +316,7 @@ $(function(){
     if(e.keyCode == 32) {
       if(e.target.tagName != 'INPUT') {
         e.preventDefault();
-        $('audio#player').trigger('toggle');
+        $('#player').trigger('toggle');
       }
     }
   });
@@ -349,10 +349,10 @@ $(function(){
   // Toggles the "muted" attribute in the audio player.
   $('#mute').change(function(e){
     if($(this).attr('checked')) {
-      $('audio#player').animate({ volume: 0.2 });
+      $('#player').animate({ volume: 0.2 });
       $(this).next('label').addClass('checked');
     } else {
-      $('audio#player').animate({ volume: 1.0 });
+      $('#player').animate({ volume: 1.0 });
       $(this).next('label').removeClass('checked');
     }
   });
@@ -364,17 +364,17 @@ $(function(){
   $('#repeat').change(function(e){
     if($(this).attr('checked')) {
       $(this).next('label').addClass('checked');
-      if($('audio#player').data('playlist')) {
+      if($('#player').data('playlist')) {
         $('button[rel=prev]').attr('disabled', '');
         $('button[rel=next]').attr('disabled', '');
       }
     } else {
       $(this).next('label').removeClass('checked');
-      if($('audio#player').data('playlist_position') == 0) {
+      if($('#player').data('playlist_position') == 0) {
         $('button[rel=prev]').attr('disabled', 'disabled');
       }
-      if($('audio#player').data('playlist_position') ==
-        ($('audio#player').data('playlist').length - 1)) {
+      if($('#player').data('playlist_position') ==
+        ($('#player').data('playlist').length - 1)) {
         $('button[rel=next]').attr('disabled', 'disabled');
       }
     }
