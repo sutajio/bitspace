@@ -156,18 +156,66 @@ $(function(){
     min: 0,
     max: 100,
     slide: function(e, ui){
-      $('#player').attr('currentTime', ui.value);
+      $('#player').each(function(){ this.setCurrentTime(ui.value); });
     }
   }).slider('disable');
+  
+  // Fallback for the audio player if browser does not fully support HTML5,
+  // or in some other way is incompatible with how we use the audio tag.
+  // Uses JPlayer to emulate the behaviour of the audio tag using Flash.
+  $('div#player').each(function(){
+    var self = $(this);
+    var jplayer = $('<div id="jplayer"/>').insertAfter(self).jPlayer({
+      nativeSupport: false,
+      swfPath: '/vendor/jplayer/'
+    })
+    .jPlayer('onProgressChange', function(lp,ppr,ppa,pt,tt){
+      self
+        .each(function(){
+          this.duration = 100;
+          this.currentTime = ppa;
+        })
+        .trigger('durationchange')
+        .trigger('timeupdate');
+      if(ppa > 0) {
+        self.trigger('canplaythrough');
+      } else {
+        self.trigger('loadstart');
+      }
+    })
+    .jPlayer('onSoundComplete', function(){
+      self.trigger('ended');
+    });
+    this.load = function(){
+      jplayer.jPlayer('setFile', $(this).attr('src'));
+      this.paused = true;
+    };
+    this.startPlayback = function(){
+      this.paused = false;
+      jplayer.jPlayer('play');
+      $(this).trigger('play');
+    };
+    this.pausePlayback = function(){
+      this.paused = true;
+      jplayer.jPlayer('pause');
+      $(this).trigger('pause');
+    };
+    this.setCurrentTime = function(value){
+      jplayer.jPlayer('playHead', value);
+    };
+    this.setVolume = function(value){
+      jplayer.jPlayer('volume', value*100.0);
+    };
+  });
   
   // The audio player object. Handles playback of the audio files and all
   // related events that can be triggered during that process, like buffering,
   // network errors, etc...
   $('#player')
   .bind('start', function(e,data){
-    this.src = data;
+    $(this).attr('src', data);
     this.load();
-    this.play();
+    this.startPlayback();
     $('a[href="'+data+'"]').addClass('playing');
   })
   .bind('play', function(e){
@@ -179,7 +227,7 @@ $(function(){
   })
   .bind('toggle', function(e){
     if($(this).data('playlist')) {
-      if(this.paused) { this.play(); } else { this.pause(); }
+      if(this.paused) { this.startPlayback(); } else { this.pausePlayback(); }
     }
   })
   .bind('ended', function(e){
@@ -283,12 +331,6 @@ $(function(){
   .bind('timeupdate', function(e){
     $('#nav-progress').slider('value', this.currentTime);
   })
-  .bind('dataunavailable', function(e){
-    window.status = 'Data unavailable';
-  })
-  .bind('empty', function(e){
-    window.status = 'Empty';
-  })
   .bind('error', function(e){
     $('a.loading').removeClass('loading');
     switch(this.error.code) {
@@ -305,6 +347,28 @@ $(function(){
             ' corrupt or you might need to install a codec for the file type.'
           ).fadeIn('slow');
       break;
+    }
+  })
+  .each(function(){
+    if(!this.startPlayback) {
+      this.startPlayback = function() {
+        this.play();
+      }
+    }
+    if(!this.pausePlayback) {
+      this.pausePlayback = function() {
+        this.pause();
+      }
+    }
+    if(!this.setCurrentTime) {
+      this.setCurrentTime = function(value) {
+        this.currentTime = value;
+      }
+    }
+    if(!this.setVolume) {
+      this.setVolume = function(value) {
+        $(this).animate({ volume: value });
+      }
     }
   });
   
@@ -349,10 +413,10 @@ $(function(){
   // Toggles the "muted" attribute in the audio player.
   $('#mute').change(function(e){
     if($(this).attr('checked')) {
-      $('#player').animate({ volume: 0.2 });
+      $('#player').each(function(){ this.setVolume(0.2); });
       $(this).next('label').addClass('checked');
     } else {
-      $('#player').animate({ volume: 1.0 });
+      $('#player').each(function(){ this.setVolume(1.0); });
       $(this).next('label').removeClass('checked');
     }
   });

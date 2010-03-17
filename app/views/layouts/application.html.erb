@@ -86,9 +86,11 @@
         </div>
       </div>
     </div>
-    <audio id="player">
-      Your browser does not support the <code>audio</code> element.
-    </audio>
+    <% if use_html5_audio? %>
+      <audio id="player"></audio>
+    <% else %>
+      <div id="player"></div>
+    <% end %>
     <%= render :partial => 'layouts/feedback' %>
     <%= render :partial => 'layouts/google_analytics' %>
   </body>
