@@ -16,6 +16,8 @@
     <li>Follow us on <%= link_to('Twitter', 'http://twitter.com/bitspaced', :class => 'external') %>.</li>
     <li>Become a fan on <%= link_to('Facebook', 'http://www.facebook.com/pages/Bitspace/172171790806', :class => 'external') %>.</li>
   </ul>
+  <% unless params[:action] == 'index' %>
   <h3>Community</h3>
   <fb:fan profile_id="172171790806" stream="" connections="8" width="236"></fb:fan>
+  <% end %>
 </div>
