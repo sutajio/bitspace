@@ -61,4 +61,14 @@ class AccountsController < ApplicationController
     end
   end
   
+  def status
+    @since = Time.parse(params[:since])
+    @nr_new_tracks = current_user.tracks.count(:conditions => ['created_at > ?', @since.utc])
+    if @nr_new_tracks > 0
+      render :text => "#{self.class.helpers.pluralize(@nr_new_tracks, 'new track')} added to your library."
+    else
+      head :ok
+    end
+  end
+  
 end

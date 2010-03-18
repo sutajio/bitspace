@@ -28,6 +28,25 @@ $(function(){
     $(this).fadeOut('slow');
   });
   
+  // Hide the info message when it is clicked.
+  $('#message').click(function(e){
+    $(this).fadeOut('slow');
+  });
+  
+  // Poll account status every 1 minute.
+  var last_account_status_poll = (new Date()).toUTCString();
+  setInterval(function(){
+    $.get('/account/status', { since: last_account_status_poll },
+      function(data){
+        if(data != null && data.replace(/^\s+|\s+$/g, '') != '') {
+          $('#message').text(data).fadeIn('slow');
+        } else {
+          $('#message').fadeOut('slow');
+        }
+      });
+    last_account_status_poll = (new Date()).toUTCString();
+  }, 1000 * 60 * 1);
+  
   // Handle change in hashtag URL. Loads the new page and does setup of
   // Shadowbox and current playing track, etc...
   $.address.change(function(e){

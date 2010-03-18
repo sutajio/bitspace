@@ -23,7 +23,7 @@ ActionController::Routing::Routes.draw do |map|
   map.login 'login', :controller => 'user_sessions', :action => 'new'
   map.logout 'logout', :controller => 'user_sessions', :action => 'destroy', :requirements => { :method => 'delete' }
   map.resource :password, :member => { :forgot => :get, :reset => :get, :woohoo => :get }
-  map.resource :account, :member => { :credentials => :any, :upgrade => :any, :profile => :any, :lastfm => :any, :api => :any, :invitations => :any, :valid_password => :get, :lastfm_scrobbling => :put, :reset_api_token => :put }
+  map.resource :account, :member => { :credentials => :any, :upgrade => :any, :profile => :any, :lastfm => :any, :api => :any, :invitations => :any, :valid_password => :get, :lastfm_scrobbling => :put, :reset_api_token => :put, :status => :get }
   
   # Pages
   map.price 'price', :controller => 'pages', :action => 'price'

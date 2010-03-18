@@ -121,7 +121,8 @@
 #nav-upload a:active { background-position: 0 -64px; }
 #nav-upload .swfupload { float: right; }
 
-#error { width: 100%; position: fixed; top: 0; z-index: 79; padding: 10px 10px; font-size: 12px; background: #800; color: #fff; opacity: 0.7; display: none; cursor: pointer; }
+#error { width: 100%; position: fixed; top: 0; z-index: 79; padding: 10px 10px; font-size: 12px; background: #800; color: #fff; opacity: 0.7; display: none; cursor: pointer; text-align: center; }
+#message { width: 100%; position: fixed; top: 0; z-index: 79; padding: 10px 10px; font-size: 12px; background: #080; color: #fff; opacity: 0.7; display: none; cursor: pointer; text-align: center; }
 
 #status { width: 100%; position: fixed; bottom: 38px; z-index: 79; padding: 10px 0; font-size: 12px; background: #000; opacity: 0.7; display: none; }
 #status-artist { font-weight: bold; }
