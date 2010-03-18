@@ -36,7 +36,8 @@ class Upload < ActiveRecord::Base
           album_artist_name = tags.album_artist.present? ? 
             tags.album_artist : various_artists
         else
-          album_artist_name = track_artist_name
+          album_artist_name = tags.album_artist.present? ? 
+            tags.album_artist : track_artist_name
         end
         release_title = 
           tags.album.blank? ? 
