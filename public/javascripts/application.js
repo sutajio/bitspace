@@ -454,24 +454,6 @@ $(function(){
     }
   });
   
-  // Hide the upload info bubble when it is clicked and show the upload
-  // spinner instead.
-  $('#upload-info').click(function(e){
-    $(this).fadeOut('slow');
-    $('#upload-info-arrow').fadeOut('slow')
-    if($(this).hasClass('finished') == false) {
-      $('#upload-spinner').fadeIn('slow');
-    }
-  });
-  
-  // Hide the upload spinner when it is clicked and show the upload info
-  // bubble instead.
-  $('#upload-spinner').click(function(e){
-    $(this).fadeOut('slow');
-    $('#upload-info').fadeIn('slow');
-    $('#upload-info-arrow').fadeIn('slow')
-  });
-  
   // Links with rel=delete acts as delete buttons.
   $('a[rel=delete]').livequery('click', function(e){
     e.preventDefault();

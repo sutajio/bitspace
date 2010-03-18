@@ -1,17 +1,13 @@
 <% if current_user.storage_left <= 0 %>
 <div class="aligncenter small">You don't have any storage left. Sorry!</div>
 <% else %>
-<div id="upload-button">
-  <div id="upload-spinner"></div>
+<div id="upload-button" class="tooltipped" title="Upload">
   <div id="upload-button-swf"></div>
 </div>
 <div id="upload-info">
-  <div id="upload-progress" class="progress">
-    <div class="gauge"></div>
-  </div>
-  <div id="upload-status" class="progress-status">Please select files to upload.</div>
+  <div id="upload-spinner"><%= image_tag('/images/upload-spinner.gif', :size => '32x32', :alt => 'Uploading...') %></div>
+  <div id="upload-progress">0%</div>
 </div>
-<div id="upload-info-arrow"></div>
 <script type="text/javascript">
 $(function(){
   $('#upload-button').each(function(){
@@ -21,9 +17,9 @@ $(function(){
       file_types: "*.mp3;*.m4a;*.mp4;*.aac;*.ogg;*.oga;*.wma;*.flac",
       file_types_description: "Audio files",
       file_post_name: "file",
-      button_image_url : "../../images/button-upload.png",
+      button_image_url : "../../images/button-upload-new.png",
       button_placeholder_id : "upload-button-swf",
-      button_width: 60,
+      button_width: 30,
       button_height: 32,
       button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
       button_cursor: SWFUpload.CURSOR.HAND,
@@ -36,13 +32,10 @@ $(function(){
     })
     .bind('fileQueued', function(e, file){
       $('#upload-info').fadeIn('slow').removeClass('finished');
-      $('#upload-info-arrow').fadeIn('slow')
-      $('#upload-spinner').fadeOut('slow');
       $(this).swfupload('startUpload');
     })
     .bind('uploadComplete', function(e, file){
         var self = this;
-        $('#upload-status').text('Queueing file for processing...');
         $.post("<%= uploads_url %>",
           { 'upload[key]': "<%= s3_upload_key_prefix %>"+file.name },
           function(){
@@ -50,15 +43,11 @@ $(function(){
           });
     })
     .bind('queueComplete', function(e, uploadCount){
-      $('#upload-info').fadeIn('slow').addClass('finished');
-      $('#upload-info-arrow').fadeIn('slow')
-      $('#upload-spinner').fadeOut('slow');
-      $('#upload-status').text('Upload finished! Please note that it can take a while before your tracks appear in your library. We need to do some magic to them before we can let you have them back.');
+      $('#upload-info').fadeOut('slow').addClass('finished');
     })
     .bind('uploadProgress', function(e, file, bytesLoaded){
       var percent = Math.ceil((bytesLoaded / file.size) * 100);
-      $('#upload-progress .gauge').width(percent + '%');
-      $('#upload-status').text(file.name + ' – ' + percent + '%');
+      $('#upload-progress').text(percent + '%');
     });
   });
 });
