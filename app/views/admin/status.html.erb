@@ -33,6 +33,8 @@
       <dd><%= number_to_human_size(User.sum(:max_storage)) %></dd>
       <dt>Real storage (approx.)</dt>
       <dd><%= number_to_human_size(Track.sum(:size, :group => 'fingerprint').values.sum) %></dd>
+      <dt>Client downloads</dt>
+      <dd><%= Client.all.inject(0) {|sum,x| sum += x.downloads } %></dd>
     </dl>
   </div>
   <div class="grid_2">
