@@ -21,7 +21,7 @@ class PaymentsController < ApplicationController
             :first_name => Iconv.conv('utf-8', params[:charset], params[:first_name]),
             :last_name => Iconv.conv('utf-8', params[:charset], params[:last_name]))
         else
-          Invitation.create(
+          Invitation.create!(
             :email => Iconv.conv('utf-8', params[:charset], params[:payer_email]),
             :subscription_id => params[:subscr_id],
             :subscription_plan => params[:item_name],
