@@ -365,6 +365,8 @@ $(function(){
           'Check your internet connection.').fadeIn('slow');
       break;
       case MediaError.MEDIA_ERR_DECODE:
+        $('#error').text('Error - Failed to decode track.').fadeIn('slow');
+      break;
       case MediaError.MEDIA_ERR_SRC_NOT_SUPPORTED:
         $('#error').text('Error - Unable to play track. Either the file is ' +
             ' corrupt or you might need to install a codec for the file type.'
