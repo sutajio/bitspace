@@ -25,41 +25,16 @@ class ReleasesController < ApplicationController
     @release = current_user.releases.find(params[:id])
     @release.transaction do
       if params[:release][:tracks]
-        params[:release][:tracks].each do |id,attributes|
-          track = @release.tracks.find_by_id(id)
-          track.title = attributes[:title]
-          if attributes[:artist].present?
-            track.artist = current_user.artists.find_or_create_by_name(attributes[:artist])
-          end
-          track.save!
-        end
+        @release.rename_tracks(params[:release][:tracks])
       end
       if params[:release][:title]
-        other_release = @release.artist.releases.find_by_title(params[:release][:title])
-        if other_release && other_release != @release
-          other_release.merge!(@release)
-          @release = other_release
-        else
-          @release.update_attributes!(:title => params[:release][:title])
-        end
+        @release = @release.rename(params[:release][:title])
       end
       if params[:release][:artist] && params[:release][:artist][:name]
-        artist = current_user.artists.find_or_create_by_name(params[:release][:artist][:name])
-        other_release = artist.releases.find_by_title(@release.title)
-        if other_release && other_release != @release
-          other_release.merge!(@release)
-          @release = other_release
-        else
-          old_artist = @release.artist
-          @release.artist = artist
-          @release.save!
-          old_artist.touch
-          artist.touch
-        end
+        @release = @release.rename_artist(params[:release][:artist][:name])
       end
       if params[:release][:year]
-        @release.year = params[:release][:year].to_i == 0 ? nil : params[:release][:year].to_i
-        @release.save!
+        @release.change_year(params[:release][:year])
       end
     end
     if request.xhr?

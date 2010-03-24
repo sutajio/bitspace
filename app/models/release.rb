@@ -158,6 +158,51 @@ class Release < ActiveRecord::Base
     "#{id}-#{artist.name.parameterize}-#{title.parameterize}"
   end
   
+  def rename(new_name)
+    other_release = artist.releases.find_by_title(new_name)
+    if other_release && other_release != self
+      other_release.merge!(self)
+      other_release
+    else
+      self.update_attributes!(:title => new_name)
+      self
+    end
+  end
+  
+  def rename_artist(new_artist_name)
+    artist = user.artists.find_or_create_by_name(new_artist_name)
+    other_release = artist.releases.find_by_title(title)
+    if other_release && other_release != self
+      other_release.merge!(self)
+      other_release
+    else
+      old_artist = self.artist
+      self.artist = artist
+      self.save!
+      old_artist.touch
+      artist.touch
+      self
+    end
+  end
+  
+  def rename_tracks(new_track_names)
+    new_track_names.each do |id,attributes|
+      track = tracks.find_by_id(id)
+      if attributes[:title].present?
+        track.title = attributes[:title]
+      end
+      if attributes[:artist].present?
+        track.artist = user.artists.find_or_create_by_name(attributes[:artist])
+      end
+      track.save!
+    end
+  end
+  
+  def change_year(new_year)
+    self.year = new_year.to_i == 0 ? nil : new_year.to_i.abs
+    self.save!
+  end
+  
   protected
   
     def with_lastfm(&block)
