@@ -5,6 +5,10 @@ class Profiles::ProfilesController < ApplicationController
   layout 'profile'
   
   def show
+    @releases = @user.releases.all(
+      :limit => 3,
+      :order => 'created_at DESC',
+      :conditions => { :archived => false })
   end
   
   def follow

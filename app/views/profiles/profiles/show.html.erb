@@ -1,7 +1,7 @@
 <div class="container_16 clearfix aligncenter">
   <div class="grid_16">
     <div class="dashboard clearfix">
-      <% @user.releases.all(:limit => 3, :order => 'created_at DESC').each do |release| %>
+      <% @releases.each do |release| %>
         <% link_to(release_profile_path(@user.login, release), :class => 'cover-art', :style => 'display:block; float:left;') do %>
           <%= image_tag(release.artwork.url(:large, false), :size => '313x313', :alt => 'Cover art') %>
           <span class="info-overlay">
