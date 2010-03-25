@@ -203,6 +203,17 @@ class Release < ActiveRecord::Base
     self.save!
   end
   
+  def could_be_various_artists?
+    mbid.blank? &&
+    title != Upload.unknown_release &&
+    !title.match(/greatest hits/i) &&
+    !title.match(/ ep$/i) &&
+    !title.match(/ (ep)$/i) &&
+    !title.match(/ [ep]$/i) &&
+    tracks_count > 0 &&
+    tracks_count <= 5
+  end
+  
   protected
   
     def with_lastfm(&block)
