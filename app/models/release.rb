@@ -214,6 +214,15 @@ class Release < ActiveRecord::Base
     tracks_count <= 5
   end
   
+  def has_track_with_nr?(set_nr, track_nr)
+    return false if track_nr.nil?
+    if set_nr.nil?
+      return true if tracks.find_by_track_nr(track_nr.to_i)
+    else
+      return true if tracks.find_by_set_nr_and_track_nr(set_nr.to_i, track_nr.to_i)
+    end
+  end
+  
   protected
   
     def with_lastfm(&block)

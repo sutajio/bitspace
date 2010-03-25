@@ -69,6 +69,19 @@ class Upload < ActiveRecord::Base
           end
         end
         
+        if album_artist_name == track_artist_name
+          if last_release = user.releases.first
+            if last_release.title == release_title
+              unless last_release.has_track_with_nr?(track_set_nr, track_nr)
+                album_artist_name = Upload.various_artists
+                if last_release.artist.name != Upload.various_artists
+                  last_release.rename_artist(Upload.various_artists)
+                end
+              end
+            end
+          end
+        end
+        
         logger.info("Title: #{track_title}")
         logger.info("Artist: #{track_artist_name}")
         logger.info("Album artist: #{album_artist_name}")
