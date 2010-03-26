@@ -60,8 +60,8 @@ class Label < ActiveRecord::Base
   def fetch_artwork
     with_discogs do |info|
       if info.images.present?
-        self.artwork = open(info.images.first.uri ||
-                            info.images.first.uri150) rescue artwork
+        self.artwork = open(info.images.sort_by(&:type).first.uri ||
+                            info.images.sort_by(&:type).first.uri150) rescue artwork
         self.save!
       end
     end
