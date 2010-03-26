@@ -15,7 +15,6 @@ class Label < ActiveRecord::Base
   
   has_attached_file :artwork,
     :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
-    :styles => { :small => ["125x125#", :png] },
     :whiny => false,
     :storage => :s3,
     :s3_credentials => {
@@ -34,12 +33,28 @@ class Label < ActiveRecord::Base
   def update_meta_data
     identify_mbid unless mbid
     fetch_artwork unless artwork.file?
+    update_website unless website
   end
   
   after_create :update_meta_data unless Rails.env.test?
   handle_asynchronously :update_meta_data
   
   def identify_mbid
+  end
+  
+  def update_website
+    with_discogs do |info|
+      if info.urls.present?
+        self.website = info.urls.first.squish
+        self.save!
+      end
+    end
+  end
+  
+  def profile
+    with_discogs do |info|
+      return info.try(:profile)
+    end
   end
   
   def fetch_artwork
@@ -59,6 +74,17 @@ class Label < ActiveRecord::Base
       @discogs_label.name # Try to fetch data
       yield(@discogs_label)
     rescue OpenURI::HTTPError => e
+    end
+    
+    def with_music_brainz(options = {}, &block)
+      if mbid
+        sleep(2)
+        q = MusicBrainz::Webservice::Query.new
+        label = q.get_label_by_id(mbid, options)
+        if label
+          yield(label)
+        end
+      end
     end
   
 end

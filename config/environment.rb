@@ -23,7 +23,7 @@ Rails::Initializer.run do |config|
   config.gem 'ruby-mp3info', :lib => 'mp3info', :source => 'http://gemcutter.org'
   config.gem 'will_paginate', :source => 'http://gemcutter.org'
   config.gem 'scoped_search', :source => 'http://gemcutter.org'
-  config.gem 'paperclip', :source => 'http://gemcutter.org'
+  config.gem 'bteitelb-paperclip', :lib => 'paperclip', :source => 'http://gemcutter.org'
   config.gem 'right_aws', :source => 'http://gemcutter.org'
   config.gem 'authlogic', :source => 'http://gemcutter.org'
   config.gem 'discogs', :source => 'http://gemcutter.org'

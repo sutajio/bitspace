@@ -12,6 +12,10 @@ class Artist < ActiveRecord::Base
   named_scope :by_name, lambda { |name| { :conditions => { :name => name } } }
   named_scope :with_releases, :conditions => ['releases_count > 0']
   
+  def self.first_with_artwork
+    first(:order => 'artists.artwork_updated_at IS NOT NULL DESC, artists.artwork_updated_at DESC')
+  end
+  
   searchable_on :name
   
   has_attached_file :artwork,

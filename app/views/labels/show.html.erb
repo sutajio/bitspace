@@ -1,5 +1,10 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
+    <% if @label.website.present? %>
+    <div class="actions" style="float:right; margin-top:15px;">
+      <%= link_to('Website', @label.website, :target => '_blank') %>
+    </div>
+    <% end %>
     <h1><%=h @label.name %></h1>
   </div>
 </div>

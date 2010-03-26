@@ -75,6 +75,7 @@ $(function(){
       if($('#player').attr('paused') == false) {
         $('a[href="'+$('#player').attr('src')+'"]').addClass('playing');
       }
+      $('.tipsy').remove();
     });
     $('a.current').removeClass('current');
     $('a[href="'+e.value.replace(/["]/g, '\\"')+'"]').addClass('current');
@@ -568,6 +569,30 @@ $(function(){
         });
       }
     });
+  });
+  
+  $('.masonry').livequery(function(e){
+    $(this).masonry({
+      columnWidth: 90,
+      itemSelector: '.tile:visible'
+    });
+  });
+  
+  $('.infinite-scroll-with-masonry').livequery(function(){
+    $(this).infinitescroll({
+      navSelector: '.more',
+      nextSelector: '.more',
+      itemSelector: 'div.infinite-scroll-with-masonry div.infscr-pages div',
+      loadingImg: '/images/black/ajax-loader.gif',
+      loadingText: 'Please wait...',
+      donetext: '',
+      bufferPx: 400
+    },
+    function(){ $('.masonry').masonry({ appendedContent: $(this) }); });
+  });
+  
+  $('.label').livequery(function(){
+    $(this).tipsy({ gravity: 's', fade: false });
   });
   
 });

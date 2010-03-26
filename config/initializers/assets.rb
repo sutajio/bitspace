@@ -18,6 +18,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.ui.js',
     '/vendor/plugins/jquery.address.js',
     '/vendor/plugins/jquery.suggest.js',
+    '/vendor/plugins/jquery.masonry.js',
     '/vendor/jplayer/jquery.jplayer.min.js',
     'application'
   ],
