@@ -1,0 +1,59 @@
+<div class="container_12 clearfix">
+  <div class="grid_8 prefix_2 suffix_2">
+    <h1>Press kit</h1>
+    <p>Welcome to our press room, where you’ll find background information and
+    press related materials including our logotype and hi-res images. Please
+    direct any press enquiries to <%= mail_to('press@bitspace.se') %>.</p>
+    
+    <h2>Logos and colors</h2>
+    <p>
+      <%= image_tag('/images/logo_200x200.png', :size => '200x200') %>
+      <%= image_tag('/images/logo_200x200_inverted.png', :size => '200x200') %>
+    </p>
+    <ul>
+      <li><%= link_to('200x200 color PNG', '/images/logo_200x200.png') %>, 44 Kb</li>
+      <li><%= link_to('200x200 inverted PNG', '/images/logo_200x200_inverted.png') %>, 36 Kb</li>
+      <li><%= link_to('16x16 favicon PNG', '/images/logos/favicon.png') %>, 4 Kb</li>
+      <li><%= link_to('16x16 favicon ICO', '/favicon.ico') %>, 4 Kb</li>
+    </ul>
+    <p>The color and inverted logos can be used interchangeably, but the inverted
+      logo is preferred in technical contexts. The official Bitspace color is
+      <code>#0099ff</code> in hexadecimal representation. Both logos can be used
+      on both a black and white background. Please avoid placing the logos on
+      backgrounds that is neither black or white or close to strongly colored
+      graphical elements.</p>
+    
+    <h2>Press images</h2>
+    <p>
+    <%= link_to(image_tag('/images/tour/screenshot-1.png', :size => '150x103', :alt => 'Screenshot of the Bitspace Player showing the artists view with artist like Apparat, Arcade Fire, Atlas Sound, Aztec Camera, Belle and Sebastion, and Black Dice.'), '/images/tour/screenshot-1.png') %>
+    <%= link_to(image_tag('/images/tour/screenshot-3.png', :size => '150x103', :alt => 'Screenshot of the Bitspace Player showing the album art for "We Brave Bee Stings" by Thao Nguyen and the Get Down Stay Down.'), '/images/tour/screenshot-3.png') %>
+    <%= link_to(image_tag('/images/tour/screenshot-4.png', :size => '150x103', :alt => 'Screenshot of the Bitspace Player with the releases view with albums by Vampire Weekend, Real Estate, Mos Def, Shugo Tokumaru and Electric President.'), '/images/tour/screenshot-4.png') %>
+    <%= link_to(image_tag('/images/tour/screenshot-8.png', :size => '150x103', :alt => 'Screenshot of the Bitspace Player showing two releases by The Microphones: "Mount Eerie" (2003) and "The Glow Pt. 2" (2001).'), '/images/tour/screenshot-8.png') %>
+    </p>
+    <p><em>Click the thumbnails for high resolution versions.</em></p>
+    
+    <h2>Background information</h2>
+    <dl class="details">
+      <dt>Company:</dt>
+      <dd>Sutajio HB</dd>
+      <dt>Founded:</dt>
+      <dd>2009 by Niklas Holmgren and Fredrik Lundqvist</dd>
+      <dt>Location:</dt>
+      <dd>Stockholm, Sweden</dd>
+      <dt>Funding:</dt>
+      <dd>Bootstrapped, no external funding.</dd>
+      <dt>Goal:</dt>
+      <dd>To develop and market web based applications related to culture and
+        entertainment, as well as technology, design and communication consulting
+        for professional clients.</dd>
+    </dl>
+    
+    <h2>Media coverage</h2>
+    <p>For current online media coverage, please see the 
+    <%= link_to('Bitspace article at Technorati', 'http://technorati.com/search/?return=posts&q=bitspace') %>.</p>
+    
+    <h2>Press releases</h2>
+    <iframe src="http://www.mynewsdesk.com/se/widget/view?query=bitspace&amp;subject=&amp;g_region=&amp;sites=all&amp;size=620_180&amp;heading=" width="620" height="180" border="0" scroll="no" frameborder="0"></iframe><br><small><a href="http://www.mynewsdesk.com/se/widget/settings?query=bitspace&amp;subject=&amp;g_region=&amp;sites=all&amp;size=380_380&amp;heading=" target="_blank">Widget från MyNewsdesk</a></small>    
+    
+  </div>
+</div>

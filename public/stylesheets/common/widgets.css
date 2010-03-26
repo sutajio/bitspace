@@ -96,3 +96,5 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 .pagination .next_page { float: right; margin-left: 20px; }
 
 .small { font-size: 9px; line-height: 12px; }
+
+.details dt { font-weight: bold; float: left; margin-right: 0.5em; }

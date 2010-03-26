@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   map.about 'about', :controller => 'pages', :action => 'about'
   map.download 'download', :controller => 'pages', :action => 'download'
   map.terms 'terms', :controller => 'pages', :action => 'terms'
+  map.press 'press', :controller => 'pages', :action => 'press'
   
   # Blog
   map.blog 'blog', :controller => 'blog_posts', :action => 'index'

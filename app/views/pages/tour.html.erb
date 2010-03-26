@@ -1,18 +1,124 @@
 <div class="container_16 clearfix">
   <div class="grid_16 aligncenter">
-    <div class="slideshow">
-      <p>
-      <%= link_to(image_tag('/images/tour/screenshot-1.png', :alt => 'Screenshot of the Bitspace Player showing the artists view with artist like Apparat, Arcade Fire, Atlas Sound, Aztec Camera, Belle and Sebastion, and Black Dice.'), root_url) %>
-      <%#= image_tag('/images/tour/screenshot-2.png') %>
-      <%= link_to(image_tag('/images/tour/screenshot-3.png', :alt => 'Screenshot of the Bitspace Player showing the album art for "We Brave Bee Stings" by Thao Nguyen and the Get Down Stay Down.'), root_url) %>
-      <%= link_to(image_tag('/images/tour/screenshot-4.png', :alt => 'Screenshot of the Bitspace Player with the releases view with albums by Vampire Weekend, Real Estate, Mos Def, Shugo Tokumaru and Electric President.'), root_url) %>
-      <%#= image_tag('/images/tour/screenshot-5.png') %>
-      <%#= image_tag('/images/tour/screenshot-6.png') %>
-      <%#= image_tag('/images/tour/screenshot-7.png') %>
-      <%= link_to(image_tag('/images/tour/screenshot-8.png', :alt => 'Screenshot of the Bitspace Player showing two releases by The Microphones: "Mount Eerie" (2003) and "The Glow Pt. 2" (2001).'), root_url) %>
-      </p>
-      
-      <h2><%= link_to('See plans and pricing →', price_path) %></h2>
+    <ul class="slideshow">
+      <li>
+        <h2>A better music player than you could ever imagine</h2>
+        <p>We are not all about storage. We also want to create a superior
+        music experience. We want the way you navigate your music library to
+        feel natural and logical and we want the music you own in digital
+        format to be just as beautiful as the music you have in your
+        bookshelf. We also want to make organizing and categorizing music
+        easy. We will make sure your meta data is correct and kept up to date
+        automatically. So that you can focus on what is really important;
+        enjoying your music.</p>
+        <%= image_tag('/images/tour/screenshot-1.png', :alt => 'Screenshot of the Bitspace Player showing the artists view with artist like Apparat, Arcade Fire, Atlas Sound, Aztec Camera, Belle and Sebastion, and Black Dice.') %>
+      </li>
+      <li>
+        <h2>The visual experience of the record album returns</h2>
+        <p>A popular "myth" that has been propagated since the early days of
+        digital music is that the album as a format is dead. That in "the
+        future" people will only listen to tracks and won't care about buying
+        albums. We don't believe that is true.</p>
+        <%= image_tag('/images/tour/screenshot-2.png') %>
+      </li>
+      <li>
+        <h2>Love the tracks you love</h2>
+        <p>We all got that one favorite track that we listen to again and
+        again. With Bitspace it's easy to be your own DJ. Bitspace makes it
+        easy to keep tabs on which tracks are your favorite ones. Just click
+        the "love" button and the track will be instantly added to a special
+        playlist where you can find and play all your favorite tracks. Loving
+        a track will also help you out when you can't remember what track was
+        the good one on an album.</p>
+        <%= image_tag('/images/tour/screenshot-3.png', :alt => 'Screenshot of the Bitspace Player showing the album art for "We Brave Bee Stings" by Thao Nguyen and the Get Down Stay Down.') %>
+      </li>
+      <li>
+        <h2>Do you have a favorite music label? With Bitspace you got many.</h2>
+        <p>Record labels have always played an important part in getting new
+        great music out to the masses and to curate the constant flow of new
+        music. In the good old days we looked at the fine print on the vinyls
+        to see what label had released it. It was a crude way to gauge if the
+        record was worth buying. Perhaps in these days of digital distribution
+        the need for printing CDs or Vinyls is not as important as it used to
+        be, but maybe you still read the blog or newsletter from your favorite
+        indie label because the job as a curator of new music is not showing
+        any signs of going away.</p>
+        <%= image_tag('/images/tour/screenshot-4.png', :alt => 'Screenshot of the Bitspace Player with the releases view with albums by Vampire Weekend, Real Estate, Mos Def, Shugo Tokumaru and Electric President.') %>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<hr />
+
+<div class="container_16 clearfix">
+  <div class="grid_16 aligncenter">
+    <h2><%= link_to('<strong><u>Try Bitspace for free for 30 days.</u></strong> See plans and pricing →', price_path) %></h2>
+    <h3 class="grey">60 seconds from signing up to enjoying your music. No credit card required. No obligations.</h3>
+  </div>
+</div>
+
+<hr />
+
+<div class="container_16 clearfix">
+  <div class="grid_16 aligncenter">
+    <ul class="slideshow">
+      <li>
+        <h2>Browse your music library by year</h2>
+        <p>Maybe you prefer music from the 80s? Or what if everything just
+        sounded so much better back in the 60s? Well, we got you covered. With
+        the "Years" view you can browse and navigate your music library based
+        on when the music you own was first released. So it's easy to find the
+        right music for the right mood. You can either browse by decade for
+        older releases or by year for newer ones.</p>
+        <%= image_tag('/images/tour/screenshot-5.png') %>
+      </li>
+      <li>
+        <h2>Smart playlists help keep your music organized</h2>
+        <p>No one wants to be a librarian. That's why we do our best to keep
+        your music organized for you, so that you don't have to. With smart
+        playlists you can easily find the track you are looking for or simply
+        start listening to all your favorite tracks all at once. Bitspace also
+        have smart playlists for your Top 100 most played tracks, as well as
+        your most recently played and most recently uploaded tracks.</p>
+        <%= image_tag('/images/tour/screenshot-6.png') %>
+      </li>
+      <li>
+        <h2>Learn more about your favorite artists</h2>
+        <p>Who killed John Lennon? How many albums did the Sex Pistols
+        release? Did Brian Eno really produce Bowies popular Berlin trilogy?
+        We have the answers to those questions and more. Did you really think
+        that you knew everything about your favorite artists? There is always
+        more to learn, and with convenient artist biographies right in your
+        Bitspace library, along with a link to the artist's homepage, the
+        information is always instantly available.</p>
+        <%= image_tag('/images/tour/screenshot-7.png') %>
+      </li>
+      <li>
+        <h2>It's so simple to upload your music, it's almost ridiculous</h2>
+        <p>Other cloud services might use crappy old school Java applets or an inconvenient and ugly desktop app to let you "sync" your music with the cloud. We say: "simple is good".</p>
+        <p><strong>1.</strong> Click the + button in the lower right corner of the player.<br/> <strong>2.</strong> Select the music files you want to upload.<br /> <strong>3.</strong> <em>There is no step 3.</em></p>
+        <%= image_tag('/images/tour/screenshot-8.png') %>
+      </li>
+      <li>
+        <h2>Share your taste in music with your friends</h2>
+        <p>With public profiles you can get your own fans. Your public profile
+        is a way for you to share your music taste and to let your friends
+        follow what you upload and listen to. You can find your public profile
+        at bitspace.at/username. Bitspace is also fully integrated with
+        Last.fm and can scrobble everything you listen to with the click of a
+        button.</p>
+        <%= image_tag('/images/tour/screenshot-9.png') %>
+      </li>
     </div>
+  </div>
+</div>
+
+<hr />
+
+<div class="container_16 clearfix">
+  <div class="grid_16 aligncenter">
+    <h2><%= link_to('<strong><u>Try Bitspace for free for 30 days.</u></strong> See plans and pricing →', price_path) %></h2>
+    <h3 class="grey">60 seconds from signing up to enjoying your music. No credit card required. No obligations.</h3>
   </div>
 </div>

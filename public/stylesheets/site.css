@@ -88,3 +88,8 @@ ul.releases li span.year { display: block; }
 
 .share-buttons { display: none; }
 
+.slideshow { list-style: none; }
+.slideshow li { margin: 25px 0 25px 0; padding-bottom: 100px; border-bottom: 1px solid #eee; }
+.slideshow li:last-child { margin-bottom: 0; border-bottom: none; }
+.slideshow p { margin: 20px auto; width: 600px; }
+.slideshow img { -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.85, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }

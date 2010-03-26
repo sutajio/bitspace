@@ -5,17 +5,17 @@
   
   <div class="grid_4 prefix_2 aligncenter">
     <div class="box" style="height: 236px; overflow: hidden; line-height: normal;">
-      <h2 style="white-space:nowrap;"><strong><%= User::SUBSCRIPTION_PLANS[:basic][:name] %></strong></h2>
-      <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:basic][:price_in_euro], :unit => '€') %>/month</h3>
+      <h2 style="white-space:nowrap;"><strong><%= User::SUBSCRIPTION_PLANS[:premium][:name] %></strong></h2>
+      <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:premium][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
-        <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:basic][:storage]) %></strong> storage</li>
-        <li style="margin: 0;"><strong><%= bytes_to_albums(User::SUBSCRIPTION_PLANS[:basic][:storage]) %></strong> albums*</li>
-        <li style="margin: 0;"><strong><%= bytes_to_tracks(User::SUBSCRIPTION_PLANS[:basic][:storage]) %></strong> tracks*</li>
+        <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:premium][:storage]) || 'Unlimited' %></strong> storage</li>
+        <li style="margin: 0;"><strong><%= bytes_to_albums(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> albums*</li>
+        <li style="margin: 0;"><strong><%= bytes_to_tracks(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> tracks*</li>
       </ul>
-      <p class="grey"><%= User::SUBSCRIPTION_PLANS[:basic][:tagline] %></p>
+      <p class="grey"><%= User::SUBSCRIPTION_PLANS[:premium][:tagline] %></p>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:basic][:paypal_button_id] %>">
+      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:premium][:paypal_button_id] %>">
       <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"<% if ENV['PRIVATE_BETA'] %> disabled="disabled" style="opacity:0.5;"<% end %>>
       <img alt="" border="0" src="https://www.paypal.com/sv_SE/i/scr/pixel.gif" width="1" height="1">
       </form>
@@ -43,17 +43,17 @@
   
   <div class="grid_4 suffix_2 aligncenter">
     <div class="box" style="height: 236px; overflow: hidden; line-height: normal;">
-      <h2 style="white-space:nowrap;"><strong><%= User::SUBSCRIPTION_PLANS[:premium][:name] %></strong></h2>
-      <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:premium][:price_in_euro], :unit => '€') %>/month</h3>
+      <h2 style="white-space:nowrap;"><strong><%= User::SUBSCRIPTION_PLANS[:basic][:name] %></strong></h2>
+      <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:basic][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">
-        <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:premium][:storage]) || 'Unlimited' %></strong> storage</li>
-        <li style="margin: 0;"><strong><%= bytes_to_albums(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> albums*</li>
-        <li style="margin: 0;"><strong><%= bytes_to_tracks(User::SUBSCRIPTION_PLANS[:premium][:storage]) %></strong> tracks*</li>
+        <li style="margin: 0;"><strong><%= number_to_human_size(User::SUBSCRIPTION_PLANS[:basic][:storage]) %></strong> storage</li>
+        <li style="margin: 0;"><strong><%= bytes_to_albums(User::SUBSCRIPTION_PLANS[:basic][:storage]) %></strong> albums*</li>
+        <li style="margin: 0;"><strong><%= bytes_to_tracks(User::SUBSCRIPTION_PLANS[:basic][:storage]) %></strong> tracks*</li>
       </ul>
-      <p class="grey"><%= User::SUBSCRIPTION_PLANS[:premium][:tagline] %></p>
+      <p class="grey"><%= User::SUBSCRIPTION_PLANS[:basic][:tagline] %></p>
       <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
       <input type="hidden" name="cmd" value="_s-xclick">
-      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:premium][:paypal_button_id] %>">
+      <input type="hidden" name="hosted_button_id" value="<%= User::SUBSCRIPTION_PLANS[:basic][:paypal_button_id] %>">
       <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"<% if ENV['PRIVATE_BETA'] %> disabled="disabled" style="opacity:0.5;"<% end %>>
       <img alt="" border="0" src="https://www.paypal.com/sv_SE/i/scr/pixel.gif" width="1" height="1">
       </form>

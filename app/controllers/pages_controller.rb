@@ -10,24 +10,28 @@ class PagesController < ApplicationController
   end
   
   def price
-    @page_title = 'Pricing and Signup - Bitspace'
+    @page_title = 'Pricing and Signup'
   end
   
   def tour
-    @page_title = 'Take a Look Inside, Product Tour - Bitspace'
+    @page_title = 'Take a Look Inside, Product Tour'
   end
   
   def about
-    @page_title = 'What is Bitspace?, FAQ, Help and Support - Bitspace'
+    @page_title = 'What is Bitspace?, FAQ, Help and Support'
   end
   
   def terms
-    @page_title = 'Terms and Conditions - Bitspace'
+    @page_title = 'Terms and Conditions'
   end
   
   def download
-    @page_title = 'Download the Mac OS X Client - Bitspace'
+    @page_title = 'Download the Mac OS X Client'
     @clients = Client.all
+  end
+  
+  def press
+    @page_title = 'Press kit for Bitspace'
   end
   
 end
