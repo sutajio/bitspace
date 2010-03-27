@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :dashboard
   map.resource :search, :collection => { :suggestions => :get }
   map.resources :uploads, :collection => { :import => :post }
-  map.resources :artists
+  map.resources :artists, :member => { :biography => :get }
   map.resources :releases, :member => { :archive => :put, :artwork => :any }
   map.resources :labels
   map.resources :years

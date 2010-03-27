@@ -39,6 +39,11 @@ class Artist < ActiveRecord::Base
   def update_meta_data
     identify_mbid unless mbid
     fetch_artwork unless artwork.file?
+    update_sort_name
+    update_artist_type unless artist_type
+    update_dates unless begin_date && end_date
+    update_website unless website
+    update_tags unless tags
   end
   
   after_create :update_meta_data unless Rails.env.test?
@@ -96,6 +101,57 @@ class Artist < ActiveRecord::Base
     "#{id}-#{name.parameterize}"
   end
   
+  def update_sort_name
+    with_music_brainz do |info|
+      if info.sort_name.present?
+        self.sort_name = info.sort_name
+      end
+    end
+    self.sort_name ||= "#{name[4..-1]}, The" if name.match(/^The /)
+    self.sort_name ||= name
+    self.save!
+  end
+  
+  def update_artist_type
+    with_music_brainz do |info|
+      if info.type.present?
+        case info.type
+        when MusicBrainz::Model::Artist::TYPE_PERSON:
+          self.artist_type = 'Person'
+        when MusicBrainz::Model::Artist::TYPE_GROUP:
+          self.artist_type = 'Group'
+        end
+        self.save!
+      end
+    end
+  end
+  
+  def update_dates
+    with_music_brainz do |info|
+      self.begin_date = info.begin_date.first if info.begin_date
+      self.end_date = info.end_date.last if info.end_date
+      self.save!
+    end
+  end
+  
+  def update_website
+    with_music_brainz(:url_rels => true) do |info|
+      urls = info.get_relations(:target_type => MusicBrainz::Model::Relation::TO_URL,
+                                :relation_type => MusicBrainz::Model::NS_REL_1 + 'OfficialHomepage')
+      if urls.present?
+        self.website = urls.sort_by(&:begin_date).last.target
+        self.save!
+      end
+    end
+  end
+  
+  def update_tags
+    with_music_brainz(:tags => true) do |info|
+      self.tags = info.tags.map(&:text).join(', ')[0..255] if info.tags.present?
+      self.save!
+    end
+  end
+  
   protected
   
     def with_lastfm(&block)
@@ -103,6 +159,21 @@ class Artist < ActiveRecord::Base
       lastfm_artist = Scrobbler2::Artist.new(name)
       if lastfm_artist.info
         yield(lastfm_artist.info)
+      end
+    end
+    
+    def with_music_brainz(options = {}, &block)
+      if @musicbrainz_artist && options == {}
+        yield(@musicbrainz_artist)
+      else
+        if mbid
+          sleep(2)
+          q = MusicBrainz::Webservice::Query.new
+          @musicbrainz_artist = q.get_artist_by_id(mbid, options)
+          if @musicbrainz_artist
+            yield(@musicbrainz_artist)
+          end
+        end
       end
     end
   

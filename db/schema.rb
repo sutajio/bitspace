@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100326203744) do
+ActiveRecord::Schema.define(:version => 20100326234650) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -22,11 +22,20 @@ ActiveRecord::Schema.define(:version => 20100326203744) do
     t.string   "artwork_content_type"
     t.integer  "artwork_file_size"
     t.datetime "artwork_updated_at"
+    t.integer  "artwork_width"
+    t.integer  "artwork_height"
+    t.string   "sort_name"
+    t.string   "artist_type"
+    t.date     "begin_date"
+    t.date     "end_date"
+    t.string   "website"
+    t.string   "tags"
   end
 
   add_index "artists", ["mbid"], :name => "index_artists_on_mbid"
   add_index "artists", ["name"], :name => "index_artists_on_name"
   add_index "artists", ["releases_count"], :name => "index_artists_on_releases_count"
+  add_index "artists", ["sort_name"], :name => "index_artists_on_sort_name"
   add_index "artists", ["user_id"], :name => "index_artists_on_user_id"
 
   create_table "blog_posts", :force => true do |t|
@@ -120,7 +129,7 @@ ActiveRecord::Schema.define(:version => 20100326203744) do
     t.integer  "artwork_width"
     t.integer  "artwork_height"
     t.string   "sort_name"
-    t.string   "type"
+    t.string   "label_type"
     t.date     "begin_date"
     t.date     "end_date"
     t.string   "website"
@@ -129,6 +138,7 @@ ActiveRecord::Schema.define(:version => 20100326203744) do
 
   add_index "labels", ["mbid"], :name => "index_labels_on_mbid"
   add_index "labels", ["name"], :name => "index_labels_on_name"
+  add_index "labels", ["sort_name"], :name => "index_labels_on_sort_name"
   add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
 
   create_table "releases", :force => true do |t|

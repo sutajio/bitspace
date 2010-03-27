@@ -1,0 +1,25 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <div class="actions" style="float:right; margin-top:15px;">
+      <%= link_to('Releases', artist_path(@artist), :target => '_self') %>
+      <%= link_to('Biography', biography_artist_path(@artist), :target => '_self', :class => 'enabled') %>
+      <% if @artist.website.present? %>
+      <%= link_to('Website', @artist.website, :target => '_blank') %>
+      <% end %>
+    </div>
+    <h1>
+      <%= link_to(h(@artist.name), @artist, :target => '_self') %>
+      <% if @artist.begin_date || @artist.end_date %>
+        <span>(<%= @artist.begin_date ? @artist.begin_date.strftime('%Y') : '?' %> &ndash; <%= @artist.end_date ? @artist.end_date.strftime('%Y') : '?' %>)</span>
+      <% end %>
+    </h1>
+    <% if @artist.artwork.file? %>
+      <% cache [@artist, 'biography'], :ttl => 1.week do %>
+        <%= image_tag(@artist.artwork.url(:large, false), :width => @artist.artwork.width(:large), :height => @artist.artwork.height(:large), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0;') %>
+        <p id="biography" class="clearfix grey" style="margin-left:<%= @artist.artwork.width(:large) + 20 %>px;">
+          <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
+        </p>
+      <% end %>
+    <% end %>
+  </div>
+</div>
