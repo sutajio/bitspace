@@ -1,4 +1,4 @@
-<% benchmark 'Playlist info', :silence => true do %>
+<% cache [Digest::MD5.hexdigest(tracks.map(&:cache_key).to_s), 'playlist-info'] do %>
   <div class="info">
     <% tracks.map(&:release).uniq[0..(tracks.size/7.0).to_i].each do |release| %>
       <% if release.artwork.file? %>

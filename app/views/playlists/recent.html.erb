@@ -6,7 +6,9 @@
       <li class="release playlist clearfix">
         <%= render :partial => 'playlist_info', :locals => { :tracks => @tracks } %>
         <ol class="tracks">
+          <% cache Digest::MD5.hexdigest(@tracks.map(&:cache_key).to_s) do %>
           <%= render :partial => 'tracks/track', :collection => @tracks, :locals => { :show_artist => true } %>
+          <% end %>
         </ol>
         <% if @tracks.total_entries > @tracks.size %>
         <p class="fallback small" style="text-align:right;">Showing <%= pluralize(@tracks.size, 'tracks') %> out of <%= pluralize(@tracks.total_entries, 'played tracks') %> in total.</p>
