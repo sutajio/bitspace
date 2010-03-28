@@ -1,5 +1,16 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
+    <div style="float:right; margin-left:10px;">
+      <script type="text/javascript">
+      tweetmeme_source = 'bitspaced';
+      </script>
+      <script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+    </div>
+    <div style="float:right; margin-left:10px;">
+      <a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php" class="fb_share">Dela</a>
+      <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+    </div>
+    
     <% if @release.artwork.file? %>
     <%= image_tag(@release.artwork.url(:medium, false), :size => '240x240', :alt => 'Cover art', :style => 'float:left; margin:0 20px 20px 0;') %>
     <% else %>
@@ -27,12 +38,7 @@
     <% end %>
     <hr />
     <div style="float:right; text-align:right;">
-      <strong>Buy from…</strong><br />
-      <%= @release.buy_links %>
-      <%= link_to('Amazon', '#', :target => '_blank') %> /
-      <%= link_to('7digital', '#', :target => '_blank') %> /
-      <%= link_to('eMusic', '#', :target => '_blank') %> /
-      <%= link_to('iTunes', '#', :target => '_blank') %>
+
     </div>
     <div style="float:left;">
       <strong>More at…</strong><br />

@@ -36,6 +36,8 @@ pre { background: #222; color: #fff; text-shadow: none; padding: 10px; -webkit-b
 .color-1 { background: #eee url(/images/noisey-grey.png); }
 .color-2 { margin-bottom: 30px; }
 .billboard { background: url(/images/billboard-glow.jpg) no-repeat 50% 0; padding: 40px 0 20px 0; height: 440px; }
+.fb_share { color: #fff !important; }
+.fb_share_no_count { display: block !important; }
 
 #new_invitation_request { background: #f9f9f9; padding: 10px; }
 #new_invitation_request h3 { margin-bottom: 10px; }

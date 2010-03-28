@@ -1,5 +1,16 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
+    <div style="float:right; margin-left:10px;">
+      <script type="text/javascript">
+      tweetmeme_source = 'bitspaced';
+      </script>
+      <script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+    </div>
+    <div style="float:right; margin-left:10px;">
+      <a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php" class="fb_share">Dela</a>
+      <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+    </div>
+    
     <h1><%=h @artist.name %></h1>
     <% if @artist.artwork.file? %>
       <% cache [@artist, 'public-biography'], :ttl => 1.week do %>
