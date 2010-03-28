@@ -36,6 +36,7 @@ class ReleasesController < ApplicationController
       if params[:release][:year]
         @release.change_year(params[:release][:year])
       end
+      @release.tracks.each(&:touch)
     end
     if request.xhr?
       render :text => release_path(@release)
@@ -48,6 +49,7 @@ class ReleasesController < ApplicationController
     @release = current_user.releases.find(params[:id])
     if request.put?
       @release.update_attributes!(:artwork => params[:release][:artwork])
+      @release.tracks.each(&:touch)
       head :ok
     end
   rescue ActiveRecord::RecordInvalid => e
