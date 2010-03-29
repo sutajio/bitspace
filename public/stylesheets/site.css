@@ -60,3 +60,19 @@ a.button:active { background: #fff; background: -webkit-gradient(linear, left to
 
 .tabnav li a { display: block; padding: 1px 10px; font-weight: bold; color: #333; text-shadow: #fff 0px 1px 0px; background: #eee; -webkit-border-radius: 15px; -moz-border-radius: 15px; }
 .tabnav li a.current { background: #aaa; color: #111; text-shadow: #ccc 0px 1px 0px; }
+
+.track-title { width: 440px; overflow: hidden; display: block; float: left; overflow: hidden; height: 19px; }
+.track-artist a { padding: 0 !important; }
+.track-length { width: 50px; display: block; float: left; text-align: right; }
+.track-love {  width: 36px; display: block; float:left; padding-left: 0 !important; text-align: center; }
+
+.track-love { opacity: 0.5; background: url(/images/love.png) no-repeat 50% 0; text-indent: -9999px; }
+.track-love.loved { opacity: 1; background-position: 50% -38px; }
+
+.release .review { margin-left: 260px; margin-right: 100px; }
+.release ol.tracks { margin-left: 260px; margin-right: 100px; background: #f9f9f9; padding: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
+.release ol.tracks li { padding: 2px; height: 19px; }
+.release ol.tracks li strong { color: #666; }
+.release ol.tracks .odd { background: #f6f6f6; }
+.release ol.tracks .even {}
+.release .meta { margin-left: 260px; margin-right: 100px; }

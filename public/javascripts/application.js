@@ -544,7 +544,7 @@ $(function(){
     });
   });
   
-  $('#biography').livequery(function(){
+  $('.biography').livequery(function(){
     $(this).expander({
       slicePoint: 1200,
       expandText: '<span class="small">Read more</span>',

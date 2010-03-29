@@ -32,7 +32,7 @@ $(function(){
     }
   });
   
-  $('#biography').livequery(function(){
+  $('.biography').livequery(function(){
     $(this).expander({
       slicePoint: 1200,
       expandText: '<span class="small">Read more</span>',
@@ -40,7 +40,7 @@ $(function(){
     });
   });
   
-  $('#review').livequery(function(){
+  $('.review').livequery(function(){
     $(this).expander({
       slicePoint: 450,
       expandText: '<span class="small">Read more</span>',
