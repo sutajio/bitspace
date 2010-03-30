@@ -404,7 +404,7 @@ $(function(){
   //
   $(document).keydown(function(e){
     if(e.keyCode == 32) {
-      if(e.target.tagName != 'INPUT') {
+      if(e.target.tagName != 'INPUT' && e.target.tagName != 'TEXTAREA') {
         e.preventDefault();
         $('#player').trigger('toggle');
       }

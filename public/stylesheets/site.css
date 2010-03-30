@@ -55,6 +55,8 @@ pre { background: #222; color: #fff; text-shadow: none; padding: 10px; -webkit-b
 a.button { background: #f9f9f9; border: 1px solid #eee; padding: 5px 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; background: -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f9f9f9)); }
 a.button:hover { border-color: #ccc; }
 a.button:active { background: #fff; background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#fff)); }
+a.button.grey { color: #333; font-weight: bold; }
+a.button.disabled { color: #ccc; font-weight: normal; }
 
 .client { margin-top: 30px; }
 

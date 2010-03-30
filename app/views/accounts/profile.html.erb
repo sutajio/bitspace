@@ -13,8 +13,11 @@
               <th><%= label_tag :password, 'Current password' %></th>
               <td>
                 <%= password_field_tag :password, '', :class => 'required' %>
-                <p class="hint"><%= link_to('Forgot your password?', forgot_password_path, :rel => 'shadowbox') %></p>
+                <div class="hint"><%= link_to('Forgot your password?', forgot_password_path, :rel => 'shadowbox') %></div>
               </td>
+            </tr>
+            <tr>
+              <td colspan="2"><hr /></td>
             </tr>
             <tr>
               <th><%= f.label :email %></th>
@@ -34,9 +37,18 @@
             </tr>
             <% if current_user.private_beta? %>
             <tr>
-              <th><%= f.label :biography %></th>
+              <td colspan="2"><hr /></td>
+            </tr>
+            <tr>
+              <th><%= f.label :website %></th>
               <td>
-                <%= f.text_field :biography %>
+                <%= f.text_field :website, :class => 'url' %>
+              </td>
+            </tr>
+            <tr>
+              <th valign="top"><%= f.label :biography %></th>
+              <td>
+                <%= f.text_area :biography, :size => '40x6', :style => 'display:block;' %>
               </td>
             </tr>
             <tr>
@@ -50,6 +62,9 @@
                   what you upload and listen to. You can find your public profile at: <%= link_to(profile_url(current_user.login), profile_url(current_user.login)) %>
                 </p>
               </td>
+            </tr>
+            <tr>
+              <td colspan="2"><hr /></td>
             </tr>
             <% end %>
             <tr>
