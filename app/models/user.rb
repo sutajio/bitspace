@@ -28,10 +28,18 @@ class User < ActiveRecord::Base
     :custom_200 => { :name => 'Bitspace Custom 200', :storage => 200.gigabytes, :price_in_euro => 29.99, :paypal_button_id => 'PVCKWTUL7XLVA' }
   }
   
+  DISALLOWED_USERNAMES = 
+    %w(player dashboard search uploads artists releases
+       labels years tracks playlists lastfm signup users invitations
+       invitation_requests user_sessions login logout signin signout password
+       account price tour about download terms blog blog_posts admin clients
+       client_versions developer)
+  
   validates_uniqueness_of :facebook_uid, :allow_nil => true
   validates_uniqueness_of :email, :allow_nil => true
   validates_inclusion_of :subscription_plan,
     :in => SUBSCRIPTION_PLANS.values.map {|x| x[:name] }
+  validates_exclusion_of :login, :in => DISALLOWED_USERNAMES
   
   attr_protected :max_storage
   

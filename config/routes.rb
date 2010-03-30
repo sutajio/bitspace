@@ -16,6 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :lastfm, :collection => { :authorize => :get, :callback => :get }
   
   # Users and invitations
+  map.resource :signup
   map.resources :users, :collection => { :unique => :get }
   map.resources :invitations
   map.resources :invitation_requests
