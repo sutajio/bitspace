@@ -14,7 +14,7 @@
     <tbody>
       <% @users.each do |user| %>
       <tr>
-        <td class="grid_1"><%= user.login || user.facebook_uid %></td>
+        <td class="grid_1"><%= link_to(user.login || user.facebook_uid, user.login ? profile_path(user.login) : '#') %></td>
         <td class="grid_3">
           <%= link_to(user.email, "##{dom_id(user)}_handler", :rel => 'shadowbox') %>
           <div id="<%= dom_id(user) %>_handler" style="display:none;">
