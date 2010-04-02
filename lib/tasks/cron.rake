@@ -1,9 +1,9 @@
 task :cron => :environment do
   puts ">> Heartbeat at #{Time.now}"
-  Rake::Task['destroy_orphans'].invoke
+  #Rake::Task['destroy_orphans'].invoke
   Rake::Task['squish_names_and_titles'].invoke
-  Rake::Task['fix_featured_artists'].invoke
-  Rake::Task['fix_various_artists_releases'].invoke
+  #Rake::Task['fix_featured_artists'].invoke
+  #Rake::Task['fix_various_artists_releases'].invoke
   Rake::Task['cron:metadata'].invoke
 end
 
