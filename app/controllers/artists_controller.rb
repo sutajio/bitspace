@@ -9,12 +9,20 @@ class ArtistsController < ApplicationController
         :per_page => 20,
         :conditions => ['releases_count > 0'])
     if request.xhr? && @artists.empty?
-      render :nothing => true
+      render :nothing => true and return
+    end
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
   
   def show
     @artist = @user.artists.with_releases.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
   
   def biography

@@ -1,0 +1,17 @@
+<%= {
+  :name => @label.name,
+  :releases => @label.releases.map {|release|
+    {
+      :title => release.title,
+      :year => release.year,
+      :url => release_url(release),
+      :playlist_url => playlist_release_url(release),
+      :tracks => tracks_to_hash(release.tracks),
+      :small_artwork_url => release.artwork.url(:small, false),
+      :medium_artwork_url => release.artwork.url(:medium, false),
+      :large_artwork_url => release.artwork.url(:large, false)
+    }
+  },
+  :playlist_url => playlist_label_url(@label),
+  :artwork_url => @label.artwork.url(:original, false)
+}.to_json %>

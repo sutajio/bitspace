@@ -10,12 +10,20 @@ class LabelsController < ApplicationController
         :order => 'releases_count DESC',
         :conditions => ['releases_count > 0'])
     if request.xhr? && @labels.empty?
-      render :nothing => true
+      render :nothing => true and return
+    end
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
   
   def show
     @label = @user.labels.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
   
   def playlist

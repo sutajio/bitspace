@@ -14,12 +14,20 @@ class ReleasesController < ApplicationController
         :order => 'created_at DESC',
         :conditions => { :archived => params[:q].present? ? [true,false] : false })
     if request.xhr? && @releases.empty?
-      render :nothing => true
+      render :nothing => true and return
+    end
+    respond_to do |format|
+      format.html
+      format.json
     end
   end
   
   def show
     @release = @user.releases.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.json
+    end
   end
   
   def edit
