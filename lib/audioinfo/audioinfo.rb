@@ -190,7 +190,11 @@ class AudioInfo
       @musicbrainz_infos.delete_if { |k, v| v.nil? }
 
     rescue Exception, Mp3InfoError, OggInfoError => e
-      raise AudioInfoError, e.to_s, e.backtrace
+      if e.is_a?(Iconv::IllegalSequence)
+        raise AudioInfoError, "Iconv::IllegalSequence", e.backtrace
+      else
+        raise AudioInfoError, e.to_s, e.backtrace
+      end
     end
   end
 
