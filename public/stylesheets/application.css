@@ -4,8 +4,6 @@
 .labels { padding: 20px 30px; }
 .label { list-style: none; margin: 0; text-align: center; float: left; }
 .label img { margin: 10px 0; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
-.label a.name { display: block; font-weight: bold; }
-.label span.meta { display: block; font-size: 10px; }
 
 .track-title { width: 500px; overflow: hidden; display: block; float: left; overflow: hidden; height: 19px; }
 .track-artist a { padding: 0 !important; }
@@ -189,3 +187,7 @@ label { text-shadow: #000 1px 1px 1px; }
 .actions a.archived { opacity: 1 !important; }
 .actions a.enabled { opacity: 1 !important; }
 .actions button { background: #333; cursor: pointer; }
+.artist span.meta { color: #666; }
+.biography { color: #666; }
+.biography a { color: #999; }
+.biography a:hover { color: #ccc; }
