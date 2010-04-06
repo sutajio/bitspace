@@ -13,7 +13,12 @@
       </div>
     </div>
     
-    <h1><%=h @artist.name %></h1>
+    <h1>
+      <%=h @artist.name %>
+      <% if @artist.begin_date || @artist.end_date %>
+        <span class="years grey"><%= @artist.begin_date ? @artist.begin_date.strftime('%Y') : '?' %> &ndash; <%= @artist.end_date ? @artist.end_date.strftime('%Y') : '?' %></span>
+      <% end %>
+    </h1>
     <% if @artist.artwork.file? %>
       <% cache [@artist, 'public-biography'], :ttl => 1.week do %>
         <%= image_tag(@artist.artwork.url(:large, false), :width => @artist.artwork.width(:large), :height => @artist.artwork.height(:large), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0;') %>

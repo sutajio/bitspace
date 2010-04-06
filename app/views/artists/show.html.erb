@@ -10,7 +10,7 @@
     <h1>
       <%= link_to(h(@artist.name), @artist, :target => '_self') %>
       <% if @artist.begin_date || @artist.end_date %>
-        <span>(<%= @artist.begin_date ? @artist.begin_date.strftime('%Y') : '?' %> &ndash; <%= @artist.end_date ? @artist.end_date.strftime('%Y') : '?' %>)</span>
+        <span class="years grey"><%= @artist.begin_date ? @artist.begin_date.strftime('%Y') : '?' %> &ndash; <%= @artist.end_date ? @artist.end_date.strftime('%Y') : '?' %></span>
       <% end %>
     </h1>
   </div>

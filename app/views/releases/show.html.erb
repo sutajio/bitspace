@@ -4,7 +4,7 @@
       <span class="artist-name"><%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %></span><br />
       <%= link_to(h(@release.title), @release, :target => '_self') %>
       <% if @release.year.present? %>
-      <span class="year">(<%= link_to(@release.year, year_path(@release.year), :target => '_self') %>)</span>
+      <span class="year grey"><%= link_to(@release.year, year_path(@release.year), :target => '_self') %></span>
       <% end %>
     </h1>
   </div>
