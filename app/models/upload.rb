@@ -60,25 +60,29 @@ class Upload < ActiveRecord::Base
         release_title = release_title.anal_title_case.squish.to_valid_utf8
         track_title = track_title.anal_title_case.squish.to_valid_utf8
         
+        if album_artist_name == track_artist_name
+          if last_release = user.releases.first(:order => 'created_at DESC')
+            if last_release.title == release_title && 
+               last_release.artist.name != album_artist_name
+              unless last_release.has_track_with_nr?(track_set_nr, track_nr)
+                album_artist_name = Upload.various_artists
+                if last_release.artist.name != Upload.various_artists
+                  last_release.tracks.each do |track|
+                    track.rename(track.title, last_release.artist.name)
+                  end
+                  last_release.rename_artist(Upload.various_artists)
+                end
+              end
+            end
+          end
+        end
+        
         [' feat. ', ' feat ', ' featuring ', ' ft. ', ' ft ',
          ' Feat. ', ' Feat ', ' Featuring ', ' Ft. ', ' Ft '].each do |feat|
           if album_artist_name == track_artist_name
             name_parts = album_artist_name.split(feat)
             album_artist_name = name_parts.first
             track_artist_name = name_parts.last
-          end
-        end
-        
-        if album_artist_name == track_artist_name
-          if last_release = user.releases.first
-            if last_release.title == release_title
-              unless last_release.has_track_with_nr?(track_set_nr, track_nr)
-                album_artist_name = Upload.various_artists
-                if last_release.artist.name != Upload.various_artists
-                  last_release.rename_artist(Upload.various_artists)
-                end
-              end
-            end
           end
         end
         

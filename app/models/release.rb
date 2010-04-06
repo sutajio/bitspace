@@ -187,13 +187,7 @@ class Release < ActiveRecord::Base
   def rename_tracks(new_track_names)
     new_track_names.each do |id,attributes|
       track = tracks.find_by_id(id)
-      if attributes[:title].present?
-        track.title = attributes[:title]
-      end
-      if attributes[:artist].present?
-        track.artist = user.artists.find_or_create_by_name(attributes[:artist])
-      end
-      track.save!
+      track.rename(attributes[:title], attributes[:artist])
     end
   end
   

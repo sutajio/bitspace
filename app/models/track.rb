@@ -96,6 +96,18 @@ class Track < ActiveRecord::Base
     loved_at.present?
   end
   
+  def rename(new_title, new_artist = nil)
+    if new_title.present?
+      self.title = new_title
+    end
+    if new_artist.present?
+      self.artist = user.artists.find_or_create_by_name(new_artist)
+    else
+      self.artist = nil
+    end
+    save!
+  end
+  
   protected
   
     def with_lastfm(&block)
