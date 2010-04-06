@@ -12,5 +12,6 @@
 *.log
 *.pid
 *.patch
+*.gz
 tmp/
 config/config.sh
