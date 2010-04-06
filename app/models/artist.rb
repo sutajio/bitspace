@@ -147,7 +147,7 @@ class Artist < ActiveRecord::Base
   
   def update_tags
     with_music_brainz(:tags => true) do |info|
-      self.tags = info.tags.map(&:text).join(', ')[0..255] if info.tags.present?
+      self.tags = info.tags.map(&:text).join(', ')[0..254] if info.tags.present?
       self.save!
     end
   end

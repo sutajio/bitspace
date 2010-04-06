@@ -92,7 +92,7 @@ class Release < ActiveRecord::Base
   
   def update_tags
     with_music_brainz :tags => true do |release|
-      self.tags = release.tags.map(&:text).join(', ')[0..255] if release.tags.present?
+      self.tags = release.tags.map(&:text).join(', ')[0..254] if release.tags.present?
       self.save!
     end
   end
