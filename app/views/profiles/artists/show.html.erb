@@ -1,14 +1,16 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
-    <div style="float:right; margin-left:10px;">
-      <script type="text/javascript">
-      tweetmeme_source = 'bitspaced';
-      </script>
-      <script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
-    </div>
-    <div style="float:right; margin-left:10px;">
-      <a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php" class="fb_share">Dela</a>
-      <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+    <div class="share-buttons">
+      <div style="float:right; margin-left:10px;">
+        <script type="text/javascript">
+        tweetmeme_source = 'bitspaced';
+        </script>
+        <script type="text/javascript" src="http://tweetmeme.com/i/scripts/button.js"></script>
+      </div>
+      <div style="float:right; margin-left:10px;">
+        <a name="fb_share" type="box_count" href="http://www.facebook.com/sharer.php" class="fb_share">Dela</a>
+        <script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script>
+      </div>
     </div>
     
     <h1><%=h @artist.name %></h1>
@@ -21,7 +23,18 @@
       <% end %>
     <% end %>
     <hr />
-    <span class="grey">More at...</span><br />
+    <ul class="releases">
+      <% @artist.releases.without_archived.each do |release| %>
+      <li>
+        <%= link_to(image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art'), release_profile_url(@user.login, release)) %>
+        <%= link_to(h(release.title), release_profile_url(@user.login, release), :class => 'title') %>
+        <% if release.year %>
+          <span class="year grey">(<%= release.year %>)</span>
+        <% end %>
+      </li>
+      <% end %>
+    </ul>
+    <hr />
     <!-- <%= link_to('Spotify', "spotify:search:artist:\"#{CGI.escape(@artist.name)}\"", :rel => 'nofollow') %> / -->
     <%= link_to('Last.fm', "http://www.last.fm/search?q=#{CGI.escape(@artist.name)}&type=artist", :rel => 'nofollow') %> /
     <%= link_to('YouTube', "http://www.youtube.com/results?search_query=#{CGI.escape(@artist.name)}", :rel => 'nofollow') %> /

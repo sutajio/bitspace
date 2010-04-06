@@ -33,7 +33,7 @@
       <%= link_to('Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'button grey tooltipped', :title => "Follow #{h(@user.login)}") %>
       <% end %>
       <span class="grey">&mdash;</span>
-      <%= link_to('Subscribe', formatted_releases_profile_path(@user.login, :format => 'atom'), :class => 'button grey tooltipped', :title => "Subscribe to the ATOM feed for #{h(@user.login)}")%>
+      <%= link_to('Subscribe', '#', :class => 'button grey disabled tooltipped', :title => "Subscribe to new releases from #{h(@user.login)}")%>
       <span class="grey">&mdash;</span>
       <% if @user.website.present? %>
       <%= link_to('Website', h(@user.website), :rel => 'nofollow', :class => 'button grey tooltipped', :title => "#{h(@user.login)} has a website, go take a look!") %>

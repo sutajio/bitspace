@@ -71,6 +71,7 @@ a.button.disabled { color: #ccc; font-weight: normal; }
 .track-love { opacity: 0.5; background: url(/images/love.png) no-repeat 50% 0; text-indent: -9999px; }
 .track-love.loved { opacity: 1; background-position: 50% -38px; }
 
+.release .artist-name { line-height: 12px; }
 .release .review { margin-left: 260px; margin-right: 100px; }
 .release ol.tracks { margin-left: 260px; margin-right: 100px; background: #f9f9f9; padding: 10px; -webkit-border-radius: 10px; -moz-border-radius: 10px; }
 .release ol.tracks li { padding: 2px; height: 19px; }
@@ -78,3 +79,12 @@ a.button.disabled { color: #ccc; font-weight: normal; }
 .release ol.tracks .odd { background: #f6f6f6; }
 .release ol.tracks .even {}
 .release .meta { margin-left: 260px; margin-right: 100px; }
+
+ul.releases { list-style: none; }
+ul.releases li { margin: 10px 20px 20px 0; float: left; width: 125px; height: 180px; text-align: center; overflow: hidden; }
+ul.releases li a { display: block; }
+ul.releases li a.title { font-weight: bold; color: #666; }
+ul.releases li span.year { display: block; }
+
+.share-buttons { display: none; }
+
