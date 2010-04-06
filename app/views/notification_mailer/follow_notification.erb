@@ -1,9 +1,9 @@
 Hi friend!
 
-We just wanted to let you know that <%= @user.login %> is now following you on Bitspace.
+We just wanted to let you know that <%= @follower.login %> is now following you on Bitspace.
 
-<% if @user.public_profile? -%>
-Find out more about <%= @user.login %> here: <%= profile_url(@user.login) %>
+<% if @follower.public_profile? -%>
+Find out more about <%= @follower.login %> here: <%= profile_url(@follower.login) %>
 <% end -%>
 
 
