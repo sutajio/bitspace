@@ -16,3 +16,5 @@ flacinfo-rb
 bluecloth
 rbrainz
 memcache-auth
+rfeedfinder
+feed-normalizer

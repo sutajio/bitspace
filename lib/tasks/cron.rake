@@ -56,4 +56,12 @@ namespace :cron do
     puts
     puts "-> Finished!"
   end
+  
+  task :import_podcasts => :environment do
+    puts "-> Importing podcasts."
+    Podcast.find_each do |podcast|
+      podcast.import
+    end
+    puts "-> Finished!"
+  end
 end
