@@ -20,7 +20,7 @@
           </thead>
           <tbody>
             <% User::SUBSCRIPTION_PLANS.values.sort_by {|plan| plan[:price_in_euro].to_i }.reverse.each do |plan| %>
-              <% if plan[:official] %>
+              <% if plan[:official] && plan[:price_in_euro] != 0 %>
                 <tr>
                   <th>
                     <%= plan[:name] %><br />
@@ -58,9 +58,10 @@
       
       <div class="grid_4 alpha grey">
         <strong>Need to cancel your account?</strong>
-        <p>You can cancel your subscription at any time by clicking the button below.
-        Your subscription will expire at the end of the current billing period.</p>
-        <%= button_to('Cancel my account', "https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=#{URI.encode(ENV['PAYPAL_USERNAME'])}", :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?') %>
+        <p>You can cancel your account at any time by clicking the link below.
+        Your account will automatically be downgraded to a free account when you cancel.
+        Please contact us if you want us to completely remove your account.
+        <%= link_to('Cancel my account', "https://www.paypal.com/cgi-bin/webscr?cmd=_subscr-find&alias=#{URI.encode(ENV['PAYPAL_USERNAME'])}", :confirm => 'WARNING: You are about to leave Bitspace. This will stop your music and cancel all currently queued uploads. Do you want to continue?', :class => 'external') %></p>
       </div>
       
       <div class="grid_4 grey">
@@ -74,8 +75,8 @@
       <div class="grid_4 grey">
         <strong>What happens if I upgrade or downgrade in the middle of a billing cycle?</strong>
         <p>If you upgrade or downgrade you'll be charged the new rate for your
-        new plan starting from the date you upgrade. We will manually cancel
-        your old subscription for you.</p>
+        new plan starting from the date you upgrade. You currently need to manually cancel
+        your old subscription yourself if you have one.</p>
       </div>
       
       <div class="grid_4 omega grey">
