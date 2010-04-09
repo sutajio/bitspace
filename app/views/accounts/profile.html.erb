@@ -58,7 +58,7 @@
                 <span class="grey small">(<%= link_to('What is this?', '#whatispublicprofiles', :rel => 'toggle') %>)</span>
                 <p id="whatispublicprofiles" class="grey" style="width:400px; display:none;">
                   Your public profile is a way for you to share your music taste and to let your friends follow
-                  what you upload and listen to. You can find your public profile at: <%= link_to(profile_url(current_user.login), profile_url(current_user.login)) %>
+                  what you upload and listen to. You can find your public profile at: <%= link_to(profile_url(current_user.login), profile_url(current_user.login), :target => '_blank') %>
                 </p>
               </td>
             </tr>
