@@ -216,6 +216,48 @@ class Release < ActiveRecord::Base
     end
   end
   
+  def copy(to_user)
+    transaction do
+      album_artist = to_user.artists.find_or_create_by_name(self.artist.name)
+      unless album_artist.valid?
+        logger.error(album_artist.errors.full_messages.to_sentence)
+        raise album_artist.errors.full_messages.to_sentence
+      end
+      release = to_user.releases.find_or_create_by_title(
+        :user => to_user,
+        :artist => album_artist,
+        :title => self.title,
+        :year => self.year,
+        :artwork => self.artwork.file? ? open(self.artwork.url).read : nil)
+      unless release.valid?
+        logger.error(release.errors.full_messages.to_sentence)
+        raise release.errors.full_messages.to_sentence
+      end
+      self.tracks.each do |track|
+        if track.artist
+          track_artist = to_user.artists.find_or_create_by_name(track.artist.name)
+        else
+          track_artist = nil
+        end
+        release.tracks.find_or_create_by_fingerprint(
+          :user => to_user,
+          :artist => track_artist,
+          :release => release,
+          :fingerprint => track.fingerprint,
+          :title => track.title,
+          :track_nr => track.track_nr,
+          :set_nr => track.set_nr,
+          :length => track.length,
+          :bitrate => track.bitrate,
+          :samplerate => track.samplerate,
+          :vbr => track.vbr,
+          :content_type => track.content_type,
+          :size => track.size)
+      end
+      release
+    end
+  end
+  
   protected
   
     def with_lastfm(&block)
