@@ -1,3 +1,4 @@
+<% unless @user %>
 <div id="share-footer">
   <div class="container_16 clearfix">
     <div class="grid_16 aligncenter">
@@ -26,10 +27,13 @@
     </div>
   </div>
 </div>
+<% end %>
 <div id="company-footer">
   <div class="container_16 clearfix">
     <div class="grid_16 aligncenter">
+      <% unless @user %>
       <p><%= image_tag('/images/logo_200x200_inverted.png', :size => '150x150') %></p>
+      <% end %>
       <h2><%= link_to('Bitspace', root_url) %><span>&trade;</span> <span>is a product from the <a href="http://www.koneko-collective.com/">Koneko Collective</a></span></h2>
       <div>
         <%= link_to('About', about_path) %> /
