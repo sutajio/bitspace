@@ -44,16 +44,6 @@
           <%= [h(@release.label.try(:name)), @release.release_date].reject(&:blank?).join('<br />') %>
         </p>
       <% end %>
-      <hr />
-      <div style="float:right; text-align:right;">
-        
-      </div>
-      <div style="float:left;">
-        <!-- <%= link_to('Spotify', "spotify:search:artist:\"#{CGI.escape(@release.artist.name)}\"+album:\"#{CGI.escape(@release.title)}\"", :rel => 'nofollow') %> / -->
-        <%= link_to('Last.fm', "http://www.last.fm/search?q=#{CGI.escape(@release.title)}&type=album", :rel => 'nofollow') %> /
-        <%= link_to('YouTube', "http://www.youtube.com/results?search_query=\"#{CGI.escape(@release.artist.name)}\"+\"#{CGI.escape(@release.title)}\"", :rel => 'nofollow') %> /
-        <%= link_to('Wikipedia', "http://en.wikipedia.org/wiki/#{CGI.escape(@release.title.gsub(' ','_'))}", :rel => 'nofollow') %>
-      </div>
     </div>
   </div>
 </div>
