@@ -123,6 +123,11 @@ class Upload < ActiveRecord::Base
           raise release.errors.full_messages.to_sentence
         end
         
+        if tags.cover.present? && !release.artwork.file?
+          release.artwork = tags.cover
+          release.save
+        end
+        
         track = release.tracks.find_or_create_by_fingerprint(
           :user => user,
           :artist => track_artist,
