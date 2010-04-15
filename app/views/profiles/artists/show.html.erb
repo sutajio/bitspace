@@ -29,7 +29,7 @@
     <% end %>
     <hr />
     <ul class="releases">
-      <% @artist.releases.without_archived.each do |release| %>
+      <% @artist.releases.has_tracks.without_archived.each do |release| %>
       <li>
         <%= link_to(image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art'), release_profile_url(@user.login, release)) %>
         <%= link_to(h(release.title), release_profile_url(@user.login, release), :class => 'title') %>

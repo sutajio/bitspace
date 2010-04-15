@@ -2,7 +2,7 @@ class ReleasesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:update]
   
   def index
-    @releases = current_user.releases.search_for(params[:q]).paginate(
+    @releases = current_user.releases.has_tracks.search_for(params[:q]).paginate(
         :page => params[:page],
         :per_page => 16,
         :include => [:artist],

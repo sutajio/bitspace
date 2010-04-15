@@ -5,7 +5,7 @@ class Profiles::ProfilesController < ApplicationController
   layout 'profile'
   
   def show
-    @releases = @user.releases.all(
+    @releases = @user.releases.has_tracks.all(
       :limit => 3,
       :order => 'created_at DESC',
       :conditions => { :archived => false })

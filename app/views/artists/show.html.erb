@@ -18,7 +18,7 @@
 
 <div class="container_16 clearfix pane" style="margin-bottom:20px;">
   <div class="grid_16">
-    <% if @artist.releases.without_archived.empty? %>
+    <% if @artist.releases.has_tracks.without_archived.empty? %>
       <div class="fallback">
         Sorry, didn't find anything. There is <%= pluralize(@artist.releases.with_archived.size, 'archived release') %> not shown though.
       </div>

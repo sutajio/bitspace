@@ -1,7 +1,7 @@
 class Profiles::ReleasesController < Profiles::ProfilesController
   
   def index
-    @releases = @user.releases.search_for(params[:q]).paginate(
+    @releases = @user.releases.has_tracks.search_for(params[:q]).paginate(
         :page => params[:page],
         :per_page => 16,
         :include => [:artist],

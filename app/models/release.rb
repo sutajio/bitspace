@@ -14,6 +14,7 @@ class Release < ActiveRecord::Base
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
   named_scope :with_archived, :conditions => { :archived => [true, false] }
   named_scope :without_archived, :conditions => { :archived => false }
+  named_scope :has_tracks, :conditions => ['tracks_count > 0']
   
   def self.first_with_artwork
     first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
