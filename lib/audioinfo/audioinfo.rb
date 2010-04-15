@@ -46,7 +46,7 @@ class AudioInfo
   # open the file with path +fn+ and convert all tags from/to specified +encoding+
   def initialize(filename, options = {})
     raise(AudioInfoError, "path is nil") if filename.nil?
-    @options = { :encoding => 'utf-8', :include_audio_content => true }.merge(options)
+    @options = { :encoding => 'utf-8', :include_audio_content => false }.merge(options)
     @path = filename
     @extension = (@options[:extension] || File.extname(@path)[1..-1]).downcase
     @encoding = @options[:encoding]

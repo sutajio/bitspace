@@ -127,7 +127,7 @@ class Upload < ActiveRecord::Base
           :user => user,
           :artist => track_artist,
           :release => release,
-          :fingerprint => self.class.generate_fingerprint(tags.audio_content),
+          :fingerprint => self.class.generate_fingerprint(file),
           :title => track_title,
           :track_nr => track_nr,
           :set_nr => track_set_nr,
@@ -184,8 +184,14 @@ class Upload < ActiveRecord::Base
   end
 
   class <<self
-    def generate_fingerprint(data)
-      Digest::SHA1.hexdigest(data)
+    def generate_fingerprint(file)
+      incr_digest = Digest::SHA1.new()
+      file.seek(0)
+      buffer = ''
+      while file.read(1.megabyte, buffer)
+        incr_digest << buffer
+      end
+      incr_digest.hexdigest
     end
 
     def parse_filename(original_filename)
