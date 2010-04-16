@@ -108,6 +108,19 @@ class Track < ActiveRecord::Base
     save!
   end
   
+  def download(to_directory)
+    track_filename = File.join(to_directory, download_filename)
+    FileUtils.mkdir_p(File.dirname(track_filename))
+    `curl -o "#{track_filename}" "#{url(false)}"`
+    track_filename
+  end
+  
+  def download_filename
+    filename = set_nr ? "#{"%02d" % set_nr.to_i} - #{"%02d" % track_nr.to_i} - #{title}.#{format}" :
+                        "#{"%02d" % track_nr.to_i} - #{title}.#{format}"
+    filename.gsub('/','').gsub("\\",'')
+  end
+  
   protected
   
     def with_lastfm(&block)

@@ -1,0 +1,27 @@
+<div class="container_16 clearfix">
+  <div class="grid_16 aligncenter" style="padding-top:40px;">
+    <div id="please-wait">
+      <p><%= image_tag('/images/download-spinner.gif') %></p>
+      <h2>Please wait...</h2>
+      <p class="grey">We are preparing your download.<br/>This can take a minute or two, so be patient.</p>
+    </div>
+    <div id="finished" style="display:none;">
+      <h2>Finished!</h2>
+      <p class="grey">Here you go. We have generated a ZIP archive for you.</p>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+  var heartbeat = setInterval(function(){
+    $.get("<%= download_release_path(@release) %>", function(data){
+      if(data.match(/^http/i)) {
+        clearInterval(heartbeat);
+        $('#please-wait').hide();
+        $('#finished').show();
+        window.location.href = data;
+      }
+    });
+  }, 5000);
+});
+</script>

@@ -1,6 +1,8 @@
 class ReleasesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:update]
   
+  layout 'site', :only => [:download]
+  
   def index
     @releases = current_user.releases.has_tracks.search_for(params[:q]).paginate(
         :page => params[:page],
@@ -60,6 +62,19 @@ class ReleasesController < ApplicationController
     @release = current_user.releases.find(params[:id])
     @release.toggle_archive!
     head :ok
+  end
+  
+  def download
+    @release = current_user.releases.find(params[:id])
+    if request.xhr?
+      render :text => @release.download_url
+    else
+      if @release.download_url
+        redirect_to @release.download_url
+      else
+        @release.generate_download
+      end
+    end
   end
   
   def destroy

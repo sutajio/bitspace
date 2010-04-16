@@ -259,6 +259,50 @@ class Release < ActiveRecord::Base
     end
   end
   
+  def generate_download
+    tracks_dir = File.join(Rails.root, 'tmp', "release-#{id}")
+    downloaded_tracks = tracks.map do |track|
+      track.download(tracks_dir)
+    end
+    release_filename = File.join(Rails.root, 'tmp', download_key)
+    FileUtils.mkdir_p(File.dirname(release_filename))
+    FileUtils.chdir(tracks_dir) do
+      `zip -r -D "#{release_filename}" #{downloaded_tracks.map{|t| "\"#{File.basename(t)}\"" }.join(' ')}`
+    end
+    FileUtils.rm_rf(tracks_dir)
+    AWS::S3::Base.establish_connection!(
+      :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'])
+    File.open(release_filename, 'rb') do |file|
+      AWS::S3::S3Object.store(download_key, file, ENV['S3_BUCKET'],
+        :access => :private,
+        :content_type => 'application/zip',
+        'content-disposition' => "attachment;filename=#{download_filename}")
+    end
+    FileUtils.rm(release_filename)
+    download_url
+  end
+  
+  handle_asynchronously :generate_download
+  
+  def download_key
+    "downloads/#{Digest::MD5.hexdigest("#{id}#{updated_at.iso8601}")}.zip"
+  end
+  
+  def download_url
+    AWS::S3::Base.establish_connection!(
+      :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY'])
+    if AWS::S3::S3Object.exists?(download_key, ENV['S3_BUCKET'])
+      AWS::S3::S3Object.url_for(download_key, ENV['S3_BUCKET'], :expires_in => 5.minutes)
+    end
+  end
+  
+  def download_filename
+    filename = year ? "#{artist.name} - #{title} (#{year}).zip" : "#{artist.name} - #{title}.zip"
+    filename.gsub('/','').gsub("\\",'')
+  end
+  
   protected
   
     def with_lastfm(&block)
