@@ -20,11 +20,13 @@
             <% end %>
           </div>
           <% @release.tracks.sort_by{|t| t.set_nr.to_i }.group_by(&:set_nr).each do |set_nr, tracks| %>
-          <ol class="tracks">
+          <ol class="tracks" style="list-style:none;">
             <% tracks.sort_by {|t| t.track_nr.to_i }.each do |track| %>
-              <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
-                <%= text_field_tag "release[tracks][#{track.id}][title]", track.title, :class => 'required', :style => 'width:50%; margin-left:19px;' %>
-                <%= text_field_tag "release[tracks][#{track.id}][artist]", track.artist.try(:name), :style => 'width:30%; margin-left:10px;', :class => 'tooltipped', :title => 'Track artist (optional)' %>
+              <% content_tag_for(:li, track, :class => cycle('odd','even'), :style => 'margin-left:0;') do %>
+                <%= text_field_tag "release[tracks][#{track.id}][set_nr]", track.set_nr, :style => 'width:20px; margin-left:10px; text-align:center;', :class => 'tooltipped', :title => 'Set number (optional)' %> /
+                <%= text_field_tag "release[tracks][#{track.id}][track_nr]", track.track_nr, :style => 'width:20px; text-align:center;', :class => 'tooltipped', :title => 'Track number' %>
+                <%= text_field_tag "release[tracks][#{track.id}][title]", track.title, :class => 'required', :style => 'width:45%; margin-left:19px;' %>
+                <%= text_field_tag "release[tracks][#{track.id}][artist]", track.artist.try(:name), :style => 'width:25%; margin-left:10px;', :class => 'tooltipped', :title => 'Track artist (optional)' %>
                 <%= link_to('Delete', track_path(track), :rel => 'delete', :class => 'delete tooltipped', :title => 'Delete track') %>
               <% end %>
             <% end %>

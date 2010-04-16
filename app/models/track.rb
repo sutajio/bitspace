@@ -96,14 +96,30 @@ class Track < ActiveRecord::Base
     loved_at.present?
   end
   
-  def rename(new_title, new_artist = nil)
+  def rename(new_title, new_artist = nil, track_nr = nil, set_nr = nil)
     if new_title.present?
       self.title = new_title
     end
-    if new_artist.present?
-      self.artist = user.artists.find_or_create_by_name(new_artist)
-    else
-      self.artist = nil
+    unless new_artist.nil?
+      if new_artist.present?
+        self.artist = user.artists.find_or_create_by_name(new_artist)
+      else
+        self.artist = nil
+      end
+    end
+    unless track_nr.nil?
+      if track_nr.present?
+        self.track_nr = track_nr
+      else
+        self.track_nr = nil
+      end
+    end
+    unless set_nr.nil?
+      if set_nr.present?
+        self.set_nr = set_nr
+      else
+        self.set_nr = nil
+      end
     end
     save!
   end

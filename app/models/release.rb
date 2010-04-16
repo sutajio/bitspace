@@ -188,7 +188,8 @@ class Release < ActiveRecord::Base
   def rename_tracks(new_track_names)
     new_track_names.each do |id,attributes|
       track = tracks.find_by_id(id)
-      track.rename(attributes[:title], attributes[:artist])
+      track.rename(attributes[:title], attributes[:artist],
+                   attributes[:track_nr], attributes[:set_nr])
     end
   end
   
