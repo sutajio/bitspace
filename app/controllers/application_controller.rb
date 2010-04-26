@@ -81,7 +81,7 @@ class ApplicationController < ActionController::Base
       if current_user
         if (request.headers['User-Agent'] || []).include?('MSIE')
           unless request.headers['User-Agent'].include?('chromeframe')
-            redirect_to 'http://www.google.com/chromeframe'
+            render :template => 'errors/msie', :status => :bad_request, :layout => 'site'
           end
         end
       end
