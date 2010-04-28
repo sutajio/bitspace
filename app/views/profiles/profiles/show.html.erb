@@ -28,17 +28,21 @@
     <hr />
     <p class="follow">
       <% if current_user && current_user.follows?(@user) %>
-      <%= link_to('Unfollow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'button grey tooltipped', :title => "Unfollow #{h(@user.login)}") %>
+      <%= link_to('Unfollow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'button grey tooltipped', :title => "Unfollow #{h(@user.login.anal_title_case)}") %>
       <% else %>
-      <%= link_to('Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'button grey tooltipped', :title => "Follow #{h(@user.login)}") %>
+      <%= link_to('Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'button grey tooltipped', :title => "Follow #{h(@user.login.anal_title_case)}") %>
       <% end %>
       <span class="grey">&mdash;</span>
-      <%= link_to('Subscribe', '#', :class => 'button grey disabled tooltipped', :title => "Subscribe to new releases from #{h(@user.login)}")%>
+      <% if @user.subscribable? %>
+      <%= link_to('Subscribe', subscribe_profile_path(@user.login), :class => 'button grey tooltipped', :title => "Subscribe to #{h(@user.login.anal_title_case)} for #{@user.subscription_price_with_currency} per #{@user.subscription_periodicity_as_period}") %>
+      <% else %>
+      <%= link_to('Subscribe', '#', :class => 'button grey disabled') %>
+      <% end %>
       <span class="grey">&mdash;</span>
       <% if @user.website.present? %>
-      <%= link_to('Website', h(@user.website), :rel => 'nofollow', :class => 'button grey tooltipped', :title => "#{h(@user.login)} has a website, go take a look!") %>
+      <%= link_to('Website', h(@user.website), :rel => 'nofollow', :class => 'button grey tooltipped', :title => "#{h(@user.login.anal_title_case)} has a website, go take a look!") %>
       <% else %>
-      <%= link_to('Website', '#', :rel => 'nofollow', :class => 'button grey disabled tooltipped', :title => "#{h(@user.login)} doesn't have a website :(") %>
+      <%= link_to('Website', '#', :rel => 'nofollow', :class => 'button grey disabled tooltipped', :title => "#{h(@user.login.anal_title_case)} doesn't have a website :(") %>
       <% end %>
     </p>
   </div>

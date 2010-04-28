@@ -6,6 +6,9 @@ class UserSessionsController < ApplicationController
   
   def new
     @user_session = UserSession.new
+    if params[:return_to].present?
+      session[:return_to] = params[:return_to]
+    end
   end
   
   def create

@@ -147,6 +147,14 @@ class Release < ActiveRecord::Base
   after_create :notify_followers unless Rails.env.test?
   handle_asynchronously :notify_followers
   
+  def give_to_subscribers
+    user.subscribers.each do |subscriber|
+      self.copy(subscriber)
+    end
+  end
+  
+  handle_asynchronously :give_to_subscribers
+  
   def review
   end
   
@@ -259,6 +267,8 @@ class Release < ActiveRecord::Base
       release
     end
   end
+  
+  handle_asynchronously :copy
   
   def generate_download
     tracks_dir = File.join(Rails.root, 'tmp', "release-#{id}")

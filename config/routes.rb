@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   map.blog_feed 'blog.atom', :controller => 'blog_posts', :action => 'index', :format => 'atom'
   
   # PayPal
-  map.resources :payments, :collection => { :paypal_ipn => :post, :success => :get, :upgraded => :get, :cancel => :get }
+  map.resources :payments, :collection => { :paypal_ipn => :post, :paypal_ipn_label => :post, :success => :get, :upgraded => :get, :cancel => :get }
   
   # Admin
   map.admin 'admin', :controller => 'admin', :action => 'index'
@@ -65,6 +65,7 @@ ActionController::Routing::Routes.draw do |map|
   # Public profiles
   map.profile ':id', :controller => 'profiles/profiles', :action => 'show'
   map.follow_profile ':id/follow', :controller => 'profiles/profiles', :action => 'follow', :requirements => { :method => :put }
+  map.subscribe_profile ':id/subscribe', :controller => 'profiles/profiles', :action => 'subscribe'
   map.artists_profile ':id/artists', :controller => 'profiles/artists', :action => 'index'
   map.releases_profile ':id/releases', :controller => 'profiles/releases', :action => 'index'
   map.followers_profile ':id/followers', :controller => 'profiles/followers', :action => 'index'

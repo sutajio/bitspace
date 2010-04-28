@@ -1,0 +1,89 @@
+<div class="container_16 clearfix">
+  <div class="grid_8 prefix_4 suffix_4">
+    <div class="box" style="margin-top:50px; margin-bottom:30px;">
+      <h1>Subscribe to <strong><%=h @user.login.anal_title_case %></strong> and get...</h1>
+      <ul>
+        <li>All old and up-coming releases added automatically to your library.</li>
+        <li>Unlimited downloads of all releases.</li>
+        <li>Exclusive members-only releases.</li>
+        <li>Special offers and other fun stuff.</li>
+      </ul>
+      
+      <div class="sticker">
+        <%= @user.subscription_price_with_currency %><br /><span class="small">per <%= @user.subscription_periodicity_as_period %></span>
+      </div>
+      
+      <hr />
+      
+      <% if current_user %>
+        <form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" class="aligncenter">
+          <input type="hidden" name="business" value="<%= @user.email %>" />
+          <input type="hidden" name="currency_code" value="<%= @user.subscription_currency %>" />
+          <input type="hidden" name="no_shipping" value="1" />
+          <input type="hidden" name="no_note" value="1" />
+          <input type="hidden" name="notify_url" value="<%= paypal_ipn_label_payments_url %>" />
+          <input type="hidden" name="return" value="<%= profile_url(@user.login) %>" />
+          <input type="hidden" name="cancel_return" value="<%= profile_url(@user.login) %>">
+          <input type="hidden" name="rm" value="1" />
+          <input type="hidden" name="cbt" value="Return to <%= @user.login.anal_title_case %>">
+          <input type="hidden" name="lc" value="US" />
+          <input type="hidden" name="charset" value="utf-8" />
+          
+          <input type="hidden" name="a3" value="<%= @user.subscription_price %>" />
+          <input type="hidden" name="p3" value="1" />
+          <input type="hidden" name="t3" value="<%= @user.subscription_periodicity_as_letter_code %>" />
+          <input type="hidden" name="src" value="1" />
+          <input type="hidden" name="sra" value="1" />
+          <input type="hidden" name="cmd" value="_xclick-subscriptions" />
+          
+          <input type="hidden" name="custom" value="<%= current_user.id %>" />
+          <input type="hidden" name="item_name" value="<%= @user.login.anal_title_case %> subscription" />
+          <input type="hidden" name="item_number" value="<%= @user.id %>" />
+          
+          <input type="image" src="https://www.paypal.com/en_US/i/btn/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+        </form>
+      <% else %>
+        <p class="aligncenter">
+          Do you already have a Bitspace account? Click <%= link_to('here', login_path(:return_to => request.path)) %> to sign in.
+        </p>
+        
+        <hr />
+        
+        <% form_for @new_user, :html => { :id => 'signup-form', :class => 'aligncenter' } do |f| %>
+          <%= f.error_messages %>
+          <%= hidden_field_tag :return_to, subscribe_profile_path(@user.login) %>
+          <div class="field">
+            <%= f.label :email %>
+            <%= f.text_field :email, :class => 'required email' %>
+            <kbd>Your email address</kbd>
+          </div>
+          <div class="field">
+            <%= f.label :login %>
+            <%= f.text_field :login, :class => 'required' %>
+            <kbd>Username, can be anything</kbd>
+          </div>
+          <div class="field">
+            <%= f.label :password %>
+            <%= f.password_field :password, :class => 'required' %>
+            <kbd>A secure password</kbd>
+          </div>
+          <div class="field">
+            <%= f.label :password_confirmation %>
+            <%= f.password_field :password_confirmation, :class => 'required' %>
+            <kbd>A secure password</kbd>
+          </div>
+          <div class="submit-row">
+            <p>
+              <button type="submit">Create my account</button>
+            </p>
+            <p class="small grey">
+              By clicking on 'Create my account' above,<br/>
+              you confirm that you accept the <%= link_to('Terms of Service', '/terms') %>.
+            </p>
+          </div>
+        <% end %>
+      <% end %>
+      
+    </div>
+  </div>
+</div>

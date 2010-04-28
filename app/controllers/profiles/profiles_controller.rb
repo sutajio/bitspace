@@ -24,6 +24,10 @@ class Profiles::ProfilesController < ApplicationController
     end
   end
   
+  def subscribe
+    @new_user = User.new unless current_user
+  end
+  
   protected
   
     def find_user

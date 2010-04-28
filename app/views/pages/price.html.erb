@@ -22,8 +22,11 @@
     </div>
   </div>
     
-  <div class="grid_4 aligncenter">
-    <div class="box" style="height: 236px; overflow: hidden; line-height: normal;">
+  <div class="grid_4 aligncenter" style="position:relative;">
+    <div class="sticker">
+      <span class="small">Most<br/>popular<br/>plan</span>
+    </div>
+    <div class="box" style="height: 236px; overflow: hidden; line-height: normal; border:10px solid #fefefe; margin-top:-10px;">
       <h2 style="white-space:nowrap;"><strong><%= User::SUBSCRIPTION_PLANS[:standard][:name] %></strong></h2>
       <h3><%= number_to_currency(User::SUBSCRIPTION_PLANS[:standard][:price_in_euro], :unit => '€') %>/month</h3>
       <ul style="list-style: none;">

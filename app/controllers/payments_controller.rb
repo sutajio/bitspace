@@ -4,7 +4,7 @@ class PaymentsController < ApplicationController
   layout 'site'
   
   skip_before_filter :require_user
-  skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn]
+  skip_before_filter :verify_authenticity_token, :only => [:paypal_ipn, :paypal_ipn_label]
   skip_before_filter :require_chrome_frame_if_ie
   
   def paypal_ipn
@@ -45,6 +45,30 @@ class PaymentsController < ApplicationController
           :subscription_plan => params[:item_name],
           :first_name => Iconv.conv('utf-8', params[:charset], params[:first_name]),
           :last_name => Iconv.conv('utf-8', params[:charset], params[:last_name])) if user
+      end
+    end
+    
+    head :ok
+  end
+  
+  def paypal_ipn_label
+    notify = Paypal::Notification.new(request.raw_post)
+    
+    if notify.acknowledge
+      case notify.type
+      when 'subscr_signup':
+        @label = User.find(params[:item_number])
+        @user = User.find(params[:custom])
+        if params[:mc_amount3] == @label.subscription_amount &&
+           params[:mc_currency] == @label.subscription_currency
+          Subscription.create!(
+            :user => @label,
+            :subscriber => @user,
+            :subscription_id => params[:subscr_id])
+        end
+      when 'subscr_eot':
+        @subscription = Subscription.find_by_subscription_id(params[:subscr_id])
+        @subscription.destroy if @subscription
       end
     end
     

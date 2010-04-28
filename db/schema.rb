@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100407095800) do
+ActiveRecord::Schema.define(:version => 20100427142340) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -189,6 +189,17 @@ ActiveRecord::Schema.define(:version => 20100407095800) do
     t.float    "longitude"
   end
 
+  create_table "subscriptions", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "subscriber_id"
+    t.string   "subscription_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "subscriptions", ["subscriber_id"], :name => "index_subscriptions_on_subscriber_id"
+  add_index "subscriptions", ["user_id"], :name => "index_subscriptions_on_user_id"
+
   create_table "tracks", :force => true do |t|
     t.integer  "release_id"
     t.integer  "artist_id"
@@ -233,8 +244,8 @@ ActiveRecord::Schema.define(:version => 20100407095800) do
     t.string   "persistence_token"
     t.string   "single_access_token"
     t.string   "perishable_token"
-    t.integer  "login_count",                       :default => 0
-    t.integer  "failed_login_count",                :default => 0
+    t.integer  "login_count",                            :default => 0
+    t.integer  "failed_login_count",                     :default => 0
     t.datetime "last_request_at"
     t.datetime "current_login_at"
     t.datetime "last_login_at"
@@ -242,8 +253,8 @@ ActiveRecord::Schema.define(:version => 20100407095800) do
     t.string   "last_login_ip"
     t.boolean  "is_admin"
     t.string   "subscription_id"
-    t.string   "subscription_plan",                 :default => "Bitspace Free"
-    t.integer  "max_storage",         :limit => 20, :default => 524288000
+    t.string   "subscription_plan",                      :default => "Bitspace Free"
+    t.integer  "max_storage",              :limit => 20, :default => 524288000
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "lastfm_session_key"
@@ -252,12 +263,16 @@ ActiveRecord::Schema.define(:version => 20100407095800) do
     t.string   "login"
     t.string   "crypted_password"
     t.string   "password_salt"
-    t.boolean  "scrobble_to_lastfm",                :default => true
+    t.boolean  "scrobble_to_lastfm",                     :default => true
     t.boolean  "private_beta"
-    t.integer  "invitations_left",                  :default => 0
-    t.boolean  "public_profile",                    :default => true
+    t.integer  "invitations_left",                       :default => 0
+    t.boolean  "public_profile",                         :default => true
     t.string   "biography"
     t.string   "website"
+    t.boolean  "subscribable"
+    t.integer  "subscription_price"
+    t.string   "subscription_currency"
+    t.string   "subscription_periodicity"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

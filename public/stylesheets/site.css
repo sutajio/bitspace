@@ -93,3 +93,5 @@ ul.releases li span.year { display: block; }
 .slideshow li:last-child { margin-bottom: 0; border-bottom: none; }
 .slideshow p { margin: 20px auto; width: 600px; }
 .slideshow img { -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.85, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
+
+.sticker { z-index: 99; position: absolute; right: -30px; top: -30px; background: url(/images/sticker.png); color: #fff; text-shadow: none; padding: 20px; font-size: 22px; width: 35px; height: 35px; -webkit-border-radius: 40px; -moz-border-radius: 40px; overflow: hidden; white-space: nowrap; }

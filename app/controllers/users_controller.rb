@@ -10,7 +10,11 @@ class UsersController < ApplicationController
       @user.setup_subscription_plan_details
       @user.save!
       UserSession.create(@user)
-      redirect_to player_path(:trailing_slash => true)
+      if params[:return_to]
+        redirect_to params[:return_to]
+      else
+        redirect_to player_path(:trailing_slash => true)
+      end
   rescue ActiveRecord::RecordInvalid => e
     flash[:error] = e.record.errors.full_messages.to_sentence
     redirect_to signup_path

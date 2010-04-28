@@ -14,11 +14,13 @@ class User < ActiveRecord::Base
   has_many :invitations
   has_many :followings
   has_many :followers, :through => :followings, :order => 'followings.created_at DESC'
+  has_many :subscriptions
+  has_many :subscribers, :through => :subscriptions
   
   SUBSCRIPTION_PLANS = {
     :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0, :official => true },
     :beta => { :name => 'Bitspace Beta', :storage => 1.gigabyte, :price_in_euro => 0 },
-    :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99, :paypal_button_id => '9893430', :upgrade_button_id => '6A8KXB3ADVCQU', :official => true, :tagline => 'Great way to start out', :invitations => 20 },
+    :basic => { :name => 'Bitspace Basic', :storage => 10.gigabyte, :price_in_euro => 3.99, :paypal_button_id => '9893430', :upgrade_button_id => '6A8KXB3ADVCQU', :official => true, :tagline => 'Great for small collections', :invitations => 20 },
     :standard => { :name => 'Bitspace Standard', :storage => 25.gigabyte, :price_in_euro => 7.99, :paypal_button_id => '9893454', :upgrade_button_id => 'F586DKKS47GCG', :official => true, :tagline => 'Great value for your money', :invitations => 40 },
     :premium => { :name => 'Bitspace Premium', :storage => 50.gigabytes, :price_in_euro => 14.99, :paypal_button_id => '9369035', :upgrade_button_id => 'KKB7JWVTNYF9S', :official => true, :tagline => 'Great for big collections', :invitations => 80 },
     :unlimited => { :name => 'Bitspace Unlimited', :storage => nil, :price_in_euro => 79.99, :paypal_button_id => '9369365', :upgrade_button_id => 'FG8GJHWEUB6V4' },
@@ -40,6 +42,10 @@ class User < ActiveRecord::Base
   validates_inclusion_of :subscription_plan,
     :in => SUBSCRIPTION_PLANS.values.map {|x| x[:name] }
   validates_exclusion_of :login, :in => DISALLOWED_USERNAMES
+  
+  validates_inclusion_of :subscription_price, :in => 1..99, :allow_nil => true
+  validates_inclusion_of :subscription_currency, :in => %w(EUR USD SEK), :allow_nil => true  
+  validates_inclusion_of :subscription_periodicity, :in => %w(weekly monthly yearly), :allow_nil => true
   
   attr_protected :max_storage
   
@@ -129,6 +135,39 @@ class User < ActiveRecord::Base
   def unfollow!(user)
     if user
       user.followings.find_by_follower_id(self.id).try(:destroy)
+    end
+  end
+  
+  def subscription_price_with_currency
+    case subscription_currency
+    when 'EUR'
+      "€#{subscription_price}"
+    when 'USD'
+      "$#{subscription_price}"
+    when 'SEK'
+      "#{subscription_price}kr"
+    end
+  end
+  
+  def subscription_periodicity_as_period
+    case subscription_periodicity.to_sym
+    when :monthly
+      'month'
+    when :weekly
+      'week'
+    when :yearly
+      'year'
+    end
+  end
+  
+  def subscription_periodicity_as_letter_code
+    case subscription_periodicity.to_sym
+    when :monthly
+      'M'
+    when :weekly
+      'W'
+    when :yearly
+      'Y'
     end
   end
   
