@@ -15,7 +15,7 @@
     </h1>
     <% if @artist.artwork.file? %>
       <% cache [@artist, 'biography'], :ttl => 1.week do %>
-        <%= image_tag(@artist.artwork.url(:large, false), :width => @artist.artwork.width(:large), :height => @artist.artwork.height(:large), :alt => 'Artwork', :style => 'float:left; margin:0 20px 10px 0;') %>
+        <%= image_tag(@artist.artwork.url(:large, false), :width => @artist.artwork.width(:large), :height => @artist.artwork.height(:large), :alt => 'Artwork', :class => 'artist-artwork') %>
         <p class="biography" class="clearfix grey" style="margin-left:<%= @artist.artwork.width(:large) + 20 %>px;">
           <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
         </p>

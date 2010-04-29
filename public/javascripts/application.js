@@ -107,7 +107,7 @@ $(function(){
     e.preventDefault();
     $('#error').fadeOut('slow');
     var playlist = [];
-    $(this).closest('ul').find('a[rel=play]').each(function(){
+    $(this).closest('#page').find('a[rel=play]').each(function(){
       var self = $(this);
       playlist.push({
         play: function(){
@@ -144,7 +144,7 @@ $(function(){
       });
     });
     var playlist_position = 
-      $(this).closest('ul').find('li a[rel=play]').index(this);
+      $(this).closest('#page').find('li a[rel=play]').index(this);
     $('#player')
       .data('playlist', playlist)
       .data('playlist_position', playlist_position)
@@ -508,7 +508,7 @@ $(function(){
   // surrounding space. It will also have a subtle fade effect to better match
   // the overall feel of the UI.
   $('.tooltipped').livequery(function(){
-    $(this).tipsy({ gravity: $.fn.tipsy.autoNS, fade: true });
+    $(this).tipsy({ gravity: $.fn.tipsy.autoNS, fade: false });
   });
   
   // Custom validator for validating usernames.

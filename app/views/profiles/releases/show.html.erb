@@ -44,6 +44,11 @@
           <%= [h(@release.label.try(:name)), @release.release_date].reject(&:blank?).join('<br />') %>
         </p>
       <% end %>
+      <div class="fb-share">
+        <iframe src="http://www.facebook.com/widgets/like.php?href=<%= release_profile_url(@user.login, @release) %>"
+                scrolling="no" frameborder="0"
+                style="border:none; width:450px; height:80px"></iframe>
+      </div>
     </div>
   </div>
 </div>

@@ -26,12 +26,14 @@
       </div>
     </div>
     <div class="grid_6">
-      <div style="padding:43px 56px; margin: 0 -38px 0 -56px; background: url(/images/dashboard-blue-bubble.png) no-repeat; height: 114px; font-size: 18px; font-family: Georgia; font-style: italic; text-shadow: #00f 0px 0px 1px;">
+      <div style="z-index:2; position:absolute; padding:43px 56px; margin: 0 -38px 0 -56px; background: url(/images/dashboard-blue-bubble.png) no-repeat; width: 320px; height: 114px; font-size: 18px; font-family: Georgia; font-style: italic; text-shadow: #00f 0px 0px 1px;">
         <div style="padding:18px 0;">Konnichiwa! You can start uploading your music collection right now. Just click the &raquo;Upload&laquo; (+) button below.</div>
       </div>
     </div>
   <% end %>
-  <hr style="border-color:transparent;" />
+  
+  <!-- <hr style="border-color:transparent;" />
+  
   <div class="grid_4">
     <%= render :partial => 'promo_1' %>
   </div>
@@ -43,5 +45,19 @@
   </div>
   <div class="grid_4">
     <%= render :partial => 'promo_4' %>
+  </div> -->
+  
+  <!-- <hr style="border-color:transparent;" />
+  
+  <div class="grid_8 alignleft">
+    <h2>Followers</h2>
+    <ul>
+      <% current_user.followers.each do |follower| %>
+      <li><%=h follower.login %></li>
+      <% end %>
+    </ul>
   </div>
+  <div class="grid_8 alignleft">
+    <h2>Feed</h2>
+  </div> -->
 </div>

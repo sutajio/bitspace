@@ -1,7 +1,13 @@
 <div class="container_16 clearfix pane">
+  <% if @followers.present? %>
   <ul class="followers clearfix" style="list-style:none;">
     <%= render :partial => 'profiles/followers/follower', :collection => @followers %>
   </ul>
+  <% else %>
+    <div class="fallback">
+      <%=h @user.login.anal_title_case %> does not have any followers yet.
+    </div>
+  <% end %>
 </div>
 
 <div class="container_16 clearfix">

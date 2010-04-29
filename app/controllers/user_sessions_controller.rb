@@ -27,8 +27,12 @@ class UserSessionsController < ApplicationController
   end
   
   def destroy
-    current_user_session.destroy if current_user_session
-    redirect_to login_path
+    if current_user_session
+      current_user_session.destroy
+      redirect_to logout_path
+    else
+      redirect_to login_path
+    end
   end
   
 end

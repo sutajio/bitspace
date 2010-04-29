@@ -1,6 +1,8 @@
 
 /* WIDGETS */
 
+.artists { padding: 0; }
+
 .labels { padding: 20px 30px; }
 .label { list-style: none; margin: 0; text-align: center; float: left; }
 .label img { margin: 10px 0; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
@@ -10,16 +12,21 @@
 .track-length { width: 50px; display: block; float: left; text-align: right; }
 .track-love {  width: 36px; display: block; float:left; padding-left: 0 !important; text-align: center; }
 
-.release { width: 800px; margin: 0; }
-.release .info { padding: 10px; width: 150px; text-align: center; float: left; }
-.release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
-.release h2 { margin: 0; font-size: 12px; }
-.release h3 { font-size: 10px; font-weight: normal; }
-.release .meta { margin-left: 210px; }
-
-.release ol.tracks { width: 620px; margin-left: 180px; }
-.release ol.tracks li { padding: 2px; height: 19px; }
+.release .cover-art { float: left; }
+.release ol.tracks { width: 580px; margin-left: 360px; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.release ol.tracks li { padding: 2px; height: 19px; margin-left: 40px; }
 .release ol.tracks li a { padding-left: 19px; }
+.release ol.tracks li .track-title { width: 450px; }
+.release .meta { margin-left: 360px; }
+
+li.release { margin: 0; }
+li.release .info { padding: 10px; width: 150px; text-align: center; float: left; }
+li.release .cover-art { float: none; }
+li.release img { margin: 10px 0; -webkit-box-reflect: below -1px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(0.55, rgba(255,255,255, .01)), to(rgba(255,255,255, .15))); }
+li.release h2 { margin: 0; font-size: 12px; }
+li.release h3 { font-size: 10px; font-weight: normal; }
+li.release ol.tracks { width: 760px; margin-left: 180px; }
+li.release ol.tracks li .track-title { width: 630px; }
 
 .playlist { width: 940px; margin: 0; }
 .playlist .info { padding: 10px; width: 150px; text-align: center; float: left; }
@@ -27,9 +34,9 @@
 .playlist h2 { padding: 10px 10px; margin-left: 180px; font-size: 14px; }
 
 .playlist ol.tracks { width: 760px; margin-left: 180px; }
-.playlist ol.tracks li { padding: 2px; height: 19px; }
+.playlist ol.tracks li { padding: 2px; height: 19px; margin-left: 40px; }
 .playlist ol.tracks li a { padding-left: 19px; }
-.playlist .track-title { width: 630px; }
+.playlist .track-title { width: 620px; }
 
 .years .releases { width: 760px; }
 .years .releases li { list-style: none; margin: 0; float: left; line-height: 0; }
@@ -37,7 +44,7 @@
 
 .account .member-since { float: right; margin-top: 12px; margin-right: 10px; font-size: 10px; }
 .account .pane { padding-left: 10px; padding-right: 10px; }
-.account form th { width: 140px; padding: 10px 5px; text-align: right; }
+.account form th { width: 120px; padding: 10px 5px; text-align: right; }
 .account form td { padding: 10px 5px; }
 .account input[type="text"],
 .account input[type="password"],
@@ -67,7 +74,7 @@
 
 /* LAYOUT */
 
-#root { padding-bottom: 120px; }
+#root { padding-bottom: 120px; min-height: 283px; }
 #player { position: absolute; left: -9999px; display: none; }
 
 #nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; padding: 8px 0 0 0; font-size: 12px; height: 38px; }
@@ -109,7 +116,7 @@
 #nav-upload a:active { background-position: 0 -64px; }
 #nav-upload .swfupload { float: right; }
 
-#info { width: 100%; position: fixed; bottom: 38px; z-index: 79; opacity: 0.7; }
+#info { width: 100%; position: fixed; bottom: 38px; z-index: 79; opacity: 0.6; }
 #error { padding: 10px 10px; font-size: 12px; background: #800; color: #fff; display: none; cursor: pointer; text-align: center; }
 #message { padding: 10px 10px; font-size: 12px; background: #080; color: #fff; display: none; cursor: pointer; text-align: center; }
 #status { padding: 10px 0; font-size: 12px; background: #000; display: none; }
@@ -127,12 +134,13 @@
 
 /* COLORS */
 
-body { background: #151515; color: #fff; }
+body { background: #151515 url(/images/black/black-noise.jpg); color: #fff; }
+#root { background: url(/images/black/root-shade.jpg) repeat-x; }
 #nav { background: url(/images/black/nav-shade.png) repeat-x; }
 #nav-fade { height: 39px; background: url(/images/black/nav-fade.png) no-repeat 50% 0; }
 #user-menu li { color: #999; }
 #user-menu li span { color: #fff; }
-#menu { border-bottom: 1px solid #222; }
+#menu { border-bottom: 2px solid #151515; }
 #menu a { color: #666; }
 #menu a:hover { color: #999; }
 #menu .first a.current { background: none; }
@@ -150,7 +158,7 @@ hr { border-color: #222; }
 .ui-slider .ui-slider-range { background: #151515; }
 .ui-slider .ui-slider-handle { background: url(/images/black/progress-handle.png) no-repeat; }
 .progress-status { color: #555; }
-.pane { background: #2a2a2a; }
+.pane { background: #2a2a2a url(/images/black/pane-noise.jpg); }
 .dialog { background: #151515; }
 .more { border: 1px solid #222; }
 .more:hover { background: #222; }
@@ -160,14 +168,14 @@ h1, h2, h3 { text-shadow: #000 1px 1px 1px; }
 h1 a, h2 a, h3 a { text-shadow: #000 1px 1px 1px; }
 dl { text-shadow: #000 1px 1px 1px; }
 label { text-shadow: #000 1px 1px 1px; }
-.release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
+li.release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
 .release ol.tracks { background: #2f2f2f; color: #777; }
 .release ol.tracks li.odd { background: #252525; }
 .release ol.tracks li.even { background: #2f2f2f; }
 .release ol.tracks li a.playing { background: url(/images/black/playing.png) no-repeat; }
 .release ol.tracks li a.loading { background: url(/images/black/loading.gif) no-repeat; }
 .release ol.tracks li span.track-artist a { color: #777; }
-.playlist { background: #2a2a2a; border-top: 1px solid #222; }
+.playlist { background: #2a2a2a url(/images/black/pane-noise.jpg); border-top: 1px solid #222; }
 .playlist h2 { background: #2f2f2f -webkit-gradient(linear, left top, left bottom, from(rgba(34,34,34, .5)), color-stop(0.55, rgba(34,34,34, .01)), to(transparent)); color: #999; }
 .playlist ol.tracks { background: #2f2f2f; color: #777; }
 .playlist ol.tracks li.odd { background: #252525; }
@@ -183,11 +191,12 @@ label { text-shadow: #000 1px 1px 1px; }
 .track-love.loved { opacity: 1; background-position: 50% -38px; }
 .error { color: #f33; text-shadow: #000 1px 1px 1px; }
 .fallback { color: #777; }
-.actions a, .actions button { font-size: 10px; padding: 5px 10px; border: 1px solid #888; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.actions a, .actions button { font-size: 10px; padding: 5px 10px; background: #151515; border: 1px solid #888; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
 .actions a.archived { opacity: 1 !important; }
 .actions a.enabled { opacity: 1 !important; }
 .actions button { background: #333; cursor: pointer; }
 .artist span.meta { color: #666; }
-.biography { color: #666; }
+.artist-artwork { float: left; margin: 0 20px 10px 0; -webkit-box-shadow: 1px 1px 5px #000; -moz-box-shadow: 1px 1px 5px #000; }
+.biography { color: #666; text-shadow: #000 1px 1px 0px; }
 .biography a { color: #999; }
 .biography a:hover { color: #ccc; }

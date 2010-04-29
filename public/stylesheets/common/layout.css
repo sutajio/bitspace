@@ -1,6 +1,6 @@
-#root { margin: 0; padding: 0 0 60px 0; position: relative; text-align: left; }
+#root { margin: 0; padding: 5px 0 60px 0; position: relative; text-align: left; }
 
-#menu { margin: 5px 0 20px 0; }
+#menu { margin: 0 0 20px 0; }
 #menu li { text-align: center; padding-top: 12px; padding-bottom: 12px; }
 #menu .first { }
 #menu .last { text-align: right; }

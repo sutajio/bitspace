@@ -1,5 +1,5 @@
 <% cache artist do %>
-  <% content_tag_for(:div, artist, :class => 'grid_3') do %>
+  <% content_tag_for(:div, artist, :class => 'grid_2') do %>
     <% link_to(artist, :target => '_self') do %>
       <% if artist.artwork.file? %>
         <%= image_tag(artist.artwork.url(:small, false), :size => '125x125', :alt => 'Artwork') %>
