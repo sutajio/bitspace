@@ -88,8 +88,15 @@ class Artist < ActiveRecord::Base
   end
   
   def biography
-    with_lastfm do |info|
-      return info['bio']['content'] unless info['bio'].blank?
+    if read_attribute(:biography)
+      read_attribute(:biography)
+    else
+      with_lastfm do |info|
+        return nil if info['bio'].blank?
+        bio = info['bio']['content']
+        update_attribute(:biography, bio)
+        bio
+      end
     end
   end
   

@@ -1,0 +1,20 @@
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <div class="breadcrumbs">
+      <%= link_to(h(@artist.name), @artist, :target => '_self') %>
+    </div>
+    <h1>Edit biography for this artist...</h1>
+  </div>
+</div>
+
+<div class="container_16 clearfix">
+  <div class="pane clearfix">
+    <div class="grid_16">
+    <% form_for(@artist) do |f| %>
+      <%= f.text_area :biography, :size => '80x20' %>
+      <hr />
+      <p class="alignright"><%= f.submit %></p>
+    <% end %>
+    </div>
+  </div>
+</div>

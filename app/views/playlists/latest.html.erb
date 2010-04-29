@@ -1,7 +1,9 @@
+<div class="container_16 clearfix">
+  <%= render :partial => 'navigation' %>
+</div>
+
 <div class="container_16 clearfix pane">
   <div class="grid_16">
-    <%= render :partial => 'navigation' %>
-    
     <ul class="releases playlists">
       <li class="release playlist clearfix">
         <%= render :partial => 'playlist_info', :locals => { :tracks => @tracks } %>

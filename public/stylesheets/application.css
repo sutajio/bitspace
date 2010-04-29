@@ -72,6 +72,12 @@ li.release ol.tracks li .track-title { width: 630px; }
 .edit_release label.error { display: none !important; }
 .edit_release input.error { border-bottom-color: #f66; }
 
+.edit_artist textarea { background: #222; color: #aaa; -webkit-border-radius: 3px; -moz-border-radius: 3px; border: 1px solid #333; font-size: 13px; padding: 30px 50px; width: 835px; height: 200px; }
+.edit_artist input[type=submit] { cursor: pointer; padding: 5px 10px; font-size: 14px; font-weight: bold; color: #333; text-shadow: #fff 0px 0px 1px; border: 3px solid #eee; -webkit-border-radius: 15px; -moz-border-radius: 15px; background: #aaa; background: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#888)); }
+.edit_artist input[type=submit]:hover { border-color: #ddd; }
+.edit_artist input[type=submit]:active { background: #888; background: -webkit-gradient(linear, left top, left bottom, from(#888), to(#ccc)); }
+
+
 /* LAYOUT */
 
 #root { padding-bottom: 120px; min-height: 283px; }
@@ -128,6 +134,7 @@ li.release ol.tracks li .track-title { width: 630px; }
 #upload-spinner { text-align: center; }
 #upload-progress { text-align: center; }
 
+#artist-artwork-upload-button { margin-bottom: 10px; text-align: center; }
 #release-artwork-upload-button { margin-bottom: 10px; text-align: center; }
 
 #infscr-loading { display: none !important; }

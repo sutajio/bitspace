@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100427142340) do
+ActiveRecord::Schema.define(:version => 20100429124858) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(:version => 20100427142340) do
     t.date     "end_date"
     t.string   "website"
     t.string   "tags"
+    t.text     "biography"
   end
 
   add_index "artists", ["mbid"], :name => "index_artists_on_mbid"

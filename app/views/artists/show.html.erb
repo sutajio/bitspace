@@ -1,12 +1,12 @@
 <div class="container_16 clearfix">
   <div class="grid_16">
-    <div class="actions" style="float:right; margin-top:15px;">
-      <%= link_to('Releases', artist_path(@artist), :target => '_self', :class => 'enabled') %>
-      <%= link_to('Biography', biography_artist_path(@artist), :target => '_self') %>
+    <ul class="tabnav" style="float:right;">
+      <li><%= link_to('Releases', artist_path(@artist), :target => '_self', :class => 'current') %></li>
+      <li><%= link_to('Biography', biography_artist_path(@artist), :target => '_self') %></li>
       <% if @artist.website.present? %>
-      <%= link_to('Website', @artist.website, :target => '_blank') %>
+      <li><%= link_to('Website', @artist.website, :target => '_blank', :rel => 'shadowbox') %></li>
       <% end %>
-    </div>
+    </ul>
     <h1>
       <%= link_to(h(@artist.name), @artist, :target => '_self') %>
       <% if @artist.begin_date || @artist.end_date %>

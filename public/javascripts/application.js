@@ -595,4 +595,16 @@ $(function(){
     $(this).tipsy({ gravity: 's', fade: false });
   });
   
+  $('.edit_artist').livequery(function(){
+    $(this).validate({
+      submitHandler: function(form) {
+        $(form).ajaxSubmit({
+          success: function(){
+            $.address.value(form.action + '/biography');
+          }
+        });
+      }
+    });
+  });
+  
 });
