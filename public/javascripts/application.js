@@ -453,13 +453,21 @@ $(function(){
   // Links with rel="love" acts as toggle buttons that sends a HTTP POST
   // request using Ajax to the URL specified in the links href attribute.
   // If the POST is successful the state of the link is updated to "loved".
-  $('a[rel=love]').livequery('click', function(e){
-    e.preventDefault();
-    var self = $(this);
-    $.post(this.href, { '_method': 'put' }, function(){
-      self.toggleClass('loved');
+  if(typeof(profile_id) == 'undefined') {
+    $('a[rel=love]').livequery('click', function(e){
+      e.preventDefault();
+      var self = $(this);
+      $.post(this.href, { '_method': 'put' }, function(){
+        self.toggleClass('loved');
+      });
     });
-  });
+  } else {
+    $('a[rel=love]').livequery(function(){
+      $(this).addClass('unlovable').click(function(e){
+        e.preventDefault();
+      });
+    });
+  }
   
   // The mute button (is actually a HTML checkbox).
   // Toggles the "muted" attribute in the audio player.

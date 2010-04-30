@@ -211,6 +211,8 @@ li.release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
 .track-love { opacity: 0.5; background: url(/images/love.png) no-repeat 50% 0; text-indent: -9999px; }
 .track-love:hover { opacity: 0.5; background-position: 50% -19px; }
 .track-love.loved { opacity: 1; background-position: 50% -38px; }
+.track-love.unlovable { cursor: default; }
+.track-love.unlovable:hover { background-position: 50% 0; }
 .error { color: #f33; text-shadow: #000 1px 1px 1px; }
 .fallback { color: #777; }
 .actions a, .actions button { font-size: 10px; padding: 5px 10px; background: #151515; border: 1px solid #888; color: #fff; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
