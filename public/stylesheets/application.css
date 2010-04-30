@@ -152,6 +152,21 @@ body { background: #151515 url(/images/black/black-noise.jpg); color: #fff; }
 #menu a:hover { color: #999; }
 #menu .first a.current { background: none; }
 #menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
+#menu .profilenav { float: right; }
+#menu .subscribe-button { display: block; float: left; font-size: 11px; margin: 9px 12px 0 0; }
+#menu .subscribe-button i { background: url(/images/button-sprites.png) no-repeat 0 -12px; width: 15px; height: 13px; margin: 0 5px 0 0; float: left; }
+#menu .subscribe-button:hover i { background-position: -16px -12px; }
+#menu .follow-button { display: block; float: left; font-size: 11px; margin: 9px 12px 0 0; }
+#menu .follow-button i { background: url(/images/button-sprites.png) no-repeat 0 0; width: 15px; height: 13px; margin: 0 5px 0 0; float: left; }
+#menu .follow-button:hover i { background-position: -16px 0; }
+#menu .unfollow-button { display: block; float: left; font-size: 11px; margin: 9px 12px 0 0; }
+#menu .unfollow-button i { background: url(/images/button-sprites.png) no-repeat 0 -39px; width: 15px; height: 13px; margin: 0 5px 0 0; float: left; }
+#menu .unfollow-button:hover i { background-position: -16px -39px; }
+#menu .website-button { display: block; float: left; font-size: 11px; margin: 9px 12px 0 0; }
+#menu .website-button i { background: url(/images/button-sprites.png) no-repeat 0 -26px; width: 15px; height: 13px; margin: 0 5px 0 0; float: left; }
+#menu .website-button:hover i { background-position: -16px -26px; }
+#menu span.website-button { color: #666; cursor: default; }
+#menu span.website-button:hover i { background-position: 0 -26px; }
 #footer { color: #666; }
 #upload-info { background: url(/images/bubble-upload.png) no-repeat; }
 #upload-progress { color: #000; font-weight: bold; }

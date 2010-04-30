@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
   
   before_filter :require_user_credentials
+  before_filter :find_user
   
   def show
   end

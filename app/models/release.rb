@@ -314,6 +314,10 @@ class Release < ActiveRecord::Base
     filename.gsub('/','').gsub("\\",'')
   end
   
+  def playable?(user)
+    self.user == user || (user && user.subscribes_to?(self.user))
+  end
+  
   protected
   
     def with_lastfm(&block)

@@ -34,22 +34,24 @@ $(function(){
   });
   
   // Poll account status every 1 minute.
-  var last_account_status_poll = (new Date()).toUTCString();
-  setInterval(function(){
-    $.ajax({
-      url: '/account/status',
-      data: { since: last_account_status_poll },
-      success: function(data){
-        if(data != null && data.replace(/^\s+|\s+$/g, '') != '') {
-          $('#message').text(data).fadeIn('slow');
-        } else {
-          $('#message').fadeOut('slow');
-        }
-      },
-      error: function(){} // Do nothing
-    });
-    last_account_status_poll = (new Date()).toUTCString();
-  }, 1000 * 60 * 1);
+  if(typeof(profile_id) != 'undefined') {
+    var last_account_status_poll = (new Date()).toUTCString();
+    setInterval(function(){
+      $.ajax({
+        url: '/account/status',
+        data: { since: last_account_status_poll },
+        success: function(data){
+          if(data != null && data.replace(/^\s+|\s+$/g, '') != '') {
+            $('#message').text(data).fadeIn('slow');
+          } else {
+            $('#message').fadeOut('slow');
+          }
+        },
+        error: function(){} // Do nothing
+      });
+      last_account_status_poll = (new Date()).toUTCString();
+    }, 1000 * 60 * 1);
+  }
   
   // Handle change in hashtag URL. Loads the new page and does setup of
   // Shadowbox and current playing track, etc...
@@ -65,7 +67,12 @@ $(function(){
     $.infinitescroll.isInvalidPage = false;
     $.infinitescroll.isDone = false;
     $(window).unbind('scroll.infscr');
-    $('#page').load(e.value == '/' ? '/dashboard' : e.value, null, function(){
+    $('#page').load(
+        (e.value == '/' ? '/dashboard' : e.value) + 
+          (typeof(profile_id) == 'undefined' ? '' :
+            (e.value.search(/\?/i) == -1 ? '?profile_id='+profile_id :
+                                           '&profile_id='+profile_id)),
+        null, function(){
       $('#page').fadeTo('slow', 1);
       $(window).scrollTop(0);
       var links = $('#page a[rel*=shadowbox]');
@@ -132,13 +139,21 @@ $(function(){
             .addClass('playing');
           if(parseFloat(self.attr('data-length')) > 30.0) {
             this.started_playing = new Date();
-            $.post(self.attr('data-now-playing-url'), {});
+            if(typeof(profile_id) == 'undefined') {
+              if(self.attr('data-now-playing-url')) {
+                $.post(self.attr('data-now-playing-url'), {});
+              }
+            }
           }
         },
         scrobble: function(){
           if(parseFloat(self.attr('data-length')) > 30.0) {
-            $.post(self.attr('data-scrobble-url'),
-                   { started_playing: this.started_playing.toUTCString() });
+            if(typeof(profile_id) == 'undefined') {
+              if(self.attr('data-scrobble-url')) {
+                $.post(self.attr('data-scrobble-url'),
+                      { started_playing: this.started_playing.toUTCString() });
+              }
+            }
           }
         }
       });
@@ -149,6 +164,15 @@ $(function(){
       .data('playlist', playlist)
       .data('playlist_position', playlist_position)
       .trigger('playcurrent');
+  });
+  
+  $('a[rel=sorry]').livequery('click', function(e){
+    e.preventDefault();
+    $('#player').trigger('start', $(this).attr('href'));
+    if($('#player').data('playlist') == null) {
+      $('#player').data('playlist', []);
+      $('#player').data('playlist_position', -1);
+    }
   });
   
   // Buttons with rel="play-pause" acts as play/pause buttons. Triggers the
@@ -415,7 +439,9 @@ $(function(){
   // address plug-in (will update the page with the search results using
   // Ajax).
   $('#search-q')
-  .suggest('/search/suggestions')
+  .suggest(typeof(profile_id) == 'undefined' ?
+    '/search/suggestions' :
+    '/search/suggestions?profile_id='+profile_id)
   .closest('form').submit(function(e){
     e.preventDefault();
     var q = $('#search-q').val();
@@ -500,6 +526,18 @@ $(function(){
     $.post(this.href, { '_method': 'put' }, function(){
       self.toggleClass('archived');
     });
+  });
+  
+  // Links with rel=sideload will sideload a release to a users own
+  // music collection.
+  $('a[rel=sideload]').livequery('click', function(e){
+    e.preventDefault();
+    if(confirm('Are you sure?')) {
+      var self = $(this);
+      $.post(this.href, null, function(){
+        self.hide('fast');
+      });
+    }
   });
   
   // Show nice looking (and above all clear and useful) tooltips for all

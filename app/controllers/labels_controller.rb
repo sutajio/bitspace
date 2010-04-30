@@ -1,7 +1,10 @@
 class LabelsController < ApplicationController
   
+  skip_before_filter :require_user, :only => [:index, :show]
+  before_filter :find_user, :only => [:index, :show]
+  
   def index
-    @labels = current_user.labels.search_for(params[:q]).paginate(
+    @labels = @user.labels.search_for(params[:q]).paginate(
         :page => params[:page],
         :per_page => 20,
         :order => 'releases_count DESC',
@@ -12,7 +15,7 @@ class LabelsController < ApplicationController
   end
   
   def show
-    @label = current_user.labels.find(params[:id])
+    @label = @user.labels.find(params[:id])
   end
   
 end

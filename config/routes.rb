@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search, :collection => { :suggestions => :get }
   map.resources :uploads, :collection => { :import => :post }
   map.resources :artists, :member => { :biography => :get, :artwork => :any }
-  map.resources :releases, :member => { :archive => :put, :artwork => :any, :download => :get }
+  map.resources :releases, :member => { :archive => :put, :artwork => :any, :download => :get, :sideload => :post }
   map.resources :labels
   map.resources :years
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
@@ -64,18 +64,8 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'pages', :action => 'index'
   
   # Public profiles
-  map.profile ':id', :controller => 'profiles/profiles', :action => 'show'
-  map.follow_profile ':id/follow', :controller => 'profiles/profiles', :action => 'follow', :requirements => { :method => :put }
-  map.subscribe_profile ':id/subscribe', :controller => 'profiles/profiles', :action => 'subscribe'
-  map.artists_profile ':id/artists', :controller => 'profiles/artists', :action => 'index'
-  map.releases_profile ':id/releases', :controller => 'profiles/releases', :action => 'index'
-  map.followers_profile ':id/followers', :controller => 'profiles/followers', :action => 'index'
-  map.formatted_artists_profile ':id/artists.:format', :controller => 'profiles/artists', :action => 'index'
-  map.formatted_releases_profile ':id/releases.:format', :controller => 'profiles/releases', :action => 'index'
-  map.formatted_followers_profile ':id/followers.:format', :controller => 'profiles/followers', :action => 'index'
-  map.artist_profile ':profile_id/artists/:id', :controller => 'profiles/artists', :action => 'show'
-  map.release_profile ':profile_id/releases/:id', :controller => 'profiles/releases', :action => 'show'
-  map.formatted_artist_profile ':profile_id/artists/:id.:format', :controller => 'profiles/artists', :action => 'show'
-  map.formatted_release_profile ':profile_id/releases/:id.:format', :controller => 'profiles/releases', :action => 'show'
+  map.profile ':profile_id', :controller => 'profiles/profiles', :action => 'show'
+  map.follow_profile ':profile_id/follow', :controller => 'profiles/profiles', :action => 'follow', :requirements => { :method => :put }
+  map.subscribe_profile ':profile_id/subscribe', :controller => 'profiles/profiles', :action => 'subscribe'
 
 end

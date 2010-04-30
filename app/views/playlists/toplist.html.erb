@@ -8,8 +8,8 @@
       <li class="release playlist clearfix">
         <%= render :partial => 'playlist_info', :locals => { :tracks => @tracks } %>
         <ol class="tracks">
-          <% cache Digest::MD5.hexdigest(@tracks.map(&:cache_key).to_s) do %>
-          <%= render :partial => 'tracks/track', :collection => @tracks, :locals => { :show_artist => true } %>
+          <% cache [Digest::MD5.hexdigest(@tracks.map(&:cache_key).to_s), current_user && current_user.subscribes_to?(@user)] do %>
+          <%= render :partial => 'tracks/track', :collection => @tracks, :locals => { :show_artist => true, :playable => current_user && current_user.subscribes_to?(@user) } %>
           <% end %>
         </ol>
       </li>

@@ -1,5 +1,8 @@
 class SearchesController < ApplicationController
   
+  skip_before_filter :require_user, :only => [:show, :suggestions]
+  before_filter :find_user, :only => [:show, :suggestions]
+  
   layout nil, :only => [:suggestions]
   
   rescue_from ScopedSearch::QueryNotSupported do |exception|
@@ -11,11 +14,11 @@ class SearchesController < ApplicationController
   end
   
   def show
-    @releases = current_user.releases.search_for(params[:q]).paginate(:page => params[:page], :include => [:artist, :tracks])
+    @releases = @user.releases.search_for(params[:q]).paginate(:page => params[:page], :include => [:artist, :tracks])
   end
   
   def suggestions
-    @releases = current_user.releases.search_for(params[:q]).all(:limit => 5, :include => [:artist, :tracks])
+    @releases = @user.releases.search_for(params[:q]).all(:limit => 5, :include => [:artist, :tracks])
   end
   
 end

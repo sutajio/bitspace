@@ -1,7 +1,0 @@
-<% link_to(release_profile_path(@user.login, release), :class => 'cover-art', :style => 'display:block; float:left;') do %>
-  <%= image_tag(release.artwork.url(:medium, false), :size => '240x240', :alt => 'Cover art') %>
-  <span class="info-overlay">
-    <%=h release.artist.name %><br />
-    <strong><%=h release.title %></strong>
-  </span>
-<% end %>

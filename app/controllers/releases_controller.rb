@@ -1,10 +1,13 @@
 class ReleasesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:update]
   
+  skip_before_filter :require_user, :only => [:index, :show, :download]
+  before_filter :find_user, :only => [:index, :show, :download]
+  
   layout 'site', :only => [:download]
   
   def index
-    @releases = current_user.releases.has_tracks.search_for(params[:q]).paginate(
+    @releases = @user.releases.has_tracks.search_for(params[:q]).paginate(
         :page => params[:page],
         :per_page => 16,
         :include => [:artist],
@@ -16,7 +19,7 @@ class ReleasesController < ApplicationController
   end
   
   def show
-    @release = current_user.releases.find(params[:id])
+    @release = @user.releases.find(params[:id])
   end
   
   def edit
@@ -65,7 +68,8 @@ class ReleasesController < ApplicationController
   end
   
   def download
-    @release = current_user.releases.find(params[:id])
+    @release = Release.find(params[:id])
+    head :forbidden and return unless @release.playable?(current_user)
     if request.xhr?
       render :text => @release.download_url
     else
@@ -75,6 +79,13 @@ class ReleasesController < ApplicationController
         @release.generate_download
       end
     end
+  end
+  
+  def sideload
+    @release = Release.find(params[:id])
+    head :forbidden and return unless @release.playable?(current_user)
+    @release.copy(current_user)
+    head :ok
   end
   
   def destroy

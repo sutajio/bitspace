@@ -138,6 +138,11 @@ class User < ActiveRecord::Base
     end
   end
   
+  def subscribes_to?(user)
+    return true if user == self
+    return user ? user.subscribers.include?(self) : false
+  end
+  
   def subscription_price_with_currency
     case subscription_currency
     when 'EUR'

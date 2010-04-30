@@ -1,7 +1,10 @@
 class ArtistsController < ApplicationController
   
+  skip_before_filter :require_user, :only => [:index, :show, :biography]
+  before_filter :find_user, :only => [:index, :show, :biography]
+  
   def index
-    @artists = current_user.artists.search_for(params[:q]).paginate(
+    @artists = @user.artists.search_for(params[:q]).paginate(
         :page => params[:page],
         :per_page => 20,
         :conditions => ['releases_count > 0'])
@@ -11,11 +14,11 @@ class ArtistsController < ApplicationController
   end
   
   def show
-    @artist = current_user.artists.with_releases.find(params[:id])
+    @artist = @user.artists.with_releases.find(params[:id])
   end
   
   def biography
-    @artist = current_user.artists.with_releases.find(params[:id])
+    @artist = @user.artists.with_releases.find(params[:id])
   end
   
   def edit

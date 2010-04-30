@@ -13,12 +13,14 @@
         <span class="years grey"><%= @artist.begin_date ? @artist.begin_date.strftime('%Y') : '?' %> &ndash; <%= @artist.end_date ? @artist.end_date.strftime('%Y') : '?' %></span>
       <% end %>
     </h1>
-      <%= image_tag(@artist.artwork.url(:large, false), :width => @artist.artwork.width(:large), :height => @artist.artwork.height(:large), :alt => 'Artwork', :class => 'artist-artwork') %>
-      <p class="biography" class="clearfix grey" style="margin-left:<%= @artist.artwork.width(:large) ? @artist.artwork.width(:large) + 20 : 335 %>px;">
-        <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
-      </p>
+    <%= image_tag(@artist.artwork.url(:large, false), :width => @artist.artwork.width(:large), :height => @artist.artwork.height(:large), :alt => 'Artwork', :class => 'artist-artwork') %>
+    <p class="biography" class="clearfix grey" style="margin-left:<%= @artist.artwork.width(:large) ? @artist.artwork.width(:large) + 20 : 335 %>px;">
+      <%= auto_link(strip_links(@artist.biography), :urls, :target => '_blank') %>
+    </p>
+    <% if @user == current_user %>
     <div class="actions">
       <%= link_to('Upload artwork', artwork_artist_path(@artist), :target => '_self') %> <%= link_to('Edit biography', edit_artist_path(@artist), :target => '_self') %>
     </div>
+    <% end %>
   </div>
 </div>

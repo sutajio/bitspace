@@ -96,5 +96,14 @@ class ApplicationController < ActionController::Base
     def single_access_allowed?
       true
     end
+    
+    def find_user
+      if params[:profile_id]
+        @user = User.find_by_login_and_public_profile(params[:profile_id], true)
+        raise ActiveRecord::RecordNotFound unless @user
+      else
+        @user = current_user
+      end
+    end
 
 end

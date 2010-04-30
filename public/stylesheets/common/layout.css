@@ -2,11 +2,12 @@
 
 #menu { margin: 0 0 20px 0; }
 #menu li { text-align: center; padding-top: 12px; padding-bottom: 12px; }
-#menu .first { }
 #menu .last { text-align: right; }
 #menu .grid_1 a { display: block; padding: 7px 0; font-weight: bold; }
 #menu #search-q { width: 140px; margin: 7px 0; -moz-border-radius: 8px; border: 0px transparent; padding: 3px; }
 #menu .usernav a { font-weight: normal; }
+#menu .grid_1 .button { display: block; padding: 7px 0; }
+#menu .grid_1 span.button { cursor: default; }
 
 #company-footer { padding: 20px 0; font-size: 11px; }
 #share-footer { padding: 20px 0; font-size: 11px; }

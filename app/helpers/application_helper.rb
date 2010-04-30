@@ -5,11 +5,11 @@ module ApplicationHelper
     return if collection.blank?
     case collection
     when Array:
-      path = polymorphic_path(collection.first.class.new, :page => next_page)
+      path = polymorphic_path(collection.first.class.new, :page => next_page, :profile_id => @user.login)
     when Hash:
-      path = url_for(hash.merge(:page => next_page))
+      path = url_for(hash.merge(:page => next_page, :profile_id => @user.login))
     when String:
-      path = "#{collection}?page=#{next_page}"
+      path = "#{collection}?page=#{next_page}&profile_id=#{@user.login}"
     end
     link_to('...', path, :rel => 'more', :class => 'more', :target => '_self')
   end

@@ -1,10 +1,10 @@
 <div class="container_16 clearfix aligncenter">
-  <% if @latest.size == 3 %>
+  <% if @user != current_user || @latest.present? %>
     <div class="grid_16">
       <div class="dashboard clearfix">
-        <% @latest.each do |release| %>
-        <%= link_to(image_tag(release.artwork.url(:large, false), :size => '313x313', :alt => 'Cover art'), release, :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
-        <% end %>
+        <%= link_to(image_tag(@latest[0] ? @latest[0].artwork.url(:large, false) : '/images/cover-art.jpg', :size => '313x313', :alt => 'Cover art'), @latest[0] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
+        <%= link_to(image_tag(@latest[1] ? @latest[1].artwork.url(:large, false) : '/images/cover-art.jpg', :size => '313x313', :alt => 'Cover art'), @latest[1] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
+        <%= link_to(image_tag(@latest[2] ? @latest[2].artwork.url(:large, false) : '/images/cover-art.jpg', :size => '313x313', :alt => 'Cover art'), @latest[2] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
       </div>
     </div>
   <% else %>
@@ -32,32 +32,21 @@
     </div>
   <% end %>
   
-  <!-- <hr style="border-color:transparent;" />
-  
-  <div class="grid_4">
-    <%= render :partial => 'promo_1' %>
-  </div>
-  <div class="grid_4">
-    <%= render :partial => 'promo_2' %>
-  </div>
-  <div class="grid_4">
-    <%= render :partial => 'promo_3' %>
-  </div>
-  <div class="grid_4">
-    <%= render :partial => 'promo_4' %>
-  </div> -->
-  
-  <!-- <hr style="border-color:transparent;" />
-  
-  <div class="grid_8 alignleft">
-    <h2>Followers</h2>
-    <ul>
-      <% current_user.followers.each do |follower| %>
-      <li><%=h follower.login %></li>
+  <% if @user != current_user %>
+    <div class="grid_8 prefix_4 suffix_4 grey">
+      <h3>
+        <%= pluralize(@user.artists.with_releases.size, 'artist') %>,
+        <%= pluralize(@user.releases.size, 'release') %>,
+        <%= pluralize(@user.followers.size, 'follower') %>
+      </h3>
+      <% if @user.biography.present? %>
+      <hr />
+      <p class="bio">
+        <%= auto_link(h(@user.biography)) %>
+      </p>
+      <hr />
       <% end %>
-    </ul>
-  </div>
-  <div class="grid_8 alignleft">
-    <h2>Feed</h2>
-  </div> -->
+    </div>
+  <% end %>
+  
 </div>

@@ -9,7 +9,11 @@
     <link rel="shortcut icon" href="/images/logos/favicon.png" type="image/png" />
     <link rel="fluid-icon" href="/images/logos/fluid.png" title="Bitspace" />
     <link rel="apple-touch-icon" href="/images/logos/touch.png" />
-    <title>Bitspace</title>
+    <% if @page_title.present? %>
+      <title><%=h @page_title %></title>
+    <% else %>
+      <title>Bitspace</title>
+    <% end %>
     <%= stylesheet_link_tag :common %>
     <%= stylesheet_link_tag :application %>
     <%= javascript_include_tag :common %>
@@ -25,12 +29,34 @@
           <li class="grid_1"><%= link_to('Labels', labels_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Years', years_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Playlists', playlists_path, :target => '_self', :rel => 'contents') %></li>
+          <% if @user == current_user %>
           <li class="grid_1 prefix_2 usernav">
             <%= link_to('Account', account_path, :target => '_self', :title => 'Change your account settings here', :class => 'tooltipped') %>
           </li>
           <li class="grid_1 usernav">
             <%= link_to("Sign out", logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
           </li>
+          <% else %>
+          <li class="grid_4 usernav">
+            <div class="profilenav">
+              <% if @user.subscribable? && !(current_user && current_user.subscribes_to?(@user)) %>
+              <%= link_to('<i></i> Subscribe', subscribe_profile_path(@user.login), :class => 'subscribe-button tooltipped', :title => "Subscribe to #{h(@user.login.anal_title_case)} for #{@user.subscription_price_with_currency} per #{@user.subscription_periodicity_as_period}") %>
+              <% end %>
+              
+              <% if current_user && current_user.follows?(@user) %>
+              <%= link_to('<i></i> Unfollow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'unfollow-button tooltipped', :title => "Unfollow #{h(@user.login.anal_title_case)}") %>
+              <% else %>
+              <%= link_to('<i></i> Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'follow-button tooltipped', :title => "Follow #{h(@user.login.anal_title_case)}") %>
+              <% end %>
+              
+              <% if @user.website.present? %>
+              <%= link_to('<i></i> Website', h(@user.website), :rel => 'nofollow', :target => '_blank', :class => 'website-button tooltipped', :title => "#{h(@user.login.anal_title_case)} has a website, go take a look!") %>
+              <% else %>
+              <%= content_tag(:span, '<i></i> Website', :class => 'website-button disabled tooltipped', :title => "#{h(@user.login.anal_title_case)} doesn't have a website :(") %>
+              <% end %>
+            </div>
+          </li>
+          <% end %>
           <li class="grid_2 last">
             <% form_tag(search_path, :method => 'get') do %>
               <input type="search" results="5" name="q" id="search-q" />
@@ -83,7 +109,9 @@
             </div>
             <div id="nav-progress"></div>
             <div id="nav-upload">
+              <% if @user == current_user %>
               <%= render :partial => 'uploads/form' %>
+              <% end %>
             </div>
           </div>
         </div>

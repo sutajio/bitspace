@@ -1,10 +1,6 @@
 <ul class="tabnav">
   <li style="float:right;"><%= link_to('Latest uploads', latest_playlists_path, :target => '_self', :class => request.path == latest_playlists_path ? 'current' : nil) %></li>
   <li style="float:right;"><%= link_to('Recently played', recent_playlists_path, :target => '_self', :class => request.path == recent_playlists_path ? 'current' : nil) %></li>
-  <% if current_user.private_beta? %>
-  <!-- <li style="float:right;"><%= link_to('Day charts', daycharts_playlists_path, :target => '_self', :class => request.path == daycharts_playlists_path ? 'current' : nil) %></li>
-  <li style="float:right;"><%= link_to('Week charts', weekcharts_playlists_path, :target => '_self', :class => request.path == weekcharts_playlists_path ? 'current' : nil) %></li> -->
-  <% end %>
   <li style="float:right;"><%= link_to('Top 100', toplist_playlists_path, :target => '_self', :class => request.path == toplist_playlists_path ? 'current' : nil) %></li>
   <li style="float:right;"><%= link_to('Favorites', playlists_path, :target => '_self', :class => request.path == playlists_path ? 'current' : nil) %></li>
 </ul>
