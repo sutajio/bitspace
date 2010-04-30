@@ -3,7 +3,7 @@
     <% if @label.website.present? %>
     <ul class="tabnav" style="float:right;">
       <li><%= link_to('Releases', label_path(@label), :target => '_self', :class => 'current') %></li>
-      <li><%= link_to('Website', @label.website, :target => '_blank') %></li>
+      <li><%= link_to('Website', @label.website, :target => '_blank', :rel => 'shadowbox') %></li>
     </ul>
     <% end %>
     <h1><%=h @label.name %></h1>
