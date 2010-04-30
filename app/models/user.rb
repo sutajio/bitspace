@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   end
   
   def storage_used
-    tracks.sum(:size)
+    tracks.originals.sum(:size)
   end
   
   def storage_used_in_percent

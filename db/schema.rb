@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100429124858) do
+ActiveRecord::Schema.define(:version => 20100430093330) do
 
   create_table "artists", :force => true do |t|
     t.string   "mbid"
@@ -31,10 +31,12 @@ ActiveRecord::Schema.define(:version => 20100429124858) do
     t.string   "website"
     t.string   "tags"
     t.text     "biography"
+    t.integer  "original_id"
   end
 
   add_index "artists", ["mbid"], :name => "index_artists_on_mbid"
   add_index "artists", ["name"], :name => "index_artists_on_name"
+  add_index "artists", ["original_id"], :name => "index_artists_on_original_id"
   add_index "artists", ["releases_count"], :name => "index_artists_on_releases_count"
   add_index "artists", ["sort_name"], :name => "index_artists_on_sort_name"
   add_index "artists", ["user_id"], :name => "index_artists_on_user_id"
@@ -168,12 +170,14 @@ ActiveRecord::Schema.define(:version => 20100429124858) do
     t.integer  "tracks_count"
     t.boolean  "archived",             :default => false
     t.string   "tags"
+    t.integer  "original_id"
   end
 
   add_index "releases", ["archived"], :name => "index_releases_on_archived"
   add_index "releases", ["artist_id"], :name => "index_releases_on_artist_id"
   add_index "releases", ["label_id"], :name => "index_releases_on_label_id"
   add_index "releases", ["mbid"], :name => "index_releases_on_mbid"
+  add_index "releases", ["original_id"], :name => "index_releases_on_original_id"
   add_index "releases", ["title"], :name => "index_releases_on_title"
   add_index "releases", ["user_id"], :name => "index_releases_on_user_id"
   add_index "releases", ["year"], :name => "index_releases_on_year"
@@ -220,11 +224,13 @@ ActiveRecord::Schema.define(:version => 20100429124858) do
     t.integer  "set_nr"
     t.datetime "loved_at"
     t.integer  "scrobbles_count"
+    t.integer  "original_id"
   end
 
   add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
   add_index "tracks", ["fingerprint"], :name => "index_tracks_on_fingerprint"
   add_index "tracks", ["mbid"], :name => "index_tracks_on_mbid"
+  add_index "tracks", ["original_id"], :name => "index_tracks_on_original_id"
   add_index "tracks", ["release_id"], :name => "index_tracks_on_release_id"
   add_index "tracks", ["title"], :name => "index_tracks_on_title"
   add_index "tracks", ["track_nr"], :name => "index_tracks_on_track_nr"

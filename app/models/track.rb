@@ -1,6 +1,7 @@
 class Track < ActiveRecord::Base
   
   belongs_to :user
+  belongs_to :original, :class_name => 'Track'
   belongs_to :release, :counter_cache => true
   belongs_to :artist
   
@@ -16,6 +17,8 @@ class Track < ActiveRecord::Base
   
   default_scope :order => 'track_nr'
   named_scope :loved, :conditions => ['loved_at IS NOT NULL']
+  named_scope :originals, :conditions => ['original_id IS NULL']
+  named_scope :copies, :conditions => ['original_id IS NOT NULL']
   
   def url(use_cdn = true)
     if ENV['CDN_HOST'] && use_cdn

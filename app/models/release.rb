@@ -1,6 +1,7 @@
 class Release < ActiveRecord::Base
   
   belongs_to :user
+  belongs_to :original, :class_name => 'Release'
   belongs_to :artist, :counter_cache => true
   belongs_to :label, :counter_cache => true
   has_many :tracks, :dependent => :destroy
@@ -228,7 +229,9 @@ class Release < ActiveRecord::Base
   
   def copy(to_user)
     transaction do
-      album_artist = to_user.artists.find_or_create_by_name(self.artist.name)
+      album_artist = to_user.artists.find_or_create_by_name(
+        :name => self.artist.name,
+        :original => self.artist)
       unless album_artist.valid?
         logger.error(album_artist.errors.full_messages.to_sentence)
         raise album_artist.errors.full_messages.to_sentence
@@ -238,14 +241,17 @@ class Release < ActiveRecord::Base
         :artist => album_artist,
         :title => self.title,
         :year => self.year,
-        :artwork => self.artwork.file? ? open(self.artwork.url).read : nil)
+        :artwork => self.artwork.file? ? open(self.artwork.url).read : nil,
+        :original => self)
       unless release.valid?
         logger.error(release.errors.full_messages.to_sentence)
         raise release.errors.full_messages.to_sentence
       end
       self.tracks.each do |track|
         if track.artist
-          track_artist = to_user.artists.find_or_create_by_name(track.artist.name)
+          track_artist = to_user.artists.find_or_create_by_name(
+            :name => track.artist.name,
+            :original => track.artist)
         else
           track_artist = nil
         end
@@ -262,7 +268,8 @@ class Release < ActiveRecord::Base
           :samplerate => track.samplerate,
           :vbr => track.vbr,
           :content_type => track.content_type,
-          :size => track.size)
+          :size => track.size,
+          :original => track)
       end
       release
     end

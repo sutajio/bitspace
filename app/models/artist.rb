@@ -1,6 +1,7 @@
 class Artist < ActiveRecord::Base
   
   belongs_to :user
+  belongs_to :original, :class_name => 'Artist'
   has_many :releases
   has_many :tracks, :through => :releases
   
