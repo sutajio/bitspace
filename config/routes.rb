@@ -64,8 +64,8 @@ ActionController::Routing::Routes.draw do |map|
   map.root :controller => 'pages', :action => 'index'
   
   # Public profiles
-  map.profile ':profile_id', :controller => 'profiles/profiles', :action => 'show'
-  map.follow_profile ':profile_id/follow', :controller => 'profiles/profiles', :action => 'follow', :requirements => { :method => :put }
-  map.subscribe_profile ':profile_id/subscribe', :controller => 'profiles/profiles', :action => 'subscribe'
+  map.profile ':profile_id', :controller => 'profiles', :action => 'show'
+  map.follow_profile ':profile_id/follow', :controller => 'profiles', :action => 'follow', :requirements => { :method => :put }
+  map.subscribe_profile ':profile_id/subscribe', :controller => 'profiles', :action => 'subscribe'
 
 end
