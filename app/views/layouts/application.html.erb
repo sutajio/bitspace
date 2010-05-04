@@ -39,14 +39,18 @@
           <% else %>
           <li class="grid_4 usernav">
             <div class="profilenav">
-              <% if @user.subscribable? && !(current_user && current_user.subscribes_to?(@user)) %>
-              <%= link_to('<i></i> Subscribe', subscribe_profile_path(@user.login), :class => 'subscribe-button tooltipped', :title => "Subscribe to #{h(@user.login.anal_title_case)} for #{@user.subscription_price_with_currency} per #{@user.subscription_periodicity_as_period}") %>
-              <% end %>
-              
-              <% if current_user && current_user.follows?(@user) %>
-              <%= link_to('<i></i> Unfollow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'unfollow-button tooltipped', :title => "Unfollow #{h(@user.login.anal_title_case)}") %>
+              <% if @user.subscribable?%>
+                <% if !(current_user && current_user.subscribes_to?(@user)) %>
+                <%= link_to('<i></i> Subscribe', subscribe_profile_path(@user.login), :class => 'subscribe-button tooltipped', :title => "Subscribe to #{h(@user.login.anal_title_case)} for #{@user.subscription_price_with_currency} per #{@user.subscription_periodicity_as_period}") %>
+                <% else %>
+                <span class="subscribe-button"><i></i> You are a fan!</span>
+                <% end %>
               <% else %>
-              <%= link_to('<i></i> Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'follow-button tooltipped', :title => "Follow #{h(@user.login.anal_title_case)}") %>
+                <% if current_user && current_user.follows?(@user) %>
+                <%= link_to('<i></i> Unfollow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'unfollow-button tooltipped', :title => "Unfollow #{h(@user.login.anal_title_case)}") %>
+                <% else %>
+                <%= link_to('<i></i> Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'follow-button tooltipped', :title => "Follow #{h(@user.login.anal_title_case)}") %>
+                <% end %>
               <% end %>
               
               <% if @user.website.present? %>

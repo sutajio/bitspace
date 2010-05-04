@@ -165,8 +165,7 @@ body { background: #151515 url(/images/black/black-noise.jpg); color: #fff; }
 #menu .website-button { display: block; float: left; font-size: 11px; margin: 9px 12px 0 0; }
 #menu .website-button i { background: url(/images/button-sprites.png) no-repeat 0 -26px; width: 15px; height: 13px; margin: 0 5px 0 0; float: left; }
 #menu .website-button:hover i { background-position: -16px -26px; }
-#menu span.website-button { color: #666; cursor: default; }
-#menu span.website-button:hover i { background-position: 0 -26px; }
+#menu span { color: #666; cursor: default; }
 #footer { color: #666; }
 #upload-info { background: url(/images/bubble-upload.png) no-repeat; }
 #upload-progress { color: #000; font-weight: bold; }
