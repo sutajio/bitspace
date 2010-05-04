@@ -29,7 +29,7 @@ class Invitation < ActiveRecord::Base
   end
   
   after_create :send_invitation
-  handle_asynchronously :send_invitation
+  handle_asynchronously :send_invitation, :priority => 10
   
   def generate_token
     if self.token.blank?

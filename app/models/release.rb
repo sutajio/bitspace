@@ -146,7 +146,7 @@ class Release < ActiveRecord::Base
   end
   
   after_create :notify_followers unless Rails.env.test?
-  handle_asynchronously :notify_followers
+  handle_asynchronously :notify_followers, :run_at => lambda { 1.hour.from_now }
   
   def give_to_subscribers
     user.subscribers.each do |subscriber|
@@ -154,7 +154,8 @@ class Release < ActiveRecord::Base
     end
   end
   
-  handle_asynchronously :give_to_subscribers
+  after_create :give_to_subscribers unless Rails.env.test?
+  handle_asynchronously :give_to_subscribers, :run_at => lambda { 1.hour.from_now }
   
   def review
   end
@@ -301,7 +302,7 @@ class Release < ActiveRecord::Base
     download_url
   end
   
-  handle_asynchronously :generate_download
+  handle_asynchronously :generate_download, :priority => 2
   
   def download_key
     "downloads/#{Digest::MD5.hexdigest("#{id}#{updated_at.iso8601}")}.zip"
