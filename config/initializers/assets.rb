@@ -7,6 +7,8 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.input-hint.js',
     '/vendor/plugins/jquery.validation.js',
     '/vendor/plugins/jquery.expander.js',
+    '/vendor/plugins/jquery.autogrow.js',
+    '/vendor/plugins/human-date.js',
     '/vendor/shadowbox/shadowbox.js'
   ],
   :application => [

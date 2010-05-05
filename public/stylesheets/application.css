@@ -223,3 +223,15 @@ li.release { background: #2a2a2a; border-top: 1px solid #1d1d1d; }
 .biography { color: #666; text-shadow: #000 1px 1px 0px; }
 .biography a { color: #999; }
 .biography a:hover { color: #ccc; }
+.comments { list-style: none; margin: 20px 0 0 360px; padding: 0; background: url(/images/black/comments-top.png) no-repeat 22px 0; padding-top: 5px; width: 250px; }
+.comments li { background: #2f2f2f; color: #777; padding: 30px 15px 15px 15px; margin: 0 0 2px 0; position: relative; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.comments li img { position: absolute; top: 10px; left: 10px; }
+.comments li .user { font-size: 10px; color: #555; text-shadow: none; font-weight: bold; position: absolute; top: 15px; left: 15px; }
+.comments li .timestamp { font-size: 10px; color: #555; position: absolute; top: 15px; right: 15px; border: none; cursor: text; }
+.comments li p { margin: 0.5em 0 0 0; text-align: left; font-size: 12px; line-height: 1.2; }
+.new_comment { padding: 10px; background: #2f2f2f; width: 230px; margin: 0 0 2px 360px; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.new_comment textarea { background: #252525; color: #ccc; padding: 2px; width: 224px; height: 16px; max-height: 400px; line-height: 16px; -webkit-border-radius: 5px; -moz-border-radius: 5px; border: 1px solid #222; }
+.new_comment textarea.hint { color: #666; }
+.new_comment .submitrow { margin-top: 5px; padding: 0; display: none; }
+.new_comment .submitrow button { font-size: 10px; background: #555; color: #aaa; border: 1px solid #666; -webkit-border-radius: 5px; -moz-border-radius: 5px; padding: 2px 5px; }
+.comments .fallback { font-size: 10px; background: #2f2f2f; padding: 15px; margin: 0 0 2px 0; -webkit-border-radius: 5px; -moz-border-radius: 5px; }

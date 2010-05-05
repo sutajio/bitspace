@@ -1,0 +1,20 @@
+Hi friend!
+
+<% if @user == @comment.commented.user -%>
+We just wanted to let you know that <%= @comment.user.login %> has commented on your release <%= @comment.commented.title %> by <%= @comment.commented.artist.name %>:
+<% elsif @comment.user == @comment.commented.user -%>
+We just wanted to let you know that <%= @comment.user.login %> also commented on his release <%= @comment.commented.title %> by <%= @comment.commented.artist.name %>:
+<% else -%>
+We just wanted to let you know that <%= @comment.user.login %> also commented on <%= @comment.commented.user.login %>'s release <%= @comment.commented.title %> by <%= @comment.commented.artist.name %>:
+<% end -%>
+
+"<%= @comment.body %>"
+
+To see the comment thread, follow the link below:
+
+<%= player_url(:trailing_slash => true, :anchor => release_path(@comment.commented)).gsub('%2F','/') %>
+
+
+Regards,
+
+The Bitspace Team

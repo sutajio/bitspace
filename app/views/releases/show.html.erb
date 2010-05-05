@@ -29,7 +29,7 @@
         <%= link_to('Edit', edit_release_path(@release), :title => 'Edit meta data for this release.', :class => 'tooltipped', :target => '_self') %>
         <%= link_to('Upload artwork', artwork_release_path(@release), :title => 'Upload cover artwork for this release.', :class => 'tooltipped', :target => '_self') %>
         <%= link_to('Download', download_release_path(@release), :title => 'Download this release as a ZIP archive.', :class => 'tooltipped', :target => '_blank') %>
-        <%= link_to('Archive', archive_release_path(@release), :title => 'If archived, a release will be hidden and will only show up in search results.', :rel => 'archive', :class => @release.archived? ? 'archived tooltipped' : 'tooltipped') %>
+        <%#= link_to('Archive', archive_release_path(@release), :title => 'If archived, a release will be hidden and will only show up in search results.', :rel => 'archive', :class => @release.archived? ? 'archived tooltipped' : 'tooltipped') %>
         <%= link_to('Delete', release_path(@release), :title => 'The release will be permanently deleted from your library. This can not be undone!', :rel => 'delete', :class => 'tooltipped') %>
       </div>
       <% elsif @release.playable?(current_user) %>
@@ -43,6 +43,8 @@
         <% if @release.release_date.present? %><label>Released:</label> <%= link_to(@release.release_date, year_path(@release.release_date.year), :target => '_self') %><br /><% end %>
         <% if @release.label.present? %><label>Label:</label> <%= link_to(h(@release.label.name), label_path(@release.label), :target => '_self') %><% end %>
       </div>
+      
+      <%= render :partial => 'comments', :locals => { :with_form => current_user.present? && @user.public_profile? } %>
     <% end %>
   </div>
 </div>

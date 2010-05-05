@@ -5,6 +5,7 @@ class Release < ActiveRecord::Base
   belongs_to :artist, :counter_cache => true
   belongs_to :label, :counter_cache => true
   has_many :tracks, :dependent => :destroy
+  has_many :comments, :dependent => :destroy, :as => :commented
   
   validates_presence_of :user_id
   validates_presence_of :artist_id
@@ -156,13 +157,6 @@ class Release < ActiveRecord::Base
   
   after_create :give_to_subscribers unless Rails.env.test?
   handle_asynchronously :give_to_subscribers, :run_at => lambda { 1.hour.from_now }
-  
-  def review
-  end
-  
-  def buy_links
-    []
-  end
   
   def to_param
     "#{id}-#{artist.name.parameterize}-#{title.parameterize}"

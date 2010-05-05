@@ -1,0 +1,21 @@
+<% if @release.comments.present? || local_assigns[:with_form] != false %>
+  <ol class="comments">
+  <% @release.comments.find(:all, :limit => 15).reverse.each do |comment| %>
+    <li>
+      <%= link_to(h(comment.user.login), profile_path(comment.user.login), :class => 'user', :target => '_blank') %>
+      <abbr class="timestamp" title="<%= comment.created_at.iso8601 %>"></abbr>
+      <%= auto_link(simple_format(escape_once(comment.body)), :all, :target => '_blank', :class => 'external') {|link| truncate(link, :length => 35) } %>
+    </li>
+  <% end %>
+  </ol>
+  <% unless local_assigns[:with_form] == false %>
+    <% form_for(Comment.new(:commented => @release), :html => { 'data-username' => current_user.login }) do |f| %>
+      <%= f.hidden_field :commented_id %>
+      <%= f.hidden_field :commented_type %>
+      <%= f.text_area :body, :class => 'required autogrow' %>
+      <div class="submitrow">
+        <button type="submit">Comment</button>
+      </div>
+    <% end %>
+  <% end %>
+<% end %>

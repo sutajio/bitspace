@@ -17,6 +17,7 @@ class User < ActiveRecord::Base
   has_many :subscriptions
   has_many :subscribers, :through => :subscriptions
   has_many :memberships, :foreign_key => 'subscriber_id', :class_name => 'Subscription'
+  has_many :comments
   
   SUBSCRIPTION_PLANS = {
     :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0, :official => true },

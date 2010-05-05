@@ -11,6 +11,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :years
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
   map.resources :playlists, :collection => { :daycharts => :get, :weekcharts => :get, :recent => :get, :latest => :get, :toplist => :get }
+  map.resources :comments
   
   # Last.fm
   map.resources :lastfm, :collection => { :authorize => :get, :callback => :get }
