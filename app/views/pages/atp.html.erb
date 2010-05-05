@@ -1,0 +1,100 @@
+<script type="text/javascript" src="http://cloud.github.com/downloads/malsup/cycle/jquery.cycle.all.2.72.js"></script>
+
+<div class="container_16 clearfix">
+  <div class="grid_16">
+    <h1>Bitspace at <strong>All Tomorrow's Parties</strong> <span>Curated by Matt Groening</span></h1>
+    
+    <div id="slideshow" style="float:left; margin:0 20px 20px 0;">
+      <%= image_tag('/images/atp2010/groening-flyer.jpg', :size => '670x335') %>
+      <%= image_tag('/images/atp2010/screenshot-1.jpg', :size => '670x335', :style => 'display:none;') %>
+      <%= image_tag('/images/atp2010/screenshot-2.jpg', :size => '670x335', :style => 'display:none;') %>
+      <%= image_tag('/images/atp2010/screenshot-3.jpg', :size => '670x335', :style => 'display:none;') %>
+      <%= image_tag('/images/atp2010/screenshot-4.jpg', :size => '670x335', :style => 'display:none;') %>
+    </div>
+    
+    <h3><strong>Bitspace is a digital music service that lets you upload your own music to the cloud.</strong></h3>
+    <h3>We love music, and during the weekend between May 7-9th 2010 we are hanging out at the worlds best music festival
+      ATP in England.</h3>
+    <h3>
+      <span>Want to try Bitspace?</span><br />
+      <%= link_to('Click here to signup for a free account', signup_path) %><br />
+      <%= link_to('<strong>Click here for an exclusive offer →</strong>', 'https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5VL5583RRK4QJ', :class => 'tooltipped', :title => 'Get 100GB for only €14.99/month!') %></h3>
+  </div>
+  
+  <div class="grid_8">
+    <iframe src="http://www.facebook.com/widgets/like.php?href=http://bitspace.at/atp"
+            scrolling="no" frameborder="0"
+            style="border:none; width:450px; height:80px"></iframe>
+  </div>
+  <div class="grid_8">
+    <div id="slideshow-nav" class="slideshow-nav"></div>
+  </div>
+  
+  <hr />
+  
+  <div class="grid_4">
+    <h2>Store your<br />music collection</h2>
+    <p><strong>External harddrives are slow, clunky, loud, ugly,
+      inconvenient and tend to crash when you least expect it.</strong>
+      Bitspace is nothing like a harddrive. It's beautiful, safe and just
+      works. Easily and securely backup music that you have bought in
+      your favorite online digital music store. That way you don't have
+      to buy all your lost music again when your harddrive crashes.</p>
+  </div>
+  <div class="grid_4">
+    <h2>A better way to<br />organize music</h2>
+    <p><strong>Tired of trying to keep your digital music library organized?</strong>
+       Can't find the music you want when you need it? Or just want a good
+       overview when you don't know what you want to listen to? We help you
+       out by organizing the music for you. We make sure your meta data is
+       correct and kept up to date, and we generate views
+       that help you find music in a smart way.
+  </div>
+  <div class="grid_4">
+    <h2>Always available<br />in the cloud</h2>
+    <p><strong>Want to access your music from anywhere?</strong>
+       Bitspace works just as well from home as behind a firewall at work. Your music library will always be available, no matter if you find yourself on a backstreet in Shibuya or on a beach in LA.
+       There is no need for slow synchronizations between computers. You always have full
+       access to all your favorite music, without worries.</p>
+  </div>
+  <div class="grid_4">
+    <h2>HTML5 &ndash; for a better<br />and more useful web</h2>
+    <p><strong>We use the latest web technologies in order to bring you the best
+      possible product.</strong> With HTML5 we can utilize the native audio
+      playback support in modern web browsers like Safari and Google Chrome.
+      Bitspace can import and play pretty much all audio file formats
+      in common use, like MP3, MP4, OGG, WMA and Flac with the click of a button.</p> 
+  </div>
+  
+  <hr />
+  
+  <div class="grid_16 clearfix">
+    <p id="images"></p>
+  </div>
+  
+  <hr />
+</div>
+
+<script type="text/javascript">
+$(function() {
+  $('#slideshow').cycle({
+    fx:     'fade',
+    speed:  1000,
+    timeout: 15000,
+    pager:  '#slideshow-nav',
+    slideExpr: 'img'
+  });
+  
+  $.getJSON("http://api.flickr.com/services/feeds/geo/United+Kingdom/England/Minehead?tags=festival&format=json&jsoncallback=?", function(data){
+    $.each(data.items, function(i,item){
+      $("<img/>").attr("src", item.media.m)
+        .appendTo("#images")
+        .wrap("<a href='" + item.link + "' rel='nofollow'></a>");
+    });
+  });
+});
+</script>
+<style>
+#images { max-height: 450px; overflow: hidden; }
+#images a { width: 156px; height: 156px; overflow: hidden; float: left; }
+</style>

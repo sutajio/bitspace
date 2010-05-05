@@ -34,4 +34,8 @@ class PagesController < ApplicationController
     @page_title = 'Press kit for Bitspace'
   end
   
+  def atp
+    @page_title = 'Bitspace at All Tomorrow\'s Parties Curated by Matt Groening'
+  end
+  
 end

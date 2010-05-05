@@ -98,3 +98,8 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 .small { font-size: 9px; line-height: 12px; }
 
 .details dt { font-weight: bold; float: left; margin-right: 0.5em; }
+
+.slideshow-nav { margin: 0 auto; }
+.slideshow-nav a { text-indent: -9999px; background: url(/images/slideshow-nav.png) no-repeat; width: 4px; height: 4px; padding: 2px; overflow: hidden; margin: 0 2px; float: left; -webkit-transition: none; }
+.slideshow-nav a:hover { background-position: 0 -8px; }
+.slideshow-nav a.activeSlide { background-position: 0 -16px; }
