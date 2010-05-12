@@ -4,7 +4,7 @@ We just wanted to let you know that <%= @release.user.login %> has just uploaded
 
 Check it out at:
 
-<%= release_profile_url(@release.user.login, @release) %>
+<%= profile_url(@release.user.login, :trailing_slash => true, :anchor => release_path(@release)).gsub('%2F','/') %>
 
 
 Regards,
