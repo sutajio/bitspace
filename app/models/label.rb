@@ -1,6 +1,7 @@
 class Label < ActiveRecord::Base
   
   belongs_to :user
+  belongs_to :original, :class_name => 'Label'
   has_many :releases
   has_many :artists, :through => :releases
   has_many :tracks, :through => :releases
@@ -65,6 +66,21 @@ class Label < ActiveRecord::Base
         self.save!
       end
     end
+  end
+  
+  def copy(to_user)
+    label = to_user.labels.find_or_create_by_name(
+      :user => to_user,
+      :name => name,
+      :artwork => artwork.file? ? open(artwork.url) : nil,
+      :mbid => mbid,
+      :website => website,
+      :original => self)
+    unless label.valid?
+      logger.error(label.errors.full_messages.to_sentence)
+      raise label.errors.full_messages.to_sentence
+    end
+    label
   end
   
   protected

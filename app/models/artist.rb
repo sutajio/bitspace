@@ -160,6 +160,26 @@ class Artist < ActiveRecord::Base
     end
   end
   
+  def copy(to_user)
+    artist = to_user.artists.find_or_create_by_name(
+      :name => name,
+      :artwork => artwork.file? ? open(artwork.url) : nil,
+      :mbid => mbid,
+      :tags => tags,
+      :sort_name => sort_name,
+      :artist_type => artist_type,
+      :begin_date => begin_date,
+      :end_date => end_date,
+      :website => website,
+      :tags => tags,
+      :original => self)
+    unless artist.valid?
+      logger.error(artist.errors.full_messages.to_sentence)
+      raise artist.errors.full_messages.to_sentence
+    end
+    artist
+  end
+  
   protected
   
     def with_lastfm(&block)

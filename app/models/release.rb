@@ -222,55 +222,39 @@ class Release < ActiveRecord::Base
     end
   end
   
-  def copy(to_user)
+  def copy(to_artist, to_label = nil)
+    release = to_artist.releases.find_or_create_by_title(
+      :user => to_artist.user,
+      :artist => to_artist,
+      :label => to_label,
+      :title => title,
+      :year => year,
+      :artwork => artwork.file? ? open(artwork.url) : nil,
+      :mbid => mbid,
+      :release_date => release_date,
+      :tags => tags,
+      :archived => false,
+      :original => self)
+    unless release.valid?
+      logger.error(release.errors.full_messages.to_sentence)
+      raise release.errors.full_messages.to_sentence
+    end
+    release
+  end
+  
+  def sideload(to_user)
     transaction do
-      album_artist = to_user.artists.find_or_create_by_name(
-        :name => self.artist.name,
-        :original => self.artist)
-      unless album_artist.valid?
-        logger.error(album_artist.errors.full_messages.to_sentence)
-        raise album_artist.errors.full_messages.to_sentence
-      end
-      release = to_user.releases.find_or_create_by_title(
-        :user => to_user,
-        :artist => album_artist,
-        :title => self.title,
-        :year => self.year,
-        :artwork => self.artwork.file? ? open(self.artwork.url).read : nil,
-        :original => self)
-      unless release.valid?
-        logger.error(release.errors.full_messages.to_sentence)
-        raise release.errors.full_messages.to_sentence
-      end
-      self.tracks.each do |track|
-        if track.artist
-          track_artist = to_user.artists.find_or_create_by_name(
-            :name => track.artist.name,
-            :original => track.artist)
-        else
-          track_artist = nil
-        end
-        release.tracks.find_or_create_by_fingerprint(
-          :user => to_user,
-          :artist => track_artist,
-          :release => release,
-          :fingerprint => track.fingerprint,
-          :title => track.title,
-          :track_nr => track.track_nr,
-          :set_nr => track.set_nr,
-          :length => track.length,
-          :bitrate => track.bitrate,
-          :samplerate => track.samplerate,
-          :vbr => track.vbr,
-          :content_type => track.content_type,
-          :size => track.size,
-          :original => track)
+      album_artist = artist.copy(to_user)
+      album_label = label.copy(to_user) if label.present?
+      release = copy(album_artist, album_label)
+      tracks.each do |track|
+        track.copy(release)
       end
       release
     end
   end
   
-  handle_asynchronously :copy
+  handle_asynchronously :sideload, :priority => 1
   
   def generate_download
     tracks_dir = File.join(Rails.root, 'tmp', "release-#{id}")

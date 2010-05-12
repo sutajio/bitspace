@@ -127,6 +127,34 @@ class Track < ActiveRecord::Base
     save!
   end
   
+  def copy(to_release)
+    if artist
+      track_artist = artist.copy(to_release.user)
+    else
+      track_artist = nil
+    end
+    track = to_release.tracks.find_or_create_by_fingerprint(
+      :user => to_release.user,
+      :artist => track_artist,
+      :release => to_release,
+      :fingerprint => fingerprint,
+      :title => title,
+      :track_nr => track_nr,
+      :set_nr => set_nr,
+      :length => length,
+      :bitrate => bitrate,
+      :samplerate => samplerate,
+      :vbr => vbr,
+      :content_type => content_type,
+      :size => size,
+      :original => self)
+    unless track.valid?
+      logger.error(track.errors.full_messages.to_sentence)
+      raise track.errors.full_messages.to_sentence
+    end
+    track
+  end
+  
   def download(to_directory)
     track_filename = File.join(to_directory, download_filename)
     FileUtils.mkdir_p(File.dirname(track_filename))

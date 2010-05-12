@@ -84,7 +84,7 @@ class ReleasesController < ApplicationController
   def sideload
     @release = Release.find(params[:id])
     head :forbidden and return unless @release.playable?(current_user)
-    @release.copy(current_user)
+    @release.sideload(current_user)
     head :ok
   end
   

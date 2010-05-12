@@ -149,10 +149,12 @@ ActiveRecord::Schema.define(:version => 20100504224118) do
     t.date     "end_date"
     t.string   "website"
     t.string   "tags"
+    t.integer  "original_id"
   end
 
   add_index "labels", ["mbid"], :name => "index_labels_on_mbid"
   add_index "labels", ["name"], :name => "index_labels_on_name"
+  add_index "labels", ["original_id"], :name => "index_labels_on_original_id"
   add_index "labels", ["sort_name"], :name => "index_labels_on_sort_name"
   add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
 
