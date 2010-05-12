@@ -10,5 +10,6 @@
       If nothing new shows up in your library within an hour, contact us at
       <%= mail_to('support@bitspace.se') %> and we will help you.
     </p>
+    <p><%= link_to("Click here to return to #{@user.login.anal_title_case} →", profile_path(@user.login)) %></p>
   </div>
 </div>
