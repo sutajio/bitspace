@@ -12,7 +12,7 @@ We just wanted to let you know that <%= @comment.user.login %> also commented on
 
 To see the comment thread, follow the link below:
 
-<%= player_url(:trailing_slash => true, :anchor => release_path(@comment.commented)).gsub('%2F','/') %>
+<%= profile_url(@comment.commented.user.login, :trailing_slash => true, :anchor => release_path(@comment.commented)).gsub('%2F','/') %>
 
 
 Regards,
