@@ -141,7 +141,7 @@ li.release ol.tracks li .track-title { width: 630px; }
 
 /* COLORS */
 
-body { background: #151515 url(/images/black/black-noise.jpg); color: #fff; }
+body { background: #151515 url(/images/black/black-noise.jpg); color: #fff; overflow-x: hidden; }
 #root { background: url(/images/black/root-shade.jpg) repeat-x; }
 #nav { background: url(/images/black/nav-shade.png) repeat-x; }
 #nav-fade { height: 39px; background: url(/images/black/nav-fade.png) no-repeat 50% 0; }
