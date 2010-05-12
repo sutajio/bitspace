@@ -518,9 +518,11 @@ $(function(){
   $('a[rel=delete]').livequery('click', function(e){
     e.preventDefault();
     if(confirm('Are you sure?')) {
-      var self = $(this).closest('li').fadeTo('fast', 0.5);;
+      var self = $(this).closest('.release').fadeTo('fast', 0.5);
       $.post(this.href, { '_method': 'delete' }, function(){
-        self.closest('li').hide('slow');
+        self.closest('.release').hide('slow', function(){
+          $.address.value('/');
+        });
       });
     }
   });

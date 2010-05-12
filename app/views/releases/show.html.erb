@@ -1,29 +1,29 @@
-<div class="container_16 clearfix">
-  <div class="grid_16">
-    <h1>
-      <span class="artist-name"><%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %></span><br />
-      <%= link_to(h(@release.title), @release, :target => '_self') %>
-      <% if @release.year.present? %>
-      <span class="year grey"><%= link_to(@release.year, year_path(@release.year), :target => '_self') %></span>
-      <% end %>
-    </h1>
+<% div_for(@release, :class => 'clearfix') do %>
+  <div class="container_16 clearfix">
+    <div class="grid_16">
+      <h1>
+        <span class="artist-name"><%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %></span><br />
+        <%= link_to(h(@release.title), @release, :target => '_self') %>
+        <% if @release.year.present? %>
+        <span class="year grey"><%= link_to(@release.year, year_path(@release.year), :target => '_self') %></span>
+        <% end %>
+      </h1>
+    </div>
   </div>
-</div>
-<div class="container_16 clearfix">
-  <div class="grid_16">
-    <% div_for(@release, :class => 'clearfix') do %>
+  <div class="container_16 clearfix">
+    <div class="grid_16">
       <% if @release.artwork.file? %>
       <%= link_to(image_tag(@release.artwork.url(:large, false), :size => '320x320', :alt => 'Cover art'), @release.artwork.url(:large, false), :class => 'cover-art', :rel => 'shadowbox') %>
       <% else %>
       <%= link_to(image_tag(@release.artwork.url(:large, false), :size => '320x320', :alt => 'Cover art'), artwork_release_path(@release), :class => 'cover-art', :title => 'Click here to upload cover art for this release', :target => '_self') %>
       <% end %>
-      
+    
       <% @release.tracks.sort_by{|t| t.set_nr.to_i }.group_by(&:set_nr).each do |set_nr, tracks| %>
       <ol class="tracks">
         <%= render :partial => 'tracks/track', :collection => tracks.sort_by {|t| t.track_nr.to_i }, :locals => { :playable => @release.playable?(current_user) } %>
       </ol>
       <% end %>
-      
+    
       <% if @user == current_user %>
       <div class="actions">
         <%= link_to('Edit', edit_release_path(@release), :title => 'Edit meta data for this release.', :class => 'tooltipped', :target => '_self') %>
@@ -38,13 +38,13 @@
         <%= link_to('Download', download_release_path(@release), :title => 'Download this release as a ZIP archive.', :class => 'tooltipped', :target => '_blank') %>
       </div>
       <% end %>
-      
+    
       <div class="meta small grey">
         <% if @release.release_date.present? %><label>Released:</label> <%= link_to(@release.release_date, year_path(@release.release_date.year), :target => '_self') %><br /><% end %>
         <% if @release.label.present? %><label>Label:</label> <%= link_to(h(@release.label.name), label_path(@release.label), :target => '_self') %><% end %>
       </div>
-      
+    
       <%= render :partial => 'comments', :locals => { :with_form => current_user.present? && @user.public_profile? } %>
-    <% end %>
+    </div>
   </div>
-</div>
+<% end %>
