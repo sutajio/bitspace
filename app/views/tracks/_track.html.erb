@@ -17,7 +17,7 @@
                 'data-scrobble-url' => scrobble_track_path(track),
                 'data-length' => track.length) %>
     <% else %>
-    <%= link_to(h(truncate(track.title, :length => 70)), "/sorry.m4a##{dom_id(track)}", :rel => 'sorry') %>
+    <%= link_to(h(truncate(track.title, :length => 70)), "/sorry.mp3##{dom_id(track)}", :rel => 'sorry') %>
     <% end %>
     <% if track.artist %>
     &ndash; <span class="track-artist"><%=h track.artist.name %></span>
