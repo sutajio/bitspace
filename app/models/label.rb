@@ -31,6 +31,10 @@ class Label < ActiveRecord::Base
       'expires' => 10.years.from_now.utc.httpdate
     }
   
+  def to_param
+    "#{id}-#{name.parameterize}"
+  end
+  
   def update_meta_data
     identify_mbid unless mbid
     fetch_artwork unless artwork.file?
