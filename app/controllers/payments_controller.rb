@@ -59,12 +59,14 @@ class PaymentsController < ApplicationController
       when 'subscr_signup':
         @label = User.find(params[:item_number])
         @user = User.find(params[:custom])
-        if params[:mc_amount3] == @label.subscription_amount &&
+        if params[:mc_amount3] == @label.subscription_price &&
            params[:mc_currency] == @label.subscription_currency
           Subscription.create!(
             :user => @label,
             :subscriber => @user,
             :subscription_id => params[:subscr_id])
+        else
+          raise "Invalid amount and currency."
         end
       when 'subscr_eot':
         @subscription = Subscription.find_by_subscription_id(params[:subscr_id])
