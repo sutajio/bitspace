@@ -29,5 +29,14 @@ class ProfilesController < ApplicationController
     @new_user = User.new unless current_user
     render :action => 'subscribe', :layout => 'site'
   end
+  
+  def thankyou
+    render :action => 'thankyou', :layout => 'site'
+  end
+  
+  def signup
+    @new_user = User.new
+    render :action => 'signup', :layout => 'site'
+  end
 
 end

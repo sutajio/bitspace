@@ -223,13 +223,14 @@ class Release < ActiveRecord::Base
   end
   
   def copy(to_artist, to_label = nil)
+    artwork_file = artwork.file? ? open(artwork.url) : nil rescue nil
     release = to_artist.releases.find_or_create_by_title(
       :user => to_artist.user,
       :artist => to_artist,
       :label => to_label,
       :title => title,
       :year => year,
-      :artwork => artwork.file? ? open(artwork.url) : nil,
+      :artwork => artwork_file,
       :mbid => mbid,
       :release_date => release_date,
       :tags => tags,

@@ -1,0 +1,40 @@
+<div class="container_16 clearfix">
+  <div class="grid_8 prefix_4 suffix_4">
+    <div class="box" style="margin-top:50px; margin-bottom:30px;">
+      
+      <% form_for @new_user, :html => { :id => 'signup-form', :class => 'aligncenter' } do |f| %>
+        <%= f.error_messages %>
+        <div class="field">
+          <%= f.label :email %>
+          <%= f.text_field :email, :class => 'required email' %>
+          <kbd>Your email address</kbd>
+        </div>
+        <div class="field">
+          <%= f.label :login %>
+          <%= f.text_field :login, :class => 'required' %>
+          <kbd>Username, can be anything</kbd>
+        </div>
+        <div class="field">
+          <%= f.label :password %>
+          <%= f.password_field :password, :class => 'required' %>
+          <kbd>A secure password</kbd>
+        </div>
+        <div class="field">
+          <%= f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, :class => 'required' %>
+          <kbd>A secure password</kbd>
+        </div>
+        <div class="submit-row">
+          <p>
+            <button type="submit">Create my account</button>
+          </p>
+          <p class="small grey">
+            By clicking on 'Create my account' above,<br/>
+            you confirm that you accept the <%= link_to('Terms of Service', '/terms') %>.
+          </p>
+        </div>
+      <% end %>
+      
+    </div>
+  </div>
+</div>

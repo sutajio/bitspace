@@ -178,4 +178,19 @@ class User < ActiveRecord::Base
     end
   end
   
+  def handle_prepaid_label_subscriptions
+    prepaid_db = YAML.load(
+      File.open(File.join(Rails.root, 'db/prepaid.yml')).read)
+    prepaid_db.keys.each do |key|
+      if prepaid_db[key].include?(self.email)
+        label = User.find_by_login(key)
+        Subscription.create!(
+          :user => label,
+          :subscriber => self)
+      end
+    end
+  end
+  
+  after_create :handle_prepaid_label_subscriptions
+  
 end

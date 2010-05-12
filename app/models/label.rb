@@ -69,10 +69,11 @@ class Label < ActiveRecord::Base
   end
   
   def copy(to_user)
+    artwork_file = artwork.file? ? open(artwork.url) : nil rescue nil
     label = to_user.labels.find_or_create_by_name(
       :user => to_user,
       :name => name,
-      :artwork => artwork.file? ? open(artwork.url) : nil,
+      :artwork => artwork_file,
       :mbid => mbid,
       :website => website,
       :original => self)

@@ -161,9 +161,10 @@ class Artist < ActiveRecord::Base
   end
   
   def copy(to_user)
+    artwork_file = artwork.file? ? open(artwork.url) : nil rescue nil
     artist = to_user.artists.find_or_create_by_name(
       :name => name,
-      :artwork => artwork.file? ? open(artwork.url) : nil,
+      :artwork => artwork_file,
       :mbid => mbid,
       :tags => tags,
       :sort_name => sort_name,

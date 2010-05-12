@@ -23,7 +23,7 @@
           <input type="hidden" name="no_note" value="1" />
           <input type="hidden" name="notify_url" value="<%= paypal_ipn_label_payments_url %>" />
           <input type="hidden" name="return" value="<%= profile_url(@user.login) %>" />
-          <input type="hidden" name="cancel_return" value="<%= profile_url(@user.login) %>">
+          <input type="hidden" name="cancel_return" value="<%= thankyou_profile_url(@user.login) %>">
           <input type="hidden" name="rm" value="1" />
           <input type="hidden" name="cbt" value="Return to <%= @user.login.anal_title_case %>">
           <input type="hidden" name="lc" value="US" />

@@ -7,8 +7,10 @@ class Subscription < ActiveRecord::Base
   validates_uniqueness_of :subscriber_id, :scope => [:user_id]
   
   def give_all_releases_to_subscriber
-    user.releases.all(:order => 'created_at').each do |release|
-      release.copy(subscriber)
+    transaction do
+      user.releases.all(:order => 'created_at').each do |release|
+        release.sideload_without_send_later(subscriber)
+      end
     end
   end
   
