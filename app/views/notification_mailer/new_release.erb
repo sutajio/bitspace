@@ -6,6 +6,11 @@ Check it out at:
 
 <%= profile_url(@release.user.login, :trailing_slash => true, :anchor => release_path(@release)).gsub('%2F','/') %>
 
+<% if @user.subscribes_to?(@release.user) -%>
+The release has also been added to your own library:
+
+<%= player_url(:trailing_slash => true) %>
+<% end -%>
 
 Regards,
 

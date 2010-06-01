@@ -152,6 +152,7 @@ class Release < ActiveRecord::Base
   def give_to_subscribers
     user.subscribers.each do |subscriber|
       self.sideload(subscriber)
+      subscriber.notify_of_new_release(self)
     end
   end
   
