@@ -151,7 +151,7 @@ class Release < ActiveRecord::Base
   
   def give_to_subscribers
     user.subscribers.each do |subscriber|
-      self.copy(subscriber)
+      self.sideload(subscriber)
     end
   end
   
