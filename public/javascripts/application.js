@@ -704,4 +704,8 @@ $(function(){
     });
   }, 5000);
   
+  $('.crayons-help').livequery('click', function(e){
+    $(this).fadeOut('slow');
+  });
+  
 });

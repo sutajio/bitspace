@@ -134,6 +134,8 @@ li.release ol.tracks li .track-title { width: 630px; }
 #upload-spinner { text-align: center; }
 #upload-progress { text-align: center; }
 
+#crayons-help-upload { position: absolute; bottom: 25px; right: 0px; width: 220px; height: 190px; z-index: 80; text-indent: -9999px; }
+
 #artist-artwork-upload-button { margin-bottom: 10px; text-align: center; }
 #release-artwork-upload-button { margin-bottom: 10px; text-align: center; }
 
@@ -169,6 +171,7 @@ body { background: #151515 url(/images/black/black-noise.jpg); color: #fff; over
 #footer { color: #666; }
 #upload-info { background: url(/images/bubble-upload.png) no-repeat; }
 #upload-progress { color: #000; font-weight: bold; }
+#crayons-help-upload { background: url(/images/crayons-help-upload.png) no-repeat; }
 hr { border-color: #222; }
 .grey { color: #555; }
 .grey a { color: #555; }

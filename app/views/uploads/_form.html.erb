@@ -8,6 +8,11 @@
   <div id="upload-spinner"><%= image_tag('/images/upload-spinner.gif', :size => '32x32', :alt => 'Uploading...') %></div>
   <div id="upload-progress">0%</div>
 </div>
+<% if @user == current_user && @user.tracks.originals.empty? %>
+<div id="crayons-help-upload" class="crayons-help">
+  Click here to upload your music
+</div>
+<% end %>
 <script type="text/javascript">
 $(function(){
   $('#upload-button').each(function(){
@@ -31,6 +36,7 @@ $(function(){
                         :flash => true) %>
     })
     .bind('fileQueued', function(e, file){
+      $('#crayons-help-upload').hide('fast');
       $('#upload-info').fadeIn('slow').removeClass('finished');
       $(this).swfupload('startUpload');
     })
