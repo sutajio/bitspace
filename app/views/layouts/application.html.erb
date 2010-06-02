@@ -41,6 +41,7 @@
             <div class="profilenav">
               <% if @user.subscribable?%>
                 <% if !(current_user && current_user.subscribes_to?(@user)) %>
+                <div id="crayons-help-subscribe" class="crayons-help"></div>
                 <%= link_to('<i></i> Subscribe', subscribe_profile_path(@user.login), :class => 'subscribe-button tooltipped', :title => "Subscribe to #{h(@user.login.anal_title_case)} for #{@user.subscription_price_with_currency} per #{@user.subscription_periodicity_as_period}") %>
                 <% else %>
                 <span class="subscribe-button"><i></i> You are a fan!</span>
