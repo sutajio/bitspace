@@ -21,6 +21,6 @@ class Comment < ActiveRecord::Base
   end
   
   after_create :send_comment_notification unless Rails.env.test?
-  #handle_asynchronously :send_comment_notification
+  handle_asynchronously :send_comment_notification
   
 end
