@@ -99,8 +99,10 @@ class ApplicationController < ActionController::Base
     
     def find_user
       if params[:profile_id]
-        @user = User.find_by_login_and_public_profile(params[:profile_id], true)
+        @user = User.find_by_login(params[:profile_id])
         raise ActiveRecord::RecordNotFound unless @user
+        raise ActiveRecord::RecordNotFound if @user != current_user &&
+                                              @user.public_profile != true
       else
         @user = current_user
       end
