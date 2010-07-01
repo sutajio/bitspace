@@ -24,9 +24,9 @@ module TracksHelper
         :track_nr => track.track_nr,
         :set_nr => track.set_nr,
         :length => track.length,
-        :track_url => release_url(track.release, :anchor => dom_id(track)),
-        :release_url => release_url(track.release),
-        :artist_url => artist_url(track.release.artist),
+        :track_url => release_url(track.release.id, :anchor => dom_id(track)),
+        :release_url => release_url(track.release.id),
+        :artist_url => artist_url(track.release.artist.id),
         :now_playing_url => now_playing_track_url(track),
         :scrobble_url => scrobble_track_url(track),
         :loved_at => track.loved_at

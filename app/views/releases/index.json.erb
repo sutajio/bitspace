@@ -5,11 +5,11 @@
     :year => release.year,
     :label => release.label ? release.label.name : nil,
     :release_date => release.release_date,
-    :url => release_url(release),
+    :url => release_url(release.id),
     :small_artwork_url => release.artwork.file? ? release.artwork.url(:small, false) : nil,
     :medium_artwork_url => release.artwork.file? ? release.artwork.url(:medium, false) : nil,
     :large_artwork_url => release.artwork.file? ? release.artwork.url(:large, false) : nil,
-    :playlist_url => playlist_release_url(release),
+    :playlist_url => playlist_release_url(release.id),
     :created_at => release.created_at,
     :updated_at => release.updated_at
   }

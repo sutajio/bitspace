@@ -1,7 +1,7 @@
 <%= {
   :title => @release.title,
   :artist => @release.artist.name,
-  :artist_url => artist_url(@release.artist),
+  :artist_url => artist_url(@release.artist.id),
   :year => @release.year,
   :year_url => @release.year ? year_url(@release.year) : nil,
   :small_artwork_url => @release.artwork.file? ? @release.artwork.url(:small, false) : nil,
@@ -10,6 +10,6 @@
   :tracks => tracks_to_hash(@release.tracks),
   :release_date => @release.release_date,
   :label => @release.label.try(:name),
-  :label_url => @release.label ? label_url(@release.label) : nil,
+  :label_url => @release.label ? label_url(@release.label.id) : nil,
   :tags => @release.tags
 }.to_json %>
