@@ -104,7 +104,11 @@ class ApplicationController < ActionController::Base
         raise ActiveRecord::RecordNotFound if @user != current_user &&
                                               @user.public_profile != true
       else
-        @user = current_user
+        if current_user
+          @user = current_user
+        else
+          require_user
+        end
       end
     end
 
