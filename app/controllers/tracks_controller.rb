@@ -2,7 +2,13 @@ class TracksController < ApplicationController
   
   def love
     @track = current_user.tracks.find(params[:id])
-    @track.toggle_love!
+    if params[:toggle] == 'on'
+      @track.love!
+    elsif params[:toggle] == 'off'
+      @track.unlove!
+    else
+      @track.toggle_love!
+    end
     head :ok
   end
   
