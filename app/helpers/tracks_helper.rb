@@ -29,6 +29,7 @@ module TracksHelper
         :artist_url => artist_url(track.release.artist.id),
         :now_playing_url => now_playing_track_url(track),
         :scrobble_url => scrobble_track_url(track),
+        :love_url => love_track_url(track),
         :loved_at => track.loved_at
       }
     }
