@@ -1,5 +1,7 @@
 class TracksController < ApplicationController
   
+  skip_before_filter :verify_authenticity_token
+  
   def love
     @track = current_user.tracks.find(params[:id])
     if params[:toggle] == 'on'
