@@ -21,6 +21,7 @@ module TracksHelper
         :url => track.url,
         :release => track.release.title,
         :artist => track.artist.try(:name),
+        :album_artist => track.release.artist.name,
         :track_nr => track.track_nr,
         :set_nr => track.set_nr,
         :length => track.length,
