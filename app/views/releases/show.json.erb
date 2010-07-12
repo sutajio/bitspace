@@ -7,7 +7,7 @@
   :small_artwork_url => @release.artwork.file? ? @release.artwork.url(:small, false) : nil,
   :medium_artwork_url => @release.artwork.file? ? @release.artwork.url(:medium, false) : nil,
   :large_artwork_url => @release.artwork.file? ? @release.artwork.url(:large, false) : nil,
-  :tracks => tracks_to_hash(@release.tracks),
+  :tracks => tracks_to_hash(@release.tracks.paginate(:page => params[:page]), :simple => true),
   :release_date => @release.release_date,
   :label => @release.label.try(:name),
   :label_url => @release.label ? label_url(@release.label.id) : nil,

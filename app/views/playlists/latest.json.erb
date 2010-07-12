@@ -1,1 +1,1 @@
-<%= tracks_to_json(@tracks) %>
+<%= { :tracks => tracks_to_hash(@tracks) }.to_json %>

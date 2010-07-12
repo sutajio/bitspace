@@ -20,6 +20,9 @@ class Track < ActiveRecord::Base
   named_scope :originals, :conditions => ['original_id IS NULL']
   named_scope :copies, :conditions => ['original_id IS NOT NULL']
   
+  cattr_reader :per_page
+  @@per_page = 100
+  
   def url(use_cdn = true)
     if ENV['CDN_HOST'] && use_cdn
       "http://#{ENV['CDN_HOST']}/#{URI.escape(key)}"
