@@ -1,4 +1,4 @@
-require 'hmac/sha1'
+require 'hmac-sha1'
 
 module UploadsHelper
   
