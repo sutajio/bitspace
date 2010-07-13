@@ -11,6 +11,7 @@
     :large_artwork_url => release.artwork.file? ? release.artwork.url(:large, false) : nil,
     :playlist_url => playlist_release_url(release.id),
     :created_at => release.created_at,
-    :updated_at => release.updated_at
+    :updated_at => release.updated_at,
+    :tracks => tracks_to_hash(release.tracks, :simple => true)
   }
 }.to_json %>
