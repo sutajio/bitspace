@@ -7,18 +7,24 @@ class ReleasesController < ApplicationController
   layout 'site', :only => [:download]
   
   def index
-    @releases = @user.releases.has_tracks.search_for(params[:q]).paginate(
-        :page => params[:page],
-        :per_page => 16,
-        :include => [:artist],
-        :order => 'created_at DESC',
-        :conditions => { :archived => params[:q].present? ? [true,false] : false })
-    if request.xhr? && @releases.empty?
-      render :nothing => true and return
-    end
     respond_to do |format|
-      format.html
-      format.json
+      format.html do
+        @releases = @user.releases.without_archived.has_tracks.paginate(
+            :page => params[:page],
+            :per_page => 16,
+            :include => [:artist],
+            :order => 'created_at DESC')
+        if request.xhr? && @releases.empty?
+          render :nothing => true and return
+        end
+      end
+      format.json do
+        @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
+            :page => params[:page],
+            :per_page => 16,
+            :include => [:artist, :tracks],
+            :order => 'created_at DESC')
+      end
     end
   end
   
@@ -51,6 +57,7 @@ class ReleasesController < ApplicationController
       end
       @release.tracks.each(&:touch)
     end
+    @release.touch
     if request.xhr?
       render :text => release_path(@release)
     else

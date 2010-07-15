@@ -11,6 +11,7 @@ class TracksController < ApplicationController
     else
       @track.toggle_love!
     end
+    @track.release.touch
     head :ok
   end
   
@@ -34,6 +35,7 @@ class TracksController < ApplicationController
   
   def destroy
     @track = current_user.tracks.find(params[:id])
+    @track.release.touch
     @track.destroy
     head :ok
   end
