@@ -148,6 +148,7 @@ class Upload < ActiveRecord::Base
           raise track.errors.full_messages.to_sentence
         end
         
+        release.unarchive!
         track_artist.try(:touch)
         album_artist.try(:touch)
         release.try(:touch)

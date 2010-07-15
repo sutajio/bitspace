@@ -105,7 +105,8 @@ class ReleasesController < ApplicationController
   
   def destroy
     @release = current_user.releases.find(params[:id])
-    @release.destroy
+    @release.tracks.each(&:destroy)
+    @release.archive!
     head :ok
   end
   
