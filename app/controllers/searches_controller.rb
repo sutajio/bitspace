@@ -14,11 +14,11 @@ class SearchesController < ApplicationController
   end
   
   def show
-    @releases = @user.releases.search_for(params[:q]).paginate(:page => params[:page], :include => [:artist, :tracks])
+    @releases = @user.releases.without_archived.search_for(params[:q]).paginate(:page => params[:page], :include => [:artist, :tracks])
   end
   
   def suggestions
-    @releases = @user.releases.search_for(params[:q]).all(:limit => 5, :include => [:artist, :tracks])
+    @releases = @user.releases.without_archived.search_for(params[:q]).all(:limit => 5, :include => [:artist, :tracks])
   end
   
 end
