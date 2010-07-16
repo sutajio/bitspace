@@ -23,7 +23,7 @@ class ReleasesController < ApplicationController
             :page => params[:page],
             :per_page => 16,
             :include => [:artist, :tracks],
-            :order => 'created_at DESC')
+            :order => 'created_at')
       end
     end
   end
