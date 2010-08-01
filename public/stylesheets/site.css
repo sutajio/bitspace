@@ -3,17 +3,19 @@
 
 body { background: #111; font: 11px/18px "Helvetica Neue", "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif; color: #333; text-shadow: #fff 1px 1px 1px; }
 #root { background: #fff; }
-#menu { border-bottom: 1px solid #eee; }
-#menu a { color: #666; font-size: 12px; }
+#menu { margin: 0 0 20px 0; border-bottom: 1px solid #eee; }
+#menu li { text-align: center; padding-top: 19px; padding-bottom: 19px; }
+#menu .first { text-align: left; }
+#menu .last { text-align: right; }
+#menu a { color: #666; font-size: 12px; margin-right: 15px; }
 #menu a:hover { color: #999; }
-#menu .first a.current { background: none; }
-#menu .last { padding-top: 19px; padding-bottom: 19px; }
-#menu a.current { background: url(/images/black/dot.png) no-repeat 50% bottom; color: #ccc; }
-#company-footer { background: #111; color: #ccc; text-shadow: #000 1px 1px 1px !important; }
+#menu .first a { font-weight: bold; }
+#menu .last a { margin-right: 0; }
+#company-footer { padding: 20px 0; font-size: 11px; background: #111; color: #ccc; text-shadow: #000 1px 1px 1px !important; }
 #company-footer a { color: #fff; text-shadow: #000 1px 1px 1px !important; }
 #company-footer h2, #footer h2 a { text-shadow: #000 1px 1px 1px !important; }
 #company-footer h3, #footer h3 a { text-shadow: #000 1px 1px 1px !important; }
-#share-footer { background: #eee; color: #666; }
+#share-footer { padding: 20px 0; font-size: 11px; background: #eee; color: #666; }
 hr { border-color: #eee; }
 .grey { color: #aaa; }
 .small {}

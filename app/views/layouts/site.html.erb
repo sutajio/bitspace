@@ -29,13 +29,18 @@
     <div id="root">
       <div class="container_12 clearfix">
         <ul id="menu" class="clearfix">
-          <li class="grid_1"><%= link_to('Start', root_path, :rel => 'start', :class => request.path == '/' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('Tour', tour_path, :class => params[:action] == 'tour' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('Price', price_path, :class => params[:action] == 'price' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('About', about_path, :class => params[:action] == 'about' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('Blog', blog_path, :class => params[:controller] == 'blog_posts' ? 'current' : nil) %></li>
-          <li class="grid_1"><%= link_to('Download', download_path, :class => params[:action] == 'download' ? 'current' : nil) %></li>
-          <li class="grid_6 last">
+          <li class="grid_5 first">
+            <%= link_to('Home', root_path, :rel => 'start', :class => request.path == '/' ? 'current' : nil) %>
+            <%= link_to('Why Bitspace?', tour_path, :class => request.path == '/tour' ? 'current' : nil) %>
+            <%= link_to('Blog', blog_path, :class => request.path == '/blog' ? 'current' : nil) %>
+            <%= link_to('Help/Support', 'http://getsatisfaction.com/bitspace') %>
+            <%= link_to('Download', download_path, :class => request.path == '/download' ? 'current' : nil) %>
+          </li>
+          <li class="grid_3">
+            <%= link_to('Plans & Pricing', '/#price') %>
+            <%= link_to('Getting started', '#price') %>
+          </li>
+          <li class="grid_4 last">
             <% if current_user %>
               <%= link_to('Go to player →', player_path(:trailing_slash => true), :class => 'button') %>
             <% else %>

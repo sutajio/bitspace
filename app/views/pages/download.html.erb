@@ -1,5 +1,7 @@
+<div class="billboard">
 <div class="container_16 clearfix">
   <div class="grid_16 aligncenter">
+    <%= image_tag('/images/bitspace.png', :size => '256x256') %>
     <% @clients.each do |client| %>
       <div class="client">
         <h2>
@@ -7,8 +9,9 @@
           <span>Version <%= client.latest_version %></span>
         </h2>
         <p><%= client.info %></p>
-        <p><%= link_to('Download', download_client_path(client), :class => 'button') %></p>
+        <p><%= link_to('Download', download_client_path(client), :class => 'button grey') %></p>
       </div>
     <% end %>
   </div>
+</div>
 </div>

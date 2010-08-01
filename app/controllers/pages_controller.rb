@@ -10,7 +10,7 @@ class PagesController < ApplicationController
   end
   
   def price
-    @page_title = 'Pricing and Signup'
+    redirect_to '/#price'
   end
   
   def tour
