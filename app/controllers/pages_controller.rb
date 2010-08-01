@@ -38,4 +38,8 @@ class PagesController < ApplicationController
     @page_title = 'Bitspace at All Tomorrow\'s Parties Curated by Matt Groening'
   end
   
+  def featured
+    render :action => 'featured', :layout => false
+  end
+  
 end
