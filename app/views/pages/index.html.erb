@@ -193,68 +193,55 @@
 </div>
 </div>
 
-<hr />
+<hr id="gettingstarted" />
 
-<div class="container_16 clearfix" style="margin-top:40px; margin-bottom:40px;">
-  <div class="grid_8 aligncenter">
-    <h2 style="margin:80px 0 20px 0;">
-      Software for the serious music collector
-    </h2>
-    <p>
-      Music is both personal and social. Music is your life and your friends.
-      Music is art and party, relaxation and good memories.
-      Bitspace lets you enjoy all your music on
-      your Mac or directly in your browser. When you want to listen to something, you no
-      longer have to look through your iTunes library or flip through internet radio channels
-       — just go to bitspace.at/player. With your entire music collection in
-      your Bitspace library, you can browse everything faster, organize it all
-      easier, and play anything whenever the mood strikes.
-    </p>
-  </div>
-  <div class="grid_8 alignright">
-    <p><%= image_tag('/images/about/screenshot-1a.png') %></p>
-  </div>
-</div>
-
-<hr />
-
-<div class="container_16 clearfix" style="margin-top:60px;">
+<div class="container_16 clearfix" style="margin-top:40px; margin-bottom:40px; font-size:14px; line-height: 22px;">
   <div class="grid_8">
-    <%= image_tag('/images/about/screenshot-3.png', :style => 'margin-bottom:-5px;') %>
+    <h2>Download Bitspace</h2>
+    <p>Bitspace works today on the following devices:</p>
+    
+    <div style="margin:15px 0 0 0; height:50px;">
+    <%= image_tag('/images/iphone.png', :style => 'float:left; margin-right:20px;') %>
+    <h3 style="margin:0;">Bitspace for the iPhone and iPod touch</h3>
+    <p><%= link_to('Download from iTunes', 'http://itunes.com/apps/bitspace') %></p>
+    </div>
+    
+    <div style="margin:15px 0 0 0; height:50px;">
+    <%= image_tag('/images/macbook.png', :style => 'float:left; margin-right:20px;') %>
+    <h3 style="margin:0;">Bitspace for Mac OS X</h3>
+    <p><%= link_to('Download desktop client', download_path) %></p>
+    </div>
+    
+    <div style="margin:15px 0 0 0; height:50px;">
+    <%= image_tag('/images/safari.png', :style => 'float:left; margin-right:20px;') %>
+    <h3 style="margin:0;">Bitspace for Safari, Firefox and Chrome</h3>
+    <p><%= link_to('Use the web player', player_path(:trailing_slash => true)) %></p>
+    </div>
   </div>
-  <div class="grid_8 aligncenter">
-    <h2 style="margin:50px 0 20px 0;">
-      Share your taste in music
+  <div class="grid_8">
+    <h2>
+      How do I get started with Bitspace?
     </h2>
-    <p>
-      With public profiles you can get your own fans. Your public profile
-      is a way for you to share your music taste and to let your friends
-      follow what you upload and listen to. You can find your public profile
-      at bitspace.at/username. Bitspace is also fully integrated with
-      Last.fm and can scrobble everything you listen to with the click of a
-      button.
-    </p>
+    <ol>
+      <li><strong>Get a supported device, OS or browser</strong> from the list on the left.</li>
+      <li><strong>Create a Bitspace account</strong> by going <%= link_to('here', signup_path) %>.</li>
+      <li><strong>Upload music from your collection</strong> using the desktop client or the web interface. Your music is securely stored on our servers and is always instantly available to stream any time you want.</li>
+      <li><strong>Download the Bitspace app from iTunes</strong> to listen to and browse your collection from your iPhone or iPod touch.</li>
+    </ol>
+    <h2>Already signed up?</h2>
+    <p>You can <%= link_to('upgrade your account', '#price') %> at any time to get more storage space, faster streaming and support for Last.fm scrobbling.</p>
   </div>
 </div>
 
 <hr />
 
 <div class="container_16 clearfix" style="margin-top:60px;">
-  <div class="grid_8 prefix_4 suffix_4 aligncenter">
-    <h2 style="margin:20px 0 20px 0;">
-      We love album art
-    </h2>
-    <p>
-      The visual experience of the record album returns with Bitspace.<br />
-      Experience a beautifully designed world right in your Bitspace library.
-    </p>
-  </div>
   <div class="grid_12 prefix_2 suffix_2 aligncenter">
     <%= image_tag('/images/about/screenshot-2.png', :style => 'margin-bottom:0px;') %>
   </div>
 </div>
 
-<div class="header">
+<div class="header" id="about">
   <div class="container_16 clearfix" style="margin-top:40px; margin-bottom:40px;">
     <div class="grid_4">
       <blockquote style="font-size:14px; padding:20px 20px 20px 30px; margin-right:20px; background:#e4e4e4; height:114px; -webkit-border-radius:10px; -moz-border-radius:10px;">

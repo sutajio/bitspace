@@ -34,6 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   map.download 'download', :controller => 'pages', :action => 'download'
   map.terms 'terms', :controller => 'pages', :action => 'terms'
   map.press 'press', :controller => 'pages', :action => 'press'
+  map.support 'support', :controller => 'pages', :action => 'support'
   map.atp 'atp', :controller => 'pages', :action => 'atp'
   map.featured 'featured', :controller => 'pages', :action => 'featured'
   

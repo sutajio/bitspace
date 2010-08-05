@@ -34,7 +34,7 @@
       <% unless @user %>
       <p><%= image_tag('/images/logo_200x200_inverted.png', :size => '150x150') %></p>
       <% end %>
-      <h2><%= link_to('Bitspace', root_url) %><span>&trade;</span> <span>is <del>a product</del> <ins>an art project</ins> from the <a href="http://www.koneko-collective.com/">Koneko Collective</a></span></h2>
+      <h2><%= link_to('Bitspace', root_url) %><span>&trade;</span> <span>is <del>a product</del> <ins>an art project</ins> from the <a href="http://koneko-collective.com/">Koneko Collective</a></span></h2>
       <div>
         <%= link_to('About', about_path) %> /
         <%= mail_to('info@sutajio.se', 'Contact', :encode => 'javascript') %> /
@@ -45,7 +45,7 @@
         <%= link_to('Signup and Pricing', price_path) %>
       </div>
       <div class="grey">
-        All text and design is copyright &copy;<%= Time.now.year %> Sutajio HB. All rights reserved.
+        All text and design is copyright &copy;<%= Time.now.year %> <a href="http://sutajio.se/">Sutajio</a>. All rights reserved.
       </div>
       <div class="grey">
         <em>We like you.</em>

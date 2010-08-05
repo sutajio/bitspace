@@ -5,6 +5,9 @@ class BlogPostsController < ApplicationController
   before_filter :authenticate, :except => [:index, :show]
   
   def index
+    redirect_to 'http://blog.bitspace.at/', :status => :moved_permanently
+    return
+    
     @page_title = 'The Product Blog, New Features, Tips, Previews, Discussion - Bitspace'
     @posts = BlogPost.published.paginate(:page => params[:page])
     respond_to do |with|

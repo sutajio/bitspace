@@ -11,8 +11,6 @@
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <link rel="icon" href="/images/logos/favicon.png" type="image/png" />
     <link rel="shortcut icon" href="/images/logos/favicon.png" type="image/png" />
-    <link rel="fluid-icon" href="/images/logos/fluid.png" title="Bitspace" />
-    <link rel="apple-touch-icon" href="/images/logos/touch.png" />
     <link rel="alternate" type="application/atom+xml" title="Bitspace Blog" href="http://feeds.feedburner.com/bitspace" />
     <% if @page_description.present? %>
     <meta name="description" content="<%= @page_description %>" />
@@ -32,22 +30,18 @@
           <li class="grid_5 first">
             <%= link_to('Home', root_path, :rel => 'start', :class => request.path == '/' ? 'current' : nil) %>
             <%= link_to('Why Bitspace?', tour_path, :class => request.path == '/tour' ? 'current' : nil) %>
-            <%= link_to('Blog', blog_path, :class => request.path == '/blog' ? 'current' : nil) %>
-            <%= link_to('Help/Support', 'http://getsatisfaction.com/bitspace') %>
+            <%= link_to('Blog', blog_path) %>
+            <%= link_to('Help/Support', support_path) %>
             <%= link_to('Download', download_path, :class => request.path == '/download' ? 'current' : nil) %>
           </li>
           <li class="grid_3">
             <%= link_to('Plans & Pricing', '/#price') %>
-            <%= link_to('Getting started', '#price') %>
+            <%= link_to('Getting started', '/#gettingstarted') %>
           </li>
           <li class="grid_4 last">
-            <% if current_user %>
-              <%= link_to('Go to player →', player_path(:trailing_slash => true), :class => 'button') %>
-            <% else %>
-              <%= link_to('Sign in →', login_path, :class => 'button') %>
-              <% if flash[:alert] %>
-              <div class="error"><%=h flash[:alert] %></div>
-              <% end %>
+            <%= link_to('Go to player →', player_path(:trailing_slash => true), :class => 'button') %>
+            <% if flash[:alert] %>
+            <div class="error"><%=h flash[:alert] %></div>
             <% end %>
           </li>
         </ul>
