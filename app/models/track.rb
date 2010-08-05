@@ -58,9 +58,7 @@ class Track < ActiveRecord::Base
       unless AWS::S3::S3Object.exists?(key, ENV['S3_BUCKET'])
         AWS::S3::S3Object.store(key, @file, ENV['S3_BUCKET'],
           :content_type => content_type,
-          :access => :public_read,
-          'cache-control' => "max-age=#{10.years.to_i}",
-          'expires' => 10.years.from_now.utc.httpdate)
+          :access => :public_read)
         logger.info "Key: #{key}"
         return true
       end
