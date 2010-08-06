@@ -1,3 +1,7 @@
+soundManager.flashVersion = 9; 
+soundManager.useMovieStar = true;
+soundManager.url = '/vendor/soundmanager/swf/';
+
 $(function(){
   // Initialize Shadowbox.
   if(Shadowbox) {
@@ -118,6 +122,9 @@ $(function(){
       var self = $(this);
       playlist.push({
         play: function(){
+          $('.playing')
+            .removeClass('playing')
+            .removeClass('loading');
           $('#player')
             .trigger('start', self.attr('href'));
           $('#status-artist')
@@ -131,9 +138,6 @@ $(function(){
             .attr('href',self.attr('data-release-url'));
           $('#status')
             .fadeIn('slow');
-          $('.playing')
-            .removeClass('playing')
-            .removeClass('loading');
           $('a[href="'+$('#player')
             .attr('src')+'"]')
             .addClass('playing');
@@ -213,46 +217,47 @@ $(function(){
   // Uses JPlayer to emulate the behaviour of the audio tag using Flash.
   $('div#player').each(function(){
     var self = $(this);
-    var jplayer = $('<div id="jplayer"/>').insertAfter(self).jPlayer({
-      nativeSupport: false,
-      swfPath: '/vendor/jplayer/'
-    })
-    .jPlayer('onProgressChange', function(lp,ppr,ppa,pt,tt){
-      self
-        .each(function(){
-          this.duration = 100;
-          this.currentTime = ppa;
-        })
-        .trigger('durationchange')
-        .trigger('timeupdate');
-      if(ppa > 0) {
-        self.trigger('canplaythrough');
-      } else {
-        self.trigger('loadstart');
-      }
-    })
-    .jPlayer('onSoundComplete', function(){
-      self.trigger('ended');
-    });
     this.load = function(){
-      jplayer.jPlayer('setFile', $(this).attr('src'));
+      canplaythrough = false;
+      if(this.sound) {
+        this.sound.destruct();
+      }
+      this.sound = soundManager.createSound({
+        id: 'sound',
+        url: self.attr('src'),
+        isMovieStar: self.attr('src').search(/m4a$/i) == -1 ? false : true,
+        onfinish: function(){
+          self.trigger('ended');
+        }
+      });
       this.paused = true;
     };
     this.startPlayback = function(){
       this.paused = false;
-      jplayer.jPlayer('play');
+      this.sound.play({
+        whileplaying: function(){
+          var t = this.position;
+          var l = this.durationEstimate;
+          self.each(function(){
+            this.duration = l;
+            this.currentTime = t;
+          })
+          .trigger('durationchange')
+          .trigger('timeupdate');
+        }
+      });
       $(this).trigger('play');
     };
     this.pausePlayback = function(){
       this.paused = true;
-      jplayer.jPlayer('pause');
+      this.sound.pause();
       $(this).trigger('pause');
     };
     this.setCurrentTime = function(value){
-      jplayer.jPlayer('playHead', value);
+      this.sound.setPosition(value);
     };
     this.setVolume = function(value){
-      jplayer.jPlayer('volume', value*100.0);
+      this.sound.setVolume(value*100.0);
     };
   });
   
@@ -264,7 +269,7 @@ $(function(){
     $(this).attr('src', data);
     this.load();
     this.startPlayback();
-    $('a[href="'+data+'"]').addClass('playing');
+    $('a[href="'+data+'"]').addClass('playing').addClass('loading');
   })
   .bind('play', function(e){
     $('button[rel=play-pause]').addClass('pause').attr('disabled','');
@@ -367,13 +372,8 @@ $(function(){
       }
     }
   })
-  .bind('loadstart', function(e){
-    $('a.playing').addClass('loading');
-  })
-  .bind('canplaythrough', function(e){
-    $('a.loading').removeClass('loading');
-  })
   .bind('durationchange', function(e){
+    $('a.loading').removeClass('loading');
     $('#nav-progress').slider('option', 'max', this.duration);
   })
   .bind('timeupdate', function(e){

@@ -21,7 +21,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.address.js',
     '/vendor/plugins/jquery.suggest.js',
     '/vendor/plugins/jquery.masonry.js',
-    '/vendor/jplayer/jquery.jplayer.min.js',
+    '/vendor/soundmanager/script/soundmanager2-nodebug-jsmin.js',
     'application'
   ],
   :login => [
