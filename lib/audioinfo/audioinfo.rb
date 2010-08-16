@@ -145,7 +145,7 @@ class AudioInfo
         @year = @info.DAY.to_i == 0 ? nil : @info.DAY.to_i
         @cover = @info.COVR
         @bitrate = @info.BITRATE
-        @samplerate = @info.FREQUENCY*1000.0
+        @samplerate = @info.FREQUENCY ? @info.FREQUENCY*1000.0 : 44100
         @length = @info.SECS
         @composer = @info.WRT
         @copyright = @info.CPRT
