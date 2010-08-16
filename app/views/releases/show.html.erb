@@ -44,7 +44,7 @@
         <% if @release.label.present? %><label>Label:</label> <%= link_to(h(@release.label.name), label_path(@release.label), :target => '_self') %><% end %>
       </div>
     
-      <%= render :partial => 'comments', :locals => { :with_form => current_user.present? && @user.public_profile? } %>
+      <%= render :partial => 'comments', :locals => { :release => @release.original ? @release.original : @release, :with_form => current_user.present? && @user.public_profile? } %>
     </div>
   </div>
 <% end %>
