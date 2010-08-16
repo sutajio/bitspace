@@ -48,7 +48,7 @@ class AudioInfo
     raise(AudioInfoError, "path is nil") if filename.nil?
     @options = { :encoding => 'utf-8', :include_audio_content => false }.merge(options)
     @path = filename
-    @extension = (@options[:extension] || File.extname(@path)[1..-1]).downcase
+    @extension = ((@options[:extension] || File.extname(@path)[1..-1]) || 'mp3').downcase
     @encoding = @options[:encoding]
     @musicbrainz_infos = {}
 
