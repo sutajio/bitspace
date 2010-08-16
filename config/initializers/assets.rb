@@ -28,6 +28,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     'login'
   ],
   :site => [
+    '/vendor/plugins/jquery.address.js',
     'site'
   ])
 ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(

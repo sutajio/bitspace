@@ -22,7 +22,7 @@
         <% else %>
           <div id="signup-button">
             <h3>
-              <% link_to('#price') do %>
+              <% link_to('#price', :target => '_self') do %>
                 See Plans and Pricing →<br />
                 <span>30-day free trial, sign up in 60 seconds</span>
               <% end %>
@@ -408,8 +408,22 @@
 
 <div class="container_16 clearfix">
   <div class="grid_16 aligncenter">
-    <h2><%= link_to('<strong><u>Try Bitspace for free for 30 days.</u></strong> See plans and pricing →', price_path) %></h2>
+    <h2><%= link_to('<strong><u>Try Bitspace for free for 30 days.</u></strong> See plans and pricing →', '#price', :target => '_self') %></h2>
     <h3 class="grey">60 seconds from signing up to enjoying your music. No credit card required. No obligations.</h3>
   </div>
 </div>
 
+<script>
+$.address.change(function(e){
+  if(e.value != '/') {
+    $('html, body').animate({
+      scrollTop: $('#'+new RegExp('/(.+)$').exec(e.value)[1]).offset().top
+    }, 500);
+  }
+});
+
+$('a[target=_self]').livequery('click', function(e){
+  e.preventDefault();
+  $.address.value(new RegExp('#(.+)$').exec(this.href)[1]);
+});
+</script>

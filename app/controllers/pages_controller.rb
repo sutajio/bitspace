@@ -11,7 +11,7 @@ class PagesController < ApplicationController
   end
   
   def price
-    redirect_to '/#price', :status => :moved_permanently
+    redirect_to '/#/price', :status => :moved_permanently
   end
   
   def tour
@@ -20,7 +20,7 @@ class PagesController < ApplicationController
   end
   
   def about
-    redirect_to '/#about', :status => :moved_permanently
+    redirect_to '/#/about', :status => :moved_permanently
   end
   
   def terms
