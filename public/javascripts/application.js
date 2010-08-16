@@ -266,7 +266,10 @@ $(function(){
   // network errors, etc...
   $('#player')
   .bind('start', function(e,data){
-    $(this).attr('src', data);
+    $(this).data('hasScrobbled', false)
+           .data('totalPlayedTime', 0)
+           .data('previousPlayedTime', 0)
+           .attr('src', data);
     this.load();
     this.startPlayback();
     $('a[href="'+data+'"]').addClass('playing').addClass('loading');
@@ -284,9 +287,6 @@ $(function(){
     }
   })
   .bind('ended', function(e){
-    if($(this).data('playlist')[$(this).data('playlist_position')]) {
-      $(this).data('playlist')[$(this).data('playlist_position')].scrobble();
-    }
     if($(this).data('playlist_position') ==
       ($(this).data('playlist').length - 1)) {
       if(($('#repeat').attr('checked') == true) ||
@@ -377,6 +377,14 @@ $(function(){
     $('#nav-progress').slider('option', 'max', this.duration);
   })
   .bind('timeupdate', function(e){
+    if(Math.abs((this.currentTime - $(this).data('previousPlayedTime'))) < 1000) {
+      $(this).data('totalPlayedTime', $(this).data('totalPlayedTime') + Math.abs((this.currentTime - $(this).data('previousPlayedTime'))));
+      if((($(this).data('totalPlayedTime') > 240000) || ($(this).data('totalPlayedTime') > (this.duration * 0.5))) && ($(this).data('hasScrobbled') == false)) {
+        $(this).data('playlist')[$(this).data('playlist_position')].scrobble();
+        $(this).data('hasScrobbled', true);
+      }
+    }
+    $(this).data('previousPlayedTime', this.currentTime);
     $('#nav-progress').slider('value', this.currentTime);
   })
   .bind('error', function(e){
