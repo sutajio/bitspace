@@ -25,7 +25,7 @@ class Podcast < ActiveRecord::Base
       logger.info("Importing podcast from #{feed_url}")
       feed = FeedNormalizer::FeedNormalizer.parse(open(feed_url))
       feed.entries.reverse.each do |entry|
-        if last_check_at.nil? || (entry.date_published > last_check_at)
+        if last_check_at.nil? || (entry.date_published.present? && (entry.date_published > last_check_at))
           if entry.enclosures.present?
             entry.enclosures.each do |enclosure|
               if SUPPORTED_MEDIA_TYPES.keys.include?(enclosure.type)
