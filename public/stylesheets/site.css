@@ -102,3 +102,5 @@ ul.releases li span.year { display: block; }
 .dashboard { -webkit-box-shadow: 1px 1px 5px #bbb; -moz-box-shadow: 1px 1px 5px #bbb; }
 .artist img { -webkit-box-shadow: 1px 1px 5px #bbb; -moz-box-shadow: 1px 1px 5px #bbb; }
 
+.blog_post .body { font-size: 13px; line-height: 1.6em; }
+
