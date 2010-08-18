@@ -4,10 +4,6 @@ class PlayersController < ApplicationController
   before_filter :find_user
   
   def show
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   protected

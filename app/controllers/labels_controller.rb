@@ -12,25 +12,10 @@ class LabelsController < ApplicationController
     if request.xhr? && @labels.empty?
       render :nothing => true and return
     end
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def show
     @label = @user.labels.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.json
-    end
-  end
-  
-  def playlist
-    @label = current_user.labels.find(params[:id])
-    respond_to do |format|
-      format.json
-    end
   end
   
 end

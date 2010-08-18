@@ -18,13 +18,6 @@ class YearsController < ApplicationController
     @releases = @user.releases.by_year(@years)
   end
   
-  def playlist
-    @releases = @user.releases.without_archived.by_year(@years)
-    respond_to do |format|
-      format.json
-    end
-  end
-  
   protected
   
     def find_years

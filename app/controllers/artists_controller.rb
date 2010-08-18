@@ -11,22 +11,18 @@ class ArtistsController < ApplicationController
     if request.xhr? && @artists.empty?
       render :nothing => true and return
     end
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def show
     @artist = @user.artists.with_releases.find(params[:id])
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def biography
     @artist = @user.artists.with_releases.find(params[:id])
+    respond_to do |format|
+      format.html
+      format.txt
+    end
   end
   
   def edit
@@ -48,13 +44,6 @@ class ArtistsController < ApplicationController
     end
   rescue ActiveRecord::RecordInvalid => e
     raise e
-  end
-  
-  def playlist
-    @artist = current_user.artists.with_releases.find(params[:id])
-    respond_to do |format|
-      format.json
-    end
   end
   
 end

@@ -1,6 +1,0 @@
-<%= @playlists.map {|playlist|
-  {
-    :title => playlist.first,
-    :tracks => tracks_to_hash(@tracks)
-  }
-}.to_json %>

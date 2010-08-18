@@ -1,19 +1,15 @@
-<%= @releases.map {|release|
-  {
-    :title => release.title,
-    :artist => release.artist.name,
-    :artist_sort_name => release.artist.sort_name,
-    :year => release.year,
-    :label => release.label ? release.label.name : nil,
-    :release_date => release.release_date,
-    :url => release_url(release.id),
-    :small_artwork_url => release.artwork.file? ? release.artwork.url(:small, false) : nil,
-    :medium_artwork_url => release.artwork.file? ? release.artwork.url(:medium, false) : nil,
-    :large_artwork_url => release.artwork.file? ? release.artwork.url(:large, false) : nil,
-    :playlist_url => playlist_release_url(release.id),
-    :created_at => release.created_at,
-    :updated_at => release.updated_at,
-    :archived => release.archived,
-    :tracks => tracks_to_hash(release.tracks, :simple => true)
-  }
-}.to_json %>
+<% if params[:simple] == 'no' %>
+  <%= {
+    :page => @releases.current_page,
+    :pages => @releases.total_pages,
+    :per_page => @releases.per_page,
+    :total => @releases.total_entries,
+    :releases => @releases.map {|release|
+      release_to_hash(release, :simple => false)
+    }
+  }.to_json %>
+<% else %>
+  <%= @releases.map {|release|
+    release_to_hash(release, :simple => true)
+  }.to_json %>
+<% end %>

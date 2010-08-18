@@ -1,8 +1,0 @@
-<%= {
-  :begin_date => @artist.begin_date,
-  :end_date => @artist.end_date,
-  :tags => @artist.tags,
-  :biography => auto_link(strip_links(@artist.biography), :urls, :target => '_blank'),
-  :small_artwork_url => @artist.artwork.url(:small, false),
-  :large_artwork_url => @artist.artwork.url(:large, false)
-}.to_json %>

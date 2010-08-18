@@ -1,8 +1,0 @@
-<%= @labels.map {|label|
-  {
-    :name => label.name,
-    :releases_count => label.releases_count,
-    :artwork_url => label.artwork.url(:original, false),
-    :url => label_url(label)
-  }
-}.to_json %>

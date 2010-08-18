@@ -21,7 +21,7 @@ class ReleasesController < ApplicationController
       format.json do
         @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
             :page => params[:page],
-            :per_page => 16,
+            :per_page => 10,
             :include => [:artist, :tracks],
             :order => 'created_at')
       end
@@ -108,13 +108,6 @@ class ReleasesController < ApplicationController
     @release.tracks.each(&:destroy)
     @release.archive!
     head :ok
-  end
-  
-  def playlist
-    @release = @artist.releases.find(params[:id])
-    respond_to do |format|
-      format.json
-    end
   end
 
 end

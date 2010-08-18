@@ -5,18 +5,10 @@ class PlaylistsController < ApplicationController
   
   def index
     @tracks = @user.tracks.loved.paginate(:page => params[:page], :per_page => 100, :order => 'loved_at DESC')
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def toplist
     @tracks = @user.tracks.paginate(:page => params[:page], :per_page => 100, :order => 'scrobbles_count DESC', :conditions => ['scrobbles_count IS NOT NULL AND scrobbles_count != 0'])
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def daycharts
@@ -28,10 +20,6 @@ class PlaylistsController < ApplicationController
       ['Late fringe  ☞ <span>(11:00 PM &ndash; 3:00 AM)</span>', @user.played_tracks.paginate(:page => 1, :per_page => 20, :order => 'scrobbles_count DESC', :conditions => ['STRFTIME(?, started_playing) IN (\'23\',\'00\',\'01\',\'02\')', '%H'])],
       ['Graveyard  ☞ <span>(3:00 AM &ndash; 6:00 AM)</span>', @user.played_tracks.paginate(:page => 1, :per_page => 20, :order => 'scrobbles_count DESC', :conditions => ['STRFTIME(?, started_playing) IN (\'03\',\'04\',\'05\')', '%H'])]
     ]
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def weekcharts
@@ -44,26 +32,14 @@ class PlaylistsController < ApplicationController
       ['Saturday', @user.played_tracks.paginate(:page => 1, :per_page => 20, :order => 'scrobbles_count DESC', :conditions => ['STRFTIME(?, started_playing) = \'6\'', '%w'])],
       ['Sunday', @user.played_tracks.paginate(:page => 1, :per_page => 20, :order => 'scrobbles_count DESC', :conditions => ['STRFTIME(?, started_playing) = \'0\'', '%w'])]
     ]
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def recent
     @tracks = @user.played_tracks.paginate(:page => params[:page], :per_page => 100, :order => 'scrobbles.started_playing DESC')
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
   def latest
     @tracks = @user.tracks.paginate(:page => params[:page], :per_page => 100, :order => 'created_at DESC')
-    respond_to do |format|
-      format.html
-      format.json
-    end
   end
   
 end
