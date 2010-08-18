@@ -34,6 +34,10 @@ class PagesController < ApplicationController
     @clients = Client.all
   end
   
+  def appstore
+    redirect_to 'http://itunes.apple.com/us/app/bitspace/id386505557?mt=8&uo=4'
+  end
+  
   def press
     response.headers['Cache-Control'] = 'public, max-age=300'
     @page_title = 'Press kit for Bitspace'

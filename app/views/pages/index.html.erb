@@ -28,7 +28,7 @@
               <% end %>
             </h3>
           </div>
-          <%= link_to(image_tag('/images/app-store-badge.png'), 'http://itunes.com/apps/bitspace') %>
+          <%= link_to(image_tag('/images/app-store-badge.png'), appstore_path) %>
         <% end %>
       </div>
     </div>
@@ -203,7 +203,7 @@
     <div style="margin:15px 0 0 0; height:50px;">
     <%= image_tag('/images/iphone.png', :style => 'float:left; margin-right:20px;') %>
     <h3 style="margin:0;">Bitspace for the iPhone and iPod touch</h3>
-    <p><%= link_to('Download from iTunes', 'http://itunes.com/apps/bitspace') %></p>
+    <p><%= link_to('Download from iTunes', appstore_path) %></p>
     </div>
     
     <div style="margin:15px 0 0 0; height:50px;">
@@ -357,7 +357,7 @@
         downloaded from the <%= link_to('download page', download_path) %>.</p>
     
       <h3>What about mobile devices?</h3>
-      <p><%= link_to('Bitspace for the iPhone', 'http://itunes.com/apps/bitspace') %> is available on the App Store for free.</p>
+      <p><%= link_to('Bitspace for the iPhone', appstore_path) %> is available on the App Store for free.</p>
     
       <h3>How does the 30-day free trial work?</h3>
       <p>If you cancel a paying plan within 30 days of signing up you won’t be
@@ -414,16 +414,18 @@
 </div>
 
 <script>
-$.address.change(function(e){
-  if(e.value != '/') {
-    $('html, body').animate({
-      scrollTop: $('#'+new RegExp('/(.+)$').exec(e.value)[1]).offset().top
-    }, 500);
-  }
-});
+$(function(){
+  $.address.change(function(e){
+    if(e.value != '/') {
+      $('html, body').animate({
+        scrollTop: $('#'+new RegExp('/(.+)$').exec(e.value)[1]).offset().top
+      }, 500);
+    }
+  });
 
-$('a[target=_self]').livequery('click', function(e){
-  e.preventDefault();
-  $.address.value(new RegExp('#(.+)$').exec(this.href)[1]);
+  $('a[target=_self]').livequery('click', function(e){
+    e.preventDefault();
+    $.address.value(new RegExp('#(.+)$').exec(this.href)[1]);
+  });
 });
 </script>

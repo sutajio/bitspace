@@ -32,6 +32,7 @@ ActionController::Routing::Routes.draw do |map|
   map.tour 'tour', :controller => 'pages', :action => 'tour'
   map.about 'about', :controller => 'pages', :action => 'about'
   map.download 'download', :controller => 'pages', :action => 'download'
+  map.appstore 'appstore', :controller => 'pages', :action => 'appstore'
   map.terms 'terms', :controller => 'pages', :action => 'terms'
   map.press 'press', :controller => 'pages', :action => 'press'
   map.support 'support', :controller => 'pages', :action => 'support'
