@@ -140,9 +140,11 @@ class Release < ActiveRecord::Base
   end
   
   def notify_followers
-    if user.public_profile?
-      user.followers.each do |follower|
-        follower.notify_of_new_release(self)
+    unless archived?
+      if user.public_profile?
+        user.followers.each do |follower|
+          follower.notify_of_new_release(self)
+        end
       end
     end
   end
@@ -151,9 +153,11 @@ class Release < ActiveRecord::Base
   handle_asynchronously :notify_followers, :run_at => lambda { 1.hour.from_now }
   
   def give_to_subscribers
-    user.subscribers.each do |subscriber|
-      self.sideload(subscriber)
-      subscriber.notify_of_new_release(self)
+    unless archived?
+      user.subscribers.each do |subscriber|
+        self.sideload(subscriber)
+        subscriber.notify_of_new_release(self)
+      end
     end
   end
   
