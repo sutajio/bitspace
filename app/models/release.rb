@@ -133,7 +133,7 @@ class Release < ActiveRecord::Base
         track.save
       end
       other.reload
-      other.destroy
+      other.archive!
       self.touch
     end
     self

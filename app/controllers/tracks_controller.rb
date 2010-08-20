@@ -35,8 +35,10 @@ class TracksController < ApplicationController
   
   def destroy
     @track = current_user.tracks.find(params[:id])
-    @track.release.touch
-    @track.destroy
+    Track.transaction do
+      @track.release.touch
+      @track.destroy
+    end
     head :ok
   end
   
