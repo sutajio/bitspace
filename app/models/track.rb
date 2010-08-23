@@ -100,6 +100,20 @@ class Track < ActiveRecord::Base
     loved_at.present?
   end
   
+  def scrobble!(started_playing_at, from_remote_ip)
+    transaction do
+      self.scrobbled_at = started_playing_at
+      self.increment(:scrobbles_count)
+      self.save!
+      
+      scrobble = self.scrobbles.create!(
+          :user_id => self.user.id,
+          :ip => from_remote_ip,
+          :started_playing => started_playing_at)
+      Delayed::Job.enqueue(scrobble)
+    end
+  end
+  
   def rename(new_title, new_artist = nil, track_nr = nil, set_nr = nil)
     if new_title.present?
       self.title = new_title

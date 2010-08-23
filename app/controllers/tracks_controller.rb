@@ -23,13 +23,10 @@ class TracksController < ApplicationController
   
   def scrobble
     @track = current_user.tracks.find(params[:id])
-    @scrobble = @track.scrobbles.create!(
-        :user_id => current_user.id,
-        :ip => request.remote_ip,
-        :started_playing => params[:started_playing] ? 
-                              Time.parse(params[:started_playing]) :
-                              Time.now.utc)
-    Delayed::Job.enqueue(@scrobble)
+    @track.scrobble!(params[:started_playing] ? 
+                          Time.parse(params[:started_playing]) :
+                          Time.now.utc,
+                     request.remote_ip)
     head :ok
   end
   
