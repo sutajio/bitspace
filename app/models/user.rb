@@ -10,7 +10,6 @@ class User < ActiveRecord::Base
   has_many :tracks
   has_many :labels
   has_many :scrobbles
-  has_many :played_tracks, :through => :scrobbles, :source => :track
   has_many :invitations
   has_many :followings
   has_many :followers, :through => :followings, :order => 'followings.created_at DESC'

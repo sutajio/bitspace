@@ -10,7 +10,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :labels, :member => { :playlist => :get }
   map.resources :years, :member => { :playlist => :get }
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
-  map.resources :playlists, :collection => { :daycharts => :get, :weekcharts => :get, :recent => :get, :latest => :get, :toplist => :get }
+  map.resources :playlists, :collection => { :recent => :get, :latest => :get, :toplist => :get }
   map.resources :comments
   
   # Last.fm

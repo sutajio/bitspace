@@ -19,6 +19,7 @@ class Track < ActiveRecord::Base
   named_scope :loved, :conditions => ['loved_at IS NOT NULL']
   named_scope :originals, :conditions => ['original_id IS NULL']
   named_scope :copies, :conditions => ['original_id IS NOT NULL']
+  named_scope :played_tracks, :conditions => ['scrobbles_count IS NOT NULL AND scrobbles_count != 0']
   
   cattr_reader :per_page
   @@per_page = 100
