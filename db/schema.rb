@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100504224118) do
+ActiveRecord::Schema.define(:version => 20100823150220) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -75,12 +75,12 @@ ActiveRecord::Schema.define(:version => 20100504224118) do
   end
 
   create_table "comments", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "commented_id"
-    t.string   "commented_type"
-    t.text     "body"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "user_id"
+    t.integer   "commented_id"
+    t.string    "commented_type"
+    t.text      "body"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "comments", ["commented_id", "commented_type"], :name => "index_comments_on_commented_id_and_commented_type"
@@ -157,6 +157,25 @@ ActiveRecord::Schema.define(:version => 20100504224118) do
   add_index "labels", ["original_id"], :name => "index_labels_on_original_id"
   add_index "labels", ["sort_name"], :name => "index_labels_on_sort_name"
   add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
+
+  create_table "mixtape_tracks", :force => true do |t|
+    t.integer "mixtape_id"
+    t.integer "track_id"
+    t.integer "position"
+  end
+
+  add_index "mixtape_tracks", ["mixtape_id", "position"], :name => "index_mixtape_tracks_on_mixtape_id_and_position"
+  add_index "mixtape_tracks", ["track_id"], :name => "index_mixtape_tracks_on_track_id"
+
+  create_table "mixtapes", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "title"
+    t.string   "cassette"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mixtapes", ["user_id"], :name => "index_mixtapes_on_user_id"
 
   create_table "podcasts", :force => true do |t|
     t.integer   "user_id"
@@ -239,6 +258,7 @@ ActiveRecord::Schema.define(:version => 20100504224118) do
     t.timestamp "loved_at"
     t.integer   "scrobbles_count"
     t.integer   "original_id"
+    t.datetime  "scrobbled_at"
   end
 
   add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
@@ -246,6 +266,8 @@ ActiveRecord::Schema.define(:version => 20100504224118) do
   add_index "tracks", ["mbid"], :name => "index_tracks_on_mbid"
   add_index "tracks", ["original_id"], :name => "index_tracks_on_original_id"
   add_index "tracks", ["release_id"], :name => "index_tracks_on_release_id"
+  add_index "tracks", ["scrobbled_at"], :name => "index_tracks_on_scrobbled_at"
+  add_index "tracks", ["scrobbles_count"], :name => "index_tracks_on_scrobbles_count"
   add_index "tracks", ["title"], :name => "index_tracks_on_title"
   add_index "tracks", ["track_nr"], :name => "index_tracks_on_track_nr"
   add_index "tracks", ["user_id"], :name => "index_tracks_on_user_id"
