@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100823173433) do
+ActiveRecord::Schema.define(:version => 20100825143553) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -285,41 +285,42 @@ ActiveRecord::Schema.define(:version => 20100823173433) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer   "facebook_uid"
-    t.string    "name"
-    t.string    "email"
-    t.string    "persistence_token"
-    t.string    "single_access_token"
-    t.string    "perishable_token"
-    t.integer   "login_count",              :default => 0
-    t.integer   "failed_login_count",       :default => 0
-    t.timestamp "last_request_at"
-    t.timestamp "current_login_at"
-    t.timestamp "last_login_at"
-    t.string    "current_login_ip"
-    t.string    "last_login_ip"
-    t.boolean   "is_admin"
-    t.string    "subscription_id"
-    t.string    "subscription_plan",        :default => "Bitspace Free"
-    t.decimal   "max_storage",              :default => 524288000.0
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "lastfm_session_key"
-    t.string    "lastfm_username"
-    t.boolean   "lastfm_subscriber"
-    t.string    "login"
-    t.string    "crypted_password"
-    t.string    "password_salt"
-    t.boolean   "scrobble_to_lastfm",       :default => true
-    t.boolean   "private_beta"
-    t.integer   "invitations_left",         :default => 0
-    t.boolean   "public_profile",           :default => true
-    t.string    "biography"
-    t.string    "website"
-    t.boolean   "subscribable"
-    t.integer   "subscription_price"
-    t.string    "subscription_currency"
-    t.string    "subscription_periodicity"
+    t.integer  "facebook_uid"
+    t.string   "name"
+    t.string   "email"
+    t.string   "persistence_token"
+    t.string   "single_access_token"
+    t.string   "perishable_token"
+    t.integer  "login_count",              :default => 0
+    t.integer  "failed_login_count",       :default => 0
+    t.datetime "last_request_at"
+    t.datetime "current_login_at"
+    t.datetime "last_login_at"
+    t.string   "current_login_ip"
+    t.string   "last_login_ip"
+    t.boolean  "is_admin"
+    t.string   "subscription_id"
+    t.string   "subscription_plan",        :default => "Bitspace Free"
+    t.decimal  "max_storage",              :default => 524288000.0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "lastfm_session_key"
+    t.string   "lastfm_username"
+    t.boolean  "lastfm_subscriber"
+    t.string   "login"
+    t.string   "crypted_password"
+    t.string   "password_salt"
+    t.boolean  "scrobble_to_lastfm",       :default => true
+    t.boolean  "private_beta"
+    t.integer  "invitations_left",         :default => 0
+    t.boolean  "public_profile",           :default => true
+    t.string   "biography"
+    t.string   "website"
+    t.boolean  "subscribable"
+    t.integer  "subscription_price"
+    t.string   "subscription_currency"
+    t.string   "subscription_periodicity"
+    t.string   "account_type",             :default => "collector"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
