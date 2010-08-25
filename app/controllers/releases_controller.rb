@@ -22,7 +22,7 @@ class ReleasesController < ApplicationController
         @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
             :page => params[:page],
             :per_page => 10,
-            :include => [:artist, :tracks],
+            :include => [:artist, :label, :tracks],
             :order => 'created_at')
       end
     end

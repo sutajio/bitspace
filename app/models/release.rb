@@ -12,7 +12,7 @@ class Release < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title, :scope => [:artist_id]
   
-  default_scope :order => 'year DESC, release_date DESC', :include => [:artist, :label]
+  default_scope :order => 'year DESC, release_date DESC'
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
   named_scope :with_archived, :conditions => { :archived => [true, false] }
   named_scope :without_archived, :conditions => { :archived => false }
