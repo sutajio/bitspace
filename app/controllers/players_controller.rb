@@ -4,6 +4,9 @@ class PlayersController < ApplicationController
   before_filter :find_user
   
   def show
+    unless current_user.collector?
+      redirect_to profile_path(current_user.login, :trailing_slash => true)
+    end
   end
   
   protected

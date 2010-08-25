@@ -13,6 +13,14 @@
       <% form_for @user, :html => { :id => 'signup-form' } do |f| %>
         <%= f.error_messages %>
         <div class="field">
+          <%= f.label :account_type %>
+          <div class="segmented">
+            <%= f.radio_button :account_type, 'collector' %> <label for="user_account_type_collector" class="first checked">Collector</label>
+            <%= f.radio_button :account_type, 'artist' %> <label for="user_account_type_artist">Artist</label>
+            <%= f.radio_button :account_type, 'label' %> <label for="user_account_type_label" class="last">Label</label>
+          </div>
+        </div>
+        <div class="field">
           <%= f.label :email %>
           <%= f.text_field :email, :class => 'required email' %>
           <kbd>Your email address</kbd>
@@ -34,7 +42,7 @@
         </div>
         <div class="submit-row">
           <p>
-            <button type="submit">Create my account</button>
+            <button type="submit" class="button green">Create my account</button>
           </p>
           <p class="small grey">
             By clicking on 'Create my account' above,<br/>

@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   validates_inclusion_of :subscription_plan,
     :in => SUBSCRIPTION_PLANS.values.map {|x| x[:name] }
   validates_exclusion_of :login, :in => DISALLOWED_USERNAMES
+  validates_inclusion_of :account_type, :in => %w(collector artist label)
   
   validates_inclusion_of :subscription_price, :in => 1..99, :allow_nil => true
   validates_inclusion_of :subscription_currency, :in => %w(EUR USD SEK), :allow_nil => true  
@@ -57,6 +58,18 @@ class User < ActiveRecord::Base
   end
   
   before_validation_on_create :setup_subscription_plan_details
+  
+  def collector?
+    account_type == 'collector'
+  end
+  
+  def artist?
+    account_type == 'artist'
+  end
+  
+  def label?
+    account_type == 'label'
+  end
   
   def storage_left
     if self.max_storage

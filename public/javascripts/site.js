@@ -31,6 +31,14 @@ $(function(){
       'user[login]': { remote: 'Sorry, username has already been taken.' }
     }
   });
+  $('#signup-form input[type=radio]').change(function(e){
+    $(this).siblings('label').removeClass('checked');
+    if($(this).attr('checked')) {
+      $(this).next('label').addClass('checked');
+    } else {
+      $(this).next('label').removeClass('checked');
+    }
+  });
   
   $('.biography').livequery(function(){
     $(this).expander({
