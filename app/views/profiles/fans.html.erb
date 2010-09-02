@@ -1,0 +1,18 @@
+<%= render :partial => 'profile' %>
+
+<div id="content">
+  <div id="secondary">
+    <ul>
+      <li><strong><%= pluralize(@subscribers.total_entries, '<span>subscriber</span>', '<span>subscribers</span>') %></strong></li>
+      <li><strong><%= pluralize(@followers.total_entries, '<span>follower</span>', '<span>followers</span>') %></strong></li>
+    </ul>
+  </div>
+  
+  <div id="main" class="with-sidebar">
+    <%= render :partial => 'subscriber', :collection => @subscribers %>
+    <%= render :partial => 'follower', :collection => @followers %>
+  </div>
+  <hr />
+  <%= will_paginate(@subscribers) %>
+  <%= will_paginate(@followers) %>
+</div>

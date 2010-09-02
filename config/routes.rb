@@ -6,7 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search, :collection => { :suggestions => :get }
   map.resources :uploads, :collection => { :import => :post }
   map.resources :artists, :member => { :biography => :get, :artwork => :any, :playlist => :get }
-  map.resources :releases, :member => { :archive => :put, :artwork => :any, :download => :get, :sideload => :post, :playlist => :get }
+  map.resources :releases, :member => { :archive => :put, :artwork => :any, :download => :get, :sideload => :post, :add_tracks => :any }
   map.resources :labels, :member => { :playlist => :get }
   map.resources :years, :member => { :playlist => :get }
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
@@ -69,9 +69,14 @@ ActionController::Routing::Routes.draw do |map|
   
   # Public profiles
   map.profile ':profile_id', :controller => 'profiles', :action => 'show'
+  map.settings_profile ':profile_id/settings', :controller => 'profiles', :action => 'settings'
   map.follow_profile ':profile_id/follow', :controller => 'profiles', :action => 'follow', :requirements => { :method => :put }
   map.subscribe_profile ':profile_id/subscribe', :controller => 'profiles', :action => 'subscribe'
   map.thankyou_profile ':profile_id/thankyou', :controller => 'profiles', :action => 'thankyou'
   map.signup_profile ':profile_id/signup', :controller => 'profiles', :action => 'signup'
+  map.artists_profile ':profile_id/artists', :controller => 'profiles', :action => 'artists'
+  map.fans_profile ':profile_id/fans', :controller => 'profiles', :action => 'fans'
+  map.player_profile ':profile_id/:id/player', :controller => 'profiles', :action => 'player'
+  map.release_profile ':profile_id/:id', :controller => 'profiles', :action => 'release'
 
 end

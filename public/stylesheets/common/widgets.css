@@ -80,20 +80,14 @@ blockquote.big-quote .end-quote { font-size: 90px; font-family: Arial; line-heig
 .dashboard :last-child img { -webkit-border-top-right-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; }
 .dashboard p { text-shadow: #000 1px 1px 1px; }
 
-.artists { padding: 20px 30px; }
-.artist { list-style: none; height: 200px; margin: 0 10px; text-align: center; }
-.artist img { margin: 10px 0; -webkit-border-radius: 10px; -moz-border-radius: 10px; -webkit-box-shadow: 1px 1px 5px #111; -moz-box-shadow: 1px 1px 5px #111; }
-.artist a.name { display: block; font-weight: bold; }
-.artist span.meta { display: block; font-size: 10px; }
-
-.pagination { text-align: center; }
+.pagination { text-align: center; height: 39px; }
 .pagination a, .pagination span { float: left; margin-right: 5px; color: #fff; text-shadow: none; background: #333; -webkit-border-bottom-left-radius: 5px; -webkit-border-bottom-right-radius: 5px; -moz-border-radius-bottomleft: 5px; -moz-border-radius-bottomright: 5px; padding: 10px; opacity: 0.8; }
 .pagination a:hover { color: #fff; opacity: 1.0; }
 .pagination .disabled { display: none; }
 .pagination .current { background: #fafafa; color: #333; border: 1px solid #ddd; border-top: none; }
 .pagination .gap { background: transparent; color: #333; }
 .pagination .prev_page { float: left; margin-right: 20px; }
-.pagination .next_page { float: right; margin-left: 20px; }
+.pagination .next_page { float: right; margin-left: 20px; margin-right: 0px; }
 
 .small { font-size: 9px; line-height: 12px; }
 

@@ -9,13 +9,16 @@
         <li>Special offers and other fun stuff.</li>
       </ul>
       
+      <% if @user.subscription_price && @user.subscription_periodicity %>
       <div class="sticker">
         <%= @user.subscription_price_with_currency %><br /><span class="small">per <%= @user.subscription_periodicity_as_period %></span>
       </div>
+      <% end %>
       
       <hr />
       
       <% if current_user %>
+        <% if @user.subscription_price && @user.subscription_periodicity %>
         <form name="_xclick" action="https://www.paypal.com/cgi-bin/webscr" method="post" class="aligncenter">
           <input type="hidden" name="business" value="<%= @user.email %>" />
           <input type="hidden" name="currency_code" value="<%= @user.subscription_currency %>" />
@@ -42,6 +45,9 @@
           
           <input type="image" src="/images/btn_subscribeCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
         </form>
+        <% else %>
+          <%= link_to('Subscribe', subscribe_profile_path(@user.login), :class => 'button green') %>
+        <% end %>
       <% else %>
         <p class="aligncenter">
           Do you already have a Bitspace account? Click <%= link_to('here', login_path(:return_to => request.path)) %> to sign in.
@@ -74,7 +80,7 @@
           </div>
           <div class="submit-row">
             <p>
-              <button type="submit">Create my account</button>
+              <input type="submit" value="Create my account" />
             </p>
             <p class="small grey">
               By clicking on 'Create my account' above,<br/>

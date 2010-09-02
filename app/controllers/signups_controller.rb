@@ -1,5 +1,5 @@
 class SignupsController < ApplicationController
-  layout 'site'
+  layout 'login'
   
   skip_before_filter :require_user
   skip_before_filter :require_chrome_frame_if_ie

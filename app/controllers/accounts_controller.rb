@@ -30,6 +30,7 @@ class AccountsController < ApplicationController
         current_user.website = params[:user][:website] if params[:user][:website].present?
         current_user.biography = params[:user][:biography] if params[:user][:biography].present?
         current_user.public_profile = params[:user][:public_profile] if params[:user][:public_profile].present?
+        current_user.avatar = params[:user][:avatar] if params[:user][:avatar].present?
         if current_user.save
           head :ok
         else

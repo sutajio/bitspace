@@ -1,19 +1,15 @@
-<div class="container_16 clearfix">
-  <div class="grid_8 prefix_4 suffix_4 aligncenter">
-    <div class="reflected-container">
+<div class="reflected-container">
 
-      <div class="box">
-        <h1>Woo hoo!</h1>
-        <p>Your password has been changed!<br />
-           Please do try to remember it this time. :)</p>
-        
-        <% form_tag player_path(:trailing_slash => true), :method => 'get' do %>
-          <div class="submit-row">
-            <%= submit_tag 'Return to Bitspace Player' %>
-          </div>
-        <% end %>
+  <div class="box">
+    <h1>Woo hoo!</h1>
+    <p>Your password has been changed!<br />
+       Please do try to remember it this time. :)</p>
+    
+    <% form_tag player_path(:trailing_slash => true), :method => 'get' do %>
+      <div class="submit-row">
+        <%= submit_tag 'Return to Bitspace Player' %>
       </div>
-
-    </div>
+    <% end %>
   </div>
+
 </div>

@@ -1,0 +1,52 @@
+<div class="release-actions">
+  <% if @release.playable?(current_user) %>
+    <% if current_user && current_user.has_copy_of_release?(@release) %>
+    <em>This release has been added to your collection.</em>
+    <% else %>
+    <%= link_to('Add to collection', sideload_release_path(@release), :title => 'Copy this release to your own collection.', :class => 'button green tooltipped', :rel => 'sideload') %>
+    <% end %>
+    <%= link_to('Download', download_release_path(@release), :title => 'Download this release as a ZIP archive.', :class => 'button tooltipped', :target => '_blank') %>
+  <% end %>
+</div>
+
+<div class="release-title-section">
+  <h1><%=h @release.title %></h1>
+  <h2>
+      <span class="artist-name">by <strong><%=h @release.artist.name %></strong></span> <!-- <span class="sep">|</span>
+      <% if release_date(@release) %><span class="release-date"><%= release_date(@release) %></span> <span class="sep">|</span><% end %>
+      <% if @release %><span class="catalog-number">SRVC006</span> <span class="sep">|</span><% end %>
+      <% if @user.label? %>
+      <span class="label-name">Released by <%= link_to(@user.login.anal_title_case, profile_path(@user.login, :trailing_slash => true)) %></span> <span class="sep">|</span>
+      <% else %>
+      <% if @release.label %><span class="label-name">Released by <strong><%=h @release.label.name %></strong></span> <span class="sep">|</span><% end %>
+      <% end %>
+      <span class="downloads-count"><%= pluralize(465, 'download') %></span> -->
+  </h2>
+</div>
+
+<div id="content">
+  <div id="secondary">
+    <%= image_tag(@release.artwork.url(:medium, false), :size => '300x300', :alt => 'Artwork', :class => 'artwork') %>
+  </div>
+  
+  <div id="main" class="with-sidebar">
+    <% @release.tracks.sort_by{|t| t.set_nr.to_i }.group_by(&:set_nr).each do |set_nr, tracks| %>
+    <ol class="tracks">
+      <%= render :partial => 'tracks/track', :collection => tracks.sort_by {|t| t.track_nr.to_i }, :locals => { :playable => @release.playable?(current_user) } %>
+    </ol>
+    <% end %>
+    
+    <% if @release.description.present? %>
+    <p class="description">
+      <%= plain_text(@release.description) %>
+    </p>
+    <% end %>
+    
+    <%= render :partial => 'releases/comments', :locals => { :release => @release.original ? @release.original : @release, :with_form => current_user.present? } %>
+  </div>
+  <hr />
+  <div class="pagination">
+    <%= link_to('&laquo; Previous', '#', :class => 'prev_page', :rel => 'prev') %>
+    <%= link_to('Next &raquo;', '#', :class => 'next_page', :rel => 'next') %>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="profile-actions">
+  <% if @user == current_user %>
+    <%= link_to('New release', new_release_path, :class => 'button green') %>
+    <%= link_to('Settings', settings_profile_path, :class => 'button', :target => '_self') %>
+    <%= link_to('Sign out', logout_path, :class => 'button') %>
+  <% else %>
+    <% if @user.subscribable? %>
+      <span class="price"><strong><%= @user.subscription_price_with_currency %></strong> / <%= @user.subscription_periodicity_as_period %></span>
+      <%= link_to('Subscribe', subscribe_profile_path(@user.login), :class => 'button green') %>
+      <% if current_user && current_user.follows?(@user) %>
+        <%= link_to('Unfollow', follow_profile_path(@user.login), :class => 'button') %>
+      <% else %>
+        <%= link_to('Follow', follow_profile_path(@user.login), :class => 'button') %>
+      <% end %>
+    <% else %>
+      <% if current_user && current_user.follows?(@user) %>
+        <%= link_to('Unfollow', follow_profile_path(@user.login), :class => 'button') %>
+      <% else %>
+        <%= link_to('Follow', follow_profile_path(@user.login), :class => 'button') %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+
+<div class="profile vcard">
+  <%= image_tag(@user.avatar.url(:original, false), :size => '100x100', :class => 'photo') %>
+  <h1><%=h @user.login.anal_title_case %></h1>
+  <ul>
+    <li>
+      <span class="locality">Stockholm, Sweden</span> <span class="sep">|</span>
+      <%= link_to(url_without_protocol(@user.website), @user.website, :class => 'url') %>
+    </li>
+  </ul>
+  <% if @user.biography.present? %>
+  <p class="bio">
+    <%= auto_link(h(@user.biography)) %>
+  </p>
+  <% end %>
+</div>
+
+<ul class="secondary-tabs">
+  <li><%= link_to('Share', '#', :class => 'share tooltipped', :title => 'Share') %></li>
+  <li><%= link_to('RSS', '#', :class => 'feed tooltipped', :title => 'RSS feed') %></li>
+</ul>
+
+<ul class="tabs">
+  <li<% if params[:action] == 'show' %> class="active"<% end %>><%= link_to(pluralize(@user.releases.count, '<span>release</span>', '<span>releases</span>'), profile_path(@user.login)) %></li>
+  <li<% if params[:action] == 'artists' %> class="active"<% end %>><%= link_to(pluralize(@user.artists.count, '<span>artist</span>', '<span>artists</span>'), artists_profile_path(@user.login)) %></li>
+  <li<% if params[:action] == 'fans' %> class="active"<% end %>><%= link_to(pluralize(@user.followers.count + @user.subscribers.count, '<span>fan</span>', '<span>fans</span>'), fans_profile_path(@user.login)) %></li>
+</ul>

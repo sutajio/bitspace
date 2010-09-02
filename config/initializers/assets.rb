@@ -8,6 +8,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.validation.js',
     '/vendor/plugins/jquery.expander.js',
     '/vendor/plugins/jquery.autogrow.js',
+    '/vendor/plugins/jquery.address.js',
     '/vendor/plugins/human-date.js',
     '/vendor/shadowbox/shadowbox.js'
   ],
@@ -18,7 +19,6 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.swfupload.js',
     '/vendor/plugins/jquery.infinitescroll.js',
     '/vendor/plugins/jquery.ui.js',
-    '/vendor/plugins/jquery.address.js',
     '/vendor/plugins/jquery.suggest.js',
     '/vendor/plugins/jquery.masonry.js',
     '/vendor/soundmanager/script/soundmanager2-nodebug-jsmin.js',
@@ -28,8 +28,10 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     'login'
   ],
   :site => [
-    '/vendor/plugins/jquery.address.js',
     'site'
+  ],
+  :profile => [
+    'profile'
   ])
 ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(
   :common => [
@@ -48,4 +50,7 @@ ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(
   ],
   :site => [
     'site'
+  ],
+  :profile => [
+    'profile'
   ])

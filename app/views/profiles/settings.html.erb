@@ -1,0 +1,79 @@
+<div class="box" id="settings-box">
+  <% if flash[:alert].present? %>
+    <div class="bubble bubble-south">
+      <div class="bubble-inner">
+        <%=h flash[:alert] %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if flash[:notice].present? %>
+    <div class="bubble bubble-south">
+      <div class="bubble-inner">
+        <%=h flash[:notice] %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% form_for current_user, :url => settings_profile_path(@user.login),
+                :html => { :id => 'settings-form', :multipart => true } do |f| %>
+    <table>
+      <tbody>
+        <tr>
+          <th><%= label_tag :password, 'Current password' %></th>
+          <td>
+            <%= password_field_tag :password, '', :class => 'required' %>
+            <div class="hint"><%= link_to('Forgot your password?', forgot_password_path, :rel => 'shadowbox') %></div>
+          </td>
+        </tr>
+        <tr>
+          <th><%= f.label :email %></th>
+          <td><%= f.text_field :email, :class => 'required email' %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :login, 'Username' %></th>
+          <td><%= f.text_field :login, :class => 'required' %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :password, 'New password' %></th>
+          <td><%= f.password_field :password %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :password_confirmation, 'Password again' %></th>
+          <td><%= f.password_field :password_confirmation %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :avatar, 'Avatar' %></th>
+          <td><%= f.file_field :avatar %></td>
+        </tr>
+        <tr>
+          <th><%= f.label :website %></th>
+          <td>
+            <%= f.text_field :website, :class => 'url' %>
+          </td>
+        </tr>
+        <tr>
+          <th valign="top"><%= f.label :biography %></th>
+          <td>
+            <%= f.text_area :biography, :size => '28x7', :style => 'display:block;' %>
+          </td>
+        </tr>
+        <tr>
+          <th></th>
+          <td>
+            <%= f.check_box :public_profile %>
+            <%= f.label :public_profile, 'Enable my public profile' %>
+            <p id="whatispublicprofiles" class="grey" style="width:290px;">
+              Your public profile is a way for you to share your music taste and to let your friends follow
+              what you upload and listen to. You can find your public profile at: <%= link_to(profile_url(current_user.login), profile_url(current_user.login), :target => '_blank') %>
+            </p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <hr />
+    <p class="alignright"><%= submit_tag 'Save changes' %></p>
+  
+  <% end %>
+</div>

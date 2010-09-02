@@ -1,55 +1,62 @@
-<div class="container_16 clearfix">
-  <div class="grid_8 prefix_4 suffix_4 aligncenter">
-    <% if flash[:error] %>
-    <div class="error">
-      <%=h flash[:error] %>
+<h1 style="margin: 20px 0 0 0;">Welcome to <%=h @user.subscription_plan %></h1>
+<h3 class="grey">
+  You will get <%= number_to_human_size(@user.max_storage) || 'insane amounts' %> of music storage, wow!
+</h3>
+<div class="box" id="signup-box">
+  <% if flash[:alert].present? %>
+    <div class="bubble bubble-south">
+      <div class="bubble-inner">
+        <%=h flash[:alert] %>
+      </div>
     </div>
-    <% end %>
-    <h1 style="margin: 0;">Welcome to <%=h @user.subscription_plan %></h1>
-    <h3 class="grey">
-      You will get <%= number_to_human_size(@user.max_storage) || 'insane amounts' %> of music storage, wow!
-    </h3>
-    <div class="box">
-      <% form_for @user, :html => { :id => 'signup-form' } do |f| %>
-        <%= f.error_messages %>
-        <div class="field">
-          <%= f.label :account_type %>
-          <div class="segmented">
-            <%= f.radio_button :account_type, 'collector' %> <label for="user_account_type_collector" class="first checked">Collector</label>
-            <%= f.radio_button :account_type, 'artist' %> <label for="user_account_type_artist">Artist</label>
-            <%= f.radio_button :account_type, 'label' %> <label for="user_account_type_label" class="last">Label</label>
-          </div>
-        </div>
-        <div class="field">
-          <%= f.label :email %>
-          <%= f.text_field :email, :class => 'required email' %>
-          <kbd>Your email address</kbd>
-        </div>
-        <div class="field">
-          <%= f.label :login %>
-          <%= f.text_field :login, :class => 'required' %>
-          <kbd>Username, can be anything</kbd>
-        </div>
-        <div class="field">
-          <%= f.label :password %>
-          <%= f.password_field :password, :class => 'required' %>
-          <kbd>A secure password</kbd>
-        </div>
-        <div class="field">
-          <%= f.label :password_confirmation %>
-          <%= f.password_field :password_confirmation, :class => 'required' %>
-          <kbd>A secure password</kbd>
-        </div>
-        <div class="submit-row">
-          <p>
-            <button type="submit" class="button green">Create my account</button>
-          </p>
-          <p class="small grey">
-            By clicking on 'Create my account' above,<br/>
-            you confirm that you accept the <%= link_to('Terms of Service', '/terms') %>.
-          </p>
-        </div>
-      <% end %>
+  <% end %>
+  
+  <% if flash[:notice].present? %>
+    <div class="bubble bubble-south">
+      <div class="bubble-inner">
+        <%=h flash[:notice] %>
+      </div>
     </div>
-  </div>
+  <% end %>
+  
+  <% form_for @user, :html => { :id => 'signup-form' } do |f| %>
+    <%= f.error_messages %>
+    <div class="field">
+      <%= f.label :account_type %>
+      <div class="segmented">
+        <%= f.radio_button :account_type, 'collector' %> <label for="user_account_type_collector" class="first checked">Collector</label>
+        <%= f.radio_button :account_type, 'artist' %> <label for="user_account_type_artist">Artist</label>
+        <%= f.radio_button :account_type, 'label' %> <label for="user_account_type_label" class="last">Label</label>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :email %>
+      <%= f.text_field :email, :class => 'required email' %>
+      <kbd>Your email address</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :login %>
+      <%= f.text_field :login, :class => 'required' %>
+      <kbd>Username, can be anything</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :password %>
+      <%= f.password_field :password, :class => 'required' %>
+      <kbd>A secure password</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :class => 'required' %>
+      <kbd>A secure password</kbd>
+    </div>
+    <div class="submit-row">
+      <p>
+        <input type="submit" value="Create my account" />
+      </p>
+      <p class="small grey">
+        By clicking on 'Create my account' above,<br/>
+        you confirm that you accept the <%= link_to('Terms of Service', '/terms') %>.
+      </p>
+    </div>
+  <% end %>
 </div>

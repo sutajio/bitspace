@@ -1,0 +1,11 @@
+<%= render :partial => 'profile' %>
+
+<div id="content">
+  <div id="main">
+    <div class="artists">
+      <%= render :partial => 'artist', :collection => @artists %>
+    </div>
+  </div>
+  <hr />
+  <%= will_paginate(@artists) %>
+</div>

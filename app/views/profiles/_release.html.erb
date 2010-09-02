@@ -1,0 +1,6 @@
+<div class="release">
+  <% link_to(release_profile_path(@user.login, release.id), :class => 'cover-art') do %>
+    <%= image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art') %>
+    <span class="overlay"></span>
+  <% end %>
+</div>

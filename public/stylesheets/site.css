@@ -48,21 +48,7 @@ pre { background: #222; color: #fff; text-shadow: none; padding: 10px; -webkit-b
 #invitation_request_email { font-size: 12px; width: 170px; border: 1px solid #ccc; padding: 5px; }
 #invitation_request_submit { font-size: 11px; background: #eee; border: 1px solid #ccc; padding: 6px; }
 
-#signup-form input { font-size: 18px; padding: 5px; width: 65%; text-align: center; border: 1px solid #ccc; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
-#signup-form input.hint { color: #ccc; }
-#signup-form label { display: block; font-size: 16px; color: #999; font-weight: normal; margin: 15px 0 5px 0; }
-#signup-form label.error { color: #f66; font-size: 12px; margin: 0; }
-#signup-form kbd { display: none; }
-#signup-form button { font-weight: bold; padding: 10px 15px; }
-
-#signup-form .segmented { height: 38px; width: 272px; border: 1px solid #ccc; margin: 0 72px; -webkit-border-radius: 10px; }
-#signup-form .segmented input[type=radio] { display: none; }
-#signup-form .segmented label { background: #ccc -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#ccc)); color: #888; text-shadow: #eee 0px 1px 1px; border-left: 1px solid #bbb; display: block; float: left; width: 70px; padding: 10px; margin: 0; font-size: 14px; font-weight: bold; cursor: pointer; }
-#signup-form .segmented label.first { border-left: none; -webkit-border-top-left-radius: 10px; -webkit-border-bottom-left-radius: 10px; }
-#signup-form .segmented label.last { -webkit-border-top-right-radius: 10px; -webkit-border-bottom-right-radius: 10px; }
-#signup-form .segmented label.checked { background: #aaa -webkit-gradient(linear, left top, left bottom, from(#777), to(#bbb)); color: #fff; text-shadow: #666 0px 1px 1px; }
-
-.button { cursor: pointer; background: #f9f9f9 -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f9f9f9)); color: #666; border: 1px solid #eee; padding: 5px 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; }
+.button { cursor: pointer; background: #f9f9f9 -webkit-gradient(linear, left top, left bottom, from(#fff), to(#f9f9f9)); color: #666; border: 1px solid #eee; padding: 5px 10px; -webkit-border-radius: 5px; -moz-border-radius: 5px; text-decoration: none; }
 .button:hover { border-color: #ccc; color: #999; }
 .button:active { background: #fff; background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#fff)); }
 .button.grey { color: #333; font-weight: bold; }

@@ -1,47 +1,43 @@
-<div class="container_16 clearfix">
-  <div class="grid_8 prefix_4 suffix_4 aligncenter">
-    <div class="reflected-container" id="logo-box">
+<div class="reflected-container" id="logo-box">
       
-      <div class="box" id="login-box">
-        <% if flash[:alert].present? %>
-          <div class="bubble bubble-south">
-            <div class="bubble-inner">
-              <%=h flash[:alert] %><br />
-              <%= link_to('Need to reset your password?', forgot_password_path) %>
-            </div>
-          </div>
-        <% end %>
-        
-        <% if flash[:notice].present? %>
-          <div class="bubble bubble-south">
-            <div class="bubble-inner">
-              <%=h flash[:notice] %>
-            </div>
-          </div>
-        <% end %>
-        
-        <% form_for @user_session do |f| %>
-          <div class="field">
-            <%= f.text_field :login %>
-            <kbd>Username</kbd>
-          </div>
-        
-          <div class="field">
-            <%= f.password_field :password %>
-            <kbd>Password</kbd>
-          </div>
-        
-          <div class="grey">
-            <%= f.check_box :remember_me %>
-            <%= f.label :remember_me, 'Remember me on this computer' %>
-          </div>
-        
-          <div class="submit-row">
-            <%= f.submit 'Sign in' %>
-          </div>
-        <% end %>
+  <div class="box" id="login-box">
+    <% if flash[:alert].present? %>
+      <div class="bubble bubble-south">
+        <div class="bubble-inner">
+          <%=h flash[:alert] %><br />
+          <%= link_to('Need to reset your password?', forgot_password_path) %>
+        </div>
       </div>
-      
-    </div>
+    <% end %>
+    
+    <% if flash[:notice].present? %>
+      <div class="bubble bubble-south">
+        <div class="bubble-inner">
+          <%=h flash[:notice] %>
+        </div>
+      </div>
+    <% end %>
+    
+    <% form_for @user_session do |f| %>
+      <div class="field">
+        <%= f.text_field :login %>
+        <kbd>Username</kbd>
+      </div>
+    
+      <div class="field">
+        <%= f.password_field :password %>
+        <kbd>Password</kbd>
+      </div>
+    
+      <div class="grey">
+        <%= f.check_box :remember_me %>
+        <%= f.label :remember_me, 'Remember me on this computer' %>
+      </div>
+    
+      <div class="submit-row">
+        <%= f.submit 'Sign in' %>
+      </div>
+    <% end %>
   </div>
+  
 </div>

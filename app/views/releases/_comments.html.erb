@@ -4,7 +4,7 @@
     <li>
       <%= link_to(h(comment.user.login), profile_path(comment.user.login), :class => 'user', :target => '_blank') %>
       <abbr class="timestamp" title="<%= comment.created_at.iso8601 %>"></abbr>
-      <%= auto_link(simple_format(escape_once(comment.body)), :all, :target => '_blank', :class => 'external') {|link| truncate(link, :length => 35) } %>
+      <%= plain_text(comment.body) %>
     </li>
   <% end %>
   </ol>
@@ -14,7 +14,7 @@
       <%= f.hidden_field :commented_type %>
       <%= f.text_area :body, :class => 'required autogrow' %>
       <div class="submitrow">
-        <button type="submit">Comment</button>
+        <button type="submit">Add comment</button>
       </div>
     <% end %>
   <% end %>

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100902143312) do
+ActiveRecord::Schema.define(:version => 20100907143839) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -211,6 +211,9 @@ ActiveRecord::Schema.define(:version => 20100902143312) do
     t.string    "tags"
     t.integer   "original_id"
     t.string    "catalog_number"
+    t.text      "description"
+    t.string    "release_type"
+    t.string    "privacy",              :default => "private"
   end
 
   add_index "releases", ["archived"], :name => "index_releases_on_archived"

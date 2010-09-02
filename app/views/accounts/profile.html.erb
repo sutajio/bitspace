@@ -6,7 +6,7 @@
       <hr />
       
       <% form_for current_user, :url => profile_account_path,
-                    :html => { :id => 'account-profile-form' } do |f| %>
+                    :html => { :id => 'account-profile-form', :multipart => true } do |f| %>
         
         <div class="grid_8 alpha">
           <table>
@@ -33,6 +33,10 @@
               <tr>
                 <th><%= f.label :password_confirmation, 'Password again' %></th>
                 <td><%= f.password_field :password_confirmation %></td>
+              </tr>
+              <tr>
+                <th><%= f.label :avatar, 'Avatar' %></th>
+                <td><%= f.file_field :avatar %></td>
               </tr>
             </tbody>
           </table>

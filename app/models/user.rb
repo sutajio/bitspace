@@ -17,6 +17,25 @@ class User < ActiveRecord::Base
   has_many :subscribers, :through => :subscriptions
   has_many :memberships, :foreign_key => 'subscriber_id', :class_name => 'Subscription'
   has_many :comments
+  has_many :latest_comments, :through => :releases, :source => :comments, :class_name => 'Comment', :limit => 5, :order => 'comments.created_at DESC'
+  
+  has_attached_file :avatar,
+    :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
+    :styles => { :tiny => ["35x35#", :jpg], :small => ["100x100#", :jpg] },
+    :whiny => false,
+    :storage => :s3,
+    :s3_credentials => {
+      :access_key_id => ENV['AMAZON_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AMAZON_SECRET_ACCESS_KEY']
+    },
+    :default_url => '/images/avatar.jpg',
+    :url => ":s3_alias_url",
+    :s3_host_alias => ENV['CDN_HOST'],
+    :bucket => ENV['S3_BUCKET'],
+    :s3_headers => {
+      'cache-control' => "max-age=#{10.years.to_i}",
+      'expires' => 10.years.from_now.utc.httpdate
+    }
   
   SUBSCRIPTION_PLANS = {
     :free => { :name => 'Bitspace Free', :storage => 500.megabytes, :price_in_euro => 0, :official => true },
@@ -204,5 +223,9 @@ class User < ActiveRecord::Base
   end
   
   after_create :handle_prepaid_label_subscriptions
+  
+  def has_copy_of_release?(original_release)
+    releases.find_by_original_id(original_release.id).present?
+  end
   
 end

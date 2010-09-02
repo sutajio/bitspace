@@ -7,10 +7,14 @@ class Release < ActiveRecord::Base
   has_many :tracks, :dependent => :destroy
   has_many :comments, :dependent => :destroy, :as => :commented
   
+  RELEASE_TYPES = ['Album', 'Audiobook', 'Compilation', 'EP', 'Interview', 
+    'Live', 'Remix', 'Single', 'Soundtrack', 'Spoken word', 'Other']
+  
   validates_presence_of :user_id
   validates_presence_of :artist_id
   validates_presence_of :title
   validates_uniqueness_of :title, :scope => [:artist_id]
+  validates_inclusion_of :release_type, :in => RELEASE_TYPES, :allow_nil => true
   
   default_scope :order => 'year DESC, release_date DESC'
   named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
@@ -45,6 +49,10 @@ class Release < ActiveRecord::Base
       'cache-control' => "max-age=#{10.years.to_i}",
       'expires' => 10.years.from_now.utc.httpdate
     }
+  
+  def full_title
+    year ? "#{artist.name} - #{title} (#{year})" : "#{artist.name} - #{title}"
+  end
   
   def update_meta_data
     identify_mbid unless mbid
@@ -315,7 +323,7 @@ class Release < ActiveRecord::Base
   end
   
   def download_filename
-    filename = year ? "#{artist.name} - #{title} (#{year}).zip" : "#{artist.name} - #{title}.zip"
+    filename = "#{full_title}.zip"
     filename.gsub('/','').gsub("\\",'')
   end
   

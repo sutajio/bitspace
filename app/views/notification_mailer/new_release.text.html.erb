@@ -2,7 +2,7 @@
 <body>
 <p>Hi friend!</p>
 
-<p>We just wanted to let you know that <strong><%= @release.user.login %></strong> has just uploaded "<%= @release.title %>" by <strong><%= @release.artist.name %></strong>.</p>
+<p>We just wanted to let you know that <strong><%= @release.user.login %></strong> has just uploaded <%= link_to(@release.title, profile_url(@release.user.login, :trailing_slash => true, :anchor => release_path(@release)).gsub('%2F','/')) %> by <strong><%= @release.artist.name %></strong>.</p>
 
 <% if @release.artwork.file? -%>
 <img src="<%= @release.artwork.url(:medium, false) %>" width="240" height="240" alt="Artwork" />
@@ -10,16 +10,16 @@
 
 <p>Check it out at:</p>
 
-<p><%= profile_url(@release.user.login, :trailing_slash => true, :anchor => release_path(@release)).gsub('%2F','/') %></p>
+<p><%= link_to(nil, profile_url(@release.user.login, :trailing_slash => true, :anchor => release_path(@release)).gsub('%2F','/')) %></p>
 
 <% if @user.subscribes_to?(@release.user) -%>
 <p>The release has also been added to your own library:</p>
 
-<p><%= player_url(:trailing_slash => true) %></p>
+<p><%= link_to(nil, player_url(:trailing_slash => true)) %></p>
 
 <p>You can also download the release as a ZIP archive if you want:</p>
 
-<p><%= download_release_url(@release) %></p>
+<p><%= link_to(nil, download_release_url(@release)) %></p>
 <% end -%>
 
 

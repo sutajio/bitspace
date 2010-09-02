@@ -2,9 +2,10 @@ class ReleasesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:update]
   
   skip_before_filter :require_user, :only => [:index, :show, :download]
-  before_filter :find_user, :only => [:index, :show, :download]
+  before_filter :find_user, :only => [:index, :show, :new, :create, :add_tracks, :download]
   
   layout 'site', :only => [:download]
+  layout 'login', :only => [:new, :create, :add_tracks]
   
   def index
     respond_to do |format|
@@ -41,6 +42,26 @@ class ReleasesController < ApplicationController
       format.html
       format.json
     end
+  end
+  
+  def new
+    @release = current_user.releases.build
+  end
+  
+  def create
+    @artist = current_user.artists.find_or_create_by_name(params[:release].delete(:artist))
+    @label = current_user.labels.find_or_create_by_name(params[:release].delete(:label))
+    @release = current_user.releases.build(params[:release])
+    @release.artist = @artist
+    @release.label = @label
+    @release.save!
+    redirect_to :action => 'add_tracks', :id => @release.id
+  rescue ActiveRecord::RecordInvalid => e
+    render :action => 'new'
+  end
+  
+  def add_tracks
+    @release = current_user.releases.without_archived.find(params[:id])
   end
   
   def edit

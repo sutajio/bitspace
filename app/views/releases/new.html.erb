@@ -1,0 +1,86 @@
+<div class="box" id="new-release-box">
+  <% if flash[:alert].present? %>
+    <div class="bubble bubble-south">
+      <div class="bubble-inner">
+        <%=h flash[:alert] %>
+      </div>
+    </div>
+  <% end %>
+  
+  <% if flash[:notice].present? %>
+    <div class="bubble bubble-south">
+      <div class="bubble-inner">
+        <%=h flash[:notice] %>
+      </div>
+    </div>
+  <% end %>
+  
+  <h1>New release</h1>
+  
+  <% form_for @release, :html => { :id => 'new-release-form' } do |f| %>
+    <div class="field">
+      <div class="segmented">
+        <%= f.radio_button :privacy, 'public' %>
+        <label for="release_privacy_public" class="first">Public</label>
+        <%= f.radio_button :privacy, 'fans' %>
+        <label for="release_privacy_fans">All fans</label>
+        <%= f.radio_button :privacy, 'subscribers' %>
+        <label for="release_privacy_subscribers">Subscribers</label>
+        <%= f.radio_button :privacy, 'private' %>
+        <label for="release_privacy_private" class="last checked">Private</label>
+      </div>
+    </div>
+    <hr />
+    <div class="field">
+      <%= f.label :title %>
+      <%= f.text_field :title, :class => 'required' %>
+      <kbd>The name of your release</kbd>
+      <div>
+        Permalink: <%= profile_url(@user.login, :trailing_slash => true) %>[title here]
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :artist %>
+      <%= f.text_field :artist, :class => 'required' %>
+      <kbd>Main artist on this release</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :description %>
+      <%= f.text_area :description %>
+      <kbd>A short description or review. But preferably longer than a haiku.</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :release_type %>
+      <%= f.select :release_type, Release::RELEASE_TYPES, :class => 'required' %>
+    </div>
+    <div class="field">
+      <%= f.label :label %>
+      <%= f.text_field :label %>
+      <kbd>I.e. "Factory Records"</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :catalog_number %>
+      <%= f.text_field :catalog_number %>
+      <kbd>I.e. "FAC 501"</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :release_date %>
+      <%= f.text_field :release_date, :class => 'dateISO' %>
+      <kbd>YYYY-MM-DD</kbd>
+    </div>
+    <div class="field">
+      <%= f.label :tags %>
+      <%= f.text_field :tags %>
+      <kbd>Comma separated words</kbd>
+    </div>
+    <div class="submit-row">
+      <p>
+        <input type="submit" value="Create release" />
+      </p>
+      <p class="small grey">
+        By clicking on 'Create release' above,<br/>
+        you confirm that you accept the <%= link_to('Terms of Service', '/terms') %>.
+      </p>
+    </div>
+  <% end %>
+</div>
