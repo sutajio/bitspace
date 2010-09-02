@@ -119,6 +119,7 @@ class Artist < ActiveRecord::Base
     end
     self.sort_name ||= "#{name[4..-1]}, The" if name.match(/^The /)
     self.sort_name ||= name
+    self.sort_name = self.sort_name.anal_title_case
     self.save!
   end
   
