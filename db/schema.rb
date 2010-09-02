@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100825143553) do
+ActiveRecord::Schema.define(:version => 20100902143312) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -32,6 +32,7 @@ ActiveRecord::Schema.define(:version => 20100825143553) do
     t.string    "tags"
     t.text      "biography"
     t.integer   "original_id"
+    t.boolean   "archived",             :default => false
   end
 
   add_index "artists", ["mbid"], :name => "index_artists_on_mbid"
@@ -39,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20100825143553) do
   add_index "artists", ["original_id"], :name => "index_artists_on_original_id"
   add_index "artists", ["releases_count"], :name => "index_artists_on_releases_count"
   add_index "artists", ["sort_name"], :name => "index_artists_on_sort_name"
+  add_index "artists", ["user_id", "archived", "sort_name"], :name => "index_artists_on_user_id_and_archived_and_sort_name"
+  add_index "artists", ["user_id", "archived"], :name => "index_artists_on_user_id_and_archived"
   add_index "artists", ["user_id"], :name => "index_artists_on_user_id"
 
   create_table "blog_posts", :force => true do |t|
@@ -150,12 +153,15 @@ ActiveRecord::Schema.define(:version => 20100825143553) do
     t.string    "website"
     t.string    "tags"
     t.integer   "original_id"
+    t.boolean   "archived",             :default => false
   end
 
   add_index "labels", ["mbid"], :name => "index_labels_on_mbid"
   add_index "labels", ["name"], :name => "index_labels_on_name"
   add_index "labels", ["original_id"], :name => "index_labels_on_original_id"
   add_index "labels", ["sort_name"], :name => "index_labels_on_sort_name"
+  add_index "labels", ["user_id", "archived", "sort_name"], :name => "index_labels_on_user_id_and_archived_and_sort_name"
+  add_index "labels", ["user_id", "archived"], :name => "index_labels_on_user_id_and_archived"
   add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
 
   create_table "mixtape_tracks", :force => true do |t|
@@ -204,6 +210,7 @@ ActiveRecord::Schema.define(:version => 20100825143553) do
     t.boolean   "archived",             :default => false
     t.string    "tags"
     t.integer   "original_id"
+    t.string    "catalog_number"
   end
 
   add_index "releases", ["archived"], :name => "index_releases_on_archived"
@@ -321,6 +328,14 @@ ActiveRecord::Schema.define(:version => 20100825143553) do
     t.string   "subscription_currency"
     t.string   "subscription_periodicity"
     t.string   "account_type",             :default => "collector"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.integer  "avatar_width"
+    t.integer  "avatar_height"
+    t.string   "city"
+    t.string   "country"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
