@@ -23,11 +23,11 @@
         
         <dl class="status grid_2 prefix_3 alpha">
           <dt>Artists</dt>
-          <dd><%= current_user.artists.with_releases.size %></dd>
+          <dd><%= current_user.artists.without_archived.has_releases.size %></dd>
         </dl>
         <dl class="status grid_2">
           <dt>Releases</dt>
-          <dd><%= current_user.releases.size %></dd>
+          <dd><%= current_user.releases.without_archived.has_tracks.size %></dd>
         </dl>
         <dl class="status grid_2">
           <dt>Tracks</dt>
@@ -35,7 +35,7 @@
         </dl>
         <dl class="status grid_2">
           <dt>Labels</dt>
-          <dd><%= current_user.labels.size %></dd>
+          <dd><%= current_user.labels.without_archived.has_releases.size %></dd>
         </dl>
         <dl class="status grid_2 suffix_3 omega">
           <dt>Total time</dt>

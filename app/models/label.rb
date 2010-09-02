@@ -11,6 +11,10 @@ class Label < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:user_id]
   
   default_scope :order => 'name'
+  named_scope :by_name, lambda { |name| { :conditions => { :name => name } } }
+  named_scope :with_archived, :conditions => { :archived => [true, false] }
+  named_scope :without_archived, :conditions => { :archived => false }
+  named_scope :has_releases, :conditions => ['releases_count > 0']
   
   searchable_on :name
   
@@ -86,6 +90,18 @@ class Label < ActiveRecord::Base
       raise label.errors.full_messages.to_sentence
     end
     label
+  end
+  
+  def toggle_archive!
+    archived? ? unarchive! : archive!
+  end
+  
+  def archive!
+    update_attribute(:archived, true)
+  end
+  
+  def unarchive!
+    update_attribute(:archived, false)
   end
   
   protected

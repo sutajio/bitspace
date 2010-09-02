@@ -12,8 +12,9 @@ namespace :cron do
   task :metadata => :environment do
     puts "-> Updating meta data."
     puts "Artists:"
-    Artist.find_each do |artist|
+    Artist.without_archived.find_each do |artist|
       begin
+        artist.archive! if artist.releases.without_archived.empty?
         artist.update_meta_data_without_send_later
         print "."
       rescue Object => e
@@ -23,8 +24,9 @@ namespace :cron do
     end
     puts
     puts "Labels:"
-    Label.find_each do |label|
+    Label.without_archived.find_each do |label|
       begin
+        label.archive! if label.releases.without_archived.empty?
         label.update_meta_data_without_send_later
         print "."
       rescue Object => e
@@ -34,7 +36,7 @@ namespace :cron do
     end
     puts
     puts "Releases:"
-    Release.find_each do |release|
+    Release.without_archived.find_each do |release|
       begin
         release.update_meta_data_without_send_later
         print "."

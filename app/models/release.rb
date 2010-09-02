@@ -115,11 +115,23 @@ class Release < ActiveRecord::Base
   end
   
   def archive!
-    update_attribute(:archived, true)
+    transaction do
+      update_attribute(:archived, true)
+      if self.artist && self.artist.releases.without_archived.empty?
+        self.artist.archive!
+      end
+      if self.label && self.label.releases.without_archived.empty?
+        self.label.archive!
+      end
+    end
   end
   
   def unarchive!
-    update_attribute(:archived, false)
+    transaction do
+      update_attribute(:archived, false)
+      self.artist.unarchive! if self.artist
+      self.label.unarchive! if self.label
+    end
   end
   
   def reprocess_artwork!

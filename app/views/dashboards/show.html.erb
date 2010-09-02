@@ -34,8 +34,8 @@
   
   <div class="grid_8 prefix_4 suffix_4 grey">
     <h3>
-      <%= pluralize(@user.artists.with_releases.size, 'artist') %>,
-      <%= pluralize(@user.releases.size, 'release') %>,
+      <%= pluralize(@user.artists.without_archived.has_releases.size, 'artist') %>,
+      <%= pluralize(@user.releases.without_archived.has_tracks.size, 'release') %>,
       <% if @user.subscribable? %>
       <%= pluralize(@user.subscribers.size, 'subscriber') %>
       <% else %>

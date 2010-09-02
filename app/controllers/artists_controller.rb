@@ -4,21 +4,20 @@ class ArtistsController < ApplicationController
   before_filter :find_user, :only => [:index, :show, :biography]
   
   def index
-    @artists = @user.artists.search_for(params[:q]).paginate(
+    @artists = @user.artists.without_archived.has_releases.search_for(params[:q]).paginate(
         :page => params[:page],
-        :per_page => 20,
-        :conditions => ['releases_count > 0'])
+        :per_page => 20)
     if request.xhr? && @artists.empty?
       render :nothing => true and return
     end
   end
   
   def show
-    @artist = @user.artists.with_releases.find(params[:id])
+    @artist = @user.artists.without_archived.has_releases.find(params[:id])
   end
   
   def biography
-    @artist = @user.artists.with_releases.find(params[:id])
+    @artist = @user.artists.without_archived.has_releases.find(params[:id])
     respond_to do |format|
       format.html
       format.txt
@@ -26,18 +25,18 @@ class ArtistsController < ApplicationController
   end
   
   def edit
-    @artist = current_user.artists.with_releases.find(params[:id])
+    @artist = current_user.artists.without_archived.has_releases.find(params[:id])
   end
   
   def update
-    @artist = current_user.artists.with_releases.find(params[:id])
+    @artist = current_user.artists.without_archived.has_releases.find(params[:id])
     @artist.biography = params[:artist][:biography]
     @artist.save!
     head :ok
   end
   
   def artwork
-    @artist = current_user.artists.find(params[:id])
+    @artist = current_user.artists.without_archived.has_releases.find(params[:id])
     if request.put?
       @artist.update_attributes!(:artwork => params[:artist][:artwork])
       head :ok

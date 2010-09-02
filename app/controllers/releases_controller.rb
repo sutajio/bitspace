@@ -29,7 +29,7 @@ class ReleasesController < ApplicationController
   end
   
   def show
-    @release = @user.releases.find(params[:id])
+    @release = @user.releases.without_archived.has_tracks.find(params[:id])
     respond_to do |format|
       format.html
       format.json
@@ -37,11 +37,11 @@ class ReleasesController < ApplicationController
   end
   
   def edit
-    @release = current_user.releases.find(params[:id])
+    @release = current_user.releases.without_archived.has_tracks.find(params[:id])
   end
   
   def update
-    @release = current_user.releases.find(params[:id])
+    @release = current_user.releases.without_archived.has_tracks.find(params[:id])
     @release.transaction do
       if params[:release][:tracks]
         @release.rename_tracks(params[:release][:tracks])
@@ -66,7 +66,7 @@ class ReleasesController < ApplicationController
   end
   
   def artwork
-    @release = current_user.releases.find(params[:id])
+    @release = current_user.releases.without_archived.has_tracks.find(params[:id])
     if request.put?
       @release.update_attributes!(:artwork => params[:release][:artwork])
       @release.tracks.each(&:touch)
@@ -76,14 +76,8 @@ class ReleasesController < ApplicationController
     raise e
   end
   
-  def archive
-    @release = current_user.releases.find(params[:id])
-    @release.toggle_archive!
-    head :ok
-  end
-  
   def download
-    @release = Release.find(params[:id])
+    @release = Release.without_archived.has_tracks.find(params[:id])
     head :forbidden and return unless @release.playable?(current_user)
     if request.xhr?
       render :text => @release.download_url
@@ -97,14 +91,14 @@ class ReleasesController < ApplicationController
   end
   
   def sideload
-    @release = Release.find(params[:id])
+    @release = Release.without_archived.has_tracks.find(params[:id])
     head :forbidden and return unless @release.playable?(current_user)
     @release.sideload(current_user)
     head :ok
   end
   
   def destroy
-    @release = current_user.releases.find(params[:id])
+    @release = current_user.releases.without_archived.has_tracks.find(params[:id])
     Release.transaction do
       @release.tracks.each(&:destroy)
       @release.archive!

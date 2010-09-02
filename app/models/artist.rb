@@ -11,7 +11,9 @@ class Artist < ActiveRecord::Base
   
   default_scope :order => 'name'
   named_scope :by_name, lambda { |name| { :conditions => { :name => name } } }
-  named_scope :with_releases, :conditions => ['releases_count > 0']
+  named_scope :with_archived, :conditions => { :archived => [true, false] }
+  named_scope :without_archived, :conditions => { :archived => false }
+  named_scope :has_releases, :conditions => ['releases_count > 0']
   
   def self.first_with_artwork
     first(:order => 'artists.artwork_updated_at IS NOT NULL DESC, artists.artwork_updated_at DESC')
@@ -179,6 +181,18 @@ class Artist < ActiveRecord::Base
       raise artist.errors.full_messages.to_sentence
     end
     artist
+  end
+  
+  def toggle_archive!
+    archived? ? unarchive! : archive!
+  end
+  
+  def archive!
+    update_attribute(:archived, true)
+  end
+  
+  def unarchive!
+    update_attribute(:archived, false)
   end
   
   protected

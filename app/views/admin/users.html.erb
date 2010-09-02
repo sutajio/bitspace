@@ -28,8 +28,8 @@ Storage: <%= number_to_human_size(user.tracks.sum(:size)) %>
 Max storage: <%= number_to_human_size(user.max_storage) %>
 Subscriptin plan: <%= user.subscription_plan %>
 Created: <%= user.created_at %>
-Artists: <%= pluralize(user.artists.with_releases.size, 'artists') %>
-Releases: <%= pluralize(user.releases.size, 'releases') %>
+Artists: <%= pluralize(user.artists.without_archived.has_releases.size, 'artists') %>
+Releases: <%= pluralize(user.releases.without_archived.has_tracks.size, 'releases') %>
 Tracks: <%= pluralize(user.tracks.size, 'tracks') %></pre>
           </div>
         </td>
