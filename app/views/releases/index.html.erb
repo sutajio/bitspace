@@ -1,4 +1,13 @@
 <div class="container_16 clearfix">
+  <ul class="tabnav" style="float:right;">
+    <li><%= link_to('Date added', releases_path, :target => '_self', :class => params[:order].blank? ? 'current' : nil) %></li>
+    <li><%= link_to('Title', releases_path(:order => 'title'), :target => '_self', :class => params[:order] == 'title' ? 'current' : nil) %></li>
+    <li><%= link_to('Artist name', releases_path(:order => 'artist'), :target => '_self', :class => params[:order] == 'artist' ? 'current' : nil) %></li>
+    <li><%= link_to('Number of tracks', releases_path(:order => 'tracks_count'), :target => '_self', :class => params[:order] == 'tracks_count' ? 'current' : nil) %></li>
+  </ul>
+</div>
+
+<div class="container_16 clearfix">
   <div class="releases clearfix infinite-scroll">
     <div id="infscr-page-1" class="infscr-pages">
       <% @releases.each do |release| %>

@@ -9,11 +9,18 @@ class ReleasesController < ApplicationController
   def index
     respond_to do |format|
       format.html do
+        order = case params[:order]
+        when 'title': 'title ASC'
+        when 'artist': 'artists.name ASC'
+        when 'tracks_count': 'tracks_count DESC'
+        else
+          'created_at DESC'
+        end
         @releases = @user.releases.without_archived.has_tracks.paginate(
             :page => params[:page],
             :per_page => 16,
             :include => [:artist],
-            :order => 'created_at DESC')
+            :order => order)
         if request.xhr? && @releases.empty?
           render :nothing => true and return
         end
