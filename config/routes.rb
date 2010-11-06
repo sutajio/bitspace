@@ -12,6 +12,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
   map.resources :playlists, :collection => { :recent => :get, :latest => :get, :toplist => :get }
   map.resources :comments
+  map.resources :devices
   
   # Last.fm
   map.resources :lastfm, :collection => { :authorize => :get, :callback => :get }
@@ -74,5 +75,6 @@ ActionController::Routing::Routes.draw do |map|
   map.subscribe_profile ':profile_id/subscribe', :controller => 'profiles', :action => 'subscribe'
   map.thankyou_profile ':profile_id/thankyou', :controller => 'profiles', :action => 'thankyou'
   map.signup_profile ':profile_id/signup', :controller => 'profiles', :action => 'signup'
+  map.devices_profile ':profile_id/devices', :controller => 'devices', :action => 'create', :requirements => { :method => :post }
 
 end

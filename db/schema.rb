@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100902143312) do
+ActiveRecord::Schema.define(:version => 20101106160010) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -101,6 +101,15 @@ ActiveRecord::Schema.define(:version => 20100902143312) do
     t.timestamp "created_at"
     t.timestamp "updated_at"
   end
+
+  create_table "devices", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "apns_token"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "devices", ["user_id"], :name => "index_devices_on_user_id"
 
   create_table "followings", :force => true do |t|
     t.integer   "user_id"
@@ -211,6 +220,9 @@ ActiveRecord::Schema.define(:version => 20100902143312) do
     t.string    "tags"
     t.integer   "original_id"
     t.string    "catalog_number"
+    t.text      "description"
+    t.string    "release_type"
+    t.string    "privacy",              :default => "private"
   end
 
   add_index "releases", ["archived"], :name => "index_releases_on_archived"
@@ -265,7 +277,7 @@ ActiveRecord::Schema.define(:version => 20100902143312) do
     t.timestamp "loved_at"
     t.integer   "scrobbles_count"
     t.integer   "original_id"
-    t.datetime  "scrobbled_at"
+    t.timestamp "scrobbled_at"
   end
 
   add_index "tracks", ["artist_id"], :name => "index_tracks_on_artist_id"
@@ -292,50 +304,49 @@ ActiveRecord::Schema.define(:version => 20100902143312) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "facebook_uid"
-    t.string   "name"
-    t.string   "email"
-    t.string   "persistence_token"
-    t.string   "single_access_token"
-    t.string   "perishable_token"
-    t.integer  "login_count",              :default => 0
-    t.integer  "failed_login_count",       :default => 0
-    t.datetime "last_request_at"
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
-    t.boolean  "is_admin"
-    t.string   "subscription_id"
-    t.string   "subscription_plan",        :default => "Bitspace Free"
-    t.decimal  "max_storage",              :default => 524288000.0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "lastfm_session_key"
-    t.string   "lastfm_username"
-    t.boolean  "lastfm_subscriber"
-    t.string   "login"
-    t.string   "crypted_password"
-    t.string   "password_salt"
-    t.boolean  "scrobble_to_lastfm",       :default => true
-    t.boolean  "private_beta"
-    t.integer  "invitations_left",         :default => 0
-    t.boolean  "public_profile",           :default => true
-    t.string   "biography"
-    t.string   "website"
-    t.boolean  "subscribable"
-    t.integer  "subscription_price"
-    t.string   "subscription_currency"
-    t.string   "subscription_periodicity"
-    t.string   "account_type",             :default => "collector"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
-    t.integer  "avatar_width"
-    t.integer  "avatar_height"
-    t.string   "city"
-    t.string   "country"
+    t.integer   "facebook_uid"
+    t.string    "name"
+    t.string    "email"
+    t.string    "persistence_token"
+    t.string    "single_access_token"
+    t.string    "perishable_token"
+    t.integer   "login_count",              :default => 0
+    t.integer   "failed_login_count",       :default => 0
+    t.timestamp "last_request_at"
+    t.timestamp "current_login_at"
+    t.timestamp "last_login_at"
+    t.string    "current_login_ip"
+    t.string    "last_login_ip"
+    t.boolean   "is_admin"
+    t.string    "subscription_id"
+    t.string    "subscription_plan",        :default => "Bitspace Free"
+    t.decimal   "max_storage",              :default => 524288000.0
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "lastfm_session_key"
+    t.string    "lastfm_username"
+    t.boolean   "lastfm_subscriber"
+    t.string    "login"
+    t.string    "crypted_password"
+    t.string    "password_salt"
+    t.boolean   "scrobble_to_lastfm",       :default => true
+    t.boolean   "private_beta"
+    t.integer   "invitations_left",         :default => 0
+    t.boolean   "public_profile",           :default => true
+    t.string    "biography"
+    t.string    "website"
+    t.boolean   "subscribable"
+    t.integer   "subscription_price"
+    t.string    "subscription_currency"
+    t.string    "subscription_periodicity"
+    t.string    "account_type",             :default => "collector"
+    t.string    "avatar_file_name"
+    t.string    "avatar_content_type"
+    t.integer   "avatar_file_size"
+    t.datetime  "avatar_updated_at"
+    t.integer   "avatar_width"
+    t.integer   "avatar_height"
+    t.string    "location"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"
