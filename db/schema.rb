@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101106160010) do
+ActiveRecord::Schema.define(:version => 20101108165535) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -347,6 +347,7 @@ ActiveRecord::Schema.define(:version => 20101106160010) do
     t.integer   "avatar_width"
     t.integer   "avatar_height"
     t.string    "location"
+    t.text      "apns_pem"
   end
 
   add_index "users", ["facebook_uid"], :name => "index_users_on_facebook_uid"

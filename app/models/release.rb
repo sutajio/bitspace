@@ -151,31 +151,6 @@ class Release < ActiveRecord::Base
     self
   end
   
-  def notify_followers
-    unless archived?
-      if user.public_profile?
-        user.followers.each do |follower|
-          follower.notify_of_new_release(self)
-        end
-      end
-    end
-  end
-  
-  after_create :notify_followers unless Rails.env.test?
-  handle_asynchronously :notify_followers, :run_at => lambda { 1.hour.from_now }
-  
-  def give_to_subscribers
-    unless archived?
-      user.subscribers.each do |subscriber|
-        self.sideload(subscriber)
-        subscriber.notify_of_new_release(self)
-      end
-    end
-  end
-  
-  after_create :give_to_subscribers unless Rails.env.test?
-  handle_asynchronously :give_to_subscribers, :run_at => lambda { 1.hour.from_now }
-  
   def to_param
     "#{id}-#{artist.name.parameterize}-#{title.parameterize}"
   end

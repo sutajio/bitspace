@@ -193,4 +193,32 @@ class User < ActiveRecord::Base
   
   after_create :handle_prepaid_label_subscriptions
   
+  def notify_devices
+    return if apns_pem.blank? || devices.empty?
+    
+    require 'openssl'
+    require 'socket'
+    
+    host         = ENV['APNS_HOST'] || 'gateway.sandbox.push.apple.com'
+    port         = ENV['APNS_PORT'] || 2195
+    context      = OpenSSL::SSL::SSLContext.new
+    context.cert = OpenSSL::X509::Certificate.new(apns_pem)
+    context.key  = OpenSSL::PKey::RSA.new(apns_pem, nil)
+    sock         = TCPSocket.new(host, port)
+    ssl          = OpenSSL::SSL::SSLSocket.new(sock, context)
+    ssl.connect
+    
+    notification = yield
+    
+    devices.each do |device|
+      device_token = Base64.decode64(device.apns_token)
+      payload = { :aps => notification }.to_json
+      puts "#{Time.now} [#{host}:#{port}] Device: #{device_token.unpack('H*')} sending #{payload}"
+      ssl.write([0, 0, device_token.size, device_token, 0, payload.size, payload].pack("ccca*cca*"))
+    end
+    
+    ssl.close
+    sock.close
+  end
+  
 end
