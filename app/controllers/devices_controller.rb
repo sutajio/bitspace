@@ -4,7 +4,7 @@ class DevicesController < ApplicationController
   before_filter :find_user
   
   def create
-    @user.devices.create!(params[:device])
+    @user.devices.create(params[:device])
     head :ok
   end
   
