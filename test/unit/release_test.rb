@@ -16,7 +16,7 @@ class ReleaseTest < ActiveSupport::TestCase
   
   test "should merge with existing release if one exist when renaming" do
     @existing_release = @artist.releases.create!(:title => 'Existing release', :user => @user)
-    assert_difference 'Release.count', -1 do
+    assert_difference 'Release.without_archived.count', -1 do
       assert_equal @existing_release, @release.rename('Existing release')
       assert_equal 'Existing release', @existing_release.reload.title
     end
@@ -40,7 +40,7 @@ class ReleaseTest < ActiveSupport::TestCase
   test "should merge with existing release if one exist when renaming artist" do
     @existing_artist = @user.artists.create!(:name => 'Existing artist')
     @existing_release = @existing_artist.releases.create!(:title => 'Test', :user => @user)
-    assert_difference 'Release.count', -1 do
+    assert_difference 'Release.without_archived.count', -1 do
       assert_equal @existing_release, @release.rename_artist('Existing artist')
       assert_equal 'Test', @existing_release.reload.title
     end

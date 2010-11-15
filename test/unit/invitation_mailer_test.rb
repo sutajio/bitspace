@@ -1,8 +1,10 @@
 require 'test_helper'
 
 class InvitationMailerTest < ActionMailer::TestCase
-  # replace this with your real tests
-  test "the truth" do
-    assert true
+  
+  test "invitation" do
+    invitation = Invitation.create!(:email => 'test@example.com')
+    assert InvitationMailer.create_invitation(invitation)
   end
+  
 end
