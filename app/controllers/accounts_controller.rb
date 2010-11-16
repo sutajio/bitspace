@@ -54,11 +54,6 @@ class AccountsController < ApplicationController
     head :ok
   end
   
-  def reset_api_token
-    current_user.reset_single_access_token!
-    render :text => current_user.single_access_token
-  end
-  
   def invitations
     @invitation = Invitation.new(params[:invitation])
     if request.post?
