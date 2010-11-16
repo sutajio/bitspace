@@ -32,7 +32,6 @@ module TracksHelper
       else
         {
           :title => track.title,
-          :url => track.url,
           :artist => track.artist.try(:name),
           :track_nr => track.track_nr,
           :set_nr => track.set_nr,
