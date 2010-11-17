@@ -221,4 +221,12 @@ class User < ActiveRecord::Base
     sock.close
   end
   
+  def collector?
+    account_type == 'collector'
+  end
+  
+  def distributor?
+    account_type != 'collector'
+  end
+  
 end

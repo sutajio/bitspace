@@ -26,20 +26,20 @@
           <li class="grid_1"><%= link_to('Overview', root_path, :target => '_self', :rel => 'start') %></li>
           <li class="grid_1"><%= link_to('Artists', artists_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Releases', releases_path, :target => '_self', :rel => 'contents') %></li>
-          <% if @user.account_type == 'collector' %>
+          <% if @user.collector? %>
           <li class="grid_1"><%= link_to('Labels', labels_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Years', years_path, :target => '_self', :rel => 'contents') %></li>
           <li class="grid_1"><%= link_to('Playlists', playlists_path, :target => '_self', :rel => 'contents') %></li>
           <% end %>
           <% if @user == current_user %>
-          <li class="grid_1 <% if @user.account_type == 'collector' %>prefix_2<% else %>prefix_5<% end %> usernav">
+          <li class="grid_1 <% if @user.collector? %>prefix_2<% else %>prefix_5<% end %> usernav">
             <%= link_to('Account', account_path, :target => '_self', :title => 'Change your account settings here', :class => 'tooltipped') %>
           </li>
           <li class="grid_1 usernav">
             <%= link_to("Sign out", logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
           </li>
           <% else %>
-          <li class="grid_4 usernav<% if @user.account_type != 'collector' %> prefix_3<% end %>">
+          <li class="grid_4 usernav<% if @user.distributor? %> prefix_3<% end %>">
             <div class="profilenav">
               <% if @user.subscribable?%>
                 <% if !(current_user && current_user.subscribes_to?(@user)) %>
