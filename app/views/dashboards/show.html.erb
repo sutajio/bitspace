@@ -2,9 +2,9 @@
   <% if @user != current_user || @latest.present? %>
     <div class="grid_16">
       <div class="dashboard clearfix">
-        <%= link_to(image_tag(@latest[0] ? @latest[0].artwork.url(:large, false) : '/images/cover-art.jpg', :size => '313x313', :alt => 'Cover art'), @latest[0] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
-        <%= link_to(image_tag(@latest[1] ? @latest[1].artwork.url(:large, false) : '/images/cover-art.jpg', :size => '313x313', :alt => 'Cover art'), @latest[1] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
-        <%= link_to(image_tag(@latest[2] ? @latest[2].artwork.url(:large, false) : '/images/cover-art.jpg', :size => '313x313', :alt => 'Cover art'), @latest[2] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
+        <%= link_to(image_tag(@latest[0] ? @latest[0].artwork.url(:large, false) : '/images/artwork-large.jpg', :size => '313x313', :alt => 'Cover art'), @latest[0] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
+        <%= link_to(image_tag(@latest[1] ? @latest[1].artwork.url(:large, false) : '/images/artwork-large.jpg', :size => '313x313', :alt => 'Cover art'), @latest[1] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
+        <%= link_to(image_tag(@latest[2] ? @latest[2].artwork.url(:large, false) : '/images/artwork-large.jpg', :size => '313x313', :alt => 'Cover art'), @latest[2] || '/', :class => 'cover-art', :target => '_self', :style => 'display:block; float:left;') %>
       </div>
     </div>
   <% else %>
