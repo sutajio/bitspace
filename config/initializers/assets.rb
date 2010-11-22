@@ -30,6 +30,9 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
   :site => [
     '/vendor/plugins/jquery.address.js',
     'site'
+  ],
+  :share => [
+    'share'
   ])
 ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(
   :common => [
@@ -48,4 +51,7 @@ ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(
   ],
   :site => [
     'site'
+  ],
+  :share => [
+    'share'
   ])

@@ -38,5 +38,11 @@ class ProfilesController < ApplicationController
     @new_user = User.new
     render :action => 'signup', :layout => 'site'
   end
+  
+  def release
+    @release = @user.releases.without_archived.has_tracks.find(params[:id])
+    @page_title = "#{@release.title}, by #{@release.artist.name}"
+    render :action => 'release', :layout => 'share'
+  end
 
 end

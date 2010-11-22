@@ -1,0 +1,57 @@
+<% content_for :html_head do %>
+<meta property="og:title" content="<%=h @release.title %>, by <%=h @release.artist.name %>"/>
+<meta property="og:type" content="album"/>
+<meta property="og:url" content="<%= release_profile_url(@release.user.login, @release) %>"/>
+<meta property="og:image" content="<%= @release.artwork.url(:small, false) %>"/>
+<meta property="og:site_name" content="Bitspace"/>
+<meta property="fb:app_id" content="<%= ENV['FACEBOOK_APP_ID'] %>"/>
+<% end %>
+
+<% div_for(@release, :class => 'clearfix') do %>
+  <div class="container_16 clearfix">
+    <div class="grid_9">
+      <%= link_to(image_tag(@release.artwork.url(:large, false), :size => '500x500', :alt => 'Cover art'), @release.artwork.url(:original, false), :class => 'cover-art', :rel => 'shadowbox') %>
+      
+      <% if @release.playable?(current_user) %>
+      <div class="actions">
+        <%= link_to('Add to collection', sideload_release_path(@release), :title => 'Copy this release to your own collection.', :class => 'tooltipped', :rel => 'sideload') %>
+        <%= link_to('Download', download_release_path(@release), :title => 'Download this release as a ZIP archive.', :class => 'tooltipped', :target => '_blank') %>
+      </div>
+      <% end %>
+      <iframe src="http://www.facebook.com/plugins/like.php?href=<%= CGI.escape(release_profile_url(@release.user.login, @release)) %>&amp;layout=button_count&amp;show_faces=true&amp;width=450&amp;action=like&amp;font=arial&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:450px; height:21px;" allowTransparency="true"></iframe>
+    </div>
+    <div class="grid_7">
+      <h1>
+        <span class="artist-name"><%=h @release.artist.name %></span><br />
+        <%=h @release.title %>
+        <% if @release.year.present? %>
+        <span class="year grey"><%= @release.year %></span>
+        <% end %>
+      </h1>
+      
+      <% @release.tracks.sort_by{|t| t.set_nr.to_i }.group_by(&:set_nr).each do |set_nr, tracks| %>
+      <ol class="tracks">
+        <% tracks.sort_by {|t| t.track_nr.to_i }.each do |track| %>
+        <% content_tag_for(:li, track) do %>
+            <span class="track-title">
+              <%=h truncate(track.title, :length => 70) %>
+              <% if track.artist %>
+              &ndash; <span class="track-artist"><%=h track.artist.name %></span>
+              <% end %>
+            </span>
+            <span class="track-length"><%= seconds_to_time(track.length) %></span>
+          </span>
+        <% end %>
+        <% end %>
+      </ol>
+      <% end %>
+      
+      <div class="meta small grey">
+        <% if @release.release_date.present? %><label>Released:</label> <%= @release.release_date %><br /><% end %>
+        <% if @release.label.present? %><label>Label:</label> <%=h @release.label.name %><% end %>
+      </div>
+    
+      <%= render :partial => 'releases/comments', :locals => { :release => @release.original ? @release.original : @release, :with_form => current_user.present? && @user.public_profile? } %>
+    </div>
+  </div>
+<% end %>

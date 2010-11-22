@@ -4,7 +4,7 @@ class ReleasesController < ApplicationController
   skip_before_filter :require_user, :only => [:index, :show, :download]
   before_filter :find_user, :only => [:index, :show, :download]
   
-  layout 'site', :only => [:download]
+  layout 'share', :only => [:download]
   
   def index
     respond_to do |format|

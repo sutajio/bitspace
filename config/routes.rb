@@ -76,5 +76,6 @@ ActionController::Routing::Routes.draw do |map|
   map.thankyou_profile ':profile_id/thankyou', :controller => 'profiles', :action => 'thankyou'
   map.signup_profile ':profile_id/signup', :controller => 'profiles', :action => 'signup'
   map.devices_profile ':profile_id/devices', :controller => 'devices', :action => 'create', :requirements => { :method => :post }
+  map.release_profile ':profile_id/:id', :controller => 'profiles', :action => 'release'
 
 end
