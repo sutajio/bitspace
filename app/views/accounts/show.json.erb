@@ -1,3 +1,31 @@
 <%= {
-  :releases_url => releases_url
+  :name => current_user.name,
+  :website => current_user.website,
+  :biography => current_user.biography,
+  :login => current_user.login,
+  :login_count => current_user.login_count,
+  :account_type => current_user.account_type,
+  
+  :subscription_plan => current_user.subscription_plan,
+  :max_storage => current_user.max_storage,
+  :storage_left => current_user.storage_left,
+  :storage_used => current_user.storage_used,
+  :storage_used_in_percent => current_user.storage_used_in_percent,
+  :paying_customer => current_user.paying_customer?,
+  :distributor => current_user.distributor?,
+  
+  :artists_count => current_user.artists.without_archived.has_releases.size,
+  :releases_count => current_user.releases.without_archived.has_tracks.size,
+  :tracks_count => current_user.tracks.size,
+  :labels_count => current_user.labels.without_archived.has_releases.size,
+  :followers_count => current_user.followers.size,
+  :subscribers_count => current_user.subscribers.size,
+  :total_time => seconds_to_time(current_user.tracks.sum(:length)),
+  
+  :subscriptions => current_user.memberships.map {|subscription|
+    {
+      :name => subscription.user.name || subscription.user.login,
+      :url => profile_url(subscription.user.login)
+    }
+  }
 }.to_json %>
