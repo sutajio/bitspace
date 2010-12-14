@@ -200,10 +200,11 @@ class User < ActiveRecord::Base
     require 'socket'
     
     host         = ENV['APNS_HOST'] || 'gateway.sandbox.push.apple.com'
-    port         = ENV['APNS_PORT'] || 2195
+    port         = ENV['APNS_PORT'].to_i || 2195
     context      = OpenSSL::SSL::SSLContext.new
     context.cert = OpenSSL::X509::Certificate.new(apns_pem)
     context.key  = OpenSSL::PKey::RSA.new(apns_pem, nil)
+    context.ca_file = File.join(Rails.root,'config/entrust_ssl_ca.cer')
     sock         = TCPSocket.new(host, port)
     ssl          = OpenSSL::SSL::SSLSocket.new(sock, context)
     ssl.connect
