@@ -10,7 +10,7 @@ class ReleaseObserver < ActiveRecord::Observer
     unless release.archived?
       if release.user.public_profile?
         release.user.notify_devices do
-          { :alert => "You have a new release by #{release.artist.name}.",
+          { :alert => "A new release is available. Go check it out!",
             :badge => 1,
             :sound => 'default' }
         end
