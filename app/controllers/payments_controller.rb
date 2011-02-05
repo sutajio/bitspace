@@ -13,6 +13,7 @@ class PaymentsController < ApplicationController
     if notify.acknowledge && params[:receiver_email] == ENV['PAYPAL_USERNAME']
       case notify.type
       when 'subscr_signup':
+      when 'subscr_payment':
         user = User.find_by_email(Iconv.conv('utf-8', params[:charset], params[:payer_email]))
         if user
           user.upgrade_subscription_plan!(
@@ -28,8 +29,6 @@ class PaymentsController < ApplicationController
             :first_name => Iconv.conv('utf-8', params[:charset], params[:first_name]),
             :last_name => Iconv.conv('utf-8', params[:charset], params[:last_name]))
         end
-      when 'subscr_payment':
-        # Send reciept?
       when 'subscr_failed':
         user = User.find_by_subscription_id(params[:subscr_id])
         user.handle_failed_payment! if user
