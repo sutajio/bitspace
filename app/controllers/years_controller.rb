@@ -15,7 +15,7 @@ class YearsController < ApplicationController
   end
   
   def show
-    @releases = @user.releases.by_year(@years)
+    @releases = @user.releases.without_archived.by_year(@years)
   end
   
   protected
