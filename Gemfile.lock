@@ -1,0 +1,84 @@
+GEM
+  remote: http://rubygems.org/
+  specs:
+    MP4Info (0.3.3)
+    actionmailer (2.3.4)
+      actionpack (= 2.3.4)
+    actionpack (2.3.4)
+      activesupport (= 2.3.4)
+      rack (~> 1.0.0)
+    activemerchant (1.10.0)
+      activesupport (>= 2.3.2)
+      braintree (>= 2.0.0)
+      builder (>= 2.0.0)
+    activerecord (2.3.4)
+      activesupport (= 2.3.4)
+    activeresource (2.3.4)
+      activesupport (= 2.3.4)
+    activesupport (2.3.4)
+    authlogic (2.1.6)
+      activesupport
+    bluecloth (2.0.11)
+    braintree (2.8.0)
+      builder
+    bteitelb-paperclip (2.3.1.14)
+    builder (3.0.0)
+    crack (0.1.8)
+    discogs (1.1.1)
+    flacinfo-rb (0.4)
+    hpricot (0.8.4)
+    htmlentities (4.2.4)
+    httparty (0.7.4)
+      crack (= 0.1.8)
+    memcache-auth (1.0.3)
+    rack (1.0.1)
+    rails (2.3.4)
+      actionmailer (= 2.3.4)
+      actionpack (= 2.3.4)
+      activerecord (= 2.3.4)
+      activeresource (= 2.3.4)
+      activesupport (= 2.3.4)
+      rake (>= 0.8.3)
+    rake (0.8.7)
+    rbrainz (0.5.1)
+    rfeedfinder (0.9.13)
+      hpricot (>= 0.6)
+      htmlentities (>= 4.0.0)
+    right_aws (2.0.0)
+      right_http_connection (>= 1.2.1)
+    right_http_connection (1.2.4)
+    ruby-hmac (0.4.0)
+    ruby-mp3info (0.6.13)
+    ruby-ogginfo (0.6)
+    scrobbler (0.2.3)
+      activesupport (>= 1.4.2)
+      hpricot (>= 0.4.86)
+    scrobbler2 (0.0.4)
+      activesupport
+      httparty (>= 0.2.2)
+    will_paginate (2.3.15)
+    wmainfo-rb (0.6)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  MP4Info
+  activemerchant
+  authlogic
+  bluecloth
+  bteitelb-paperclip
+  discogs
+  flacinfo-rb
+  memcache-auth
+  rails (= 2.3.4)
+  rbrainz
+  rfeedfinder
+  right_aws
+  ruby-hmac
+  ruby-mp3info
+  ruby-ogginfo
+  scrobbler
+  scrobbler2
+  will_paginate
+  wmainfo-rb
