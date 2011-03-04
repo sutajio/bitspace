@@ -50,6 +50,8 @@ GEM
     ruby-hmac (0.4.0)
     ruby-mp3info (0.6.13)
     ruby-ogginfo (0.6)
+    scoped_search (2.2.1)
+      activerecord (>= 2.1.0)
     scrobbler (0.2.3)
       activesupport (>= 1.4.2)
       hpricot (>= 0.4.86)
@@ -78,6 +80,7 @@ DEPENDENCIES
   ruby-hmac
   ruby-mp3info
   ruby-ogginfo
+  scoped_search
   scrobbler
   scrobbler2
   will_paginate
