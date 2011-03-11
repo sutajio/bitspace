@@ -18,6 +18,10 @@ GEM
     activesupport (2.3.4)
     authlogic (2.1.6)
       activesupport
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
     bluecloth (2.0.11)
     braintree (2.8.0)
       builder
@@ -25,12 +29,16 @@ GEM
     builder (3.0.0)
     crack (0.1.8)
     discogs (1.1.1)
+    feed-normalizer (1.5.2)
+      hpricot (>= 0.6)
+      simple-rss (>= 1.1)
     flacinfo-rb (0.4)
     hpricot (0.8.4)
     htmlentities (4.2.4)
     httparty (0.7.4)
       crack (= 0.1.8)
     memcache-auth (1.0.3)
+    mime-types (1.16)
     rack (1.0.1)
     rails (2.3.4)
       actionmailer (= 2.3.4)
@@ -58,8 +66,10 @@ GEM
     scrobbler2 (0.0.4)
       activesupport
       httparty (>= 0.2.2)
+    simple-rss (1.2.3)
     will_paginate (2.3.15)
     wmainfo-rb (0.6)
+    xml-simple (1.0.14)
 
 PLATFORMS
   ruby
@@ -68,9 +78,11 @@ DEPENDENCIES
   MP4Info
   activemerchant
   authlogic
+  aws-s3
   bluecloth
   bteitelb-paperclip
   discogs
+  feed-normalizer
   flacinfo-rb
   memcache-auth
   rails (= 2.3.4)
