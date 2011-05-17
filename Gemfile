@@ -2,6 +2,7 @@ source 'http://rubygems.org/'
 
 gem 'rails', '2.3.4'
 
+gem 'i18n'
 gem 'aws-s3'
 gem 'ruby-hmac'
 gem 'ruby-mp3info'
