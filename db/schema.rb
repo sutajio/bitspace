@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101108165535) do
+ActiveRecord::Schema.define(:version => 20110518152918) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -43,17 +43,6 @@ ActiveRecord::Schema.define(:version => 20101108165535) do
   add_index "artists", ["user_id", "archived", "sort_name"], :name => "index_artists_on_user_id_and_archived_and_sort_name"
   add_index "artists", ["user_id", "archived"], :name => "index_artists_on_user_id_and_archived"
   add_index "artists", ["user_id"], :name => "index_artists_on_user_id"
-
-  create_table "blog_posts", :force => true do |t|
-    t.string    "title"
-    t.text      "body"
-    t.boolean   "published"
-    t.string    "slug"
-    t.integer   "year"
-    t.integer   "month"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-  end
 
   create_table "client_versions", :force => true do |t|
     t.integer   "client_id"
@@ -103,10 +92,10 @@ ActiveRecord::Schema.define(:version => 20101108165535) do
   end
 
   create_table "devices", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "apns_token"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.integer   "user_id"
+    t.string    "apns_token"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
   end
 
   add_index "devices", ["user_id"], :name => "index_devices_on_user_id"
@@ -173,25 +162,6 @@ ActiveRecord::Schema.define(:version => 20101108165535) do
   add_index "labels", ["user_id", "archived"], :name => "index_labels_on_user_id_and_archived"
   add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
 
-  create_table "mixtape_tracks", :force => true do |t|
-    t.integer "mixtape_id"
-    t.integer "track_id"
-    t.integer "position"
-  end
-
-  add_index "mixtape_tracks", ["mixtape_id", "position"], :name => "index_mixtape_tracks_on_mixtape_id_and_position"
-  add_index "mixtape_tracks", ["track_id"], :name => "index_mixtape_tracks_on_track_id"
-
-  create_table "mixtapes", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "title"
-    t.string   "cassette"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "mixtapes", ["user_id"], :name => "index_mixtapes_on_user_id"
-
   create_table "podcasts", :force => true do |t|
     t.integer   "user_id"
     t.string    "url"
@@ -201,28 +171,25 @@ ActiveRecord::Schema.define(:version => 20101108165535) do
   end
 
   create_table "releases", :force => true do |t|
-    t.integer   "artist_id"
-    t.integer   "label_id"
-    t.string    "mbid"
-    t.string    "title"
-    t.integer   "year"
-    t.string    "type"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.string    "artwork_file_name"
-    t.string    "artwork_content_type"
-    t.integer   "artwork_file_size"
-    t.timestamp "artwork_updated_at"
-    t.integer   "user_id"
-    t.date      "release_date"
-    t.integer   "tracks_count"
-    t.boolean   "archived",             :default => false
-    t.string    "tags"
-    t.integer   "original_id"
-    t.string    "catalog_number"
-    t.text      "description"
-    t.string    "release_type"
-    t.string    "privacy",              :default => "private"
+    t.integer  "artist_id"
+    t.integer  "label_id"
+    t.string   "mbid"
+    t.string   "title"
+    t.integer  "year"
+    t.string   "type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "artwork_file_name"
+    t.string   "artwork_content_type"
+    t.integer  "artwork_file_size"
+    t.datetime "artwork_updated_at"
+    t.integer  "user_id"
+    t.date     "release_date"
+    t.integer  "tracks_count"
+    t.boolean  "archived",             :default => false
+    t.string   "tags"
+    t.integer  "original_id"
+    t.string   "label"
   end
 
   add_index "releases", ["archived"], :name => "index_releases_on_archived"
@@ -340,13 +307,6 @@ ActiveRecord::Schema.define(:version => 20101108165535) do
     t.string    "subscription_currency"
     t.string    "subscription_periodicity"
     t.string    "account_type",             :default => "collector"
-    t.string    "avatar_file_name"
-    t.string    "avatar_content_type"
-    t.integer   "avatar_file_size"
-    t.datetime  "avatar_updated_at"
-    t.integer   "avatar_width"
-    t.integer   "avatar_height"
-    t.string    "location"
     t.text      "apns_pem"
   end
 
