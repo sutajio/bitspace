@@ -7,8 +7,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :uploads, :collection => { :import => :post }
   map.resources :artists, :member => { :biography => :get, :artwork => :any, :playlist => :get }
   map.resources :releases, :member => { :archive => :put, :artwork => :any, :download => :get, :sideload => :post, :playlist => :get }
-  map.resources :labels, :member => { :playlist => :get }
-  map.resources :years, :member => { :playlist => :get }
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
   map.resources :playlists, :collection => { :recent => :get, :latest => :get, :toplist => :get }
   map.resources :comments
@@ -29,22 +27,10 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :account, :member => { :credentials => :any, :upgrade => :any, :profile => :any, :lastfm => :any, :invitations => :any, :valid_password => :get, :lastfm_scrobbling => :put, :status => :get }
   
   # Pages
-  map.price 'price', :controller => 'pages', :action => 'price'
-  map.tour 'tour', :controller => 'pages', :action => 'tour'
-  map.about 'about', :controller => 'pages', :action => 'about'
   map.download 'download', :controller => 'pages', :action => 'download'
   map.appstore 'appstore', :controller => 'pages', :action => 'appstore'
   map.terms 'terms', :controller => 'pages', :action => 'terms'
-  map.press 'press', :controller => 'pages', :action => 'press'
-  map.support 'support', :controller => 'pages', :action => 'support'
-  map.atp 'atp', :controller => 'pages', :action => 'atp'
-  map.featured 'featured', :controller => 'pages', :action => 'featured'
-  
-  # Blog
-  map.blog 'blog', :controller => 'blog_posts', :action => 'index'
-  map.blog_archive 'blog/archive/:year/:month/:slug', :controller => 'blog_posts', :action => 'show'
-  map.blog_feed 'blog.atom', :controller => 'blog_posts', :action => 'index', :format => 'atom'
-  
+    
   # PayPal
   map.resources :payments, :collection => { :paypal_ipn => :post, :paypal_ipn_label => :post, :success => :get, :upgraded => :get, :cancel => :get }
   
