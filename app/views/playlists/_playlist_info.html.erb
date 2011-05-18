@@ -1,9 +1,0 @@
-<% cache [Digest::MD5.hexdigest(tracks.map(&:cache_key).to_s), 'playlist-info'] do %>
-  <div class="info">
-    <% first_handfull_of_releases_in_playlist(tracks).each do |release| %>
-      <% if release.artwork.file? %>
-      <%= link_to(image_tag(release.artwork.url(:small, false), :size => '125x125', :alt => 'Cover art', :style => 'margin:11px 0; -webkit-box-reflect:none;'), release_path(release), :target => '_self') %>
-      <% end %>
-    <% end %>
-  </div>
-<% end %>

@@ -8,7 +8,6 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :artists, :member => { :biography => :get, :artwork => :any, :playlist => :get }
   map.resources :releases, :member => { :archive => :put, :artwork => :any, :download => :get, :sideload => :post, :playlist => :get }
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
-  map.resources :playlists, :collection => { :recent => :get, :latest => :get, :toplist => :get }
   map.resources :comments
   map.resources :devices
   
