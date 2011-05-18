@@ -32,13 +32,9 @@ task :squish_names_and_titles => :environment do
   end
   Release.find_each do |release|
     release.title = release.title.squish
+    release.label = release.label.squish
     puts release.title if release.changed?
     release.save
-  end
-  Label.find_each do |label|
-    label.name = label.name.squish
-    puts label.name if label.changed?
-    label.save
   end
   Track.find_each do |track|
     track.title = track.title.squish

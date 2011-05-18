@@ -3,7 +3,6 @@ class Release < ActiveRecord::Base
   belongs_to :user
   belongs_to :original, :class_name => 'Release'
   belongs_to :artist, :counter_cache => true
-  belongs_to :label, :counter_cache => true
   has_many :tracks, :dependent => :destroy
   has_many :comments, :dependent => :destroy, :as => :commented
   
@@ -23,10 +22,9 @@ class Release < ActiveRecord::Base
     first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
   end
   
-  scoped_search :on => [:title, :year, :tags]
+  scoped_search :on => [:title, :year, :tags, :label]
   scoped_search :in => :artist, :on => [:name]
   scoped_search :in => :tracks, :on => [:title]
-  scoped_search :in => :label, :on => [:name]
   
   has_attached_file :artwork,
     :path => ":class/:attachment/:style/:id_partition-:unix_timestamp.png",
@@ -83,12 +81,8 @@ class Release < ActiveRecord::Base
       if release.release_events.present?
         label = release.release_events[0].label
         if label
-          transaction do
-            self.label = Label.find_or_create_by_name_and_user_id(
-                                :name => label.name, :user_id => user.id)
-            self.save!
-            self.label.try(:touch)
-          end
+          self.label = label.name
+          self.save!
         end
       end
     end

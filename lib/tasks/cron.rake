@@ -23,18 +23,6 @@ namespace :cron do
       STDOUT.flush
     end
     puts
-    puts "Labels:"
-    Label.without_archived.find_each do |label|
-      begin
-        label.archive! if label.releases.without_archived.empty?
-        label.update_meta_data_without_send_later
-        print "."
-      rescue Object => e
-        print "F"
-      end
-      STDOUT.flush
-    end
-    puts
     puts "Releases:"
     Release.without_archived.find_each do |release|
       begin

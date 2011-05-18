@@ -23,7 +23,7 @@ module ReleasesHelper
         :artist_sort_name => release.artist.sort_name,
         :year => release.year,
         :release_date => release.release_date,
-        :label => release.label ? release.label.name : nil,
+        :label => release.label,
         :small_artwork_url => release.artwork.file? ? release.artwork.url(:small, false) : nil,
         :medium_artwork_url => release.artwork.file? ? release.artwork.url(:medium, false) : nil,
         :large_artwork_url => release.artwork.file? ? release.artwork.url(:large, false) : nil,
@@ -54,17 +54,7 @@ module ReleasesHelper
           :archived => false #release.artist.archived
         },
         :year => release.year,
-        :label => release.label ? {
-          :id => release.label.id,
-          :name => release.label.name,
-          :sort_name => release.label.sort_name,
-          :label_type => release.label.label_type,
-          :begin_date => release.label.begin_date,
-          :end_date => release.label.end_date,
-          :website => release.label.website,
-          :created_at => release.label.created_at,
-          :updated_at => release.label.updated_at
-        } : nil,
+        :label => release.label,
         :release_date => release.release_date,
         :small_artwork_url => release.artwork.file? ? release.artwork.url(:small, false) : nil,
         :medium_artwork_url => release.artwork.file? ? release.artwork.url(:medium, false) : nil,

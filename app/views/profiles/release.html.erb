@@ -48,7 +48,7 @@
       
       <div class="meta small grey">
         <% if @release.release_date.present? %><label>Released:</label> <%= @release.release_date %><br /><% end %>
-        <% if @release.label.present? %><label>Label:</label> <%=h @release.label.name %><% end %>
+        <% if @release.label.present? %><label>Label:</label> <%=h @release.label %><% end %>
       </div>
     
       <%= render :partial => 'releases/comments', :locals => { :release => @release.original ? @release.original : @release, :with_form => current_user.present? && @user.public_profile? } %>

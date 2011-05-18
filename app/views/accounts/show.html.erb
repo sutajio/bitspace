@@ -33,10 +33,6 @@
           <dt>Tracks</dt>
           <dd><%= current_user.tracks.size %></dd>
         </dl>
-        <dl class="status grid_2">
-          <dt>Labels</dt>
-          <dd><%= current_user.labels.without_archived.has_releases.size %></dd>
-        </dl>
         <dl class="status grid_2 suffix_3 omega">
           <dt>Total time</dt>
           <dd><%= seconds_to_time(current_user.tracks.sum(:length)) %></dd>

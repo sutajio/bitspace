@@ -5,7 +5,7 @@
         <span class="artist-name"><%= link_to(h(@release.artist.name), @release.artist, :target => '_self') %></span><br />
         <%= link_to(h(@release.title), @release, :target => '_self') %>
         <% if @release.year.present? %>
-        <span class="year grey"><%= link_to(@release.year, year_path(@release.year), :target => '_self') %></span>
+        <span class="year grey"><%= @release.year %></span>
         <% end %>
       </h1>
     </div>
@@ -40,8 +40,8 @@
       <% end %>
     
       <div class="meta small grey">
-        <% if @release.release_date.present? %><label>Released:</label> <%= link_to(@release.release_date, year_path(@release.release_date.year), :target => '_self') %><br /><% end %>
-        <% if @release.label.present? %><label>Label:</label> <%= link_to(h(@release.label.name), label_path(@release.label), :target => '_self') %><% end %>
+        <% if @release.release_date.present? %><label>Released:</label> <%= h(@release.release_date) %><br /><% end %>
+        <% if @release.label.present? %><label>Label:</label> <%= h(@release.label) %><% end %>
       </div>
     
       <%= render :partial => 'comments', :locals => { :release => @release.original ? @release.original : @release, :with_form => current_user.present? && @user.public_profile? } %>

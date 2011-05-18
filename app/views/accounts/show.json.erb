@@ -17,7 +17,6 @@
   :artists_count => current_user.artists.without_archived.has_releases.size,
   :releases_count => current_user.releases.without_archived.has_tracks.size,
   :tracks_count => current_user.tracks.size,
-  :labels_count => current_user.labels.without_archived.has_releases.size,
   :followers_count => current_user.followers.size,
   :subscribers_count => current_user.subscribers.size,
   :total_time => seconds_to_time(current_user.tracks.sum(:length)),

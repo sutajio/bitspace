@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518152918) do
+ActiveRecord::Schema.define(:version => 20110518154635) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -130,37 +130,6 @@ ActiveRecord::Schema.define(:version => 20110518152918) do
   end
 
   add_index "invitations", ["token"], :name => "index_invitations_on_token"
-
-  create_table "labels", :force => true do |t|
-    t.string    "mbid"
-    t.string    "name"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-    t.integer   "user_id"
-    t.string    "artwork_file_name"
-    t.string    "artwork_content_type"
-    t.integer   "artwork_file_size"
-    t.timestamp "artwork_updated_at"
-    t.integer   "releases_count"
-    t.integer   "artwork_width"
-    t.integer   "artwork_height"
-    t.string    "sort_name"
-    t.string    "label_type"
-    t.date      "begin_date"
-    t.date      "end_date"
-    t.string    "website"
-    t.string    "tags"
-    t.integer   "original_id"
-    t.boolean   "archived",             :default => false
-  end
-
-  add_index "labels", ["mbid"], :name => "index_labels_on_mbid"
-  add_index "labels", ["name"], :name => "index_labels_on_name"
-  add_index "labels", ["original_id"], :name => "index_labels_on_original_id"
-  add_index "labels", ["sort_name"], :name => "index_labels_on_sort_name"
-  add_index "labels", ["user_id", "archived", "sort_name"], :name => "index_labels_on_user_id_and_archived_and_sort_name"
-  add_index "labels", ["user_id", "archived"], :name => "index_labels_on_user_id_and_archived"
-  add_index "labels", ["user_id"], :name => "index_labels_on_user_id"
 
   create_table "podcasts", :force => true do |t|
     t.integer   "user_id"
