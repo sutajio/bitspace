@@ -29,7 +29,7 @@ ActionController::Routing::Routes.draw do |map|
   map.download 'download', :controller => 'pages', :action => 'download'
   map.appstore 'appstore', :controller => 'pages', :action => 'appstore'
   map.terms 'terms', :controller => 'pages', :action => 'terms'
-    
+  
   # PayPal
   map.resources :payments, :collection => { :paypal_ipn => :post, :paypal_ipn_label => :post, :success => :get, :upgraded => :get, :cancel => :get }
   
@@ -46,9 +46,6 @@ ActionController::Routing::Routes.draw do |map|
   # Clients
   map.resources :clients, :member => { :changelog => :get, :release_notes => :get, :download => :get }
   map.resources :client_versions, :member => { :download => :get }
-  
-  # Developerland
-  map.resource :developer, :member => { :branding => :get, :authentication => :get, :upload => :get, :library => :get }
   
   # Root
   map.root :controller => 'players', :action => 'show'
