@@ -1,7 +1,7 @@
 class ReleasesController < ApplicationController
   skip_before_filter :verify_authenticity_token, :only => [:update]
   
-  skip_before_filter :require_user, :only => [:index, :show, :download]
+  skip_before_filter :require_user, :only => [:index, :show, :download, :popular, :newest]
   before_filter :find_user, :only => [:index, :show, :download]
   
   layout 'share', :only => [:download]
@@ -17,10 +17,10 @@ class ReleasesController < ApplicationController
           'created_at DESC'
         end
         @releases = @user.releases.without_archived.has_tracks.paginate(
-            :page => params[:page],
-            :per_page => 16,
-            :include => [:artist],
-            :order => order)
+          :page => params[:page],
+          :per_page => 16,
+          :include => [:artist],
+          :order => order)
         if request.xhr? && @releases.empty?
           render :nothing => true and return
         end
@@ -34,9 +34,75 @@ class ReleasesController < ApplicationController
       end
     end
   end
-  
+
+  def inbox
+    respond_to do |format|
+      format.json do
+        @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
+          :page => params[:page],
+          :per_page => 10,
+          :include => [:artist, :label, :tracks],
+          :order => 'created_at DESC'
+        )
+        render :json => {
+          :page => @releases.current_page,
+          :pages => @releases.total_pages,
+          :per_page => @releases.per_page,
+          :total => @releases.total_entries,
+          :releases => @releases.map {|release|
+            release_to_hash(release, :simple => false)
+          }
+        }
+      end
+    end
+  end
+
+  def popular
+    respond_to do |format|
+      format.json do
+        @releases = Release.updated_since(params[:since]).with_archived.paginate(
+          :page => params[:page],
+          :per_page => 10,
+          :include => [:artist, :label, :tracks],
+          :order => 'popularity DESC'
+        )
+        render :json => {
+          :page => @releases.current_page,
+          :pages => @releases.total_pages,
+          :per_page => @releases.per_page,
+          :total => @releases.total_entries,
+          :releases => @releases.map {|release|
+            release_to_hash(release, :simple => false)
+          }
+        }
+      end
+    end
+  end
+
+  def newest
+    respond_to do |format|
+      format.json do
+        @releases = Release.updated_since(params[:since]).with_archived.paginate(
+          :page => params[:page],
+          :per_page => 10,
+          :include => [:artist, :label, :tracks],
+          :order => 'created_at DESC'
+        )
+        render :json => {
+          :page => @releases.current_page,
+          :pages => @releases.total_pages,
+          :per_page => @releases.per_page,
+          :total => @releases.total_entries,
+          :releases => @releases.map {|release|
+            release_to_hash(release, :simple => false)
+          }
+        }
+      end
+    end
+  end
+
   def show
-    @release = @user.releases.without_archived.has_tracks.find(params[:id])
+    @release = Release.without_archived.has_tracks.find(params[:id])
     respond_to do |format|
       format.html
       format.json
