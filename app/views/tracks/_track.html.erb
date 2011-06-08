@@ -1,11 +1,9 @@
 <% content_tag_for(:li, track, :class => cycle('odd','even')) do %>
   <% show_artist = (defined? show_artist) ? show_artist : false %>
-  <% playable = (defined? playable) ? playable : false %>
-  <% cache [track, show_artist, playable] do %>
+  <% cache [track, show_artist] do %>
     <span class="track-title">
-    <% if playable %>
     <%= link_to(h(truncate(track.title, :length => 70)),
-                track.url(current_user.paying_customer?), :rel => 'play',
+                track.url, :rel => 'play',
                 'data-track' => h(track.title),
                 'data-release' => h(track.release.title),
                 'data-artist' => h(track.artist.try(:name) || track.release.artist.name),
@@ -16,9 +14,6 @@
                 'data-now-playing-url' => now_playing_track_path(track),
                 'data-scrobble-url' => scrobble_track_path(track),
                 'data-length' => track.length) %>
-    <% else %>
-    <%= link_to(h(truncate(track.title, :length => 70)), "/sorry.mp3##{dom_id(track)}", :rel => 'sorry') %>
-    <% end %>
     <% if track.artist %>
     &ndash; <span class="track-artist"><%=h track.artist.name %></span>
     <% elsif show_artist %>
