@@ -32,7 +32,7 @@
         <%#= link_to('Archive', archive_release_path(@release), :title => 'If archived, a release will be hidden and will only show up in search results.', :rel => 'archive', :class => @release.archived? ? 'archived tooltipped' : 'tooltipped') %>
         <%= link_to('Delete', release_path(@release), :title => 'The release will be permanently deleted from your library. This can not be undone!', :rel => 'delete', :class => 'tooltipped') %>
       </div>
-      <% elsif @release.playable?(current_user) %>
+      <% else %>
       <div class="actions">
         <%= link_to('Add to collection', sideload_release_path(@release), :title => 'Copy this release to your own collection.', :class => 'tooltipped', :rel => 'sideload') %>
         <%= link_to('Download', download_release_path(@release), :title => 'Download this release as a ZIP archive.', :class => 'tooltipped', :target => '_blank') %>
