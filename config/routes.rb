@@ -66,7 +66,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :developer, :member => { :branding => :get, :authentication => :get, :upload => :get, :library => :get }
   
   # Root
-  map.root :controller => 'pages', :action => 'index'
+  map.root :controller => 'players', :action => 'show'
   
   # Public profiles
   map.profile ':profile_id', :controller => 'profiles', :action => 'show'

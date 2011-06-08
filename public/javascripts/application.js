@@ -72,7 +72,7 @@ $(function(){
     $.infinitescroll.isDone = false;
     $(window).unbind('scroll.infscr');
     $('#page').load(
-        (e.value == '/' ? '/dashboard' : e.value) + 
+        (e.value == '/' ? '/releases' : e.value) + 
           (typeof(profile_id) == 'undefined' ? '' :
             (e.value.search(/\?/i) == -1 ? '?profile_id='+profile_id :
                                            '&profile_id='+profile_id)),
