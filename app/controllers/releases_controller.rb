@@ -151,7 +151,6 @@ class ReleasesController < ApplicationController
   
   def download
     @release = Release.without_archived.has_tracks.find(params[:id])
-    head :forbidden and return unless @release.playable?(current_user)
     if request.xhr?
       render :text => @release.download_url
     else
@@ -165,7 +164,6 @@ class ReleasesController < ApplicationController
   
   def sideload
     @release = Release.without_archived.has_tracks.find(params[:id])
-    head :forbidden and return unless @release.playable?(current_user)
     @release.sideload(current_user)
     head :ok
   end
