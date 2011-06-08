@@ -2,10 +2,7 @@ require "iconv"
 require "stringio"
 
 require "mp3info"
-require "ogginfo"
-require "wmainfo"
 require "mp4info"
-require "flacinfo"
 
 class AudioInfoError < Exception; end
 
@@ -21,7 +18,7 @@ class AudioInfo
     "trackid" => "Track Id"
   }
 
-  SUPPORTED_EXTENSIONS = %w{mp3 ogg oga wma mp4 aac m4a flac}
+  SUPPORTED_EXTENSIONS = %w{mp3 mp4 aac m4a}
   
   attr_reader :path, :extension, :musicbrainz_infos, :tracknum, :bitrate, :samplerate, :vbr
   attr_reader :artist, :album, :title, :length, :date, :year, :compilation, :album_artist, :setnum
@@ -96,40 +93,6 @@ class AudioInfo
         end
         @info.close
 
-      when 'ogg', 'oga'
-        @info = OggInfo.new(filename, @encoding)
-        default_fill_musicbrainz_fields
-        default_tag_fill
-        @bitrate = @info.bitrate/1000
-        @tracknum = @info.tag.tracknumber.to_i
-        @length = @info.length.to_i
-        @date = @info.tag["date"]
-        @vbr = true
-        @info.close
-        
-        if @options[:include_audio_content]
-          @audio_content = File.open(filename).read
-        end
-
-      when 'wma'
-        @info = WmaInfo.new(filename, :encoding => @encoding)
-        @artist = @info.tags["Author"]
-        @album = @info.tags["AlbumTitle"]
-        @title = @info.tags["Title"]
-        @tracknum = @info.tags["TrackNumber"].to_i
-        @date = @info.tags["Year"]
-        @bitrate = @info.info["bitrate"]
-        @length = @info.info["playtime_seconds"]
-        MUSICBRAINZ_FIELDS.each do |key, original_key|
-          @musicbrainz_infos[key] = 
-                  @info.info["MusicBrainz/" + original_key.tr(" ", "")] ||
-                  @info.info["MusicBrainz/" + original_key]
-        end
-        
-        if @options[:include_audio_content]
-          @audio_content = File.open(filename).read
-        end
-
       when 'aac', 'mp4', 'm4a'
         @info = MP4Info.open(filename)
         @artist = @info.ART
@@ -155,27 +118,6 @@ class AudioInfo
         @bpm = @info.TMPO
         @grouping = @info.GRP
         @genre = @info.GNRE
-        
-        if @options[:include_audio_content]
-          @audio_content = File.open(filename).read
-        end
-  
-      when 'flac'
-        @info = FlacInfo.new(filename)
-        tags = convert_tags_encoding(@info.tags, "UTF-8")
-        @artist = tags["ARTIST"] || tags["artist"]
-        @album = tags["ALBUM"] || tags["album"]
-        @title = tags["TITLE"] || tags["title"]
-        @tracknum = (tags["TRACKNUMBER"]||tags["tracknumber"]).to_i
-        @date = tags["DATE"]||tags["date"]
-        @length = @info.streaminfo["total_samples"] / @info.streaminfo["samplerate"].to_f
-        @bitrate = File.size(filename).to_f*8/@length/1024
-        tags.each do |tagname, tagvalue|
-          next unless tagname =~ /^musicbrainz_(.+)$/
-          @musicbrainz_infos[$1] = tags[tagname]
-        end
-        @musicbrainz_infos["trmid"] = tags["musicip_puid"]
-        #default_fill_musicbrainz_fields
         
         if @options[:include_audio_content]
           @audio_content = File.open(filename).read

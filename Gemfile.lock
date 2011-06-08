@@ -32,7 +32,6 @@ GEM
     feed-normalizer (1.5.2)
       hpricot (>= 0.6)
       simple-rss (>= 1.1)
-    flacinfo-rb (0.4)
     hpricot (0.8.4)
     htmlentities (4.2.4)
     httparty (0.7.4)
@@ -58,7 +57,6 @@ GEM
     right_http_connection (1.2.4)
     ruby-hmac (0.4.0)
     ruby-mp3info (0.6.13)
-    ruby-ogginfo (0.6)
     scoped_search (2.2.1)
       activerecord (>= 2.1.0)
     scrobbler (0.2.3)
@@ -69,7 +67,6 @@ GEM
       httparty (>= 0.2.2)
     simple-rss (1.2.3)
     will_paginate (2.3.15)
-    wmainfo-rb (0.6)
     xml-simple (1.0.14)
 
 PLATFORMS
@@ -84,7 +81,6 @@ DEPENDENCIES
   bteitelb-paperclip
   discogs
   feed-normalizer
-  flacinfo-rb
   i18n
   memcache-auth
   rails (= 2.3.4)
@@ -93,9 +89,7 @@ DEPENDENCIES
   right_aws
   ruby-hmac
   ruby-mp3info
-  ruby-ogginfo
   scoped_search
   scrobbler
   scrobbler2
   will_paginate
-  wmainfo-rb
