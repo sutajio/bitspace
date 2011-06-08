@@ -22,7 +22,12 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.suggest.js',
     '/vendor/plugins/jquery.masonry.js',
     '/vendor/soundmanager/script/soundmanager2-nodebug-jsmin.js',
-    'application'
+    '/vendor/backbone/underscore.js',
+    '/vendor/backbone/backbone.js',
+    '/vendor/backbone/history.js',
+    'application',
+    'player',
+    'bitspace'
   ],
   :login => [
     'login'
@@ -44,7 +49,8 @@ ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(
     '/vendor/shadowbox/shadowbox.css'
   ],
   :application => [
-    'application'
+    'application',
+    'bitspace'
   ],
   :login => [
     'login'

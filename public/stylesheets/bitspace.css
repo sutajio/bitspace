@@ -1,0 +1,32 @@
+nav#player-nav { width: 100%; position: fixed; bottom: 0px; z-index: 80; font-size: 12px; height: 46px; background: url(/images/player_bg.png); }
+nav#player-nav #playback { position: absolute; left: 0; top: 0; width: 96px; text-align: center; padding: 7px 20px; }
+nav#player-nav #playback button { float: left; display: block; text-indent: -9999px; width: 32px; height: 32px; border: none; }
+nav#player-nav #playback button:disabled { opacity: 0.6; background-position-y: 0 !important; }
+nav#player-nav #play-pause { background: url(/images/button-play-pause.png) no-repeat;  }
+nav#player-nav #play-pause:hover { background-position: 0 -32px; }
+nav#player-nav #play-pause:active { background-position: 0 -64px; }
+nav#player-nav #play-pause.pause { background-position: -32px 0; }
+nav#player-nav #play-pause.pause:hover { background-position: -32px -32px; }
+nav#player-nav #play-pause.pause:active { background-position: -32px -64px; }
+nav#player-nav #prev { background: url(/images/button-next-prev.png) no-repeat 0 0; }
+nav#player-nav #prev:hover { background-position: 0 -32px; }
+nav#player-nav #prev:active { background-position: 0 -64px; }
+nav#player-nav #next { background: url(/images/button-next-prev.png) no-repeat -32px 0; }
+nav#player-nav #next:hover { background-position: -32px -32px; }
+nav#player-nav #next:active { background-position: -32px -64px; }
+nav#player-nav #progress { position: absolute; left: 136px; right: 114px; top: 0; margin: 18px 0; height: 10px; overflow: hidden; background: url(/images/progress_bg.png); border-radius: 5px; }
+nav#player-nav #progress .ui-slider-range { width: 50%; height: 10px; border-radius: 5px; background: #fff; }
+nav#player-nav #progress .ui-slider-handle {}
+nav#player-nav #repeat { position: absolute; right: 20px; }
+nav#player-nav #repeat input[type=checkbox] { display: none; }
+nav#player-nav #repeat label { background: url(/images/repeat.png) no-repeat 50% 0; width: 32px; height: 46px; display: block; text-indent: -9999px; cursor: pointer; }
+nav#player-nav #repeat label:hover { background-position: 0 -46px; }
+nav#player-nav #repeat label.checked { background-position: 0 -92px; }
+nav#player-nav #shuffle { position: absolute; right: 62px; }
+nav#player-nav #shuffle input[type=checkbox] { display: none; }
+nav#player-nav #shuffle label { background: url(/images/shuffle.png) no-repeat 50% 0; width: 32px; height: 46px; display: block; text-indent: -9999px; cursor: pointer; }
+nav#player-nav #shuffle label:hover { background-position: 0 -46px; }
+nav#player-nav #shuffle label.checked { background-position: 0 -92px; }
+
+ol.releases-list { list-style: none; margin: 0; padding: 0; }
+ol.releases-list li { margin: 0; padding: 0; float: left; width: 300px; height: 300px; }
