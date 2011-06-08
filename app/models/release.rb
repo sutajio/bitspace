@@ -209,12 +209,12 @@ class Release < ActiveRecord::Base
     end
   end
   
-  def copy(to_artist, to_label = nil)
+  def copy(to_artist)
     artwork_file = artwork.file? ? open(artwork.url) : nil rescue nil
     release = to_artist.releases.find_or_create_by_title(
       :user => to_artist.user,
       :artist => to_artist,
-      :label => to_label,
+      :label => label,
       :title => title,
       :year => year,
       :artwork => artwork_file,
@@ -233,8 +233,7 @@ class Release < ActiveRecord::Base
   def sideload(to_user)
     transaction do
       album_artist = artist.copy(to_user)
-      album_label = label.copy(to_user) if label.present?
-      release = copy(album_artist, album_label)
+      release = copy(album_artist)
       tracks.each do |track|
         track.copy(release)
       end
