@@ -29,7 +29,7 @@ class ReleasesController < ApplicationController
         @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
             :page => params[:page],
             :per_page => 10,
-            :include => [:artist, :label, :tracks],
+            :include => [:artist, :tracks],
             :order => 'created_at')
       end
     end
@@ -41,7 +41,7 @@ class ReleasesController < ApplicationController
         @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
           :page => params[:page],
           :per_page => 10,
-          :include => [:artist, :label, :tracks],
+          :include => [:artist, :tracks],
           :order => 'created_at DESC'
         )
         render :json => {
@@ -63,7 +63,7 @@ class ReleasesController < ApplicationController
         @releases = Release.updated_since(params[:since]).with_archived.paginate(
           :page => params[:page],
           :per_page => 10,
-          :include => [:artist, :label, :tracks],
+          :include => [:artist, :tracks],
           :order => 'popularity DESC'
         )
         render :json => {
@@ -85,7 +85,7 @@ class ReleasesController < ApplicationController
         @releases = Release.updated_since(params[:since]).with_archived.paginate(
           :page => params[:page],
           :per_page => 10,
-          :include => [:artist, :label, :tracks],
+          :include => [:artist, :tracks],
           :order => 'created_at DESC'
         )
         render :json => {
