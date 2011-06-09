@@ -54,7 +54,7 @@ module ReleasesHelper
           :archived => false #release.artist.archived
         },
         :year => release.year,
-        :label => release.label,
+        :label => release.label ? { :name => release.label } : nil,
         :release_date => release.release_date,
         :small_artwork_url => release.artwork.file? ? release.artwork.url(:small, false) : nil,
         :medium_artwork_url => release.artwork.file? ? release.artwork.url(:medium, false) : nil,
