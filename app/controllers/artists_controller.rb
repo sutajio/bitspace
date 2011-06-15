@@ -1,16 +1,7 @@
 class ArtistsController < ApplicationController
   
-  skip_before_filter :require_user, :only => [:index, :show, :biography]
-  before_filter :find_user, :only => [:index, :show, :biography]
-  
-  def index
-    @artists = @user.artists.without_archived.has_releases.search_for(params[:q]).paginate(
-        :page => params[:page],
-        :per_page => 20)
-    if request.xhr? && @artists.empty?
-      render :nothing => true and return
-    end
-  end
+  skip_before_filter :require_user, :only => [:show, :biography]
+  before_filter :find_user, :only => [:show, :biography]
   
   def show
     @artist = @user.artists.without_archived.has_releases.find(params[:id])
