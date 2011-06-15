@@ -5,6 +5,7 @@ class Release < ActiveRecord::Base
   belongs_to :artist, :counter_cache => true
   has_many :tracks, :dependent => :destroy
   has_many :comments, :dependent => :destroy, :as => :commented
+  has_many :originals, :class_name => 'Release'
   
   validates_presence_of :user_id
   validates_presence_of :artist_id

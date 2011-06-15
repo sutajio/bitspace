@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110518154635) do
+ActiveRecord::Schema.define(:version => 20110615185647) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -140,25 +140,26 @@ ActiveRecord::Schema.define(:version => 20110518154635) do
   end
 
   create_table "releases", :force => true do |t|
-    t.integer  "artist_id"
-    t.integer  "label_id"
-    t.string   "mbid"
-    t.string   "title"
-    t.integer  "year"
-    t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.string   "artwork_file_name"
-    t.string   "artwork_content_type"
-    t.integer  "artwork_file_size"
-    t.datetime "artwork_updated_at"
-    t.integer  "user_id"
-    t.date     "release_date"
-    t.integer  "tracks_count"
-    t.boolean  "archived",             :default => false
-    t.string   "tags"
-    t.integer  "original_id"
-    t.string   "label"
+    t.integer   "artist_id"
+    t.integer   "label_id"
+    t.string    "mbid"
+    t.string    "title"
+    t.integer   "year"
+    t.string    "type"
+    t.timestamp "created_at"
+    t.timestamp "updated_at"
+    t.string    "artwork_file_name"
+    t.string    "artwork_content_type"
+    t.integer   "artwork_file_size"
+    t.timestamp "artwork_updated_at"
+    t.integer   "user_id"
+    t.date      "release_date"
+    t.integer   "tracks_count"
+    t.boolean   "archived",             :default => false
+    t.string    "tags"
+    t.integer   "original_id"
+    t.string    "label"
+    t.integer   "popularity",           :default => 0
   end
 
   add_index "releases", ["archived"], :name => "index_releases_on_archived"
@@ -166,6 +167,7 @@ ActiveRecord::Schema.define(:version => 20110518154635) do
   add_index "releases", ["label_id"], :name => "index_releases_on_label_id"
   add_index "releases", ["mbid"], :name => "index_releases_on_mbid"
   add_index "releases", ["original_id"], :name => "index_releases_on_original_id"
+  add_index "releases", ["popularity"], :name => "index_releases_on_popularity"
   add_index "releases", ["title"], :name => "index_releases_on_title"
   add_index "releases", ["user_id"], :name => "index_releases_on_user_id"
   add_index "releases", ["year"], :name => "index_releases_on_year"

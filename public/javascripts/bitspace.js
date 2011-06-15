@@ -50,7 +50,11 @@ Backbone.sync = function(method, model, success, error) {
   // Ensure that we have a URL.
   if (!params.url) {
     var url = getUrl(model) || urlError();
-    params.url = 'http://' + API_HOST + decodeURI(url);
+    if(API_HOST) {
+      params.url = 'http://' + API_HOST + decodeURI(url);
+    } else {
+      params.url = decodeURI(url);
+    }
   }
 
   // Ensure that we have the appropriate request data.
@@ -119,6 +123,7 @@ $(function(){
     play: function() {
       player.start(this.get('url'));
       this.trigger('playing', this);
+      $.post('/now_playing', { id: this.get('id') });
     },
     scrobble: function() {
       $.post('/scrobble', { id: this.get('id') });
@@ -132,7 +137,7 @@ $(function(){
   window.Releases = Backbone.Collection.extend({
     model: Release,
     parse: function(response) {
-      return _.map(response.data, function(data){ return _.defaults(data, { id: data._id }); });
+      return _.map(response.data || response.releases, function(data){ return _.defaults(data, { id: data._id }); });
     }
   });
 
@@ -140,7 +145,6 @@ $(function(){
     className: 'release',
     template: _.template($('#release-template').html()),
     events: {
-      'click .play': 'playAllTracks',
       'click .track': 'playTrack'
     },
     initialize: function() {
@@ -160,13 +164,6 @@ $(function(){
         this.$('.release-tracks ol').append(view.el);
       }, this));
     },
-    playAllTracks: function(e) {
-      e.preventDefault();
-      player
-        .setPlaylist(this.model.tracks.models)
-        .setPlaylistPosition(0)
-        .playCurrent();
-    },
     playTrack: function(e) {
       e.preventDefault();
       player
@@ -178,15 +175,32 @@ $(function(){
 
   window.ReleaseItemView = Backbone.View.extend({
     tagName: 'li',
+    className: 'release-item',
     template: _.template($('#release-item-template').html()),
+    events: {
+      'click a': 'flipRelease'
+    },
     initialize: function() {
       _.bindAll(this, 'render');
       this.model.bind('change', this.render);
+      this.model.bind('playing', this.render);
       this.render();
     },
     render: function() {
       $(this.el).html(this.template(this.model.toJSON()));
       return this;
+    },
+    flipRelease: function(e) {
+      e.preventDefault();
+      if(this.releaseView) {
+        $(this.el).removeClass('flip');
+        this.releaseView = null;
+      } else {
+        $(this.el).addClass('flip');
+        this.releaseView = new ReleaseView({ model: this.model });
+        this.releaseView.render();
+        $(this.el).find('.back').empty().append(this.releaseView.el);
+      }
     }
   });
 
@@ -209,6 +223,7 @@ $(function(){
       return this;
     },
     showLoading: function() {
+      $('li.track').removeClass('loading').removeClass('playing');
       $(this.el).addClass('loading');
     }
   });
@@ -216,7 +231,7 @@ $(function(){
   window.ReleasesListView = Backbone.View.extend({
     tagName: 'ol',
     className: 'releases-list',
-    template: _.template($('#releases-list-template').html()),
+    template: _.template($('#fallback-template').html()),
     initialize: function() {
       _.bindAll(this, 'render', 'addRelease');
       this.collection.bind('refresh', this.render);
@@ -224,9 +239,14 @@ $(function(){
     },
     render: function() {
       $(this.el).empty();
-      this.collection.forEach(_.bind(function(release){
-        this.addRelease(release);
-      }, this));
+      if(this.collection.length > 0) {
+        this.collection.forEach(_.bind(function(release){
+          this.addRelease(release);
+        }, this));
+      } else {
+        $(this.el).html(this.template({}));
+      }
+      return this;
     },
     addRelease: function(release) {
       var view = new ReleaseItemView({ model: release });
@@ -234,37 +254,11 @@ $(function(){
     }
   });
 
-  window.SearchResultsView = Backbone.View.extend({
-    tagName: 'div',
-    id: 'search-results',
-    template: _.template($('#search-results-template').html()),
-    initialize: function() {
-      this.results = [];
-      $(this.el).hide();
-    },
-    render: function() {
-      $(this.el).html(this.template({ results: _.map(this.results, function(x){ return x.toJSON(); }) }));
-    },
-    updateResults: function(results) {
-      this.results = results;
-      this.render();
-      return this;
-    },
-    show: function() {
-      $(this.el).show();
-      return this;
-    },
-    hide: function() {
-      $(this.el).hide();
-      return this;
-    }
-  });
-
   window.AppView = Backbone.View.extend({
     el: $('body'),
     template: _.template($('#app-template').html()),
     events: {
-      'click a': 'loadPage',
+      'click #header nav a': 'loadPage',
       'keypress #search-query': 'processSearchKey',
       'blur #search-query': 'hideSearch',
       'click #search-query': 'performSearch'
@@ -275,8 +269,6 @@ $(function(){
     render: function() {
       $(this.el).html(this.template({}));
       this.searchQuery = this.$('#search-query');
-      this.searchResults = new SearchResultsView;
-      $('#search').append(this.searchResults.el);
       return this;
     },
     loadPage: function(e) {
@@ -313,8 +305,9 @@ $(function(){
         results = _.sortBy(results, function(collection){
           return comparator(collection.get('name') || collection.get('title'), query);
         });
-        if(results.length > 0)
+        if(results.length > 0) {
           this.searchResults.updateResults(results).show();
+        }
       }
     },
     hideSearch: function() {
@@ -325,38 +318,70 @@ $(function(){
   window.Controller = Backbone.Controller.extend({
     routes: {
       '/': 'home',
-      '/artists/:id': 'artist',
-      '/artists/:id/:slug': 'artist',
-      '/releases/:id': 'release',
-      '/releases/:id/:slug': 'release',
-      '/search/:query': 'search'
+      '/:profile/': 'profile',
+      '/popular': 'popular',
+      '/newest': 'newest'
     },
     home: function() {
-      var releasesList = new ReleasesListView({ collection: releases });
-      releasesList.render();
-      $('#content').empty().append(releasesList.el);
+      var releasesList = new ReleasesListView({ collection: releases }).render();
+      $('#content').empty();
+      $('#header nav a').removeClass('current');
+      $('#header nav a#home').addClass('current');
+      $('#loading').show();
       $(window).scrollTop(0);
-    },
-    artist: function(id) {
-      var artist = new Artist({ id: id });
-      var artistView = new ArtistView({ model: artist });
-      $('#loading').show();
-      artist.fetch({
-        success: function() { $('#content').empty().append(artistView.el); $('#loading').hide(); $(window).scrollTop(0); },
+      releases.fetch({
+        success: function() {
+          $('#loading').hide();
+          $('#content').empty().append(releasesList.el);
+        },
         error: function() { alert('Error'); }
       });
     },
-    release: function(id) {
-      var release = new Release({ id: id });
-      var releaseView = new ReleaseView({ model: release });
+    profile: function(profile) {
+      var profileReleases = new Releases([]);
+      profileReleases.url = '/'+profile+'/releases';
+      var releasesList = new ReleasesListView({ collection: profileReleases }).render();
+      $('#content').empty();
+      $('#header nav a').removeClass('current');
       $('#loading').show();
-      release.fetch({
-        success: function() { $('#content').empty().append(releaseView.el); $('#loading').hide(); $(window).scrollTop(0); },
+      $(window).scrollTop(0);
+      profileReleases.fetch({
+        success: function() {
+          $('#loading').hide();
+          $('#content').empty().append(releasesList.el);
+        },
         error: function() { alert('Error'); }
       });
     },
-    search: function(query) {
-      alert('search'+query);
+    popular: function() {
+      var releasesList = new ReleasesListView({ collection: popularReleases }).render();
+      $('#content').empty();
+      $('#header nav a').removeClass('current');
+      $('#header nav a#popular').addClass('current');
+      $('#loading').show();
+      $(window).scrollTop(0);
+      popularReleases.fetch({
+        success: function() {
+          $('#loading').hide();
+          $('#content').empty().append(releasesList.el);
+        },
+        error: function() { alert('Error'); }
+      });
+    },
+    newest: function() {
+      var releasesList = new ReleasesListView({ collection: newestReleases });
+      $('#content').empty();
+      $('#header nav a').removeClass('current');
+      $('#header nav a#newest').addClass('current');
+      $('#loading').show();
+      $(window).scrollTop(0);
+      newestReleases.fetch({
+        success: function() {
+          $('#loading').hide();
+          $('#content').empty().append(releasesList.el);
+        },
+        error: function() { alert('Error'); }
+      });
     }
   });
 

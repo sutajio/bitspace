@@ -1,128 +1,129 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="chrome=1" />
     <meta name="robots" content="noindex" />
-    <link rel="icon" href="/images/logos/favicon.png" type="image/png" />
-    <link rel="shortcut icon" href="/images/logos/favicon.png" type="image/png" />
-    <link rel="fluid-icon" href="/images/logos/fluid.png" title="Bitspace" />
-    <link rel="apple-touch-icon" href="/images/logos/touch.png" />
     <% if @page_title.present? %>
       <title><%=h @page_title %></title>
     <% else %>
       <title>Bitspace</title>
     <% end %>
-    <%= stylesheet_link_tag :common %>
-    <%= stylesheet_link_tag :application %>
-    <%= javascript_include_tag :common %>
-    <%= javascript_include_tag :application %>
+    <link href="/stylesheets/bitspace.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="/vendor/jquery/jquery.js" type="text/javascript"></script>
+    <script src="/vendor/plugins/human-date.js" type="text/javascript"></script>
+    <script src="/vendor/swfobject/swfobject.js" type="text/javascript"></script>
+    <script src="/vendor/swfupload/swfupload.js" type="text/javascript"></script>
+    <script src="/vendor/swfupload/swfupload.queue.js" type="text/javascript"></script>
+    <script src="/vendor/plugins/jquery.swfupload.js" type="text/javascript"></script>
+    <script src="/vendor/plugins/jquery.ui.js" type="text/javascript"></script>
+    <script src="/vendor/soundmanager/script/soundmanager2-nodebug-jsmin.js" type="text/javascript"></script>
+    <script src="/vendor/backbone/underscore.js" type="text/javascript"></script>
+    <script src="/vendor/backbone/backbone.js" type="text/javascript"></script>
+    <script src="/vendor/backbone/history.js" type="text/javascript"></script>
+    <script src="/javascripts/player.js" type="text/javascript"></script>
+    <script src="/javascripts/bitspace.js" type="text/javascript"></script>
+
+    <script>
+    var API_HOST = '<%= ENV['API_HOST'] %>';
+
+    $(function(){
+      window.releases = new Releases([]);
+      window.releases.url = '/releases';
+      window.popularReleases = new Releases([]);
+      window.popularReleases.url = '/releases/popular';
+      window.popularReleases.comparator = function(r) { return -r.get('popularity'); };
+      window.newestReleases = new Releases([]);
+      window.newestReleases.url = '/releases/newest';
+      window.newestReleases.comparator = function(r) { return r.get('created_at'); };
+      window.app = new AppView().render();
+      window.controller = new Controller();
+      window.player = new Player({
+        playPause: $('#play-pause'),
+        next: $('#next'),
+        prev: $('#prev'),
+        progress: $('#progress'),
+        shuffle: $('#shuffle-button'),
+        repeat: $('#repeat-button')
+      });
+      Backbone.history.start();
+    });
+    </script>
   </head>
   <body>
-    <div id="root">
-      <div class="container_12 clearfix">
-        <ul id="menu" class="clearfix">
-          <li class="grid_1"><%= link_to('Collection', '/', :target => '_self', :rel => 'contents') %></li>
-          <% if @user == current_user %>
-          <li class="grid_1 prefix_7 usernav">
-            <%= link_to('Account', account_path, :target => '_self', :title => 'Change your account settings here', :class => 'tooltipped') %>
-          </li>
-          <li class="grid_1 usernav">
-            <%= link_to("Sign out", logout_path, :method => :delete, :title => 'Sign out from Bitspace', :class => 'tooltipped') %>
-          </li>
-          <% else %>
-          <li class="grid_4 usernav prefix_5">
-            <div class="profilenav">
-              <% if @user.subscribable?%>
-                <% if !(current_user && current_user.subscribes_to?(@user)) %>
-                <div id="crayons-help-subscribe" class="crayons-help"></div>
-                <%= link_to('<i></i> Subscribe', subscribe_profile_path(@user.login), :class => 'subscribe-button tooltipped', :title => "Subscribe to #{h(@user.login.anal_title_case)} for #{@user.subscription_price_with_currency} per #{@user.subscription_periodicity_as_period}") %>
-                <% else %>
-                <span class="subscribe-button"><i></i> You are a fan!</span>
-                <% end %>
-              <% else %>
-                <% if current_user && current_user.follows?(@user) %>
-                <%= link_to('<i></i> Unfollow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'unfollow-button tooltipped', :title => "Unfollow #{h(@user.login.anal_title_case)}") %>
-                <% else %>
-                <%= link_to('<i></i> Follow', follow_profile_path(@user.login, :return_to => request.path), :method => :put, :class => 'follow-button tooltipped', :title => "Follow #{h(@user.login.anal_title_case)}") %>
-                <% end %>
-              <% end %>
-              
-              <% if @user.website.present? %>
-              <%= link_to('<i></i> Website', h(@user.website), :rel => 'nofollow', :target => '_blank', :class => 'website-button tooltipped', :title => "#{h(@user.login.anal_title_case)} has a website, go take a look!") %>
-              <% else %>
-              <%= content_tag(:span, '<i></i> Website', :class => 'website-button disabled tooltipped', :title => "#{h(@user.login.anal_title_case)} doesn't have a website :(") %>
-              <% end %>
-            </div>
-          </li>
-          <% end %>
-          <li class="grid_2 last">
-            <% form_tag(search_path, :method => 'get') do %>
-              <input type="search" results="5" name="q" id="search-q" />
-            <% end %>
-            <div id="search-suggestions"></div>
-          </li>
-        </ul>
-      </div>
-      <div id="page">
-        <%= yield %>
-      </div>
-    </div>
-    <div id="info">
-      <div id="error"></div>
-      <div id="message"></div>
-      <div id="status">
-        <div class="container_16 clearfix">
-          <div class="grid_16">
-            <div>
-              <a id="status-artist" href="#" target="_self"></a> &ndash;
-              <a id="status-track" href="#" target="_self"></a>
-            </div>
-            <div>
-              <a id="status-release" href="#" target="_self"></a>
-            </div>
-          </div>
+    <script type="text/template" id="app-template">
+      <header id="header">
+        <div class="container">
+          <form action="/search" method="get" id="search">
+            <input type="text" name="q" id="search-query" placeholder="Search..." autocomplete="off" />
+          </form>
+          <nav>
+            <a href="/" id="home">Home</a>
+            <a href="/popular" id="popular">Popular</a>
+            <a href="/newest" id="newest">Newest</a>
+            <a href="/people" id="people">People</a>
+            <a href="#" id="upload">Upload</a>
+            <a href="#" id="account"><%=h current_user.login %></a>
+          </nav>
         </div>
-      </div>
-    </div>
-    <div id="nav">
-      <div id="nav-fade">
-        <div class="container_16 clearfix">
-          <div class="grid_16">
-            <div id="nav-playback">
-              <button rel="prev" id="nav-prev" disabled="disabled">← Prev</button>
-              <button rel="play-pause" id="nav-play-pause" disabled="disabled">Play/Pause</button>
-              <button rel="next" id="nav-next" disabled="disabled">Next →</button>
-            </div>
-            <div id="nav-mute">
-              <%= check_box_tag :mute, true %>
-              <%= label_tag :mute, 'Mute', :title => 'Mute', :class => 'tooltipped' %>
-            </div>
-            <div id="nav-repeat">
-              <%= check_box_tag :repeat, true %>
-              <%= label_tag :repeat, 'Repeat', :title => 'Repeat', :class => 'tooltipped' %>
-            </div>
-            <div id="nav-shuffle">
-              <%= check_box_tag :shuffle, true %>
-              <%= label_tag :shuffle, 'Shuffle', :title => 'Shuffle', :class => 'tooltipped' %>
-            </div>
-            <div id="nav-progress"></div>
-            <div id="nav-upload">
-              <% if @user == current_user %>
-              <%= render :partial => 'uploads/form' %>
-              <% end %>
-            </div>
-          </div>
+      </header>
+
+      <section id="content" class="clearfix"></section>
+
+      <nav id="player-nav">
+        <div id="playback">
+          <button rel="prev" id="prev" disabled="disabled">&larr; Prev</button>
+          <button rel="play-pause" id="play-pause" disabled="disabled">Play/Pause</button>
+          <button rel="next" id="next" disabled="disabled">Next &rarr;</button>
         </div>
+        <div id="progress"></div>
+        <div id="repeat">
+          <input type="checkbox" name="repeat" id="repeat-button" />
+          <label for="repeat-button">Repeat</label>
+        </div>
+        <div id="shuffle">
+          <input type="checkbox" name="shuffle" id="shuffle-button" />
+          <label for="shuffle-button">Shuffle</label>
+        </div>
+      </nav>
+    </script>
+
+    <script type="text/template" id="fallback-template">
+      <div class="fallback">
+        <h2>You don&#x27;t have any music in your collection yet.</h2>
+        <p>
+          Explore the <em>Popular</em> or <em>Newest</em> feeds above with music from other peoples collections.<br />
+          Or you can upload your own music using the <em>Upload</em> button above, or by dragging and droping files here.
+        </p>
       </div>
-    </div>
-    <% if use_html5_audio? %>
-      <audio id="player"></audio>
-    <% else %>
-      <div id="player"></div>
-    <% end %>
-    <%#= render :partial => 'layouts/feedback' %>
-    <%= render :partial => 'layouts/google_analytics' %>
+    </script>
+
+    <script type="text/template" id="release-template">
+      <div class="release-tracks">
+        <ol></ol>
+      </div>
+    </script>
+
+    <script type="text/template" id="release-item-template">
+      <a href="#" class="close">Close</a>
+      <div class="front">
+      <a href="#" class="artwork">
+        {% if(medium_artwork_url) { %}
+        <img src="{{medium_artwork_url}}" width="240" height="240" alt="Artwork" />
+        {% } %}
+      </a>
+      <a href="#" class="info">
+        {{popularity}}
+        <span class="artist">{{artist.name}}</span>
+        <span class="title">{{title}}</span>
+      </a>
+      </div>
+      <div class="back"></div>
+    </script>
+
+    <script type="text/template" id="track-item-template">
+      <span class="tr">{{title}}{% if(artist) { %} <span class="ar">&ndash; {{artist}}</span>{% } %}</span>
+      <span class="ti">{{secondsToTime(length)}}</span>
+    </script>
   </body>
 </html>

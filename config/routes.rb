@@ -6,10 +6,14 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :search, :collection => { :suggestions => :get }
   map.resources :uploads, :collection => { :import => :post }
   map.resources :artists, :member => { :biography => :get, :artwork => :any, :playlist => :get }
-  map.resources :releases, :member => { :archive => :put, :artwork => :any, :download => :get, :sideload => :post, :playlist => :get }
+  map.resources :releases, :collection => { :popular => :get, :newest => :get }, :member => { :archive => :put, :artwork => :any, :download => :get, :sideload => :post, :playlist => :get }
   map.resources :tracks, :member => { :love => :put, :scrobble => :post, :now_playing => :post }
   map.resources :comments
   map.resources :devices
+  
+  # Scrobbling
+  map.now_playing '/now_playing', :controller => 'tracks', :action => 'now_playing'
+  map.scrobble '/scrobble', :controller => 'tracks', :action => 'scrobble'
   
   # Last.fm
   map.resources :lastfm, :collection => { :authorize => :get, :callback => :get }
@@ -46,6 +50,9 @@ ActionController::Routing::Routes.draw do |map|
   # Clients
   map.resources :clients, :member => { :changelog => :get, :release_notes => :get, :download => :get }
   map.resources :client_versions, :member => { :download => :get }
+  
+  map.popular '/popular', :controller => 'players', :action => 'show'
+  map.newest '/newest', :controller => 'players', :action => 'show'
   
   # Root
   map.root :controller => 'players', :action => 'show'

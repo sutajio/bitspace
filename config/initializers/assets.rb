@@ -8,8 +8,7 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/plugins/jquery.validation.js',
     '/vendor/plugins/jquery.expander.js',
     '/vendor/plugins/jquery.autogrow.js',
-    '/vendor/plugins/human-date.js',
-    '/vendor/shadowbox/shadowbox.js'
+    '/vendor/plugins/human-date.js'
   ],
   :application => [
     '/vendor/swfobject/swfobject.js',
@@ -25,7 +24,6 @@ ActionView::Helpers::AssetTagHelper.register_javascript_expansion(
     '/vendor/backbone/underscore.js',
     '/vendor/backbone/backbone.js',
     '/vendor/backbone/history.js',
-    'application',
     'player',
     'bitspace'
   ],
@@ -45,8 +43,7 @@ ActionView::Helpers::AssetTagHelper.register_stylesheet_expansion(
     'common/text',
     'common/grid',
     'common/widgets',
-    'common/layout',
-    '/vendor/shadowbox/shadowbox.css'
+    'common/layout'
   ],
   :application => [
     'application',

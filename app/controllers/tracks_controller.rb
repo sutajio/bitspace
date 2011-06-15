@@ -16,14 +16,15 @@ class TracksController < ApplicationController
   end
   
   def now_playing
-    @track = current_user.tracks.find(params[:id])
+    @track = Track.find(params[:id])
     Scrobble.now_playing(@track, current_user)
     head :ok
   end
   
   def scrobble
-    @track = current_user.tracks.find(params[:id])
-    @track.scrobble!(params[:started_playing] ? 
+    @track = Track.find(params[:id])
+    @track.scrobble!(current_user,
+                     params[:started_playing] ? 
                           Time.parse(params[:started_playing]) :
                           Time.now.utc,
                      request.remote_ip)

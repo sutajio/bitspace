@@ -47,7 +47,7 @@ module ReleasesHelper
           :website => release.artist.website,
           :small_artwork_url => release.artist.artwork.file? ? release.artist.artwork.url(:small, false) : nil,
           :large_artwork_url => release.artist.artwork.file? ? release.artist.artwork.url(:large, false) : nil,
-          :biography_url => biography_artist_url(release.artist, :format => 'txt', :profile_id => @user.login),
+          :biography_url => biography_artist_url(release.artist, :format => 'txt', :profile_id => release.user.login),
           :releases_count => release.artist.releases_count,
           :created_at => release.artist.created_at,
           :updated_at => release.artist.updated_at,
@@ -62,6 +62,7 @@ module ReleasesHelper
         :created_at => release.created_at,
         :updated_at => release.updated_at,
         :archived => release.archived,
+        :popularity => release.popularity,
         :tracks => tracks_to_hash(release.tracks)
       }
     end

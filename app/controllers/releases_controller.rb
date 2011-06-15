@@ -6,31 +6,26 @@ class ReleasesController < ApplicationController
   
   layout 'share', :only => [:download]
   
+  include TracksHelper
+  include ReleasesHelper
+  
   def index
     respond_to do |format|
-      format.html do
-        order = case params[:order]
-        when 'title': 'title ASC'
-        when 'artist': 'artists.name ASC'
-        when 'tracks_count': 'tracks_count DESC'
-        else
-          'created_at DESC'
-        end
-        @releases = @user.releases.without_archived.has_tracks.paginate(
-          :page => params[:page],
-          :per_page => 16,
-          :include => [:artist],
-          :order => order)
-        if request.xhr? && @releases.empty?
-          render :nothing => true and return
-        end
-      end
       format.json do
         @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
             :page => params[:page],
             :per_page => 10,
             :include => [:artist, :tracks],
             :order => 'created_at')
+        render :json => {
+          :page => @releases.current_page,
+          :pages => @releases.total_pages,
+          :per_page => @releases.per_page,
+          :total => @releases.total_entries,
+          :releases => @releases.map {|release|
+            release_to_hash(release, :simple => false)
+          }
+        }
       end
     end
   end
@@ -60,9 +55,9 @@ class ReleasesController < ApplicationController
   def popular
     respond_to do |format|
       format.json do
-        @releases = Release.updated_since(params[:since]).with_archived.paginate(
+        @releases = Release.updated_since(params[:since]).without_archived.paginate(
           :page => params[:page],
-          :per_page => 10,
+          :per_page => 100,
           :include => [:artist, :tracks],
           :order => 'popularity DESC'
         )
@@ -82,9 +77,9 @@ class ReleasesController < ApplicationController
   def newest
     respond_to do |format|
       format.json do
-        @releases = Release.updated_since(params[:since]).with_archived.paginate(
+        @releases = Release.updated_since(params[:since]).without_archived.paginate(
           :page => params[:page],
-          :per_page => 10,
+          :per_page => 100,
           :include => [:artist, :tracks],
           :order => 'created_at DESC'
         )

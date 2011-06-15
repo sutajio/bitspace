@@ -25,11 +25,7 @@ class Track < ActiveRecord::Base
   @@per_page = 100
   
   def url(use_cdn = true)
-    if ENV['CDN_HOST'] && use_cdn
-      "http://#{ENV['CDN_HOST']}/#{URI.escape(key)}"
-    else
-      "http://#{ENV['S3_BUCKET']}.#{AWS::S3::DEFAULT_HOST}/#{URI.escape(key)}"
-    end
+    "http://#{ENV['S3_BUCKET']}.#{AWS::S3::DEFAULT_HOST}/#{URI.escape(key)}"
   end
   
   def torrent
@@ -101,14 +97,14 @@ class Track < ActiveRecord::Base
     loved_at.present?
   end
   
-  def scrobble!(started_playing_at, from_remote_ip)
+  def scrobble!(user, started_playing_at, from_remote_ip)
     transaction do
       self.scrobbled_at = started_playing_at
       self.increment(:scrobbles_count)
       self.save!
       
       scrobble = self.scrobbles.create!(
-          :user_id => self.user.id,
+          :user_id => user.id,
           :ip => from_remote_ip,
           :started_playing => started_playing_at)
       Delayed::Job.enqueue(scrobble)
