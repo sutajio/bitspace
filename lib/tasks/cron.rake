@@ -4,7 +4,6 @@ task :cron => :environment do
   Rake::Task['squish_names_and_titles'].invoke
   #Rake::Task['fix_featured_artists'].invoke
   #Rake::Task['fix_various_artists_releases'].invoke
-  Rake::Task['cron:import_podcasts'].invoke
   Rake::Task['cron:metadata'].invoke
 end
 
@@ -45,16 +44,6 @@ namespace :cron do
       STDOUT.flush
     end
     puts
-    puts "-> Finished!"
-  end
-  
-  task :import_podcasts => :environment do
-    puts "-> Importing podcasts."
-    Podcast.find_each do |podcast|
-      podcast.import
-      print "."
-      STDOUT.flush
-    end
     puts "-> Finished!"
   end
 end

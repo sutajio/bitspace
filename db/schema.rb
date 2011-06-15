@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615185647) do
+ActiveRecord::Schema.define(:version => 20110615222756) do
 
   create_table "artists", :force => true do |t|
     t.string    "mbid"
@@ -130,14 +130,6 @@ ActiveRecord::Schema.define(:version => 20110615185647) do
   end
 
   add_index "invitations", ["token"], :name => "index_invitations_on_token"
-
-  create_table "podcasts", :force => true do |t|
-    t.integer   "user_id"
-    t.string    "url"
-    t.timestamp "last_check_at"
-    t.timestamp "created_at"
-    t.timestamp "updated_at"
-  end
 
   create_table "releases", :force => true do |t|
     t.integer   "artist_id"
