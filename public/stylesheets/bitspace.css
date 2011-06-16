@@ -56,8 +56,9 @@ nav#player-nav #shuffle label:hover { background-position: 0 -46px; }
 nav#player-nav #shuffle label.checked { background-position: 0 -92px; }
 
 #content { padding: 65px 20px; }
-
 #content .fallback { text-align: center; color: #999; text-shadow: #fff 1px 1px 1px; }
+
+#loading { position: absolute; left: 49%; top: 45%; text-indent: -99999px; background: url(/images/ajax-loader.gif) no-repeat; width: 31px; height: 31px; }
 
 ol.releases-list { list-style: none; margin: 0; padding: 0; }
 ol.releases-list li.release-item { margin: 10px; padding: 0; float: left; width: 240px; height: 320px; }
