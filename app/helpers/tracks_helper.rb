@@ -24,9 +24,9 @@ module TracksHelper
         :track_nr => track.track_nr,
         :set_nr => track.set_nr,
         :length => track.length,
-        :now_playing_url => now_playing_track_url(track),
-        :scrobble_url => scrobble_track_url(track),
-        :love_url => love_track_url(track),
+        :now_playing_url => "http://api.bitspaceapp.com/now_playing?id=#{track.id}",
+        :scrobble_url => "http://api.bitspaceapp.com/scrobble?id=#{track.id}",
+        :love_url => "http://api.bitspaceapp.com/love?id=#{track.id}",
         :loved_at => track.loved_at
       }
     }

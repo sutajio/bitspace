@@ -12,16 +12,10 @@ class ReleasesController < ApplicationController
   def index
     respond_to do |format|
       format.json do
-        @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
-            :page => params[:page],
-            :per_page => 10,
+        @releases = @user.releases.updated_since(params[:since]).with_archived.all(
             :include => [:artist, :tracks],
             :order => 'created_at')
         render :json => {
-          :page => @releases.current_page,
-          :pages => @releases.total_pages,
-          :per_page => @releases.per_page,
-          :total => @releases.total_entries,
           :releases => @releases.map {|release|
             release_to_hash(release, :simple => false)
           }
@@ -35,7 +29,7 @@ class ReleasesController < ApplicationController
       format.json do
         @releases = @user.releases.updated_since(params[:since]).with_archived.paginate(
           :page => params[:page],
-          :per_page => 10,
+          :per_page => 100,
           :include => [:artist, :tracks],
           :order => 'created_at DESC'
         )

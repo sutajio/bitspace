@@ -57,7 +57,7 @@ class User < ActiveRecord::Base
     self.invitations_left = plan ? plan[:invitations] || 0 : 0
   end
   
-  before_validation_on_create :setup_subscription_plan_details
+  before_validation :setup_subscription_plan_details, :on => :create
   
   def storage_left
     if self.max_storage

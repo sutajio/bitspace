@@ -16,13 +16,10 @@ class Track < ActiveRecord::Base
   validates_uniqueness_of :fingerprint, :scope => [:release_id, :set_nr]
   
   default_scope :order => 'track_nr'
-  named_scope :loved, :conditions => ['loved_at IS NOT NULL']
-  named_scope :originals, :conditions => ['original_id IS NULL']
-  named_scope :copies, :conditions => ['original_id IS NOT NULL']
-  named_scope :played_tracks, :conditions => ['scrobbles_count IS NOT NULL AND scrobbles_count != 0']
-  
-  cattr_reader :per_page
-  @@per_page = 100
+  scope :loved, :conditions => ['loved_at IS NOT NULL']
+  scope :originals, :conditions => ['original_id IS NULL']
+  scope :copies, :conditions => ['original_id IS NOT NULL']
+  scope :played_tracks, :conditions => ['scrobbles_count IS NOT NULL AND scrobbles_count != 0']
   
   def url(use_cdn = true)
     "http://#{ENV['S3_BUCKET']}.#{AWS::S3::DEFAULT_HOST}/#{URI.escape(key)}"

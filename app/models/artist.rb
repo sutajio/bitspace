@@ -9,11 +9,10 @@ class Artist < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :name, :scope => [:user_id]
   
-  default_scope :order => 'name'
-  named_scope :by_name, lambda { |name| { :conditions => { :name => name } } }
-  named_scope :with_archived, :conditions => { :archived => [true, false] }
-  named_scope :without_archived, :conditions => { :archived => false }
-  named_scope :has_releases, :conditions => ['releases_count > 0']
+  scope :by_name, lambda { |name| { :conditions => { :name => name } } }
+  scope :with_archived, :conditions => { :archived => [true, false] }
+  scope :without_archived, :conditions => { :archived => false }
+  scope :has_releases, :conditions => ['releases_count > 0']
   
   def self.first_with_artwork
     first(:order => 'artists.artwork_updated_at IS NOT NULL DESC, artists.artwork_updated_at DESC')

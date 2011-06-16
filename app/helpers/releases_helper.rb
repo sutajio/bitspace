@@ -47,7 +47,7 @@ module ReleasesHelper
           :website => release.artist.website,
           :small_artwork_url => release.artist.artwork.file? ? release.artist.artwork.url(:small, false) : nil,
           :large_artwork_url => release.artist.artwork.file? ? release.artist.artwork.url(:large, false) : nil,
-          :biography_url => biography_artist_url(release.artist, :format => 'txt', :profile_id => release.user.login),
+          :biography_url => "http://en.wikipedia.org/wiki/#{release.artist.name.gsub(' ','_')}",
           :releases_count => release.artist.releases_count,
           :created_at => release.artist.created_at,
           :updated_at => release.artist.updated_at,

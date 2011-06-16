@@ -12,12 +12,11 @@ class Release < ActiveRecord::Base
   validates_presence_of :title
   validates_uniqueness_of :title, :scope => [:artist_id]
   
-  default_scope :order => 'year DESC, release_date DESC'
-  named_scope :by_year, lambda {|year| { :conditions => { :year => year } } }
-  named_scope :with_archived, :conditions => { :archived => [true, false] }
-  named_scope :without_archived, :conditions => { :archived => false }
-  named_scope :has_tracks, :conditions => ['tracks_count > 0']
-  named_scope :updated_since, lambda {|date| date.present? ? { :conditions => ['releases.updated_at > ?', date.is_a?(String) ? Time.parse(date) : date] } : {} }
+  scope :by_year, lambda {|year| { :conditions => { :year => year } } }
+  scope :with_archived, :conditions => { :archived => [true, false] }
+  scope :without_archived, :conditions => { :archived => false }
+  scope :has_tracks, :conditions => ['tracks_count > 0']
+  scope :updated_since, lambda {|date| date.present? ? { :conditions => ['releases.updated_at > ?', date.is_a?(String) ? Time.parse(date) : date] } : {} }
   
   def self.first_with_artwork
     first(:order => 'artwork_updated_at IS NOT NULL DESC, artwork_updated_at DESC')
