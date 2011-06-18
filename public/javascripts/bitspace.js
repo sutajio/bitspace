@@ -41,7 +41,7 @@ Backbone.sync = function(method, model, success, error) {
   // Default JSON-request options.
   var params = {
     type:         type,
-    dataType:     'jsonp',
+    dataType:     API_HOST ? 'jsonp' : 'json',
     processData:  false,
     success:      success,
     error:        error
@@ -99,6 +99,10 @@ $(function(){
       label: { name: 'Unknown Label' },
       year: null,
       release_date: null,
+      small_artwork_url: null,
+      medium_artwork_url: null,
+      large_artwork_url: null,
+      original_artwork_url: null,
       tracks: []
     },
     initialize: function() {
@@ -146,6 +150,21 @@ $(function(){
     model: Release,
     parse: function(response) {
       return _.map(response.data || response.releases, function(data){ return _.defaults(data, { id: data._id }); });
+    },
+    subscribe: function(channel_name) {
+      this.channel = pusher.subscribe(channel_name);
+      this.channel.bind('add', _.bind(function(release) {
+        this.add([release]);
+        this.sort();
+      }, this));
+      this.channel.bind('update', _.bind(function(release) {
+        var r = this.get(release.id || release._id);
+        if(r) { r.set(release); }
+      }, this));
+      this.channel.bind('remove', _.bind(function(release) {
+        var r = this.get(release.id || release._id);
+        if(r) { this.remove(r); }
+      }, this));
     }
   });
 
@@ -241,9 +260,9 @@ $(function(){
     className: 'releases-list',
     template: _.template($('#fallback-template').html()),
     initialize: function() {
-      _.bindAll(this, 'render', 'addRelease');
+      _.bindAll(this, 'render', 'addRelease', 'removeRelease');
       this.collection.bind('refresh', this.render);
-      this.collection.bind('add', this.addRelease);
+      this.collection.bind('remove', this.removeRelease);
     },
     render: function() {
       $(this.el).empty();
@@ -259,8 +278,11 @@ $(function(){
       return this;
     },
     addRelease: function(release) {
-      var view = new ReleaseItemView({ model: release });
+      var view = new ReleaseItemView({ model: release, id: "release-"+release.id });
       $(this.el).append(view.el);
+    },
+    removeRelease: function(release) {
+      $(this.el).find('#release-'+release.id).remove();
     },
     filterWith: function(query) {
       this.query = query;

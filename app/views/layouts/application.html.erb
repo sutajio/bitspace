@@ -10,6 +10,7 @@
       <title>Bitspace</title>
     <% end %>
     <link href="/stylesheets/bitspace.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="http://js.pusherapp.com/1.8/pusher.min.js"></script>
     <script src="/vendor/jquery/jquery.js" type="text/javascript"></script>
     <script src="/vendor/plugins/human-date.js" type="text/javascript"></script>
     <script src="/vendor/swfobject/swfobject.js" type="text/javascript"></script>
@@ -26,16 +27,29 @@
 
     <script>
     var API_HOST = '<%= ENV['API_HOST'] %>';
+    var PUSHER_APP_ID = '<%= ENV['PUSHER_APP_ID'] %>';
 
     $(function(){
+      window.pusher = new Pusher(PUSHER_APP_ID);
+      window.system_channel = pusher.subscribe('system');
+      system_channel.bind('alert', function(message) {
+        alert(message);
+      });
+      system_channel.bind('update', function(version) {
+        window.location.reload();
+      });
       window.releases = new Releases([]);
       window.releases.url = '/releases';
+      window.releases.comparator = function(r) { return r.get('artist').name + r.get('title'); };
+      window.releases.subscribe('<%= @user.login %>:releases');
       window.popularReleases = new Releases([]);
       window.popularReleases.url = '/releases/popular';
       window.popularReleases.comparator = function(r) { return -r.get('popularity'); };
+      window.popularReleases.subscribe('releases:popular');
       window.newestReleases = new Releases([]);
       window.newestReleases.url = '/releases/newest';
-      window.newestReleases.comparator = function(r) { return r.get('created_at'); };
+      window.newestReleases.comparator = function(r) { return -r.get('created_at').valueOf(); };
+      window.newestReleases.subscribe('releases:timeline');
       window.app = new AppView().render();
       window.controller = new Controller();
       window.player = new Player({
