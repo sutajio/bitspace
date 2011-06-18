@@ -95,9 +95,10 @@ $(function(){
   window.Release = Backbone.Model.extend({
     defaults: {
       title: 'Unknown Title',
-      artist: 'Unknown Artist',
+      artist: { name: 'Unknown Artist' },
+      label: { name: 'Unknown Label' },
       year: null,
-      artwork: null,
+      release_date: null,
       tracks: []
     },
     initialize: function() {
@@ -110,6 +111,13 @@ $(function(){
     },
     url: function() {
       return '/releases/' + encodeURIComponent(this.id);
+    },
+    match: function(query) {
+      if(query == null || query == '') { return true; }
+      if(this.get('title') && this.get('title').toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) != -1) { return true; }
+      if(this.get('artist') && this.get('artist').name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) != -1) { return true; }
+      if(this.get('label') && this.get('label').name.toLocaleLowerCase().indexOf(query.toLocaleLowerCase()) != -1) { return true; }
+      return false;
     }
   });
 
@@ -241,7 +249,9 @@ $(function(){
       $(this.el).empty();
       if(this.collection.length > 0) {
         this.collection.forEach(_.bind(function(release){
-          this.addRelease(release);
+          if(release.match(this.query)) {
+            this.addRelease(release);
+          }
         }, this));
       } else {
         $(this.el).html(this.template({}));
@@ -251,6 +261,10 @@ $(function(){
     addRelease: function(release) {
       var view = new ReleaseItemView({ model: release });
       $(this.el).append(view.el);
+    },
+    filterWith: function(query) {
+      this.query = query;
+      this.render();
     }
   });
 
@@ -259,9 +273,8 @@ $(function(){
     template: _.template($('#app-template').html()),
     events: {
       'click #header nav a': 'loadPage',
-      'keypress #search-query': 'processSearchKey',
-      'blur #search-query': 'hideSearch',
-      'click #search-query': 'performSearch'
+      'keydown #search-query': 'processSearchKey',
+      'click #search button': 'performSearch'
     },
     initialize: function() {
       _.bindAll(this, 'render');
@@ -276,6 +289,24 @@ $(function(){
       var href = $(e.currentTarget).attr('href');
       Backbone.history.saveLocation(href);
       Backbone.history.loadUrl();
+    },
+    showReleasesList: function(r, options) {
+      var options = _.defaults(options || {}, { refresh: true });
+      this.releasesList = new ReleasesListView({ collection: r }).render();
+      $('#content').empty();
+      $(window).scrollTop(0);
+      if(options.refresh) {
+        $('#loading').show();
+        r.fetch({
+          success: _.bind(function() {
+            $('#loading').hide();
+            $('#content').empty().append(this.releasesList.el);
+          }, this),
+          error: function() { $('#loading').hide(); alert('Error'); }
+        });
+      } else {
+        $('#content').append(this.releasesList.el);
+      }
     },
     processSearchKey: function(e) {
       if(/27$|38$|40$/.test(e.keyCode) ||
@@ -293,95 +324,42 @@ $(function(){
         this.prevSearchQueryLength = this.searchQuery.val().length;
       }
     },
-    performSearch: function() {
-      if(this.searchQuery.val() != '') {
-        var query = this.searchQuery.val();
-        var comparator = function(x,y) {
-          return x.toLocaleLowerCase().indexOf(y.toLocaleLowerCase());
-        };
-        var results = this.model.collections.select(function(collection){
-          return comparator(collection.get('name') || collection.get('title'), query) != -1;
-        });
-        results = _.sortBy(results, function(collection){
-          return comparator(collection.get('name') || collection.get('title'), query);
-        });
-        if(results.length > 0) {
-          this.searchResults.updateResults(results).show();
-        }
+    performSearch: function(e) {
+      if(e) { e.preventDefault(); }
+      var query = this.searchQuery.val();
+      if(this.releasesList) {
+        this.releasesList.filterWith(query);
       }
-    },
-    hideSearch: function() {
-      setTimeout(_.bind(function() { this.searchResults.hide() }, this), 200);
     }
   });
 
   window.Controller = Backbone.Controller.extend({
     routes: {
       '/': 'home',
-      '/:profile': 'profile',
       '/popular': 'popular',
-      '/newest': 'newest'
+      '/newest': 'newest',
+      '/:profile': 'profile'
     },
     home: function() {
-      var releasesList = new ReleasesListView({ collection: releases }).render();
-      $('#content').empty();
+      app.showReleasesList(releases, { refresh: releases.length == 0 });
       $('#header nav a').removeClass('current');
       $('#header nav a#home').addClass('current');
-      $('#loading').show();
-      $(window).scrollTop(0);
-      releases.fetch({
-        success: function() {
-          $('#loading').hide();
-          $('#content').empty().append(releasesList.el);
-        },
-        error: function() { alert('Error'); }
-      });
     },
     profile: function(profile) {
       var profileReleases = new Releases([]);
       profileReleases.url = '/'+profile+'/releases';
-      var releasesList = new ReleasesListView({ collection: profileReleases }).render();
-      $('#content').empty();
+      app.showReleasesList(profileReleases);
       $('#header nav a').removeClass('current');
-      $('#loading').show();
-      $(window).scrollTop(0);
-      profileReleases.fetch({
-        success: function() {
-          $('#loading').hide();
-          $('#content').empty().append(releasesList.el);
-        },
-        error: function() { alert('Error'); }
-      });
     },
     popular: function() {
-      var releasesList = new ReleasesListView({ collection: popularReleases }).render();
-      $('#content').empty();
+      app.showReleasesList(popularReleases);
       $('#header nav a').removeClass('current');
       $('#header nav a#popular').addClass('current');
-      $('#loading').show();
-      $(window).scrollTop(0);
-      popularReleases.fetch({
-        success: function() {
-          $('#loading').hide();
-          $('#content').empty().append(releasesList.el);
-        },
-        error: function() { alert('Error'); }
-      });
     },
     newest: function() {
-      var releasesList = new ReleasesListView({ collection: newestReleases });
-      $('#content').empty();
+      app.showReleasesList(newestReleases);
       $('#header nav a').removeClass('current');
       $('#header nav a#newest').addClass('current');
-      $('#loading').show();
-      $(window).scrollTop(0);
-      newestReleases.fetch({
-        success: function() {
-          $('#loading').hide();
-          $('#content').empty().append(releasesList.el);
-        },
-        error: function() { alert('Error'); }
-      });
     }
   });
 
