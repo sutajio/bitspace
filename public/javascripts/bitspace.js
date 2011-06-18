@@ -318,7 +318,7 @@ $(function(){
   window.Controller = Backbone.Controller.extend({
     routes: {
       '/': 'home',
-      '/:profile/': 'profile',
+      '/:profile': 'profile',
       '/popular': 'popular',
       '/newest': 'newest'
     },

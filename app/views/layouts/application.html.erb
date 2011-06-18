@@ -55,7 +55,8 @@
       <header id="header">
         <div class="container">
           <form action="/search" method="get" id="search">
-            <input type="text" name="q" id="search-query" placeholder="Search..." autocomplete="off" />
+            <input type="text" name="q" id="search-query" placeholder="Search" autocomplete="off" />
+            <button>Go</button>
           </form>
           <nav>
             <a href="/" id="home">Home</a>
@@ -63,7 +64,7 @@
             <a href="/newest" id="newest">Newest</a>
             <a href="/people" id="people">People</a>
             <a href="#" id="upload">Upload</a>
-            <a href="#" id="account"><%=h current_user.login %></a>
+            <a href="#" id="account"><%=h current_user.name.present? ? current_user.name : current_user.login %></a>
           </nav>
         </div>
       </header>
@@ -115,7 +116,6 @@
         {% } %}
       </a>
       <a href="#" class="info">
-        {{popularity}}
         <span class="artist">{{artist.name}}</span>
         <span class="title">{{title}}</span>
       </a>
